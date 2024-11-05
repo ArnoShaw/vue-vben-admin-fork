@@ -1,12 +1,12 @@
 {
-  "name": "@vben/web-antd",
+  "name": "@vben/web-naive",
   "version": "5.4.4",
   "homepage": "https://vben.pro",
   "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "apps/web-antd"
+    "directory": "apps/web-naive"
   },
   "license": "MIT",
   "author": {
@@ -41,8 +41,7 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vueuse/core": "catalog:",
-    "ant-design-vue": "catalog:",
-    "dayjs": "catalog:",
+    "naive-ui": "catalog:",
     "pinia": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
