@@ -38,7 +38,8 @@ async function getVersionTag() {
   try {
     if (
       location.hostname === 'localhost' ||
-      location.hostname === '127.0.0.1'
+      location.hostname === '127.0.0.1' ||
+      location.hostname.includes('192.168')
     ) {
       return null;
     }

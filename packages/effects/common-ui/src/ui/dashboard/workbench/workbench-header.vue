@@ -14,20 +14,24 @@ withDefaults(defineProps<Props>(), {
 });
 </script>
 <template>
-  <div class="card-box p-4 py-6 lg:flex">
-    <VbenAvatar :src="avatar" class="size-20" />
-    <div
-      v-if="$slots.title || $slots.description"
-      class="flex flex-col justify-center md:ml-6 md:mt-0"
-    >
-      <h1 v-if="$slots.title" class="text-md font-semibold md:text-xl">
-        <slot name="title"></slot>
-      </h1>
-      <span v-if="$slots.description" class="text-foreground/80 mt-1">
-        <slot name="description"></slot>
-      </span>
+  <div class="card-box flex flex-wrap justify-between">
+    <div class="flex flex-wrap py-6 pl-4">
+      <VbenAvatar :src="avatar" class="size-20" />
+      <div
+        v-if="$slots.title || $slots.description"
+        class="flex max-w-[400px] flex-col justify-center md:ml-6 md:mt-0"
+      >
+        <h1 v-if="$slots.title" class="text-md font-semibold md:text-xl">
+          <slot name="title"></slot>
+        </h1>
+        <span v-if="$slots.description" class="text-foreground/80 mt-1">
+          <slot name="description"></slot>
+        </span>
+      </div>
     </div>
-    <div class="mt-4 flex flex-1 justify-end md:mt-0">
+
+    <slot></slot>
+    <!-- <div class="mt-4 flex flex-1 justify-end md:mt-0">
       <div class="flex flex-col justify-center text-right">
         <span class="text-foreground/80"> 待办 </span>
         <span class="text-2xl">2/10</span>
@@ -41,6 +45,6 @@ withDefaults(defineProps<Props>(), {
         <span class="text-foreground/80"> 团队 </span>
         <span class="text-2xl">300</span>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>

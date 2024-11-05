@@ -10,5 +10,17 @@
     "title": "Dashboard",
     "analytics": "Analytics",
     "workspace": "Workspace"
+  },
+  "overview": {
+    "index": "overview"
+  },
+  "package": {
+    "index": "package"
+  },
+  "bill": {
+    "index": "bill"
+  },
+  "setting": {
+    "index": "setting"
   }
 }

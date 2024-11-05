@@ -7,26 +7,25 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'lucide:layout-dashboard',
-      order: -1,
-      title: $t('page.dashboard.title'),
+      icon: 'lucide:package',
+      order: 1,
+      title: $t('page.package.index'),
     },
     name: 'Dashboard',
-    path: '/',
+    path: '/dashboard',
     children: [
       {
         name: 'Analytics',
-        path: '/analytics',
+        path: 'analytics',
         component: () => import('#/views/dashboard/analytics/index.vue'),
         meta: {
-          affixTab: true,
           icon: 'lucide:area-chart',
           title: $t('page.dashboard.analytics'),
         },
       },
       {
         name: 'Workspace',
-        path: '/workspace',
+        path: 'workspace',
         component: () => import('#/views/dashboard/workspace/index.vue'),
         meta: {
           icon: 'carbon:workspace',

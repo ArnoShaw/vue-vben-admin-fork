@@ -10,5 +10,17 @@
     "title": "概览",
     "analytics": "分析页",
     "workspace": "工作台"
+  },
+  "overview": {
+    "index": "总览"
+  },
+  "package": {
+    "index": "包裹"
+  },
+  "bill": {
+    "index": "账单"
+  },
+  "setting": {
+    "index": "设置"
   }
 }

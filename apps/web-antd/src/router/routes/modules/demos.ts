@@ -7,10 +7,10 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'ic:baseline-view-in-ar',
+      icon: 'lucide:receipt-japanese-yen',
       keepAlive: true,
       order: 1000,
-      title: $t('demos.title'),
+      title: $t('page.bill.index'),
     },
     name: 'Demos',
     path: '/demos',
