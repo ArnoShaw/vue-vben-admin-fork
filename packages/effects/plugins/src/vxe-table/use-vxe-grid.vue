@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import type { VbenFormProps } from '@vben-core/form-ui';
-import type {
-  VxeGridInstance,
-  VxeGridProps as VxeTableGridProps,
-} from 'vxe-table';
+import type { VxeGridInstance, VxeGridProps as VxeTableGridProps } from 'vxe-table';
 
 import type { ExtendedVxeGridApi, VxeGridProps } from './types';
 
@@ -11,6 +8,7 @@ import {
   computed,
   nextTick,
   onMounted,
+  onUnmounted,
   toRaw,
   useSlots,
   useTemplateRef,
@@ -89,11 +87,7 @@ const showTableTitle = computed(() => {
 });
 
 const showToolbar = computed(() => {
-  return (
-    !!slots[TOOLBAR_ACTIONS]?.() ||
-    !!slots[TOOLBAR_TOOLS]?.() ||
-    showTableTitle.value
-  );
+  return !!slots[TOOLBAR_ACTIONS]?.() || !!slots[TOOLBAR_TOOLS]?.() || showTableTitle.value;
 });
 
 const toolbarOptions = computed(() => {
@@ -108,9 +102,7 @@ const toolbarOptions = computed(() => {
   return {
     toolbarConfig: {
       slots: {
-        ...(slotActions || showTableTitle.value
-          ? { buttons: TOOLBAR_ACTIONS }
-          : {}),
+        ...(slotActions || showTableTitle.value ? { buttons: TOOLBAR_ACTIONS } : {}),
         ...(slotTools ? { tools: TOOLBAR_TOOLS } : {}),
       },
     },
@@ -121,12 +113,7 @@ const options = computed(() => {
   const globalGridConfig = VxeUI?.getConfig()?.grid ?? {};
 
   const mergedOptions: VxeTableGridProps = cloneDeep(
-    mergeWithArrayOverride(
-      {},
-      toolbarOptions.value,
-      toRaw(gridOptions.value),
-      globalGridConfig,
-    ),
+    mergeWithArrayOverride({}, toolbarOptions.value, toRaw(gridOptions.value), globalGridConfig),
   );
 
   if (mergedOptions.proxyConfig) {
@@ -141,32 +128,16 @@ const options = computed(() => {
   }
 
   if (mergedOptions.pagerConfig) {
-    const mobileLayouts = [
-      'PrevJump',
-      'PrevPage',
-      'Number',
-      'NextPage',
-      'NextJump',
-    ] as any;
-    const layouts = [
-      'Total',
-      'Sizes',
-      'Home',
-      ...mobileLayouts,
-      'End',
-    ] as readonly string[];
-    mergedOptions.pagerConfig = mergeWithArrayOverride(
-      {},
-      mergedOptions.pagerConfig,
-      {
-        pageSize: 20,
-        background: true,
-        pageSizes: [10, 20, 30, 50, 100, 200],
-        className: 'mt-2 w-full',
-        layouts: isMobile.value ? mobileLayouts : layouts,
-        size: 'mini' as const,
-      },
-    );
+    const mobileLayouts = ['PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump'] as any;
+    const layouts = ['Total', 'Sizes', 'Home', ...mobileLayouts, 'End'] as readonly string[];
+    mergedOptions.pagerConfig = mergeWithArrayOverride({}, mergedOptions.pagerConfig, {
+      pageSize: 20,
+      background: true,
+      pageSizes: [10, 20, 30, 50, 100, 200],
+      className: 'mt-2 w-full',
+      layouts: isMobile.value ? mobileLayouts : layouts,
+      size: 'mini' as const,
+    });
   }
   if (mergedOptions.formConfig) {
     mergedOptions.formConfig.enabled = false;
@@ -236,11 +207,7 @@ watch(
   formOptions,
   () => {
     formApi.setState((prev) => {
-      const finalFormOptions: VbenFormProps = mergeWithArrayOverride(
-        {},
-        formOptions.value,
-        prev,
-      );
+      const finalFormOptions: VbenFormProps = mergeWithArrayOverride({}, formOptions.value, prev);
       return {
         ...finalFormOptions,
         collapseTriggerResize: !!finalFormOptions.showCollapseButton,
@@ -255,6 +222,11 @@ watch(
 onMounted(() => {
   props.api?.mount?.(gridRef.value, formApi);
   init();
+});
+
+onUnmounted(() => {
+  formApi?.unmount?.();
+  props.api?.unmount?.();
 });
 </script>
 
@@ -288,11 +260,7 @@ onMounted(() => {
       </template>
 
       <!-- 继承默认的slot -->
-      <template
-        v-for="slotName in delegatedSlots"
-        :key="slotName"
-        #[slotName]="slotProps"
-      >
+      <template v-for="slotName in delegatedSlots" :key="slotName" #[slotName]="slotProps">
         <slot :name="slotName" v-bind="slotProps"></slot>
       </template>
 
@@ -306,10 +274,7 @@ onMounted(() => {
                 :key="slotName"
                 #[slotName]="slotProps"
               >
-                <slot
-                  :name="`${FORM_SLOT_PREFIX}${slotName}`"
-                  v-bind="slotProps"
-                ></slot>
+                <slot :name="`${FORM_SLOT_PREFIX}${slotName}`" v-bind="slotProps"></slot>
               </template>
               <template #reset-before="slotProps">
                 <slot name="reset-before" v-bind="slotProps"></slot>

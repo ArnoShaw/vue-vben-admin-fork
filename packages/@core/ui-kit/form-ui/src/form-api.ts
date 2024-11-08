@@ -1,9 +1,4 @@
-import type {
-  FormState,
-  GenericObject,
-  ResetFormOpts,
-  ValidationOptions,
-} from 'vee-validate';
+import type { FormState, GenericObject, ResetFormOpts, ValidationOptions } from 'vee-validate';
 
 import type { FormActions, FormSchema, VbenFormProps } from './types';
 
@@ -92,12 +87,8 @@ export class FormApi {
     const prevSchema = this.prevState?.schema ?? [];
     // 进行了删除schema操作
     if (currentSchema.length < prevSchema.length) {
-      const currentFields = new Set(
-        currentSchema.map((item) => item.fieldName),
-      );
-      const deletedSchema = prevSchema.filter(
-        (item) => !currentFields.has(item.fieldName),
-      );
+      const currentFields = new Set(currentSchema.map((item) => item.fieldName));
+      const deletedSchema = prevSchema.filter((item) => !currentFields.has(item.fieldName));
 
       for (const schema of deletedSchema) {
         this.form?.setFieldValue(schema.fieldName, undefined);
@@ -207,11 +198,7 @@ export class FormApi {
     form.setFieldValue(field, value, shouldValidate);
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: VbenFormProps) => Partial<VbenFormProps>)
-      | Partial<VbenFormProps>,
-  ) {
+  setState(stateOrFn: ((prev: VbenFormProps) => Partial<VbenFormProps>) | Partial<VbenFormProps>) {
     if (isFunction(stateOrFn)) {
       this.store.setState((prev) => {
         return mergeWithArrayOverride(stateOrFn(prev), prev);
@@ -253,6 +240,7 @@ export class FormApi {
   }
 
   unmount() {
+    this.form?.resetForm?.();
     // this.state = null;
     this.isMounted = false;
     this.stateHandler.reset();
@@ -260,9 +248,7 @@ export class FormApi {
 
   updateSchema(schema: Partial<FormSchema>[]) {
     const updated: Partial<FormSchema>[] = [...schema];
-    const hasField = updated.every(
-      (item) => Reflect.has(item, 'fieldName') && item.fieldName,
-    );
+    const hasField = updated.every((item) => Reflect.has(item, 'fieldName') && item.fieldName);
 
     if (!hasField) {
       console.error(
@@ -283,10 +269,7 @@ export class FormApi {
     currentSchema.forEach((schema, index) => {
       const updatedData = updatedMap[schema.fieldName];
       if (updatedData) {
-        currentSchema[index] = mergeWithArrayOverride(
-          updatedData,
-          schema,
-        ) as FormSchema;
+        currentSchema[index] = mergeWithArrayOverride(updatedData, schema) as FormSchema;
       }
     });
     this.setState({ schema: currentSchema });
