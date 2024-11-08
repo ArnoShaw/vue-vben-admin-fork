@@ -36,10 +36,9 @@ import {
   Upload,
 } from 'ant-design-vue';
 
-const withDefaultPlaceholder = <T extends Component>(
-  component: T,
-  type: 'input' | 'select',
-) => {
+import BasicTitle from '#/components/basic-title.vue';
+
+const withDefaultPlaceholder = <T extends Component>(component: T, type: 'input' | 'select') => {
   return (props: any, { attrs, slots }: Omit<SetupContext, 'expose'>) => {
     const placeholder = props?.placeholder || $t(`ui.placeholder.${type}`);
     return h(component, { ...props, ...attrs, placeholder }, slots);
@@ -49,6 +48,7 @@ const withDefaultPlaceholder = <T extends Component>(
 // 这里需要自行根据业务组件库进行适配，需要用到的组件都需要在这里类型说明
 export type ComponentType =
   | 'AutoComplete'
+  | 'BasicTitle'
   | 'Checkbox'
   | 'CheckboxGroup'
   | 'DatePicker'
@@ -106,6 +106,7 @@ async function initComponentAdapter() {
     TimePicker,
     TreeSelect: withDefaultPlaceholder(TreeSelect, 'select'),
     Upload,
+    BasicTitle,
   };
 
   // 将组件注册到全局共享状态中

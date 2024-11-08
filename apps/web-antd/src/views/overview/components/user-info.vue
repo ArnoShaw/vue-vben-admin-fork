@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import {
-  F7MoneyYenCircle,
-  HeroiconsCreditCard,
-  IonWalletOutline,
-} from '@vben/icons';
+import { F7MoneyYenCircle, HeroiconsCreditCard, IonWalletOutline } from '@vben/icons';
 import { preferences } from '@vben/preferences';
 import { useUserStore } from '@vben/stores';
 
@@ -14,10 +10,7 @@ const userStore = useUserStore();
 <template>
   <div class="card-box flex flex-wrap justify-between">
     <div class="flex flex-wrap px-4 py-6">
-      <Avatar
-        :src="userStore.userInfo?.avatar || preferences.app.defaultAvatar"
-        class="size-20"
-      />
+      <Avatar :src="userStore.userInfo?.avatar || preferences.app.defaultAvatar" class="size-20" />
       <div class="flex max-w-[400px] flex-col md:ml-6 md:mt-0">
         <h1 class="text-md break-words font-semibold md:text-xl">
           {{ userStore.userInfo?.realName }}
@@ -39,11 +32,9 @@ const userStore = useUserStore();
         <span class="mt-2">¥4423432.34 元</span>
         <span class="mt-2">H232344.34 元</span>
         <span class="mb-3 mt-2">$626426.34 元</span>
-        <Button size="small" type="primary">充值</Button>
+        <Button class="!text-xs" size="small" type="primary">充值</Button>
       </div>
-      <div
-        class="border-border group flex min-w-[200px] flex-col items-center border-r p-4"
-      >
+      <div class="border-border group flex min-w-[200px] flex-col items-center border-r p-4">
         <HeroiconsCreditCard
           class="text-primary size-10 transition-all duration-300 group-hover:scale-125"
         />
@@ -52,9 +43,7 @@ const userStore = useUserStore();
         <span class="mt-2">H2344.34 元</span>
         <span class="mb-3 mt-2">$6266.34 元</span>
       </div>
-      <div
-        class="border-border group flex min-w-[200px] flex-col items-center p-4"
-      >
+      <div class="border-border group flex min-w-[200px] flex-col items-center p-4">
         <IonWalletOutline
           class="text-primary size-10 transition-all duration-300 group-hover:scale-125"
         />
