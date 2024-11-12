@@ -30,6 +30,22 @@ const routes: RouteRecordRaw[] = [
               title: '新建包裹',
             },
           },
+          {
+            name: 'PackageDailyOperationCalculation',
+            path: 'calculation',
+            component: () => import('#/views/package/daily-operation/calculation/index.vue'),
+            meta: {
+              title: '运费试算',
+            },
+          },
+          {
+            name: 'PackageDailyOperationImport',
+            path: 'import',
+            component: () => import('#/views/package/daily-operation/import/index.vue'),
+            meta: {
+              title: '批量导入',
+            },
+          },
         ],
       },
     ],

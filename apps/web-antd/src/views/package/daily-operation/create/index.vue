@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { useVbenModal } from '@vben/common-ui';
+import { Page, useVbenModal } from '@vben/common-ui';
 
-import { Button, Input } from 'ant-design-vue';
+import { Button, Checkbox, Input } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
@@ -17,6 +17,8 @@ import { declareColumns, formSchemas, shippingColumns } from './const-data';
 
 const shippingMethod = ref();
 const trackingNumberCache = ref();
+const forcast = ref(false);
+const submitLoading = ref(false);
 
 const [Form] = useVbenForm({
   wrapperClass: 'grid-cols-12',
@@ -125,60 +127,113 @@ function handlePasted(info = {}) {
   });
   // setFieldsValue(info);
 }
+
+async function handleSubmit() {
+  // if (!unref(customerInfo).companyId) return createMessage.warning('请先查询客户');
+  // const fields = await validate();
+  // if (!unref(shippingMethod)?.shippingMethodId) return createMessage.warning('请选择邮寄方式');
+  // if (!getDataSource()?.length) return createMessage.warning('请添加申报商品');
+  // const p = formatParams(cloneDeep(fields));
+  // console.log(p);
+  // submitLoading.value = true;
+  // const api = isEdit ? apis.package.updatePackage : apis.package.savePackage;
+  // try {
+  //   const { flg, isFreeze } = (await api(p)) || {};
+  //   if (isFreeze)
+  //     return createMessage.error('当前用户已被冻结，不能进行预报和撤销预报操作，请解冻后重试！');
+  //   if (flg)
+  //     return createMessage.error(
+  //       '当前客户已逾期签署合同导致当前账号无法预报或预约揽收。如需申请逾期签署，请联系营销总监！',
+  //     );
+  // } finally {
+  //   submitLoading.value = false;
+  // }
+  // createMessage.success('保存成功');
+  // if (isEdit)
+  //   setTimeout(() => {
+  //     closeCurrent();
+  //     go({ name: 'CustomerProxyPrediction' });
+  //   }, 1000);
+  // else resetInfo();
+}
 </script>
 
 <template>
-  <div class="card-box m-4 p-4">
-    <Form>
-      <template #addressee>
-        <BasicTitle
-          class="w-full"
-          icon="ri:user-received-line"
-          icon-class="text-primary"
-          title="收件信息"
+  <Page auto-content-height content-class="!p-0">
+    <div class="absolute h-full overflow-auto">
+      <div class="p-4">
+        <div class="card-box relative rounded-b-none p-4">
+          <Form>
+            <template #addressee>
+              <BasicTitle
+                class="w-full"
+                icon="ri:user-received-line"
+                icon-class="text-primary"
+                title="收件信息"
+              >
+                <Button class="!text-xs" size="small" type="primary" @click="PasteModalApi.open()">
+                  智能粘贴
+                </Button>
+              </BasicTitle>
+            </template>
+            <template #shippingMethod>
+              <ShippingaTable class="w-full">
+                <template #toolbar-actions>
+                  <div
+                    v-show="shippingMethod?.hasTrackingNumberFlag === '1'"
+                    class="whitespace-nowrap"
+                  >
+                    您选择的邮寄方式需要追踪号
+                    <Input v-model:value="trackingNumberCache" :maxlength="50" class="w-[165px]" />
+                    此处留空系统将自动分配追踪号
+                  </div>
+                </template>
+                <template #toolbar-tools>
+                  <Button
+                    class="!text-xs"
+                    size="small"
+                    type="primary"
+                    @click="handleSearchShipping"
+                  >
+                    查询支持上述目的地的邮寄方式
+                  </Button>
+                </template>
+              </ShippingaTable>
+            </template>
+            <template #productList>
+              <DeclareTable class="w-full">
+                <template #toolbar-tools>
+                  <Button
+                    class="mr-2 !text-xs"
+                    size="small"
+                    type="primary"
+                    @click="handleAddProduct"
+                  >
+                    添加
+                  </Button>
+                  <Button class="!text-xs" size="small" type="primary" @click="handleSelectProduct">
+                    从申报信息选取
+                  </Button>
+                </template>
+                <template #action="{ row }">
+                  <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
+                  <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
+                </template>
+              </DeclareTable>
+            </template>
+          </Form>
+          <PasteModal @success="handlePasted" />
+          <ProductModal @success="handleAddedProduct" />
+          <SelectProductModal />
+        </div>
+        <div
+          class="bg-card z-100 border-border sticky bottom-0 mt-2 rounded-xl rounded-t-none border p-3 text-right"
         >
-          <Button class="!text-xs" size="small" type="primary" @click="PasteModalApi.open()">
-            智能粘贴
-          </Button>
-        </BasicTitle>
-      </template>
-      <template #shippingMethod>
-        <ShippingaTable class="w-full">
-          <template #toolbar-actions>
-            <div v-show="shippingMethod?.hasTrackingNumberFlag === '1'" class="whitespace-nowrap">
-              您选择的邮寄方式需要追踪号
-              <Input v-model:value="trackingNumberCache" :maxlength="50" class="w-[165px]" />
-              此处留空系统将自动分配追踪号
-            </div>
-          </template>
-          <template #toolbar-tools>
-            <Button class="!text-xs" size="small" type="primary" @click="handleSearchShipping">
-              查询支持上述目的地的邮寄方式
-            </Button>
-          </template>
-        </ShippingaTable>
-      </template>
-      <template #productList>
-        <DeclareTable class="w-full">
-          <template #toolbar-tools>
-            <Button class="mr-2 !text-xs" size="small" type="primary" @click="handleAddProduct">
-              添加
-            </Button>
-            <Button class="!text-xs" size="small" type="primary" @click="handleSelectProduct">
-              从申报信息选取
-            </Button>
-          </template>
-          <template #action="{ row }">
-            <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
-            <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
-          </template>
-        </DeclareTable>
-      </template>
-    </Form>
-    <PasteModal @success="handlePasted" />
-    <ProductModal @success="handleAddedProduct" />
-    <SelectProductModal />
-  </div>
+          <Checkbox v-model:checked="forcast">直接提交预报</Checkbox>
+          <span class="mx-4">运费：¥ {{ shippingMethod?.estimateFreight || '0.00' }}</span>
+          <Button :loading="submitLoading" type="primary" @click="handleSubmit"> 保存包裹 </Button>
+        </div>
+      </div>
+    </div>
+  </Page>
 </template>
-
-<style scoped></style>

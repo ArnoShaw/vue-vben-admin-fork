@@ -19,3 +19,22 @@ export enum ActionEnum {
   // 详情
   VIEW = 'view',
 }
+
+export const FILE_MIMES = {
+  EXCEL: [
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  ],
+};
+
+/**
+ * @description:  contentType
+ */
+export enum ContentTypeEnum {
+  // form-data  upload
+  FORM_DATA = 'multipart/form-data;charset=UTF-8',
+  // form-data qs
+  FORM_URLENCODED = 'application/x-www-form-urlencoded;charset=UTF-8',
+  // json
+  JSON = 'application/json;charset=UTF-8',
+}

@@ -61,13 +61,7 @@ onMounted(() => {
 <template>
   <div class="relative">
     <div
-      v-if="
-        description ||
-        $slots.description ||
-        title ||
-        $slots.title ||
-        $slots.extra
-      "
+      v-if="description || $slots.description || title || $slots.title || $slots.extra"
       ref="headerRef"
       class="bg-card relative px-6 py-4"
     >

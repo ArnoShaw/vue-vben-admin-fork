@@ -18,9 +18,6 @@ const [Grid, GridApi] = useVbenVxeGrid({
     wrapperClass: 'grid-cols-12',
     actionWrapperClass: 'col-span-6',
   },
-  // gridEvents: {
-
-  // },
   gridOptions: {
     columns: productColumns,
     border: true,
@@ -44,6 +41,7 @@ const [Grid, GridApi] = useVbenVxeGrid({
 
 const [Modal, ModalApi] = useVbenModal({
   title: '选择申报信息',
+  draggable: true,
   // onOpenChange(isOpen) {
   //   if (isOpen) {
   //   }

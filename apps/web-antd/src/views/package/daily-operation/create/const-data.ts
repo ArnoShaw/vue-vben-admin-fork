@@ -499,10 +499,12 @@ export const shippingColumns: VxeGridProps['columns'] = [
 export const declareColumns: VxeGridProps['columns'] = [
   {
     title: '申报品名（英文）',
+    minWidth: 125,
     field: 'declareEnName',
   },
   {
     title: '申报品名（中文）',
+    minWidth: 125,
     field: 'declareCnName',
   },
   {
