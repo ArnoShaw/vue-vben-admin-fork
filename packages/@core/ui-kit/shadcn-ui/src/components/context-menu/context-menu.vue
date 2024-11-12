@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
 import type {
   ContextMenuContentProps,
   ContextMenuRootEmits,
@@ -22,11 +23,11 @@ import {
 
 const props = defineProps<
   {
-    class?: any;
-    contentClass?: any;
+    class?: ClassType;
+    contentClass?: ClassType;
     contentProps?: ContextMenuContentProps;
     handlerData?: Record<string, any>;
-    itemClass?: any;
+    itemClass?: ClassType;
     menus: (data: any) => IContextMenuItem[];
   } & ContextMenuRootProps
 >();
@@ -64,11 +65,7 @@ function handleClick(menu: IContextMenuItem) {
     <ContextMenuTrigger as-child>
       <slot></slot>
     </ContextMenuTrigger>
-    <ContextMenuContent
-      :class="contentClass"
-      v-bind="contentProps"
-      class="side-content z-[1000]"
-    >
+    <ContextMenuContent :class="contentClass" v-bind="contentProps" class="side-content z-[1000]">
       <template v-for="menu in menusView" :key="menu.key">
         <ContextMenuItem
           :class="itemClass"
@@ -77,11 +74,7 @@ function handleClick(menu: IContextMenuItem) {
           class="cursor-pointer"
           @click="handleClick(menu)"
         >
-          <component
-            :is="menu.icon"
-            v-if="menu.icon"
-            class="mr-2 size-4 text-lg"
-          />
+          <component :is="menu.icon" v-if="menu.icon" class="mr-2 size-4 text-lg" />
 
           {{ menu.text }}
           <ContextMenuShortcut v-if="menu.shortcut">

@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import type {
-  AvatarFallbackProps,
-  AvatarImageProps,
-  AvatarRootProps,
-} from 'radix-vue';
+import type { ClassType } from '@vben-core/typings';
+import type { AvatarFallbackProps, AvatarImageProps, AvatarRootProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
@@ -11,9 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../ui';
 
 interface Props extends AvatarRootProps, AvatarFallbackProps, AvatarImageProps {
   alt?: string;
-  class?: any;
+  class?: ClassType;
   dot?: boolean;
-  dotClass?: any;
+  dotClass?: ClassType;
 }
 
 defineOptions({

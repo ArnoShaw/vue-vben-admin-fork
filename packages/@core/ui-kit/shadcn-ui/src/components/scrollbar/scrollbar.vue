@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import { computed, ref } from 'vue';
 
 import { cn } from '@vben-core/shared/utils';
@@ -6,9 +8,9 @@ import { cn } from '@vben-core/shared/utils';
 import { ScrollArea, ScrollBar } from '../../ui';
 
 interface Props {
-  class?: any;
+  class?: ClassType;
   horizontal?: boolean;
-  scrollBarClass?: any;
+  scrollBarClass?: ClassType;
   shadow?: boolean;
   shadowBorder?: boolean;
   shadowBottom?: boolean;
@@ -45,10 +47,7 @@ const showShadowRight = computed(() => props.shadow && props.shadowRight);
 const computedShadowClasses = computed(() => {
   return {
     'both-shadow':
-      !isAtLeft.value &&
-      !isAtRight.value &&
-      showShadowLeft.value &&
-      showShadowRight.value,
+      !isAtLeft.value && !isAtRight.value && showShadowLeft.value && showShadowRight.value,
     'left-shadow': !isAtLeft.value && showShadowLeft.value,
     'right-shadow': !isAtRight.value && showShadowRight.value,
   };
@@ -99,11 +98,7 @@ function handleScroll(event: Event) {
       }"
       class="scrollbar-bottom-shadow pointer-events-none absolute bottom-0 z-10 h-12 w-full opacity-0 transition-opacity duration-300 ease-in-out will-change-[opacity]"
     ></div>
-    <ScrollBar
-      v-if="horizontal"
-      :class="scrollBarClass"
-      orientation="horizontal"
-    />
+    <ScrollBar v-if="horizontal" :class="scrollBarClass" orientation="horizontal" />
   </ScrollArea>
 </template>
 
@@ -114,12 +109,7 @@ function handleScroll(event: Event) {
   }
 
   &:not(.both-shadow).right-shadow {
-    mask-image: linear-gradient(
-      90deg,
-      #000 0%,
-      #000 calc(100% - 16px),
-      transparent
-    );
+    mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 16px), transparent);
   }
 
   &.both-shadow {
@@ -134,18 +124,10 @@ function handleScroll(event: Event) {
 }
 
 .scrollbar-top-shadow {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--scroll-shadow, var(--background))),
-    transparent
-  );
+  background: linear-gradient(to bottom, hsl(var(--scroll-shadow, var(--background))), transparent);
 }
 
 .scrollbar-bottom-shadow {
-  background: linear-gradient(
-    to top,
-    hsl(var(--scroll-shadow, var(--background))),
-    transparent
-  );
+  background: linear-gradient(to top, hsl(var(--scroll-shadow, var(--background))), transparent);
 }
 </style>

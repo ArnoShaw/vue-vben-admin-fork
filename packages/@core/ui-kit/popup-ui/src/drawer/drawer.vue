@@ -3,11 +3,7 @@ import type { DrawerProps, ExtendedDrawerApi } from './drawer';
 
 import { provide, ref, useId, watch } from 'vue';
 
-import {
-  useIsMobile,
-  usePriorityValues,
-  useSimpleLocale,
-} from '@vben-core/composables';
+import { useIsMobile, usePriorityValues, useSimpleLocale } from '@vben-core/composables';
 import { X } from '@vben-core/icons';
 import {
   Sheet,
@@ -56,6 +52,9 @@ const {
   contentClass,
   description,
   footer: showFooter,
+  footerClass,
+  header: showHeader,
+  headerClass,
   loading: showLoading,
   modal,
   openAutoFocus,
@@ -108,11 +107,7 @@ function handleFocusOutside(e: Event) {
 }
 </script>
 <template>
-  <Sheet
-    :modal="false"
-    :open="state?.isOpen"
-    @update:open="() => drawerApi?.close()"
-  >
+  <Sheet :modal="false" :open="state?.isOpen" @update:open="() => drawerApi?.close()">
     <SheetContent
       :class="
         cn('flex w-[520px] flex-col', drawerClass, {
@@ -129,8 +124,9 @@ function handleFocusOutside(e: Event) {
       @pointer-down-outside="pointerDownOutside"
     >
       <SheetHeader
+        v-if="showHeader"
         :class="
-          cn('!flex flex-row items-center justify-between border-b px-6 py-5', {
+          cn('!flex flex-row items-center justify-between border-b px-6 py-5', headerClass, {
             'px-4 py-3': closable,
           })
         "
@@ -186,7 +182,7 @@ function handleFocusOutside(e: Event) {
 
       <SheetFooter
         v-if="showFooter"
-        class="w-full flex-row items-center justify-end border-t p-2 px-3"
+        :class="cn('w-full flex-row items-center justify-end border-t p-2 px-3', footerClass)"
       >
         <slot name="prepend-footer"></slot>
         <slot name="footer">

@@ -1,4 +1,5 @@
 import type { VbenButtonProps } from '@vben-core/shadcn-ui';
+import type { ClassType } from '@vben-core/typings';
 import type { FieldOptions, FormContext, GenericObject } from 'vee-validate';
 import type { ZodTypeAny } from 'zod';
 
@@ -128,10 +129,7 @@ export interface FormItemDependencies {
 }
 
 type ComponentProps =
-  | ((
-      value: Partial<Record<string, any>>,
-      actions: FormActions,
-    ) => MaybeComponentProps)
+  | ((value: Partial<Record<string, any>>, actions: FormActions) => MaybeComponentProps)
   | MaybeComponentProps;
 
 export interface FormCommonConfig {
@@ -197,17 +195,14 @@ type RenderComponentContentType = (
   api: FormActions,
 ) => Record<string, any>;
 
-export type HandleSubmitFn = (
-  values: Record<string, any>,
-) => Promise<void> | void;
+export type HandleSubmitFn = (values: Record<string, any>) => Promise<void> | void;
 
-export type HandleResetFn = (
-  values: Record<string, any>,
-) => Promise<void> | void;
+export type HandleResetFn = (values: Record<string, any>) => Promise<void> | void;
 
-export interface FormSchema<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> extends FormCommonConfig {
+export type FieldMappingTime = [string, [string, string], ([string, string] | string)?][];
+
+export interface FormSchema<T extends BaseFormComponentType = BaseFormComponentType>
+  extends FormCommonConfig {
   /** 组件 */
   component: Component | T;
   /** 组件参数 */
@@ -236,9 +231,7 @@ export interface FormFieldProps extends FormSchema {
   required?: boolean;
 }
 
-export interface FormRenderProps<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> {
+export interface FormRenderProps<T extends BaseFormComponentType = BaseFormComponentType> {
   /**
    * 是否展开，在showCollapseButton=true下生效
    */
@@ -294,16 +287,16 @@ export interface ActionButtonOptions extends VbenButtonProps {
   show?: boolean;
 }
 
-export interface VbenFormProps<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> extends Omit<
-    FormRenderProps<T>,
-    'componentBindEventMap' | 'componentMap' | 'form'
-  > {
+export interface VbenFormProps<T extends BaseFormComponentType = BaseFormComponentType>
+  extends Omit<FormRenderProps<T>, 'componentBindEventMap' | 'componentMap' | 'form'> {
   /**
    * 表单操作区域class
    */
-  actionWrapperClass?: any;
+  actionWrapperClass?: ClassType;
+  /**
+   * 表单字段映射成时间格式
+   */
+  fieldMappingTime?: FieldMappingTime;
   /**
    * 表单重置回调
    */
@@ -344,9 +337,7 @@ export type ExtendedFormApi = {
   ) => Readonly<Ref<T>>;
 } & FormApi;
 
-export interface VbenFormAdapterOptions<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> {
+export interface VbenFormAdapterOptions<T extends BaseFormComponentType = BaseFormComponentType> {
   config?: {
     baseModelPropName?: string;
     disabledOnChangeListener?: boolean;
@@ -354,15 +345,7 @@ export interface VbenFormAdapterOptions<
     modelPropNameMap?: Partial<Record<T, string>>;
   };
   defineRules?: {
-    required?: (
-      value: any,
-      params: any,
-      ctx: Record<string, any>,
-    ) => boolean | string;
-    selectRequired?: (
-      value: any,
-      params: any,
-      ctx: Record<string, any>,
-    ) => boolean | string;
+    required?: (value: any, params: any, ctx: Record<string, any>) => boolean | string;
+    selectRequired?: (value: any, params: any, ctx: Record<string, any>) => boolean | string;
   };
 }

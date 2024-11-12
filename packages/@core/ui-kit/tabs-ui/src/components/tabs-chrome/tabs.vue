@@ -65,7 +65,7 @@ const tabsView = computed(() => {
     :style="style"
     class="tabs-chrome !flex h-full w-max overflow-y-hidden pr-6"
   >
-    <TransitionGroup name="slide-down">
+    <TransitionGroup name="slide-left">
       <div
         v-for="(tab, i) in tabsView"
         :key="tab.key"
@@ -83,12 +83,7 @@ const tabsView = computed(() => {
         data-tab-item="true"
         @click="active = tab.key"
       >
-        <VbenContextMenu
-          :handler-data="tab"
-          :menus="contextMenus"
-          :modal="false"
-          item-class="pr-6"
-        >
+        <VbenContextMenu :handler-data="tab" :menus="contextMenus" :modal="false" item-class="pr-6">
           <div class="relative size-full px-1">
             <!-- divider -->
             <div

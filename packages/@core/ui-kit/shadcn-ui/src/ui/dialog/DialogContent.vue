@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ClassType } from '@vben-core/typings';
+
 import { computed, ref } from 'vue';
 
 import { cn } from '@vben-core/shared/utils';
@@ -18,8 +20,8 @@ import DialogOverlay from './DialogOverlay.vue';
 const props = withDefaults(
   defineProps<
     {
-      class?: any;
-      closeClass?: any;
+      class?: ClassType;
+      closeClass?: ClassType;
       modal?: boolean;
       open?: boolean;
       showClose?: boolean;
@@ -27,18 +29,10 @@ const props = withDefaults(
   >(),
   { showClose: true },
 );
-const emits = defineEmits<
-  { close: []; closed: []; opened: [] } & DialogContentEmits
->();
+const emits = defineEmits<{ close: []; closed: []; opened: [] } & DialogContentEmits>();
 
 const delegatedProps = computed(() => {
-  const {
-    class: _,
-    modal: _modal,
-    open: _open,
-    showClose: __,
-    ...delegated
-  } = props;
+  const { class: _, modal: _modal, open: _open, showClose: __, ...delegated } = props;
 
   return delegated;
 });

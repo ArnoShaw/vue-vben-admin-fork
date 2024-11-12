@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import type {
-  HoverCardContentProps,
-  HoverCardRootEmits,
-  HoverCardRootProps,
-} from 'radix-vue';
+import type { ClassType } from '@vben-core/typings';
+import type { HoverCardContentProps, HoverCardRootEmits, HoverCardRootProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
@@ -12,8 +9,8 @@ import { useForwardPropsEmits } from 'radix-vue';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../../ui';
 
 interface Props extends HoverCardRootProps {
-  class?: any;
-  contentClass?: any;
+  class?: ClassType;
+  contentClass?: ClassType;
   contentProps?: HoverCardContentProps;
 }
 
@@ -22,12 +19,7 @@ const props = defineProps<Props>();
 const emits = defineEmits<HoverCardRootEmits>();
 
 const delegatedProps = computed(() => {
-  const {
-    class: _cls,
-    contentClass: _,
-    contentProps: _cProps,
-    ...delegated
-  } = props;
+  const { class: _cls, contentClass: _, contentProps: _cProps, ...delegated } = props;
 
   return delegated;
 });
@@ -42,11 +34,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         <slot name="trigger"></slot>
       </div>
     </HoverCardTrigger>
-    <HoverCardContent
-      :class="contentClass"
-      v-bind="contentProps"
-      class="side-content z-[1000]"
-    >
+    <HoverCardContent :class="contentClass" v-bind="contentProps" class="side-content z-[1000]">
       <slot></slot>
     </HoverCardContent>
   </HoverCard>

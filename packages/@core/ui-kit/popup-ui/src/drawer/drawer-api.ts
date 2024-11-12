@@ -4,10 +4,7 @@ import { Store } from '@vben-core/shared/store';
 import { bindMethods, isFunction } from '@vben-core/shared/utils';
 
 export class DrawerApi {
-  private api: Pick<
-    DrawerApiOptions,
-    'onBeforeClose' | 'onCancel' | 'onConfirm' | 'onOpenChange'
-  >;
+  private api: Pick<DrawerApiOptions, 'onBeforeClose' | 'onCancel' | 'onConfirm' | 'onOpenChange'>;
   // private prevState!: DrawerState;
   private state!: DrawerState;
 
@@ -36,6 +33,7 @@ export class DrawerApi {
       confirmLoading: false,
       contentClass: '',
       footer: true,
+      header: true,
       isOpen: false,
       loading: false,
       modal: true,
@@ -119,11 +117,7 @@ export class DrawerApi {
     this.sharedData.payload = payload;
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: DrawerState) => Partial<DrawerState>)
-      | Partial<DrawerState>,
-  ) {
+  setState(stateOrFn: ((prev: DrawerState) => Partial<DrawerState>) | Partial<DrawerState>) {
     if (isFunction(stateOrFn)) {
       this.store.setState(stateOrFn);
     } else {

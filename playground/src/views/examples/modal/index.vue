@@ -8,7 +8,7 @@ import AutoHeightDemo from './auto-height-demo.vue';
 import BaseDemo from './base-demo.vue';
 import DragDemo from './drag-demo.vue';
 import DynamicDemo from './dynamic-demo.vue';
-import FormModalDemo from './form-model-demo.vue';
+import FormModalDemo from './form-modal-demo.vue';
 import SharedDataDemo from './shared-data-demo.vue';
 
 const [BaseModal, baseModalApi] = useVbenModal({
@@ -106,16 +106,12 @@ function openFormModal() {
     <Card class="mb-4" title="动态配置示例">
       <p class="mb-3">通过 setState 动态调整弹窗数据</p>
       <Button type="primary" @click="openDynamicModal">打开弹窗</Button>
-      <Button class="ml-2" type="primary" @click="handleUpdateTitle">
-        从外部修改标题并打开
-      </Button>
+      <Button class="ml-2" type="primary" @click="handleUpdateTitle"> 从外部修改标题并打开 </Button>
     </Card>
 
     <Card class="mb-4" title="内外数据共享示例">
       <p class="mb-3">通过共享 sharedData 来进行数据交互</p>
-      <Button type="primary" @click="openSharedModal">
-        打开弹窗并传递数据
-      </Button>
+      <Button type="primary" @click="openSharedModal"> 打开弹窗并传递数据 </Button>
     </Card>
 
     <Card class="mb-4" title="表单弹窗示例">

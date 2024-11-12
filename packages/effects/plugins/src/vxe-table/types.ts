@@ -1,10 +1,6 @@
-import type { DeepPartial } from '@vben/types';
+import type { ClassType, DeepPartial } from '@vben/types';
 import type { VbenFormProps } from '@vben-core/form-ui';
-import type {
-  VxeGridListeners,
-  VxeGridProps as VxeTableGridProps,
-  VxeUIExport,
-} from 'vxe-table';
+import type { VxeGridListeners, VxeGridProps as VxeTableGridProps, VxeUIExport } from 'vxe-table';
 
 import type { VxeGridApi } from './api';
 
@@ -30,11 +26,11 @@ export interface VxeGridProps {
   /**
    * 组件class
    */
-  class?: any;
+  class?: ClassType;
   /**
    * vxe-grid class
    */
-  gridClass?: any;
+  gridClass?: ClassType;
   /**
    * vxe-grid 配置
    */

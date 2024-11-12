@@ -17,6 +17,8 @@ import {
 } from '@vben/icons';
 
 import { Card } from 'ant-design-vue';
+
+import IconPicker from './icon-picker.vue';
 </script>
 
 <template>
@@ -24,11 +26,7 @@ import { Card } from 'ant-design-vue';
     <template #description>
       <div class="text-foreground/80 mt-2">
         图标可在
-        <a
-          class="text-primary"
-          href="https://icon-sets.iconify.design/"
-          target="_blank"
-        >
+        <a class="text-primary" href="https://icon-sets.iconify.design/" target="_blank">
           Iconify
         </a>
         中查找，支持多种图标库，如 Material Design, Font Awesome, Jam Icons 等。
@@ -45,7 +43,7 @@ import { Card } from 'ant-design-vue';
       </div>
     </Card>
 
-    <Card title="Svg Icons">
+    <Card class="mb-5" title="Svg Icons">
       <div class="flex items-center gap-5">
         <SvgAvatar1Icon class="size-8" />
         <SvgAvatar2Icon class="size-8 text-red-500" />
@@ -55,6 +53,18 @@ import { Card } from 'ant-design-vue';
         <SvgBellIcon class="size-8" />
         <SvgCardIcon class="size-8" />
         <SvgDownloadIcon class="size-8" />
+      </div>
+    </Card>
+
+    <Card class="mb-5" title="图标选择器(Iconify)">
+      <div class="flex items-center gap-5">
+        <IconPicker width="300px" />
+      </div>
+    </Card>
+
+    <Card title="图标选择器(Svg)">
+      <div class="flex items-center gap-5">
+        <IconPicker prefix="svg" width="300px" />
       </div>
     </Card>
   </Page>
