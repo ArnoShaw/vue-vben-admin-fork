@@ -5,6 +5,10 @@ import { useVbenVxeGrid } from '#/adapter/vxe-table';
 
 import { baseColumns, baseSchema } from './const-data';
 
+defineOptions({
+  name: 'PackageDailyOperationCalculation',
+});
+
 const [Table] = useVbenVxeGrid({
   tableTitle: '价格列表',
   formOptions: {
@@ -18,8 +22,7 @@ const [Table] = useVbenVxeGrid({
     border: true,
     height: 'auto',
     columnConfig: {
-      resizable: false,
-      minWidth: 80,
+      minWidth: 100,
     },
     rowConfig: {
       isHover: true,
@@ -39,5 +42,3 @@ const [Table] = useVbenVxeGrid({
 <template>
   <Page auto-content-height> <Table class="rounded-xl" /></Page>
 </template>
-
-<style scoped></style>

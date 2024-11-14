@@ -27,6 +27,7 @@ function useAccess() {
    * @param codes
    */
   function hasAccessByCodes(codes: string[]) {
+    if (!codes) return true;
     const userCodesSet = new Set(accessStore.accessCodes);
 
     const intersection = codes.filter((item) => userCodesSet.has(item));
@@ -36,8 +37,7 @@ function useAccess() {
   async function toggleAccessMode() {
     updatePreferences({
       app: {
-        accessMode:
-          preferences.app.accessMode === 'frontend' ? 'backend' : 'frontend',
+        accessMode: preferences.app.accessMode === 'frontend' ? 'backend' : 'frontend',
       },
     });
   }

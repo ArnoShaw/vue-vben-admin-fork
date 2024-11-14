@@ -7,7 +7,7 @@ import { cloneDeep } from '@vben/utils';
 import Decimal from 'decimal.js';
 
 import { useVbenForm } from '#/adapter/form';
-import { ActionEnum } from '#/enums/common';
+import { ActionEnum } from '#/constants/common';
 
 import { productSchema } from '../const-data';
 

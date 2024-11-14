@@ -40,15 +40,12 @@ export class VxeGridApi {
     const storeState = { ...options };
 
     const defaultState = getDefaultState();
-    this.store = new Store<VxeGridProps>(
-      mergeWithArrayOverride(storeState, defaultState),
-      {
-        onUpdate: () => {
-          // this.prevState = this.state;
-          this.state = this.store.state;
-        },
+    this.store = new Store<VxeGridProps>(mergeWithArrayOverride(storeState, defaultState), {
+      onUpdate: () => {
+        // this.prevState = this.state;
+        this.state = this.store.state;
       },
-    );
+    });
 
     this.state = this.store.state;
     this.stateHandler = new StateHandler();
@@ -94,11 +91,7 @@ export class VxeGridApi {
     });
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: VxeGridProps) => Partial<VxeGridProps>)
-      | Partial<VxeGridProps>,
-  ) {
+  setState(stateOrFn: ((prev: VxeGridProps) => Partial<VxeGridProps>) | Partial<VxeGridProps>) {
     if (isFunction(stateOrFn)) {
       this.store.setState((prev) => {
         return mergeWithArrayOverride(stateOrFn(prev), prev);

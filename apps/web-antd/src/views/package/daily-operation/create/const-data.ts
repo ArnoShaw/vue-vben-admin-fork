@@ -5,6 +5,9 @@ import { type VbenFormSchema, z } from '@vben/common-ui';
 
 import Decimal from 'decimal.js';
 
+// const CODCurrencyList = getOptionsByDict('sys_package_cod_currency_code');
+// const declareCurrencyCodes = getOptionsByDict('sy_bs_currency_code');
+
 export const formSchemas = (
   goodsSelectCb?: Fn,
   isCODChangeCb?: Fn,
@@ -604,6 +607,7 @@ export const productSchema: VbenFormSchema[] = [
     component: 'Select',
     defaultValue: 'USD',
     componentProps: {
+      // options: declareCurrencyCodes,
       defaultValue: 'USD',
       filterOption: true,
       options: [

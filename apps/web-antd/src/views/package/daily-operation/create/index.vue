@@ -8,12 +8,16 @@ import { Button, Checkbox, Input } from 'ant-design-vue';
 import { useVbenForm } from '#/adapter/form';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import BasicTitle from '#/components/basic-title.vue';
-import { ActionEnum } from '#/enums/common';
+import { ActionEnum } from '#/constants/common';
 
 import ModalAddProduct from './components/modal-add-product.vue';
 import ModalAutoPaste from './components/modal-auto-paste.vue';
 import ModalSelectProduct from './components/modal-select-product.vue';
 import { declareColumns, formSchemas, shippingColumns } from './const-data';
+
+defineOptions({
+  name: 'PackageDailyOperationCreate',
+});
 
 const shippingMethod = ref();
 const trackingNumberCache = ref();
@@ -66,7 +70,6 @@ const [DeclareTable, DeclareTableApi] = useVbenVxeGrid({
     minHeight: 300,
     maxHeight: 500,
     columnConfig: {
-      resizable: false,
       minWidth: 80,
     },
     rowConfig: {
@@ -160,7 +163,7 @@ async function handleSubmit() {
 
 <template>
   <Page auto-content-height content-class="!p-0">
-    <div class="absolute h-full overflow-auto">
+    <div class="absolute h-full w-full overflow-auto">
       <div class="p-4">
         <div class="card-box relative rounded-b-none p-4">
           <Form>
@@ -218,6 +221,10 @@ async function handleSubmit() {
                 <template #action="{ row }">
                   <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
                   <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
+                  <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
+                  <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
+                  <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
+                  <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
                 </template>
               </DeclareTable>
             </template>
@@ -227,7 +234,7 @@ async function handleSubmit() {
           <SelectProductModal />
         </div>
         <div
-          class="bg-card z-100 border-border sticky bottom-0 mt-2 rounded-xl rounded-t-none border p-3 text-right"
+          class="bg-card z-100 border-border sticky bottom-0 mt-2 rounded-xl rounded-t-none border p-4 text-right"
         >
           <Checkbox v-model:checked="forcast">直接提交预报</Checkbox>
           <span class="mx-4">运费：¥ {{ shippingMethod?.estimateFreight || '0.00' }}</span>

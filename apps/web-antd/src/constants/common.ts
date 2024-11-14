@@ -1,3 +1,6 @@
+import type { Fn } from '@vueuse/core';
+import type { ButtonProps } from 'ant-design-vue';
+
 /**
  * 操作列 类型
  */
@@ -37,4 +40,16 @@ export enum ContentTypeEnum {
   FORM_URLENCODED = 'application/x-www-form-urlencoded;charset=UTF-8',
   // json
   JSON = 'application/json;charset=UTF-8',
+}
+
+export interface ActionItem extends ButtonProps {
+  onClick?: Fn;
+  label?: string;
+  color?: 'error' | 'success' | 'warning';
+  icon?: string;
+  disabled?: boolean;
+  // 权限编码控制是否显示
+  auth?: string | string[];
+  // 业务控制是否显示
+  ifShow?: ((action: ActionItem) => boolean) | boolean;
 }

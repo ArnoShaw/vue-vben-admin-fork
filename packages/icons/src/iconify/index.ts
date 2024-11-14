@@ -24,6 +24,6 @@ export const IconParkOutlineTransactionOrder = createIconifyIcon(
 
 export const PhWarningBold = createIconifyIcon('ph:warning-bold');
 
-export const IconParkOutlineVolumeNotice = createIconifyIcon(
-  'icon-park-outline:volume-notice',
-);
+export const IconParkOutlineVolumeNotice = createIconifyIcon('icon-park-outline:volume-notice');
+
+export const RiMoreFill = createIconifyIcon('ri:more-fill');

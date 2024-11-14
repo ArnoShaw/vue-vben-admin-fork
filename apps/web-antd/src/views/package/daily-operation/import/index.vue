@@ -9,13 +9,13 @@ import { Alert, Button, Checkbox, message, Modal, Upload, type UploadProps } fro
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import BasicTitle from '#/components/basic-title.vue';
-import { FILE_MIMES } from '#/enums/common';
+import { FILE_MIMES } from '#/constants/common';
 
 import { columns } from './const-data';
 import ModalHelpDesc from './modal-help-desc.vue';
 
 defineOptions({
-  name: 'CustomerProxyImport',
+  name: 'PackageDailyOperationImport',
 });
 
 const customerInfo = ref({});
@@ -167,7 +167,7 @@ async function handleImport() {
       </div>
       <Alert banner>
         <template #message>
-          小贴士 : 以下这些情况都会影响您的导入速度，还有可能会导致您导入失败哦。
+          小贴士: 以下这些情况都会影响您的导入速度，还有可能会导致您导入失败哦。
         </template>
         <template #description>
           <p>1. 同一个公司同一时间只能允许一个人执行导入操作，单次导入最大限制为10000条。</p>

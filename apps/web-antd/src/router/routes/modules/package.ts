@@ -46,6 +46,14 @@ const routes: RouteRecordRaw[] = [
               title: '批量导入',
             },
           },
+          {
+            name: 'PackageDailyOperationPrediction',
+            path: 'prediction',
+            component: () => import('#/views/package/daily-operation/prediction/index.vue'),
+            meta: {
+              title: '包裹预报',
+            },
+          },
         ],
       },
     ],

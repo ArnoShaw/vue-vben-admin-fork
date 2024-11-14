@@ -11,6 +11,7 @@ setupVbenVxeTable({
     vxeUI.setConfig({
       grid: {
         align: 'center',
+        layouts: ['Form', 'Top', 'Toolbar', 'Table', 'Bottom', 'Pager'],
         border: false,
         columnConfig: {
           resizable: true,

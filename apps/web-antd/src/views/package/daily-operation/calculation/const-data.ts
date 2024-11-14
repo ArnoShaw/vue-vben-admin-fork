@@ -5,35 +5,43 @@ import { type VbenFormSchema, z } from '@vben/common-ui';
 export const baseColumns: VxeGridProps['columns'] = [
   {
     title: '报价名称',
+    sortable: true,
     field: 'priceName',
   },
   {
     title: '邮寄方式',
+    sortable: true,
     field: 'shippingMethodCnName',
   },
   {
     title: '结算重量',
+    sortable: true,
     field: 'weight',
   },
   {
     title: '计算公式',
     width: 240,
+    sortable: true,
     field: 'formula',
   },
   {
     title: '折扣',
+    sortable: true,
     field: 'rebate',
   },
   {
     title: '加收费用',
+    sortable: true,
     field: 'additional',
   },
   {
     title: '合计',
+    sortable: true,
     field: 'amt',
   },
   {
     title: '币种',
+    sortable: true,
     field: 'currencyCode',
   },
   {
