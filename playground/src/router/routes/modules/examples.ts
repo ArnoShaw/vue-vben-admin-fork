@@ -124,8 +124,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'VxeTableCustomCellExample',
             path: '/examples/vxe-table/custom-cell',
-            component: () =>
-              import('#/views/examples/vxe-table/custom-cell.vue'),
+            component: () => import('#/views/examples/vxe-table/custom-cell.vue'),
             meta: {
               title: $t('examples.vxeTable.custom-cell'),
             },
@@ -175,8 +174,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'DragVerifyExample',
             path: '/examples/captcha/slider',
-            component: () =>
-              import('#/views/examples/captcha/slider-captcha.vue'),
+            component: () => import('#/views/examples/captcha/slider-captcha.vue'),
             meta: {
               title: $t('examples.captcha.sliderCaptcha'),
             },
@@ -184,8 +182,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'RotateVerifyExample',
             path: '/examples/captcha/slider-rotate',
-            component: () =>
-              import('#/views/examples/captcha/slider-rotate-captcha.vue'),
+            component: () => import('#/views/examples/captcha/slider-rotate-captcha.vue'),
             meta: {
               title: $t('examples.captcha.sliderRotateCaptcha'),
             },
@@ -193,8 +190,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'CaptchaPointSelectionExample',
             path: '/examples/captcha/point-selection',
-            component: () =>
-              import('#/views/examples/captcha/point-selection-captcha.vue'),
+            component: () => import('#/views/examples/captcha/point-selection-captcha.vue'),
             meta: {
               title: $t('examples.captcha.pointSelection'),
             },
@@ -226,6 +222,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
           icon: 'ion:ellipsis-horizontal',
           title: $t('examples.ellipsis.title'),
+        },
+      },
+      {
+        name: 'VueResizeDemo',
+        path: '/demos/resize/basic',
+        component: () => import('#/views/examples/resize/basic.vue'),
+        meta: {
+          icon: 'material-symbols:resize',
+          title: $t('examples.resize.title'),
         },
       },
     ],

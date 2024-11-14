@@ -9,11 +9,7 @@ import { useForwardPriorityValues } from '@vben-core/composables';
 import { useTemplateRef } from 'vue';
 
 import FormActions from './components/form-actions.vue';
-import {
-  COMPONENT_BIND_EVENT_MAP,
-  COMPONENT_MAP,
-  DEFAULT_FORM_COMMON_CONFIG,
-} from './config';
+import { COMPONENT_BIND_EVENT_MAP, COMPONENT_MAP, DEFAULT_FORM_COMMON_CONFIG } from './config';
 import { Form } from './form-render';
 import { provideFormProps, useFormInitial } from './use-form-context';
 // 通过 extends 会导致热更新卡死，所以重复写了一遍
@@ -40,6 +36,9 @@ const handleUpdateCollapsed = (value: boolean) => {
 };
 
 function handleKeyDownEnter(event: KeyboardEvent) {
+  if (!state.value.submitOnEnter || !formActionsRef.value || !formActionsRef.value.handleSubmit) {
+    return;
+  }
   // 如果是 textarea 不阻止默认行为，否则会导致无法换行。
   // 跳过 textarea 的回车提交处理
   if (event.target instanceof HTMLTextAreaElement) {
@@ -47,9 +46,6 @@ function handleKeyDownEnter(event: KeyboardEvent) {
   }
   event.preventDefault();
 
-  if (!state.value.submitOnEnter || !formActionsRef.value) {
-    return;
-  }
   formActionsRef.value?.handleSubmit?.();
 }
 </script>
@@ -64,11 +60,7 @@ function handleKeyDownEnter(event: KeyboardEvent) {
     :form="form"
     :global-common-config="DEFAULT_FORM_COMMON_CONFIG"
   >
-    <template
-      v-for="slotName in delegatedSlots"
-      :key="slotName"
-      #[slotName]="slotProps"
-    >
+    <template v-for="slotName in delegatedSlots" :key="slotName" #[slotName]="slotProps">
       <slot :name="slotName" v-bind="slotProps"></slot>
     </template>
     <template #default="slotProps">

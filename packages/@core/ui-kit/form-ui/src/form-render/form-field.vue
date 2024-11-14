@@ -57,9 +57,7 @@ const formApi = formRenderProps.form;
 const isInValid = computed(() => errors.value?.length > 0);
 
 const FieldComponent = computed(() => {
-  const finalComponent = isString(component)
-    ? componentMap.value[component]
-    : component;
+  const finalComponent = isString(component) ? componentMap.value[component] : component;
   if (!finalComponent) {
     // 组件未注册
     console.warn(`Component ${component} is not registered`);
@@ -67,14 +65,8 @@ const FieldComponent = computed(() => {
   return finalComponent;
 });
 
-const {
-  dynamicComponentProps,
-  dynamicRules,
-  isDisabled,
-  isIf,
-  isRequired,
-  isShow,
-} = useDependencies(() => dependencies);
+const { dynamicComponentProps, dynamicRules, isDisabled, isIf, isRequired, isShow } =
+  useDependencies(() => dependencies);
 
 const labelStyle = computed(() => {
   return labelClass?.includes('w-') || isVertical.value
@@ -200,16 +192,12 @@ function fieldBindEvent(slotProps: Record<string, any>) {
   const modelValue = slotProps.componentField.modelValue;
   const handler = slotProps.componentField['onUpdate:modelValue'];
 
-  const bindEventField = isString(component)
-    ? componentBindEventMap.value?.[component]
-    : null;
+  const bindEventField = isString(component) ? componentBindEventMap.value?.[component] : null;
 
   let value = modelValue;
   // antd design 的一些组件会传递一个 event 对象
   if (modelValue && isObject(modelValue) && bindEventField) {
-    value = isEventObjectLike(modelValue)
-      ? modelValue?.target?.[bindEventField]
-      : modelValue;
+    value = isEventObjectLike(modelValue) ? modelValue?.target?.[bindEventField] : modelValue;
   }
   if (bindEventField) {
     return {
@@ -238,6 +226,12 @@ function createComponentProps(slotProps: Record<string, any>) {
     ...slotProps.componentField,
     ...computedProps.value,
     ...bindEvents,
+    ...(Reflect.has(computedProps.value, 'onChange')
+      ? { onChange: computedProps.value.onChange }
+      : {}),
+    ...(Reflect.has(computedProps.value, 'onInput')
+      ? { onInput: computedProps.value.onInput }
+      : {}),
   };
 
   return binds;
@@ -256,12 +250,7 @@ function autofocus() {
 </script>
 
 <template>
-  <FormField
-    v-if="isIf"
-    v-bind="fieldProps"
-    v-slot="slotProps"
-    :name="fieldName"
-  >
+  <FormField v-if="isIf" v-bind="fieldProps" v-slot="slotProps" :name="fieldName">
     <FormItem
       v-show="isShow"
       :class="{
@@ -311,10 +300,7 @@ function autofocus() {
               :disabled="shouldDisabled"
             >
               <template v-for="name in renderContentKey" :key="name" #[name]>
-                <VbenRenderContent
-                  :content="customContentRender[name]"
-                  v-bind="slotProps"
-                />
+                <VbenRenderContent :content="customContentRender[name]" v-bind="slotProps" />
               </template>
               <!-- <slot></slot> -->
             </component>
