@@ -62,6 +62,32 @@ const [ShippingaTable] = useVbenVxeGrid({
     },
   },
 });
+// const [
+//     registerShippingaTable,
+//     {
+//       reload,
+//       setTableData,
+//       setPagination,
+//       clearSelectedRowKeys,
+//       setSelectedRowKeys,
+//       getDataSource: getDataSourceShipping,
+//     },
+//   ] = useTable({
+//     api: apis.package.getShippingMethodList,
+//     beforeFetch: handleBeforeFetchShipping,
+//     afterFetch: handleAfterFetchFetchShipping,
+//     columns: shippingColumns,
+//     bordered: true,
+//     showIndexColumn: false,
+//     isCanResizeParent: true,
+//     rowKey: 'shippingMethodId',
+//     immediate: false,
+//     rowSelection: {
+//       type: 'radio',
+//       fixed: 'left',
+//       onChange: handleSelectShipping,
+//     },
+//   });
 
 const [DeclareTable, DeclareTableApi] = useVbenVxeGrid({
   gridOptions: {

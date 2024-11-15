@@ -101,7 +101,7 @@ function handleClickMenu(item: any) {
     </template>
     <Dropdown v-if="dropDownActions && getDropdownList.length > 0" :trigger="['hover', 'click']">
       <Button size="small" type="link">
-        <RiMoreFill class="" />
+        <RiMoreFill />
       </Button>
       <template #overlay>
         <Menu>

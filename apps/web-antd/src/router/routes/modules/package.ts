@@ -54,6 +54,14 @@ const routes: RouteRecordRaw[] = [
               title: '包裹预报',
             },
           },
+          {
+            name: 'PackageDailyOperationPrint',
+            path: 'print',
+            component: () => import('#/views/package/daily-operation/print/index.vue'),
+            meta: {
+              title: '面单打印',
+            },
+          },
         ],
       },
     ],

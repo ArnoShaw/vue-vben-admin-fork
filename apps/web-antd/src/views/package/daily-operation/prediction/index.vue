@@ -77,6 +77,42 @@ const [Table, TableApi] = useVbenVxeGrid({
   },
 });
 
+// const [
+//     registerTable,
+//     {
+//       getForm,
+//       reload,
+//       setTableData,
+//       setColumns,
+//       setPagination,
+//       clearSelectedRowKeys,
+//       getDataSource,
+//       getPaginationRef,
+//     },
+//   ] = useTable({
+//     api: apis.packagePrediction.getPackageListView,
+//     columns: columns(unref(predictStatus)),
+//     title: '包裹预报列表',
+//     showIndexColumn: false,
+//     bordered: true,
+//     showTableSetting: true,
+//     useSearchForm: true,
+//     immediate: false,
+//     rowKey: 'packageId',
+//     beforeFetch: handleSearchList,
+//     rowSelection: {
+//       type: 'checkbox',
+//       onChange: handleSelectChange,
+//     },
+//     formConfig: {
+//       schemas: formSchema(onOptionsSelect),
+//       showAdvancedButton: false,
+//       labelWidth: 80,
+//       fieldMapToTime: [['createTime', ['createTimeFrom', 'createTimeTo'], 'YYYY-MM-DD HH:mm:ss']],
+//       actionColOptions: { span: 8 },
+//     },
+//   });
+
 const [ModalModify, ModalModifyApi] = useVbenModal({
   connectedComponent: ModalChangeStatus,
 });

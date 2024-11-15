@@ -1,5 +1,9 @@
+import type { Recordable } from '@vben/types';
 import type { Fn } from '@vueuse/core';
 import type { ButtonProps } from 'ant-design-vue';
+import type { DescriptionsItemProp } from 'ant-design-vue/es/descriptions';
+
+import type { VNode } from 'vue';
 
 /**
  * 操作列 类型
@@ -52,4 +56,10 @@ export interface ActionItem extends ButtonProps {
   auth?: string | string[];
   // 业务控制是否显示
   ifShow?: ((action: ActionItem) => boolean) | boolean;
+}
+
+export interface DescItem extends DescriptionsItemProp {
+  field: string;
+  show?: (val: any, data: Recordable) => boolean;
+  render?: (val: any, data: Recordable) => Element | number | string | undefined | VNode;
 }

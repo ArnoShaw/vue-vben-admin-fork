@@ -113,14 +113,14 @@ export const columns = (status: string): VxeGridProps['columns'] => [
   {
     title: '订单生成时间',
     field: 'createTime',
-    width: 160,
+    minWidth: 160,
     sortable: true,
     formatter: ({ cellValue }) => formatDateTime(cellValue),
   },
   {
     title: '预报时间',
     field: 'predictionTime',
-    width: 160,
+    minWidth: 160,
     sortable: true,
     visible: status === '4',
     formatter: ({ cellValue }) => formatDateTime(cellValue),
@@ -128,7 +128,7 @@ export const columns = (status: string): VxeGridProps['columns'] => [
   {
     title: '失败原因',
     field: 'predictionFailReason',
-    width: 160,
+    minWidth: 160,
     visible: status === '0' || status === '3',
     showOverflow: false,
     className: 'text-xs text-red-500',

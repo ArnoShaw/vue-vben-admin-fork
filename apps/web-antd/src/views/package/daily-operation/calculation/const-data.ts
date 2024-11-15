@@ -20,7 +20,7 @@ export const baseColumns: VxeGridProps['columns'] = [
   },
   {
     title: '计算公式',
-    width: 240,
+    minWidth: 240,
     sortable: true,
     field: 'formula',
   },

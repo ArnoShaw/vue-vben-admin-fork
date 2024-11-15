@@ -25,12 +25,33 @@ defineProps({
 });
 </script>
 <template>
-  <div class="flex items-center justify-between">
+  <div class="basic-title flex items-center justify-between text-lg">
     <div class="flex items-center">
       <IconifyIcon v-if="icon" :class="iconClass" :icon="icon" class="text-2xl" />
-      <span class="ml-2 mr-1 text-lg font-semibold">{{ title }}</span>
+      <span class="title mx-1 font-semibold">{{ title }}</span>
       <HelpTooltip v-if="helpMessage">{{ helpMessage }}</HelpTooltip>
     </div>
     <slot></slot>
   </div>
 </template>
+<style lang="scss" scoped>
+.basic-title {
+  &.before {
+    .title {
+      position: relative;
+      padding-left: 6px;
+
+      &::before {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 3px;
+        height: 16px;
+        margin-right: 4px;
+        content: '';
+        background-color: hsl(var(--primary));
+      }
+    }
+  }
+}
+</style>

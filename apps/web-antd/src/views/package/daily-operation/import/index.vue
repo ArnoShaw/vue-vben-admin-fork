@@ -45,15 +45,6 @@ const [Table] = useVbenVxeGrid({
 const [DescModal, ModalApi] = useVbenModal({
   connectedComponent: ModalHelpDesc,
 });
-// const [registerModal, { openModal }] = useModal();
-// const [registerTable] = useTable({
-//   columns,
-//   showIndexColumn: true,
-//   bordered: true,
-//   canResize: false,
-//   pagination: false,
-//   dataSource: templateList,
-// });
 
 function beforeUpload(file: any) {
   if (FILE_MIMES.EXCEL.includes(file.type)) {

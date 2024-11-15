@@ -59,11 +59,3 @@ const [Modal] = useVbenModal({
     </Table>
   </Modal>
 </template>
-<style lang="less">
-.help-desc-modal {
-  .desc-col {
-    text-align: left !important;
-    white-space: pre-wrap;
-  }
-}
-</style>
