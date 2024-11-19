@@ -119,17 +119,17 @@ const data = {};
 
 <template>
   <Drawer class="w-[70%]">
-    <BasicTitle class="before mb-2 text-base" title="顺友流水号" />
+    <BasicTitle class="before mb-2 !text-base" title="顺友流水号" />
     <Description :data="data" :items="descItemBasic" :options="descOptions" class="!-mt-1" />
-    <BasicTitle class="before mb-2 mt-4 text-base" title="收件人信息" />
+    <BasicTitle class="before mb-2 mt-4 !text-base" title="收件人信息" />
     <Description :data="data" :items="descItemRecipient" :options="descOptions" />
-    <BasicTitle class="before mb-2 mt-4 text-base" title="寄件人信息" />
+    <BasicTitle class="before mb-2 mt-4 !text-base" title="寄件人信息" />
     <Description :data="data" :items="descItemSender" :options="descOptions" />
-    <BasicTitle class="before mb-2 mt-4 text-base" title="物流信息" />
+    <BasicTitle class="before mb-2 mt-4 !text-base" title="物流信息" />
     <Description :data="data" :items="descItemShipping" :options="descOptions" />
-    <BasicTitle class="before mb-2 mt-4 text-base" title="报关信息" />
+    <BasicTitle class="before mb-2 mt-4 !text-base" title="报关信息" />
     <TableDeclare />
-    <BasicTitle class="before mb-2 mt-4 text-base" title="包裹日志" />
+    <BasicTitle class="before mb-2 mt-4 !text-base" title="包裹日志" />
     <TableLog />
   </Drawer>
 </template>

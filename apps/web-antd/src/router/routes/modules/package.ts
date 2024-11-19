@@ -62,6 +62,22 @@ const routes: RouteRecordRaw[] = [
               title: '面单打印',
             },
           },
+          {
+            name: 'PackageDailyOperationReservation',
+            path: 'reservation',
+            component: () => import('#/views/package/daily-operation/reservation/index.vue'),
+            meta: {
+              title: '预约揽收',
+            },
+          },
+          {
+            name: 'PackageDailyOperationRecord',
+            path: 'record',
+            component: () => import('#/views/package/daily-operation/record/index.vue'),
+            meta: {
+              title: '揽收记录',
+            },
+          },
         ],
       },
     ],

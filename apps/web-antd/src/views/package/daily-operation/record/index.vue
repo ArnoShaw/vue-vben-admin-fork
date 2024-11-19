@@ -6,16 +6,16 @@ import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { baseColumns, baseSchema } from './const-data';
 
 defineOptions({
-  name: 'PackageDailyOperationCalculation',
+  name: 'PackageDailyOperationRecord',
 });
 
 const [Table] = useVbenVxeGrid({
-  tableTitle: '价格列表',
+  tableTitle: '揽收记录列表',
   formOptions: {
     schema: baseSchema,
     showCollapseButton: false,
     wrapperClass: 'grid-cols-12',
-    actionWrapperClass: 'col-span-5',
+    actionWrapperClass: 'col-span-4',
   },
   gridOptions: {
     columns: baseColumns,

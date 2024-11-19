@@ -609,7 +609,7 @@ export const productSchema: VbenFormSchema[] = [
     componentProps: {
       // options: declareCurrencyCodes,
       defaultValue: 'USD',
-      filterOption: true,
+      showSearch: true,
       options: [
         { label: 'USD', value: 'USD' },
         { label: 'CNY', value: 'CNY' },

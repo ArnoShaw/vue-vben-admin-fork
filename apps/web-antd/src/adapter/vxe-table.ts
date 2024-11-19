@@ -2,9 +2,12 @@ import { h } from 'vue';
 
 import { setupVbenVxeTable, useVbenVxeGrid } from '@vben/plugins/vxe-table';
 
+import VxeUIPluginRenderAntd from '@vxe-ui/plugin-render-antd';
 import { Button, Image } from 'ant-design-vue';
 
 import { useVbenForm } from './form';
+
+import '@vxe-ui/plugin-render-antd/dist/style.css';
 
 setupVbenVxeTable({
   configVxeTable: (vxeUI) => {
@@ -47,7 +50,7 @@ setupVbenVxeTable({
 
     // 表格配置项可以用 cellRender: { name: 'CellLink' },
     vxeUI.renderer.add('CellLink', {
-      renderDefault(renderOpts, params) {
+      renderTableDefault(renderOpts, params) {
         const { props } = renderOpts;
         const { row } = params;
         const val = props?.key ? row?.[props.key] : (props?.text ?? '');
@@ -58,6 +61,8 @@ setupVbenVxeTable({
         );
       },
     });
+
+    vxeUI.use(VxeUIPluginRenderAntd);
 
     // 这里可以自行扩展 vxe-table 的全局配置，比如自定义格式化
     // vxeUI.formats.add
