@@ -18,6 +18,7 @@ export async function unicorn(): Promise<Linter.Config[]> {
         'unicorn/better-regex': 'off',
         'unicorn/consistent-destructuring': 'off',
         'unicorn/consistent-function-scoping': 'off',
+        'unicorn/expiring-todo-comments': 'off',
         'unicorn/filename-case': 'off',
         'unicorn/import-style': 'off',
         'unicorn/no-array-for-each': 'off',
@@ -32,10 +33,7 @@ export async function unicorn(): Promise<Linter.Config[]> {
       },
     },
     {
-      files: [
-        'scripts/**/*.?([cm])[jt]s?(x)',
-        'internal/**/*.?([cm])[jt]s?(x)',
-      ],
+      files: ['scripts/**/*.?([cm])[jt]s?(x)', 'internal/**/*.?([cm])[jt]s?(x)'],
       rules: {
         'unicorn/no-process-exit': 'off',
       },

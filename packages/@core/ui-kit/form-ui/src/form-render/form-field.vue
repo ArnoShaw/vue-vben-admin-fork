@@ -197,8 +197,11 @@ function fieldBindEvent(slotProps: Record<string, any>) {
   let value = modelValue;
   // antd design 的一些组件会传递一个 event 对象
   if (modelValue && isObject(modelValue) && bindEventField) {
-    value = isEventObjectLike(modelValue) ? modelValue?.target?.[bindEventField] : modelValue;
+    value = isEventObjectLike(modelValue)
+      ? modelValue?.target?.[bindEventField]
+      : (modelValue?.[bindEventField] ?? modelValue);
   }
+
   if (bindEventField) {
     return {
       [`onUpdate:${bindEventField}`]: handler,
@@ -211,6 +214,7 @@ function fieldBindEvent(slotProps: Record<string, any>) {
             if (!shouldUnwrap) {
               return onChange?.(e);
             }
+
             return onChange?.(e?.target?.[bindEventField] ?? e);
           },
       onInput: () => {},
