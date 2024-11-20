@@ -8,6 +8,8 @@ import { formatDateTime } from '@vben/utils';
 
 import dayjs from 'dayjs';
 
+import { endTime, startTime } from '#/constants/common';
+
 // const stockStatusList = getOptionsByDict('stock_status');
 // const predictionDateList = getOptionsByDict('sys_printed_days');
 
@@ -142,9 +144,6 @@ export const columns = (status: string): VxeGridProps['columns'] => [
     fixed: 'right',
   },
 ];
-
-const startTime = (dayNum: number) => dayjs().subtract(dayNum, 'day').startOf('day');
-const endTime = dayjs().endOf('day');
 
 export const formSchema = (
   onOptionsSelect?: Fn,

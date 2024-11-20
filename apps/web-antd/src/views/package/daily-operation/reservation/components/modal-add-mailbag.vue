@@ -75,7 +75,9 @@ const [Modal, ModalApi] = useVbenModal({
   //   if (isOpen) {
   //   }
   // },
-  onConfirm() {
+  async onConfirm() {
+    const valid = await TableAddApi.grid.validate(true);
+    if (valid) return;
     emit('success');
     ModalApi.close();
   },

@@ -7,9 +7,11 @@ import type { VbenFormSchema } from '@vben/common-ui';
 import type { VxeGridProps } from '@vben/plugins/vxe-table';
 import type { Fn } from '@vueuse/core';
 
-import type { DescItem } from '#/constants/common';
-
 import { formatDateTime } from '@vben/utils';
+
+import dayjs, { type Dayjs } from 'dayjs';
+
+import { type DescItem, endTime, startTime } from '#/constants/common';
 
 export enum OperateType {
   DOWNLOAD = 'download',
@@ -23,57 +25,70 @@ export const columns: VxeGridProps['columns'] = [
     fixed: 'left',
   },
   {
-    title: '流水号',
+    title: '包裹流水号',
     minWidth: 160,
-    sortable: true,
+
     fixed: 'left',
-    field: 'packageCode',
+    field: 'packagecode',
   },
   {
     title: '追踪号',
-    sortable: true,
-    field: 'trackingNumber',
+    minWidth: 160,
+    field: 'trackingnumber',
   },
   {
-    title: '客户订单号',
-    sortable: true,
-    field: 'customerOrderNo',
+    title: '客户订单号\n客户参考号',
+    minWidth: 160,
+    showOverflow: false,
+    field: 'customerorderno',
+    formatter: ({ cellValue, row }) => {
+      const number = row?.customerreferenceno || '无';
+      return `${cellValue || '无'}\n${number}`;
+    },
   },
   {
     title: '目的地',
-    field: 'recipientCountryCode',
+    field: 'recipientcountrycode',
   },
   {
-    title: '重量(kg)',
-    field: 'predictionWeight',
+    title: '预报重量(kg)',
+    minWidth: 120,
+    sortable: true,
+    field: 'weight',
   },
   {
     title: 'SKU/数量',
-    sortable: true,
-    field: 'productskus',
-  },
-  {
-    title: '运费(¥)',
-    sortable: true,
-    field: 'predictionFreight',
+    minWidth: 160,
+    field: 'declare_cn_name',
   },
   {
     title: '创建时间',
     sortable: true,
-    field: 'createTime',
+    field: 'createtime',
     minWidth: 160,
-    formatter: ({ cellValue }) => formatDateTime(cellValue),
+    // formatter: ({ cellValue }) => formatDateTime(cellValue),
   },
   {
-    title: '打印时间',
+    title: '运费(¥)',
     sortable: true,
-    field: 'printTime',
+    field: 'freight',
+  },
+  {
+    title: '计费重量(kg)',
+    minWidth: 120,
+    sortable: true,
+    field: 'reviseWeight',
+  },
+  {
+    title: '入仓时间',
+    sortable: true,
+    field: 'sortingTime',
     minWidth: 160,
     formatter: ({ cellValue }) => formatDateTime(cellValue),
   },
   {
     title: '操作',
-    width: 160,
+    width: 110,
     field: 'action',
     showOverflow: false,
     slots: { default: 'action' },
@@ -88,7 +103,7 @@ export const formSchema = (
   {
     fieldName: 'searchText',
     label: '包裹查询',
-    labelWidth: 60,
+    labelWidth: 75,
     component: 'Input',
     componentProps: {
       placeholder: '流水号/追踪号/订单号/参考号',
@@ -96,70 +111,74 @@ export const formSchema = (
     formItemClass: 'col-span-4',
   },
   {
-    fieldName: 'printStatus',
-    label: '打印状态',
+    fieldName: 'dataType',
+    label: '包裹来源',
     component: 'Select',
-    defaultValue: '1',
+    defaultValue: 1,
     componentProps: {
       allowClear: false,
       onSelect: onOptionsSelect,
       options: [
-        { value: '', label: '全部' },
-        { value: '1', label: '未打印' },
-        { value: '2', label: '已打印' },
+        { value: 1, label: '顺友' },
+        { value: 2, label: 'Wish邮' },
       ],
-      // options: [{ value: '', label: '全部' }, ...printStatus],
     },
     formItemClass: 'col-span-4',
   },
   {
-    fieldName: 'printedDays',
-    label: '打印日期',
+    fieldName: 'packageStatus',
+    label: '包裹状态',
     component: 'Select',
-    defaultValue: '0',
-    dependencies: {
-      triggerFields: ['printStatus'],
-      if(values) {
-        return values.printStatus === '2';
-      },
-    },
     componentProps: {
-      allowClear: false,
       onSelect: onOptionsSelect,
-      // options: predictionDateList,
+      placeholder: '全部',
     },
     formItemClass: 'col-span-4',
   },
   {
-    fieldName: 'createdDays',
-    label: '创建日期',
+    fieldName: 'timeType',
+    hideLabel: true,
     component: 'Select',
-    defaultValue: '0',
-    dependencies: {
-      triggerFields: ['printStatus'],
-      if(values) {
-        return values.printStatus === '1' || !values.printStatus;
-      },
-    },
+    defaultValue: 1,
     componentProps: {
       allowClear: false,
-      onSelect: onOptionsSelect,
-      // options: predictionDateList,
+      options: [
+        { value: 1, label: '创建时间' },
+        { value: 2, label: '入仓时间' },
+        { value: 3, label: '发货时间' },
+      ],
     },
-    formItemClass: 'col-span-4',
+    formItemClass: 'col-span-1',
   },
   {
-    fieldName: 'stockStatus',
-    label: '库存状态',
-    labelWidth: 60,
-    component: 'Select',
-    defaultValue: '0',
-    componentProps: {
-      allowClear: false,
-      onSelect: onOptionsSelect,
-      // options: stockStatusList,
+    fieldName: 'dateStatus',
+    hideLabel: true,
+    component: 'RangePicker',
+    defaultValue: [startTime(0), endTime],
+    componentProps: () => {
+      let dates: [Dayjs?, Dayjs?] = [dayjs().startOf('d'), dayjs().endOf('d')];
+      return {
+        onOpenChange: onOptionsSelect,
+        showTime: true,
+        disabledDate: (current: Dayjs) => {
+          if (!dates?.length) return false;
+          const tooLate = dates[0] && current.diff(dates[0], 'days') > 30;
+          const tooEarly = dates[1] && dates[1].diff(current, 'days') > 30;
+          return !!tooEarly || !!tooLate;
+        },
+        onCalendarChange(values: [Dayjs, Dayjs]) {
+          dates = values;
+        },
+        presets: [
+          { label: '今天', value: [startTime(0), endTime] },
+          { label: '昨天', value: [startTime(1), dayjs().subtract(1, 'day').endOf('day')] },
+          { label: '7天', value: [startTime(6), endTime] },
+          { label: '15天', value: [startTime(14), endTime] },
+          { label: '30天', value: [startTime(29), endTime] },
+        ],
+      };
     },
-    formItemClass: 'col-span-4',
+    formItemClass: 'col-span-3',
   },
   {
     fieldName: 'shippingMethodId',
@@ -169,10 +188,26 @@ export const formSchema = (
     componentProps: {
       options: ShippingMethodList,
       showSearch: true,
-      filterOption: (input: string, option: any) => {
-        return option.label.toLowerCase().includes(input.toLowerCase());
-      },
+      optionFilterProp: 'label',
     },
+    formItemClass: 'col-span-4',
+  },
+  {
+    fieldName: 'countryCode',
+    label: '目的国家',
+    component: 'Select',
+    componentProps: {
+      showSearch: true,
+      optionFilterProp: 'label',
+    },
+    formItemClass: 'col-span-4',
+  },
+  {
+    fieldName: 'productSku',
+    label: 'SKU包含',
+    help: '多个SKU请用分号“;”隔开，包裹中任一商品与您输入的多个SKU匹配原则本条件成立',
+    labelWidth: 75,
+    component: 'Input',
     formItemClass: 'col-span-4',
   },
 ];

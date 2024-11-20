@@ -80,6 +80,33 @@ const routes: RouteRecordRaw[] = [
           },
         ],
       },
+      {
+        name: 'PackageMyPackage',
+        path: 'my-package',
+        redirect: '/package/my-package/all',
+        meta: {
+          title: '我的包裹',
+        },
+        children: [
+          {
+            name: 'PackageMyPackageAll',
+            path: 'all',
+            component: () => import('#/views/package/my-package/all/index.vue'),
+            meta: {
+              title: '全部包裹',
+            },
+          },
+          {
+            name: 'PackageMyPackageEdit',
+            path: 'edit/:id',
+            component: () => import('#/views/package/daily-operation/create/index.vue'),
+            meta: {
+              title: '编辑包裹',
+              hideInMenu: true,
+            },
+          },
+        ],
+      },
     ],
   },
 ];

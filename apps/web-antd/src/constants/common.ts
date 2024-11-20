@@ -5,6 +5,8 @@ import type { DescriptionsItemProp } from 'ant-design-vue/es/descriptions';
 
 import type { VNode } from 'vue';
 
+import dayjs from 'dayjs';
+
 /**
  * 操作列 类型
  */
@@ -63,3 +65,6 @@ export interface DescItem extends DescriptionsItemProp {
   show?: (val: any, data: Recordable) => boolean;
   render?: (val: any, data: Recordable) => Element | number | string | undefined | VNode;
 }
+
+export const startTime = (dayNum: number) => dayjs().subtract(dayNum, 'day').startOf('day');
+export const endTime = dayjs().endOf('day');

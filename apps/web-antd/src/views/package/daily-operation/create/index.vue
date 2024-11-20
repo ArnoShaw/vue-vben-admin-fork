@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { Page, useVbenModal } from '@vben/common-ui';
 
@@ -23,6 +24,12 @@ const shippingMethod = ref();
 const trackingNumberCache = ref();
 const forcast = ref(false);
 const submitLoading = ref(false);
+const loading = ref(false);
+const route = useRoute();
+// const packageId = route?.params?.id;
+const isEdit = route.name === 'PackageMyPackageEdit';
+
+if (isEdit) getPackageDetail();
 
 const [Form] = useVbenForm({
   wrapperClass: 'grid-cols-12',
@@ -107,6 +114,37 @@ const [DeclareTable, DeclareTableApi] = useVbenVxeGrid({
   },
 });
 
+async function getPackageDetail() {
+  loading.value = true;
+  // const p: any = { packageId: packageId || '' };
+  try {
+    // const [detail, productList] = await Promise.all([
+    //   apis.package.showPackageInfoBase(p),
+    //   apis.package.getProductList(p),
+    // ]);
+    // initData(detail, productList);
+  } finally {
+    loading.value = false;
+  }
+}
+
+// function initData(detail: any, productList: defs.apis.SyBsPackageProductVO[]) {
+// packageDetail.value = detail;
+// const { packageCodAmount, isDrawBack, senderCity, senderState, senderDistrict, trackingNumber } =
+//   detail;
+// detail.packageAttributes = detail.checkedPackageAttributeList;
+// detail.isDrawBack = isDrawBack == 1 ? true : false;
+// detail.packageCodFlag = !!packageCodAmount;
+// trackingNumberCache.value = trackingNumber;
+// if (Number(senderCity)) getCityOrDistrictList(senderState, 3);
+// if (Number(senderDistrict)) getCityOrDistrictList(senderCity, 4);
+// isCOD.value = !!packageCodAmount;
+// setFieldsValue(detail);
+// setTableDataDeclare(productList);
+// updateForm();
+// clearValidate();
+// }
+
 // 获取邮寄方式，编辑页面首次加载通过赋值国家触发
 function handleSearchShipping() {
   // if (!unref(customerInfo).companyId)
@@ -188,7 +226,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <Page auto-content-height content-class="!p-0">
+  <Page :loading="true" auto-content-height content-class="!p-0">
     <div class="absolute h-full w-full overflow-auto">
       <div class="p-4">
         <div class="card-box relative rounded-b-none p-4">

@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router';
 
 import { Page, useVbenModal } from '@vben/common-ui';
 
-import { useThrottleFn } from '@vueuse/core';
 import { Button, Dropdown, Menu, MenuItem, message, Modal, TabPane, Tabs } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
@@ -207,12 +206,12 @@ function handleOperate(record: any, operateType: OperateType) {
   });
 }
 
-const handleExport = useThrottleFn(async (status, selectAll) => {
+async function handleExport(status: string, selectAll: boolean) {
   if (
     TableApi.grid.getData().length === 0 ||
-    (TableApi.grid.getCheckboxRecords().length > 0 && !selectAll)
+    (TableApi.grid.getCheckboxRecords().length === 0 && !selectAll)
   )
-    return message.warning('暂无数据');
+    return message.warning('请选择包裹');
   // if (getDataSource().length === 0 || (!unref(selectedRowKeys)?.length && !selectAll))
   //   return message.warning('请选择包裹');
   // const { companyId } = unref(customerInfo);
@@ -236,7 +235,7 @@ const handleExport = useThrottleFn(async (status, selectAll) => {
   } finally {
     exportLoading.value = false;
   }
-}, 2000);
+}
 
 function onOptionsSelect(val?: string) {
   if (val === 'predictStatus') {

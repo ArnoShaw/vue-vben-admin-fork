@@ -54,6 +54,7 @@ export const baseSchema: VbenFormSchema[] = [
   {
     fieldName: 'countryCode',
     label: '目的国家',
+    labelWidth: 75,
     component: 'Select',
     rules: 'required',
     componentProps: {
@@ -85,6 +86,7 @@ export const baseSchema: VbenFormSchema[] = [
   {
     fieldName: 'length',
     label: '体积参数',
+    labelWidth: 75,
     help: '无需区分长宽高',
     component: 'InputNumber',
     componentProps: {
