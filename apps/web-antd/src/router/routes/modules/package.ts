@@ -105,6 +105,22 @@ const routes: RouteRecordRaw[] = [
               hideInMenu: true,
             },
           },
+          {
+            name: 'PackageMyPackageOutOfStock',
+            path: 'out-of-stock',
+            component: () => import('#/views/package/my-package/out-of-stock/index.vue'),
+            meta: {
+              title: '标记缺货',
+            },
+          },
+          {
+            name: 'PackageMyPackageInStock',
+            path: 'in-stock',
+            component: () => import('#/views/package/my-package/in-stock/index.vue'),
+            meta: {
+              title: '标记有货',
+            },
+          },
         ],
       },
     ],

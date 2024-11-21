@@ -132,6 +132,7 @@ export const formSchema = (
     componentProps: {
       onSelect: onOptionsSelect,
       placeholder: '全部',
+      allowClear: true,
     },
     formItemClass: 'col-span-4',
   },

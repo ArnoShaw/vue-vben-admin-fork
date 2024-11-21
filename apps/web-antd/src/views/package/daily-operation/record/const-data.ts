@@ -63,6 +63,7 @@ export const baseSchema: VbenFormSchema[] = [
     componentProps: {
       options: [],
       placeholder: '全部',
+      allowClear: true,
     },
     formItemClass: 'col-span-4',
   },
