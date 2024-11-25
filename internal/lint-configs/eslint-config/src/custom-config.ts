@@ -7,6 +7,9 @@ const restrictedImportIgnores = [
 ];
 
 const customConfig: Linter.Config[] = [
+  {
+    ignores: ['apps/web-antd/src/services/*'],
+  },
   // shadcn-ui 内部组件是自动生成的，不做太多限制
   {
     files: ['packages/@core/ui-kit/shadcn-ui/**/**'],
@@ -39,8 +42,7 @@ const customConfig: Linter.Config[] = [
           patterns: [
             {
               group: ['#/api/*'],
-              message:
-                'The #/api package cannot be imported, please use the @core package itself',
+              message: 'The #/api package cannot be imported, please use the @core package itself',
             },
             {
               group: ['#/layouts/*'],
@@ -122,8 +124,7 @@ const customConfig: Linter.Config[] = [
           patterns: [
             {
               group: ['@vben/*'],
-              message:
-                'The @vben package cannot be imported, please use the @core package itself',
+              message: 'The @vben package cannot be imported, please use the @core package itself',
             },
           ],
         },
