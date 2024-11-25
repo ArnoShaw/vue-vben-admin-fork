@@ -1,0 +1,25 @@
+{
+  "outDir": "./apps/web-antd/src/services",
+  "origins": [
+    {
+      "originUrl": "http://192.168.88.31:8788/v3/api-docs",
+      "originType": "SwaggerV3",
+      "name": "apis",
+      "usingMultipleOrigins": true
+    }
+  ],
+  "mocks": {
+    "enable": false
+  },
+  "templatePath": "./pontTemplate",
+  "prettierConfig": {
+    "printWidth": 100,
+    "semi": true,
+    "vueIndentScriptAndStyle": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "proseWrap": "never",
+    "htmlWhitespaceSensitivity": "strict",
+    "endOfLine": "auto"
+  }
+}

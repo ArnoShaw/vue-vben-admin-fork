@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<Props>(), {
   contentPaddingTop: 0,
   footerEnable: false,
   footerFixed: true,
-  footerHeight: 32,
+  footerHeight: 48,
   headerHeight: 50,
   headerHidden: false,
   headerMode: 'fixed',
@@ -71,25 +71,15 @@ const sidebarExpandOnHovering = ref(false);
 const headerIsHidden = ref(false);
 const contentRef = ref();
 
-const {
-  arrivedState,
-  directions,
-  isScrolling,
-  y: scrollY,
-} = useScroll(document);
+const { arrivedState, directions, isScrolling, y: scrollY } = useScroll(document);
 
 const { setLayoutHeaderHeight } = useLayoutHeaderStyle();
 const { setLayoutFooterHeight } = useLayoutFooterStyle();
 
 const { y: mouseY } = useMouse({ target: contentRef, type: 'client' });
 
-const {
-  currentLayout,
-  isFullContent,
-  isHeaderNav,
-  isMixedNav,
-  isSidebarMixedNav,
-} = useLayout(props);
+const { currentLayout, isFullContent, isHeaderNav, isMixedNav, isSidebarMixedNav } =
+  useLayout(props);
 
 /**
  * 顶栏是否自动隐藏
@@ -108,8 +98,7 @@ const headerWrapperHeight = computed(() => {
 });
 
 const getSideCollapseWidth = computed(() => {
-  const { sidebarCollapseShowTitle, sidebarMixedWidth, sideCollapseWidth } =
-    props;
+  const { sidebarCollapseShowTitle, sidebarMixedWidth, sideCollapseWidth } = props;
 
   return sidebarCollapseShowTitle || isSidebarMixedNav.value
     ? sidebarMixedWidth
@@ -212,9 +201,7 @@ const mainStyle = computed(() => {
   ) {
     // fixed模式下生效
     const isSideNavEffective =
-      isSidebarMixedNav.value &&
-      sidebarExpandOnHover.value &&
-      sidebarExtraVisible.value;
+      isSidebarMixedNav.value && sidebarExpandOnHover.value && sidebarExtraVisible.value;
 
     if (isSideNavEffective) {
       const sideCollapseWidth = sidebarCollapse.value
@@ -256,9 +243,7 @@ const tabbarStyle = computed((): CSSProperties => {
       : getSideCollapseWidth.value;
 
     // 设置 marginLeft，根据侧边栏是否折叠来决定
-    marginLeft = sidebarCollapse.value
-      ? getSideCollapseWidth.value
-      : onHoveringWidth;
+    marginLeft = sidebarCollapse.value ? getSideCollapseWidth.value : onHoveringWidth;
 
     // 设置 tabbar 的宽度，计算方式为 100% 减去侧边栏的宽度
     width = `calc(100% - ${sidebarCollapse.value ? getSidebarWidth.value : onHoveringWidth}px)`;
@@ -301,10 +286,7 @@ const headerWrapperStyle = computed((): CSSProperties => {
     height: isFullContent.value ? '0' : `${headerWrapperHeight.value}px`,
     left: isMixedNav.value ? 0 : mainStyle.value.sidebarAndExtraWidth,
     position: fixed ? 'fixed' : 'static',
-    top:
-      headerIsHidden.value || isFullContent.value
-        ? `-${headerWrapperHeight.value}px`
-        : 0,
+    top: headerIsHidden.value || isFullContent.value ? `-${headerWrapperHeight.value}px` : 0,
     width: mainStyle.value.width,
     'z-index': headerZIndex.value,
   };
@@ -428,19 +410,11 @@ watch(
   watch(
     () => scrollY.value,
     () => {
-      if (
-        props.headerMode !== 'auto-scroll' ||
-        isMixedNav.value ||
-        isFullContent.value
-      ) {
+      if (props.headerMode !== 'auto-scroll' || isMixedNav.value || isFullContent.value) {
         return;
       }
       if (isScrolling.value) {
-        checkHeaderIsHidden(
-          directions.top,
-          directions.bottom,
-          arrivedState.top,
-        );
+        checkHeaderIsHidden(directions.top, directions.bottom, arrivedState.top);
       }
     },
   );
@@ -542,11 +516,7 @@ function handleHeaderToggle() {
           <slot name="header"></slot>
         </LayoutHeader>
 
-        <LayoutTabbar
-          v-if="tabbarEnable"
-          :height="tabbarHeight"
-          :style="tabbarStyle"
-        >
+        <LayoutTabbar v-if="tabbarEnable" :height="tabbarHeight" :style="tabbarStyle">
           <slot name="tabbar"></slot>
         </LayoutTabbar>
       </div>

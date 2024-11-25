@@ -11,11 +11,14 @@ import { $t } from '@vben/locales';
 import { useVbenForm } from '@vben-core/form-ui';
 import { VbenButton, VbenCheckbox } from '@vben-core/shadcn-ui';
 
+import { objectOmit } from '@vueuse/core';
+
 import Title from './auth-title.vue';
 import ThirdPartyLogin from './third-party-login.vue';
 
 interface Props extends AuthenticationProps {
   formSchema: VbenFormSchema[];
+  codeImg?: string;
 }
 
 defineOptions({
@@ -29,19 +32,21 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   qrCodeLoginPath: '/auth/qrcode-login',
   registerPath: '/auth/register',
-  showCodeLogin: true,
+  showCodeLogin: false,
   showForgetPassword: true,
-  showQrcodeLogin: true,
+  showQrcodeLogin: false,
   showRegister: true,
   showRememberMe: true,
-  showThirdPartyLogin: true,
+  showThirdPartyLogin: false,
   submitButtonText: '',
   subTitle: '',
   title: '',
+  codeImg: '',
 });
 
 const emit = defineEmits<{
   submit: [Recordable<any>];
+  updateCode: [];
 }>();
 
 const [Form, formApi] = useVbenForm(
@@ -49,6 +54,7 @@ const [Form, formApi] = useVbenForm(
     commonConfig: {
       hideLabel: true,
       hideRequiredMark: true,
+      formItemClass: 'col-span-2',
     },
     schema: computed(() => props.formSchema),
     showDefaultActions: false,
@@ -65,12 +71,10 @@ const rememberMe = ref(!!localUsername);
 async function handleSubmit() {
   const { valid } = await formApi.validate();
   const values = await formApi.getValues();
+  const _values = objectOmit(values, ['codeImg']);
   if (valid) {
-    localStorage.setItem(
-      REMEMBER_ME_KEY,
-      rememberMe.value ? values?.username : '',
-    );
-    emit('submit', values);
+    localStorage.setItem(REMEMBER_ME_KEY, rememberMe.value ? values?.username : '');
+    emit('submit', { ..._values, grantType: 'password' });
   }
 }
 
@@ -106,18 +110,22 @@ defineExpose({
       </Title>
     </slot>
 
-    <Form />
+    <Form>
+      <template #codeImg>
+        <div class="flex w-full justify-end">
+          <img
+            :src="`data:image/png;base64,${codeImg}`"
+            alt=""
+            class="h-[39px] w-[104px] cursor-pointer rounded-sm"
+            @click="emit('updateCode')"
+          />
+        </div>
+      </template>
+    </Form>
 
-    <div
-      v-if="showRememberMe || showForgetPassword"
-      class="mb-6 flex justify-between"
-    >
+    <div v-if="showRememberMe || showForgetPassword" class="mb-6 flex justify-between">
       <div class="flex-center">
-        <VbenCheckbox
-          v-if="showRememberMe"
-          v-model:checked="rememberMe"
-          name="rememberMe"
-        >
+        <VbenCheckbox v-if="showRememberMe" v-model:checked="rememberMe" name="rememberMe">
           {{ $t('authentication.rememberMe') }}
         </VbenCheckbox>
       </div>
@@ -172,10 +180,7 @@ defineExpose({
     <slot name="to-register">
       <div v-if="showRegister" class="mt-3 text-center text-sm">
         {{ $t('authentication.accountTip') }}
-        <span
-          class="vben-link text-sm font-normal"
-          @click="handleGo(registerPath)"
-        >
+        <span class="vben-link text-sm font-normal" @click="handleGo(registerPath)">
           {{ $t('authentication.createAccount') }}
         </span>
       </div>

@@ -33,6 +33,7 @@ interface Props {
    * @zh_CN 按钮文本
    */
   submitButtonText?: string;
+  codeImg?: string;
 }
 
 defineOptions({
@@ -46,10 +47,12 @@ const props = withDefaults(defineProps<Props>(), {
   submitButtonText: '',
   subTitle: '',
   title: '',
+  codeImg: '',
 });
 
 const emit = defineEmits<{
   submit: [Recordable<any>];
+  updateCode: [];
 }>();
 
 const [Form, formApi] = useVbenForm(
@@ -57,6 +60,7 @@ const [Form, formApi] = useVbenForm(
     commonConfig: {
       hideLabel: true,
       hideRequiredMark: true,
+      formItemClass: 'col-span-2',
     },
     schema: computed(() => props.formSchema),
     showDefaultActions: false,
@@ -85,16 +89,25 @@ defineExpose({
 <template>
   <div>
     <Title>
-      <slot name="title">
-        {{ title || $t('authentication.createAnAccount') }} 🚀
-      </slot>
+      <slot name="title"> {{ title || $t('authentication.createAnAccount') }} 🚀 </slot>
       <template #desc>
         <slot name="subTitle">
           {{ subTitle || $t('authentication.signUpSubtitle') }}
         </slot>
       </template>
     </Title>
-    <Form />
+    <Form>
+      <template #codeImg>
+        <div class="flex w-full justify-end">
+          <img
+            :src="`data:image/png;base64,${codeImg}`"
+            alt=""
+            class="h-[39px] w-[104px] cursor-pointer rounded-sm"
+            @click="emit('updateCode')"
+          />
+        </div>
+      </template>
+    </Form>
 
     <VbenButton
       :class="{

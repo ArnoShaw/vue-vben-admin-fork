@@ -13,11 +13,6 @@ import dayjs, { type Dayjs } from 'dayjs';
 
 import { type DescItem, endTime, startTime } from '#/constants/common';
 
-export enum OperateType {
-  DOWNLOAD = 'download',
-  PRINT = 'print',
-}
-
 export const columns: VxeGridProps['columns'] = [
   {
     type: 'checkbox',

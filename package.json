@@ -23,8 +23,8 @@
     "email": "ann.vben@gmail.com",
     "url": "https://github.com/anncwb"
   },
-  "type": "module",
   "scripts": {
+    "apis": "rimraf ./apps/web-antd/src/services & pont generate",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:analyze": "turbo build:analyze",
     "build:antd": "pnpm run build --filter=@vben/web-antd",
@@ -85,6 +85,7 @@
     "is-ci": "catalog:",
     "lint-staged": "catalog:",
     "playwright": "catalog:",
+    "pont-engine": "1.3.3",
     "rimraf": "catalog:",
     "tailwindcss": "catalog:",
     "turbo": "catalog:",

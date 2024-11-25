@@ -10,14 +10,18 @@ const userStore = useUserStore();
 <template>
   <div class="card-box flex flex-wrap justify-between">
     <div class="flex flex-wrap px-4 py-6">
-      <Avatar :src="userStore.userInfo?.avatar || preferences.app.defaultAvatar" class="size-20" />
+      <Avatar
+        :alt="userStore.userInfo?.userName"
+        :src="userStore.userInfo?.headPortraitPath || preferences.app.defaultAvatar"
+        class="size-20"
+      />
       <div class="flex max-w-[400px] flex-col md:ml-6 md:mt-0">
         <h1 class="text-md break-words font-semibold md:text-xl">
-          {{ userStore.userInfo?.realName }}
+          {{ userStore.userInfo?.userName }}
         </h1>
         <a class="vben-link">修改个人信息 ></a>
         <span class="text-foreground/80 mt-1">
-          上次登录时间：{{ new Date().toLocaleString() }}
+          上次登录时间：{{ userStore.userInfo?.lastLoginTime }}
         </span>
       </div>
     </div>

@@ -121,6 +121,22 @@ const routes: RouteRecordRaw[] = [
               title: '标记有货',
             },
           },
+          // {
+          //   name: 'PackageMyPackageClaim',
+          //   path: 'claim',
+          //   component: () => import('#/views/package/my-package/claim/index.vue'),
+          //   meta: {
+          //     title: '包裹理赔',
+          //   },
+          // },
+          {
+            name: 'PackageMyPackageAbnormal',
+            path: 'abnormal',
+            component: () => import('#/views/package/my-package/abnormal/index.vue'),
+            meta: {
+              title: '包裹异常',
+            },
+          },
         ],
       },
     ],

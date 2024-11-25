@@ -1,9 +1,4 @@
-import type {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  CreateAxiosDefaults,
-} from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults } from 'axios';
 
 import { bindMethods, merge } from '@vben/utils';
 
@@ -38,7 +33,7 @@ class RequestClient {
         'Content-Type': 'application/json;charset=utf-8',
       },
       // 默认超时时间
-      timeout: 10_000,
+      timeout: 60_000,
     };
     const { ...axiosConfig } = options;
     const requestConfig = merge(axiosConfig, defaultConfig);
@@ -48,8 +43,7 @@ class RequestClient {
 
     // 实例化拦截器管理器
     const interceptorManager = new InterceptorManager(this.instance);
-    this.addRequestInterceptor =
-      interceptorManager.addRequestInterceptor.bind(interceptorManager);
+    this.addRequestInterceptor = interceptorManager.addRequestInterceptor.bind(interceptorManager);
     this.addResponseInterceptor =
       interceptorManager.addResponseInterceptor.bind(interceptorManager);
 
@@ -71,29 +65,21 @@ class RequestClient {
   /**
    * GET请求方法
    */
-  public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return this.request<T>(url, { ...config, method: 'GET' });
+  public get<T = any>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> {
+    return this.request<T>(url, { params, ...config, method: 'GET' });
   }
 
   /**
    * POST请求方法
    */
-  public post<T = any>(
-    url: string,
-    data?: any,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  public post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
     return this.request<T>(url, { ...config, data, method: 'POST' });
   }
 
   /**
    * PUT请求方法
    */
-  public put<T = any>(
-    url: string,
-    data?: any,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  public put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
     return this.request<T>(url, { ...config, data, method: 'PUT' });
   }
 

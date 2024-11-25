@@ -21,28 +21,12 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="text-md flex-center">
-    <!-- ICP Link -->
-    <a
-      v-if="icp"
-      :href="icpLink || 'javascript:void(0)'"
-      class="hover:text-primary-hover mx-1"
-      target="_blank"
-    >
-      {{ icp }}
-    </a>
-
-    <!-- Copyright Text -->
-    Copyright © {{ date }}
-
-    <!-- Company Link -->
-    <a
-      v-if="companyName"
-      :href="companySiteLink || 'javascript:void(0)'"
-      class="hover:text-primary-hover mx-1"
-      target="_blank"
-    >
-      {{ companyName }}
-    </a>
+  <div class="text-md text-center">
+    <p>Copyright 2008-{{ new Date().getFullYear() }} SunYou Logistics All Rights Reserved.</p>
+    <div class="mt-1 flex">
+      <p>深圳市顺友跨境物流股份有限公司</p>
+      <p class="mx-2">版权所有</p>
+      <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2021106733号</a>
+    </div>
   </div>
 </template>
