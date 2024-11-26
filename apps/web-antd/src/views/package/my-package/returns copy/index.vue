@@ -1,11 +1,8 @@
 <!-- eslint-disable unicorn/no-nested-ternary -->
 <script setup lang="ts">
-import type { Recordable } from '@vben/types';
-
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
-import { Page } from '@vben/common-ui';
+import { Page, useVbenModal } from '@vben/common-ui';
 
 import { Button, Dropdown, Menu, MenuItem, message, Modal } from 'ant-design-vue';
 
@@ -13,6 +10,7 @@ import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import TableAction from '#/components/table-action.vue';
 
 import { columns, formSchema } from './const-data';
+import ModalSignatureInfo from './modal-signature-info.vue';
 
 defineOptions({
   name: 'PackageMyPackageAbnormal',
@@ -21,10 +19,9 @@ defineOptions({
 // const selectAll = ref();
 // const shippingMethodList = ref();
 const exportLoading = ref(false);
-const router = useRouter();
 
 const [Table, TableApi] = useVbenVxeGrid({
-  tableTitle: '异常包裹列表',
+  tableTitle: '退件包裹列表',
   formOptions: {
     schema: formSchema,
     collapsedRows: 2,
@@ -38,6 +35,96 @@ const [Table, TableApi] = useVbenVxeGrid({
   },
   gridOptions: {
     columns,
+    data: [
+      {
+        subareaname: '赤道几内亚平邮小包[US]',
+        channelcnname: '赤道几内亚平邮小包',
+        returncode: 'TJ109',
+        packagecode: 'SIX2311111115112',
+        countrycode: 'US',
+        returntype: 0,
+        lineid: 163_993,
+        remark: '测试2',
+        channelcode: 'GQPNAM',
+        sortingfreight: 22.62,
+        companyid: 32_392,
+        refundstatus: 0,
+        returnby: '易洋',
+        companyname: '66科技有限公司',
+        shippingmethodcode: 'rrtest',
+        trackingnumber: 'test000317',
+        sortingweight: 1.12,
+        channelid: 607,
+        username: 'user',
+        returntime: '2024-10-25 10:46:21',
+        status: 2,
+      },
+      {
+        subareaname: '赤道几内亚平邮小包[US]',
+        channelcnname: '赤道几内亚平邮小包',
+        returncode: 'TJ109',
+        packagecode: 'SIX2311111125112',
+        countrycode: 'US',
+        returntype: 5,
+        lineid: 163_992,
+        remark: '测试1',
+        channelcode: 'GQPNAM',
+        sortingfreight: 40.4,
+        companyid: 32_392,
+        refundstatus: 1,
+        returnby: '易洋',
+        companyname: '66科技有限公司',
+        shippingmethodcode: 'rrtest',
+        trackingnumber: 'test000358',
+        sortingweight: 2,
+        channelid: 607,
+        username: 'user',
+        returntime: '2024-10-25 10:46:21',
+        status: 0,
+      },
+      {
+        subareaname: '赤道几内亚平邮小包[US]',
+        channelcnname: '赤道几内亚平邮小包',
+        packagecode: 'SIX2311111128118',
+        countrycode: 'US',
+        returntype: 1,
+        lineid: 163_990,
+        channelcode: 'GQPNAM',
+        sortingfreight: 40.4,
+        companyid: 32_392,
+        refundstatus: 0,
+        returnby: '易洋',
+        companyname: '66科技有限公司',
+        shippingmethodcode: 'rrtest',
+        trackingnumber: 'test000382',
+        sortingweight: 2,
+        channelid: 607,
+        username: 'user',
+        returntime: '2024-10-25 09:33:49',
+        status: 0,
+      },
+      {
+        subareaname: '赤道几内亚平邮小包[PR]',
+        channelcnname: '赤道几内亚平邮小包',
+        packagecode: 'SIX2111111114316',
+        countrycode: 'PR',
+        returntype: 1,
+        lineid: 163_985,
+        channelcode: 'GQPNAM',
+        sortingfreight: 3.2,
+        companyid: 32_392,
+        refundstatus: 0,
+        returnby: '易洋',
+        companyname: '66科技有限公司',
+        shippingmethodcode: 'rrtest',
+        trackingnumber: 'TEST0000025946SY',
+        sortingweight: 0.16,
+        channelid: 607,
+        username: 'user',
+        returntime: '2024-10-16 15:29:52',
+        status: 0,
+      },
+    ],
     border: true,
     height: 'auto',
     columnConfig: {
@@ -101,6 +188,14 @@ const [Table, TableApi] = useVbenVxeGrid({
 //   return params;
 // }
 
+// function getSelectedKeys() {
+//   return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);
+// }
+
+const [SignModal, ModalApi] = useVbenModal({
+  connectedComponent: ModalSignatureInfo,
+});
+
 async function handleExport(selectAll: boolean) {
   if (
     TableApi.grid.getData().length === 0 ||
@@ -121,64 +216,22 @@ async function handleExport(selectAll: boolean) {
   }
 }
 
-function handleEdit(record: Recordable) {
-  const { packageId } = record;
-  router.push({
-    name: 'PackageMyPackageEdit',
-    params: {
-      id: packageId,
-    },
-  });
-}
-
-function getSelectedKeys() {
-  return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);
-}
-
 async function handleSubmit(_ids: number[]) {
   message.success(`操作成功`);
 }
 
-function handleReturn(isBatch: boolean, record?: Recordable) {
-  if (!getSelectedKeys()?.length && isBatch) return message.warning('请选择包裹');
-  if (isBatch && TableApi.grid.getCheckboxRecords().some((row: any) => row.clientChoice === 1))
-    return message.warning('选择的包裹已分拣，不能进行撤销预报操作，请重新选择要撤销预报的包裹');
-  const title = `${isBatch ? '批量' : ''}撤销预报`;
-  const content = `您确定要撤销预报${isBatch ? '选择的' : '该'}包裹吗？\n撤销预报，追踪号将会回收，重新分配`;
+function handleReceipt(row: any) {
   Modal.confirm({
     iconType: 'warning',
-    title,
-    content,
-    onOk: () => handleSubmit(isBatch ? getSelectedKeys() : [record?.packageId]),
+    title: '确认收货',
+    content: '您确定要确认收货吗？',
+    onOk: () => handleSubmit([row?.packageId]),
   });
 }
 
-function handleDeliver(isBatch: boolean, record?: Recordable) {
-  if (!getSelectedKeys()?.length && isBatch) return message.warning('请选择包裹');
-  if (isBatch && TableApi.grid.getCheckboxRecords().some((row: any) => row.clientChoice === 2))
-    return message.warning('选择的包裹已分拣，不能进行撤销预报操作，请重新选择要撤销预报的包裹');
-  const title = `${isBatch ? '批量' : ''}撤销预报`;
-  const content = `您确定要撤销预报${isBatch ? '选择的' : '该'}包裹吗？\n撤销预报，追踪号将会回收，重新分配`;
-  Modal.confirm({
-    iconType: 'warning',
-    title,
-    content,
-    onOk: () => handleSubmit(isBatch ? getSelectedKeys() : [record?.packageId]),
-  });
-}
-
-function handleDestory(isBatch: boolean, record?: Recordable) {
-  if (!getSelectedKeys()?.length && isBatch) return message.warning('请选择包裹');
-  if (isBatch && TableApi.grid.getCheckboxRecords().some((row: any) => row.clientChoice === 3))
-    return message.warning('选择的包裹已分拣，不能进行撤销预报操作，请重新选择要撤销预报的包裹');
-  const title = `${isBatch ? '批量' : ''}撤销预报`;
-  const content = `您确定要撤销预报${isBatch ? '选择的' : '该'}包裹吗？\n撤销预报，追踪号将会回收，重新分配`;
-  Modal.confirm({
-    iconType: 'warning',
-    title,
-    content,
-    onOk: () => handleSubmit(isBatch ? getSelectedKeys() : [record?.packageId]),
-  });
+function handleViewSign(row: any) {
+  ModalApi.setData(row);
+  ModalApi.open();
 }
 </script>
 
@@ -190,6 +243,7 @@ function handleDestory(isBatch: boolean, record?: Recordable) {
           <Button
             :loading="exportLoading"
             class="mr-2"
+            type="primary"
             v-auth="'POST:/client/package/operation/prediction/exportExcel'"
           >
             导出Excel
@@ -205,57 +259,23 @@ function handleDestory(isBatch: boolean, record?: Recordable) {
             </Menu>
           </template>
         </Dropdown>
-        <Button
-          class="mr-2"
-          v-auth="'POST:/client/package/operation/print/printpdfbatch/do'"
-          @click="handleReturn(true)"
-        >
-          批量申请退回
-        </Button>
-        <Button
-          class="mr-2"
-          v-auth="'POST:/client/package/operation/print/printpdfbatch/do'"
-          @click="handleDeliver(true)"
-        >
-          批量申请发货
-        </Button>
-        <Button
-          class="mr-2"
-          type="primary"
-          v-auth="'POST:/client/package/operation/print/printpdfbatch/do'"
-          @click="handleDestory(true)"
-        >
-          批量申请销毁
-        </Button>
       </template>
       <template #action="{ row }">
         <TableAction
           :actions="[
             {
-              label: '编辑',
-              onClick: handleEdit.bind(null, row),
+              label: '确认收货',
+              onClick: handleReceipt.bind(null, row),
             },
             {
-              label: '申请退回',
+              label: '查看签名',
               disabled: row.clientChoice === 1 && row.clientChoice !== 0,
-              onClick: handleReturn.bind(null, false, row),
-            },
-          ]"
-          :drop-down-actions="[
-            {
-              label: '申请发货',
-              disabled: row.clientChoice === 2 && row.clientChoice !== 0,
-              onClick: handleDeliver.bind(null, false, row),
-            },
-            {
-              label: '申请销毁',
-              disabled: row.clientChoice === 3 && row.clientChoice !== 0,
-              onClick: handleDestory.bind(null, false, row),
+              onClick: handleViewSign.bind(null, row),
             },
           ]"
         />
       </template>
     </Table>
-    <Modal />
+    <SignModal />
   </Page>
 </template>

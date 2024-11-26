@@ -17,7 +17,7 @@ export const columns: VxeGridProps['columns'] = [
     fixed: 'left',
   },
   {
-    title: '流水号',
+    title: '顺友流水号',
     minWidth: 160,
     fixed: 'left',
     sortable: true,

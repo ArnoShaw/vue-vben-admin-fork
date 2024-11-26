@@ -23,7 +23,7 @@ const props = defineProps({
 
 function getContent(item: DescItem) {
   const val = props.data?.[item.field] || '';
-  return val;
+  return h('div', {}, item?.render ? item?.render?.(props.data[item.field], props.data) : val);
 }
 
 function renderLabel({ label, labelStyle }: DescItem) {
@@ -47,7 +47,7 @@ function renderLabel({ label, labelStyle }: DescItem) {
         :label="renderLabel(item)"
         v-bind="objectOmit(item, ['show', 'render', 'label'])"
       >
-        {{ item?.render ? item?.render?.(data[item.field], data) : getContent(item) }}
+        <component :is="getContent(item)" />
       </Descriptions.Item>
     </template>
   </Descriptions>

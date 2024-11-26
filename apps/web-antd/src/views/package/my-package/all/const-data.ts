@@ -20,7 +20,7 @@ export const columns: VxeGridProps['columns'] = [
     fixed: 'left',
   },
   {
-    title: '包裹流水号',
+    title: '顺友流水号',
     minWidth: 160,
 
     fixed: 'left',

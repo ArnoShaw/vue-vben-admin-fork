@@ -564,6 +564,9 @@ importers:
       playwright:
         specifier: 'catalog:'
         version: 1.49.0
+      pont-engine:
+        specifier: 1.3.3
+        version: 1.3.3(encoding@0.1.13)
       rimraf:
         specifier: 'catalog:'
         version: 6.0.1
@@ -658,6 +661,9 @@ importers:
       '@vueuse/core':
         specifier: 'catalog:'
         version: 11.3.0(vue@3.5.13(typescript@5.7.2))
+      '@vxe-ui/plugin-render-antd':
+        specifier: ^4.0.7
+        version: 4.0.7
       ant-design-vue:
         specifier: 'catalog:'
         version: 4.2.6(vue@3.5.13(typescript@5.7.2))

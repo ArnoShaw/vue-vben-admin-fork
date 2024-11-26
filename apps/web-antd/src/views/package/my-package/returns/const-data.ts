@@ -20,71 +20,62 @@ export const columns: VxeGridProps['columns'] = [
   },
   {
     title: '顺友流水号',
-    sortable: true,
     minWidth: 160,
     fixed: 'left',
-    field: 'packageCode',
+    field: 'packagecode',
   },
   {
     title: '追踪号',
-    sortable: true,
     minWidth: 160,
-    field: 'trackingNumber',
+    field: 'trackingnumber',
   },
   {
-    title: '异常类型',
-    sortable: true,
-    field: 'type',
+    title: '目的国',
+    field: 'countrycode',
+  },
+  {
+    title: '重量(kg)',
+    field: 'sortingweight',
+  },
+  {
+    title: '包裹运费',
+    field: 'sortingfreight',
+  },
+  {
+    title: '退件类型',
+    field: 'returntype',
     // formatter: ({ cellValue, row }) => {
     //   const number = row?.customerreferenceno || '无';
     //   return `${cellValue || '无'}\n${number}`;
     // },
   },
   {
-    title: '异常说明',
-    field: 'words',
-    className: 'text-red-500',
+    title: '退件状态',
+    field: 'status',
+    cellRender: {
+      name: 'CellTag',
+      props: {
+        color(value: any) {
+          return value === 2 ? 'success' : 'error';
+        },
+        text: (value: any) => value,
+      },
+    },
   },
   {
-    title: '申请处理方式',
-    sortable: true,
-    minWidth: 120,
-    field: 'clientChoice',
-    // formatter: ({ cellValue, row }) => {
-    //   const number = row?.customerreferenceno || '无';
-    //   return `${cellValue || '无'}\n${number}`;
-    // },
+    title: '退件编号',
+    field: 'returncode',
   },
+
   {
-    title: '处理结果',
-    sortable: true,
-    field: 'adminHandle',
-    // formatter: ({ cellValue, row }) => {
-    //   const number = row?.customerreferenceno || '无';
-    //   return `${cellValue || '无'}\n${number}`;
-    // },
-  },
-  {
-    title: '分拣记录',
-    sortable: true,
-    field: 'sortingCode',
-  },
-  {
-    title: '预报重量(kg)',
-    minWidth: 120,
-    sortable: true,
-    field: 'predictionWeight',
-  },
-  {
-    title: '拦截时间',
-    sortable: true,
-    field: 'interceptTime',
+    title: '退件时间',
+    field: 'returntime',
     minWidth: 160,
     // formatter: ({ cellValue }) => formatDateTime(cellValue),
   },
   {
     title: '操作',
-    width: 160,
+    width: 150,
     field: 'action',
     showOverflow: false,
     slots: { default: 'action' },
@@ -99,15 +90,15 @@ export const formSchema: VbenFormSchema[] = [
     labelWidth: 60,
     component: 'Input',
     componentProps: {
-      placeholder: '流水号/追踪号',
+      placeholder: '流水号/追踪号/退件编号',
     },
     formItemClass: 'col-span-4',
   },
   {
     fieldName: 'createTime',
-    label: '异常时间',
+    label: '退件时间',
     component: 'RangePicker',
-    defaultValue: [startTime(0), endTime],
+    defaultValue: [startTime(29), endTime],
     componentProps: {
       allowClear: false,
       presets: [
@@ -123,21 +114,10 @@ export const formSchema: VbenFormSchema[] = [
   },
   {
     fieldName: 'abnormalStatus',
-    label: '异常状态',
+    label: '退件状态',
     component: 'Select',
     componentProps: {
       placeholder: '全部',
-    },
-    formItemClass: 'col-span-4',
-  },
-  {
-    fieldName: 'packageStatus',
-    label: '处理状态',
-    labelWidth: 60,
-    component: 'Select',
-    componentProps: {
-      placeholder: '全部',
-      allowClear: true,
     },
     formItemClass: 'col-span-4',
   },

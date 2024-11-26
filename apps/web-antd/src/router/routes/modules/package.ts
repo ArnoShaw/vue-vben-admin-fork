@@ -137,6 +137,14 @@ const routes: RouteRecordRaw[] = [
               title: '包裹异常',
             },
           },
+          {
+            name: 'PackageMyPackageReturns',
+            path: 'returns',
+            component: () => import('#/views/package/my-package/returns/index.vue'),
+            meta: {
+              title: '包裹退件',
+            },
+          },
         ],
       },
     ],

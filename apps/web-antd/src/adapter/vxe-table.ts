@@ -1,9 +1,10 @@
 import { h } from 'vue';
 
 import { setupVbenVxeTable, useVbenVxeGrid } from '@vben/plugins/vxe-table';
+import { isFunction } from '@vben/utils';
 
 import VxeUIPluginRenderAntd from '@vxe-ui/plugin-render-antd';
-import { Button, Image } from 'ant-design-vue';
+import { Button, Image, Tag } from 'ant-design-vue';
 
 import { useVbenForm } from './form';
 
@@ -59,6 +60,26 @@ setupVbenVxeTable({
           { size: 'small', type: 'link', onClick: () => props?.onClick?.(row) },
           { default: () => val },
         );
+      },
+    });
+
+    vxeUI.renderer.add('CellTag', {
+      renderTableDefault(renderOpts, params) {
+        const { props } = renderOpts;
+        const { column, row } = params;
+        const color = props?.color
+          ? // eslint-disable-next-line unicorn/no-nested-ternary
+            isFunction(props.color)
+            ? props.color(row[column.field], row)
+            : props.color
+          : 'default';
+        const text = props?.text
+          ? // eslint-disable-next-line unicorn/no-nested-ternary
+            isFunction(props.text)
+            ? props.text(row[column.field], row)
+            : props.text
+          : '';
+        return h(Tag, { color }, () => text);
       },
     });
 
