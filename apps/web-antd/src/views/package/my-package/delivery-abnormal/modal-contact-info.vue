@@ -1,25 +1,12 @@
 <script lang="ts" setup>
-import type { DescItem } from '#/constants/common';
-
-import { h, ref } from 'vue';
+import { ref } from 'vue';
 
 import { useVbenModal } from '@vben/common-ui';
-import { formatDateTime } from '@vben/utils';
 
-import { Image } from 'ant-design-vue';
-
+import BasicTitle from '#/components/basic-title.vue';
 import Description from '#/components/description.vue';
 
-const itemBasic: DescItem[] = [
-  { label: '签收日期', field: 'time', render: (val) => formatDateTime(val) },
-  {
-    label: '签收图片',
-    field: 'img',
-    render(val) {
-      return h(Image, { src: val });
-    },
-  },
-];
+import { itemBasic, itemPackage } from './const-data';
 
 const descOptions = {
   column: 1,
@@ -27,17 +14,16 @@ const descOptions = {
     whiteSpace: 'pre-line',
     width: '760px',
   },
-  labelMinWidth: 60,
+  labelMinWidth: 85,
 };
 
-const data = ref({
-  time: Date.now(),
-  img: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-});
+const data = ref();
 
 const [Modal, ModalApi] = useVbenModal({
-  title: '查看签名',
+  title: '联系方式',
   draggable: true,
+  showConfirmButton: false,
+  cancelText: '关闭',
   onOpenChange(isOpen) {
     if (isOpen) {
       const res: any = ModalApi.getData();
@@ -48,6 +34,9 @@ const [Modal, ModalApi] = useVbenModal({
 </script>
 <template>
   <Modal class="w-[760px]">
+    <BasicTitle class="before mb-2 !text-base" title="收件人联系方式" />
     <Description :data="data" :items="itemBasic" :options="descOptions" />
+    <BasicTitle class="before mb-2 mt-3 !text-base" title="包裹信息" />
+    <Description :data="data" :items="itemPackage" :options="descOptions" />
   </Modal>
 </template>

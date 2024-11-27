@@ -8,7 +8,7 @@ import type { VxeGridProps } from '@vben/plugins/vxe-table';
 
 import dayjs from 'dayjs';
 
-import { endTime, startTime } from '#/constants/common';
+import { type DescItem, endTime, startTime } from '#/constants/common';
 
 export const columns: VxeGridProps['columns'] = [
   {
@@ -28,52 +28,47 @@ export const columns: VxeGridProps['columns'] = [
     field: 'trackingnumber',
   },
   {
-    title: '目的国',
-    field: 'countrycode',
-  },
-  {
-    title: '重量(kg)',
-    field: 'sortingweight',
-  },
-  {
-    title: '包裹运费',
-    field: 'sortingfreight',
-  },
-  {
-    title: '退件类型',
-    field: 'returntype',
+    title: '异常原因',
+    field: 'statusCode',
     // formatter: ({ cellValue, row }) => {
     //   const number = row?.customerreferenceno || '无';
     //   return `${cellValue || '无'}\n${number}`;
-    // },
+    // }
   },
   {
-    title: '退件状态',
-    field: 'status',
-    cellRender: {
-      name: 'CellTag',
-      props: {
-        color(value: any) {
-          return value === 2 ? 'success' : 'error';
-        },
-        text: (value: any) => value,
-      },
-    },
+    title: '最新动态',
+    field: 'operationContent',
   },
   {
-    title: '退件编号',
-    field: 'returncode',
+    title: '异常时间',
+    field: 'operationTime',
+  },
+  {
+    title: '异常天数(天)',
+    field: 'abnormalDays',
+  },
+  {
+    title: '处理状态',
+    field: 'handleStatus',
+    // formatter: ({ cellValue, row }) => {
+    //   const number = row?.customerreferenceno || '无';
+    //   return `${cellValue || '无'}\n${number}`;
+    // }
+  },
+  {
+    title: '处理结果',
+    field: 'remark',
   },
 
   {
-    title: '退件时间',
-    field: 'returntime',
+    title: '邮件提醒结果',
+    field: 'sendStatus',
     minWidth: 160,
     // formatter: ({ cellValue }) => formatDateTime(cellValue),
   },
   {
     title: '操作',
-    width: 150,
+    width: 180,
     field: 'action',
     showOverflow: false,
     slots: { default: 'action' },
@@ -88,7 +83,7 @@ export const formSchema: VbenFormSchema[] = [
     labelWidth: 60,
     component: 'Input',
     componentProps: {
-      placeholder: '流水号/追踪号/退件编号',
+      placeholder: '流水号/追踪号',
     },
     formItemClass: 'col-span-4',
   },
@@ -112,11 +107,35 @@ export const formSchema: VbenFormSchema[] = [
   },
   {
     fieldName: 'abnormalStatus',
-    label: '退件状态',
+    label: '处理状态',
     component: 'Select',
     componentProps: {
       placeholder: '全部',
     },
     formItemClass: 'col-span-4',
   },
+  {
+    fieldName: 'email',
+    label: '邮件提醒',
+    labelWidth: 60,
+    component: 'Select',
+    componentProps: {
+      placeholder: '全部',
+    },
+    formItemClass: 'col-span-4',
+  },
+];
+
+export const itemBasic: DescItem[] = [
+  { label: '收件人姓名', field: 'recipientName' },
+  { label: '收件人电话', field: 'recipientPhone' },
+  { label: '收件人邮箱', field: 'recipientEmail' },
+  { label: '收件人手机', field: 'recipientMobile' },
+  { label: '收件人地址', field: 'recipientFullAddress' },
+];
+
+export const itemPackage: DescItem[] = [
+  { label: '计费重量(kg)', field: 'weight' },
+  { label: '运费', field: 'freight' },
+  { label: '下单时间', field: 'createTime' },
 ];

@@ -149,44 +149,6 @@ const [Table, TableApi] = useVbenVxeGrid({
     },
   },
 });
-// const [registerTable, { getForm, reload, setTableData, setPagination, clearSelectedRowKeys }] =
-//   useTable({
-//     api: apis.viewPackage.packageList,
-//     columns,
-//     title: '面单打印列表',
-//     showIndexColumn: false,
-//     bordered: true,
-//     showTableSetting: true,
-//     useSearchForm: true,
-//     immediate: false,
-//     rowKey: 'packageId',
-//     rowSelection: {
-//       type: 'checkbox',
-//       onChange: handleSelectChange,
-//       getCheckboxProps: () => {
-//         return {
-//           disabled: unref(selectAll),
-//         };
-//       },
-//     },
-//     formConfig: {
-//       schemas: formSchema(onOptionsSelect),
-//       showAdvancedButton: false,
-//       labelWidth: 80,
-//       fieldMapToTime: [['createTime', ['createTimeFrom', 'createTimeTo'], 'YYYY-MM-DD HH:mm:ss']],
-//       actionColOptions: { span: 24 },
-//     },
-//   });
-
-// function formatParams(ids: number[]) {
-//   const { userId } = unref(customerInfo);
-//   const params: Recordable = {
-//     userId,
-//     packageIdList: ids,
-//     ports: 'yunwei',
-//   };
-//   return params;
-// }
 
 // function getSelectedKeys() {
 //   return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);

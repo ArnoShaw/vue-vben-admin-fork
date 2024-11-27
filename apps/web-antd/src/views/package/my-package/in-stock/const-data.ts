@@ -73,7 +73,7 @@ export const columns: VxeGridProps['columns'] = [
   {
     title: '缺货天数',
     sortable: true,
-    field: 'productDetail',
+    field: 'days',
   },
 ];
 

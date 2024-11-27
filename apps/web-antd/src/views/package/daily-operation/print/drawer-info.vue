@@ -24,7 +24,7 @@ const descOptions = {
     whiteSpace: 'pre-line',
     width: '320px',
   },
-  labelMinWidth: 80,
+  labelMinWidth: 85,
 };
 
 // const id = ref(0);
@@ -120,7 +120,7 @@ const data = {};
 <template>
   <Drawer class="w-[70%]">
     <BasicTitle class="before mb-2 !text-base" title="顺友流水号" />
-    <Description :data="data" :items="descItemBasic" :options="descOptions" class="!-mt-1" />
+    <Description :data="data" :items="descItemBasic" :options="descOptions" />
     <BasicTitle class="before mb-2 mt-4 !text-base" title="收件人信息" />
     <Description :data="data" :items="descItemRecipient" :options="descOptions" />
     <BasicTitle class="before mb-2 mt-4 !text-base" title="寄件人信息" />

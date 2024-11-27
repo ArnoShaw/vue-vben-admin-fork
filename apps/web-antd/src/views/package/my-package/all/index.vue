@@ -11,9 +11,9 @@ import { Button, Dropdown, Menu, MenuItem, message } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import TableAction from '#/components/table-action.vue';
+import DrawerInfo from '#/views/package/daily-operation/print/drawer-info.vue';
 
 import { columns, formSchema } from './const-data';
-import DrawerInfo from './drawer-info.vue';
 import ModalModifyWeight from './modal-modify-weight.vue';
 
 defineOptions({
