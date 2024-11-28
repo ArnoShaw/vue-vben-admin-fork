@@ -21,7 +21,7 @@ defineOptions({
 const exportLoading = ref(false);
 
 const [Table, TableApi] = useVbenVxeGrid({
-  tableTitle: '退件包裹列表',
+  tableTitle: '包裹退件列表',
   formOptions: {
     schema: formSchema,
     collapsedRows: 2,
@@ -154,7 +154,7 @@ const [Table, TableApi] = useVbenVxeGrid({
 //   return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);
 // }
 
-const [SignModal, ModalApi] = useVbenModal({
+const [ModalSign, ModalApi] = useVbenModal({
   connectedComponent: ModalSignatureInfo,
 });
 
@@ -238,6 +238,6 @@ function handleViewSign(row: any) {
         />
       </template>
     </Table>
-    <SignModal />
+    <ModalSign />
   </Page>
 </template>

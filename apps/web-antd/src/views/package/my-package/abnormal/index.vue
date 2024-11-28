@@ -24,7 +24,7 @@ const exportLoading = ref(false);
 const router = useRouter();
 
 const [Table, TableApi] = useVbenVxeGrid({
-  tableTitle: '异常包裹列表',
+  tableTitle: '包裹异常列表',
   formOptions: {
     schema: formSchema,
     collapsedRows: 2,

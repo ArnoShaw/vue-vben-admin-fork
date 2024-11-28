@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref, unref } from 'vue';
 
-import { useVbenForm, useVbenModal } from '@vben/common-ui';
+import { useVbenDrawer, useVbenForm } from '@vben/common-ui';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { ActionEnum } from '#/constants/common';
@@ -13,7 +13,7 @@ const isView = computed(() => unref(actionType) === ActionEnum.VIEW);
 
 const [Table] = useVbenVxeGrid({
   gridOptions: {
-    height: 250,
+    maxHeight: 300,
     columns: [
       {
         title: '更新时间',
@@ -66,24 +66,24 @@ const [Form, FormApi] = useVbenForm({
   ],
 });
 
-const [Modal, ModalApi] = useVbenModal({
+const [Drawer, DrawerApi] = useVbenDrawer({
   title: '处理结果',
-  draggable: true,
   onOpenChange(isOpen) {
     if (isOpen) {
-      const res: any = ModalApi.getData();
+      const res: any = DrawerApi.getData();
       data.value = res;
       actionType.value = res?.actionType;
+      if (unref(isView)) DrawerApi.setState({ showConfirmButton: false, cancelText: '关闭' });
     }
   },
   onConfirm() {
-    FormApi.validate();
+    if (!unref(isView)) FormApi.validate();
   },
 });
 </script>
 <template>
-  <Modal class="w-[760px]">
-    <Table />
+  <Drawer class="w-[760px]">
+    <Table class="h-auto" />
     <Form v-if="!isView" class="mt-4" />
-  </Modal>
+  </Drawer>
 </template>

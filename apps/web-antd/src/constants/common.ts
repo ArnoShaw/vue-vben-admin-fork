@@ -34,6 +34,8 @@ export const FILE_MIMES = {
     'application/vnd.ms-excel',
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   ],
+  PNG: 'image/png',
+  JPG: 'image/jpeg',
 };
 
 /**

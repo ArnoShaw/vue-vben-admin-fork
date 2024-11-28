@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { Page, useVbenModal } from '@vben/common-ui';
+import { Page, useVbenDrawer } from '@vben/common-ui';
 
 import { Button, Dropdown, Menu, MenuItem, message, Modal } from 'ant-design-vue';
 
@@ -12,8 +12,8 @@ import { ActionEnum } from '#/constants/common';
 import { getCommonBatchMsg } from '#/views/package/daily-operation/prediction/const-data';
 
 import { columns, formSchema } from './const-data';
-import ModalContactInfo from './modal-contact-info.vue';
-import ModalHandleResult from './modal-handle-result.vue';
+import DrawerContactInfo from './drawer-contact-info.vue';
+import DrawerHandleResult from './drawer-handle-result.vue';
 
 defineOptions({
   name: 'PackageMyPackageDeliveryAbnormal',
@@ -81,12 +81,19 @@ function getSelectedKeys() {
   return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);
 }
 
-const [SignModal, ModalApi] = useVbenModal({
-  connectedComponent: ModalContactInfo,
+// const [ModalInfo, ModalApi] = useVbenModal({
+//   connectedComponent: ModalContactInfo,
+// });
+
+// const [HandleModal, HandleModalApi] = useVbenModal({
+//   connectedComponent: ModalHandleResult,
+// });
+const [DrawerInfo, DrawerInfoApi] = useVbenDrawer({
+  connectedComponent: DrawerContactInfo,
 });
 
-const [HandleModal, HandleModalApi] = useVbenModal({
-  connectedComponent: ModalHandleResult,
+const [DrawerResult, DrawerResultApi] = useVbenDrawer({
+  connectedComponent: DrawerHandleResult,
 });
 
 async function handleExport(selectAll: boolean) {
@@ -129,16 +136,16 @@ function handleBatchSendEmail() {
 }
 
 function handleStatus(row: any) {
-  HandleModalApi.setData({
+  DrawerResultApi.setData({
     ...row,
     actionType: row.status === 1 ? ActionEnum.VIEW : ActionEnum.EDIT,
   });
-  HandleModalApi.open();
+  DrawerResultApi.open();
 }
 
 function handleViewInfo(row: any) {
-  ModalApi.setData(row);
-  ModalApi.open();
+  DrawerInfoApi.setData(row);
+  DrawerInfoApi.open();
 }
 </script>
 
@@ -189,7 +196,7 @@ function handleViewInfo(row: any) {
         />
       </template>
     </Table>
-    <SignModal />
-    <HandleModal />
+    <DrawerInfo />
+    <DrawerResult />
   </Page>
 </template>
