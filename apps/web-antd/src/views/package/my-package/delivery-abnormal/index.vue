@@ -38,20 +38,6 @@ const [Table, TableApi] = useVbenVxeGrid({
   },
   gridOptions: {
     columns,
-    data: [
-      {
-        abnormal_days: 35,
-        shipping_method_code: 'SYEMS',
-        package_code: 'TEMP1005',
-        status_code: '20806',
-        operation_time: '2024-10-23 11:26:40',
-        operation_content: '111',
-        trackingnumber: 'TEMP1005',
-        remark: 'test',
-        package_id: 121_506_410,
-        status: 1,
-      },
-    ],
     border: true,
     height: 'auto',
     columnConfig: {

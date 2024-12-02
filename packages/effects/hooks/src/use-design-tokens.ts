@@ -49,8 +49,7 @@ export function useAntdDesignTokens() {
 
       getCssVariableValue('--primary-foreground');
 
-      tokens.colorBorderSecondary = tokens.colorBorder =
-        getCssVariableValue('--border');
+      tokens.colorBorderSecondary = tokens.colorBorder = getCssVariableValue('--border');
 
       tokens.colorBgElevated = getCssVariableValue('--popover');
 
@@ -138,14 +137,11 @@ export function useNaiveDesignTokens() {
 
       commonTokens.baseColor = getCssVariableValue('--primary-foreground');
 
-      commonTokens.dividerColor = commonTokens.borderColor =
-        getCssVariableValue('--border');
+      commonTokens.dividerColor = commonTokens.borderColor = getCssVariableValue('--border');
 
-      commonTokens.modalColor = commonTokens.popoverColor =
-        getCssVariableValue('--popover');
+      commonTokens.modalColor = commonTokens.popoverColor = getCssVariableValue('--popover');
 
-      commonTokens.tableColor = commonTokens.cardColor =
-        getCssVariableValue('--card');
+      commonTokens.tableColor = commonTokens.cardColor = getCssVariableValue('--card');
 
       commonTokens.bodyColor = getCssVariableValue('--background');
       commonTokens.invertedColor = getCssVariableValue('--background-deep');
@@ -211,9 +207,7 @@ export function useElementPlusDesignTokens() {
         '--el-color-error-light-8': isDark.value
           ? border
           : getCssVariableValue('--destructive-100'),
-        '--el-color-error-light-9': isDark.value
-          ? accent
-          : getCssVariableValue('--destructive-50'),
+        '--el-color-error-light-9': isDark.value ? accent : getCssVariableValue('--destructive-50'),
 
         '--el-color-info-light-8': border,
         '--el-color-info-light-9': getCssVariableValue('--info'), // getCssVariableValue('--secondary'),
@@ -221,49 +215,36 @@ export function useElementPlusDesignTokens() {
         '--el-color-primary-dark-2': getCssVariableValue('--primary'),
         '--el-color-primary-light-3': getCssVariableValue('--primary-400'),
         '--el-color-primary-light-5': getCssVariableValue('--primary-300'),
-        '--el-color-primary-light-7': isDark.value
-          ? border
-          : getCssVariableValue('--primary-200'),
-        '--el-color-primary-light-8': isDark.value
-          ? border
-          : getCssVariableValue('--primary-100'),
-        '--el-color-primary-light-9': isDark.value
-          ? accent
-          : getCssVariableValue('--primary-50'),
+        '--el-color-primary-light-7': isDark.value ? border : getCssVariableValue('--primary-200'),
+        '--el-color-primary-light-8': isDark.value ? border : getCssVariableValue('--primary-100'),
+        '--el-color-primary-light-9': isDark.value ? accent : getCssVariableValue('--primary-50'),
 
         '--el-color-success': getCssVariableValue('--success-500'),
         '--el-color-success-dark-2': getCssVariableValue('--success'),
         '--el-color-success-light-3': getCssVariableValue('--success-400'),
         '--el-color-success-light-5': getCssVariableValue('--success-300'),
         '--el-color-success-light-7': getCssVariableValue('--success-200'),
-        '--el-color-success-light-8': isDark.value
-          ? border
-          : getCssVariableValue('--success-100'),
-        '--el-color-success-light-9': isDark.value
-          ? accent
-          : getCssVariableValue('--success-50'),
+        '--el-color-success-light-8': isDark.value ? border : getCssVariableValue('--success-100'),
+        '--el-color-success-light-9': isDark.value ? accent : getCssVariableValue('--success-50'),
 
         '--el-color-warning': getCssVariableValue('--warning-500'),
         '--el-color-warning-dark-2': getCssVariableValue('--warning'),
         '--el-color-warning-light-3': getCssVariableValue('--warning-400'),
         '--el-color-warning-light-5': getCssVariableValue('--warning-300'),
         '--el-color-warning-light-7': getCssVariableValue('--warning-200'),
-        '--el-color-warning-light-8': isDark.value
-          ? border
-          : getCssVariableValue('--warning-100'),
-        '--el-color-warning-light-9': isDark.value
-          ? accent
-          : getCssVariableValue('--warning-50'),
+        '--el-color-warning-light-8': isDark.value ? border : getCssVariableValue('--warning-100'),
+        '--el-color-warning-light-9': isDark.value ? accent : getCssVariableValue('--warning-50'),
 
         '--el-fill-color': getCssVariableValue('--accent'),
         '--el-fill-color-blank': background,
         '--el-fill-color-light': getCssVariableValue('--accent'),
         '--el-fill-color-lighter': getCssVariableValue('--accent-lighter'),
 
+        '--el-fill-color-dark': getCssVariableValue('--accent-dark'),
+        '--el-fill-color-darker': getCssVariableValue('--accent-darker'),
+
         // 解决ElLoading背景色问题
-        '--el-mask-color': isDark.value
-          ? 'rgba(0,0,0,.8)'
-          : 'rgba(255,255,255,.9)',
+        '--el-mask-color': isDark.value ? 'rgba(0,0,0,.8)' : 'rgba(255,255,255,.9)',
 
         '--el-text-color-primary': getCssVariableValue('--foreground'),
 

@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountInfo',
             path: 'info',
-            component: () => import('#/views/package/daily-operation/create/index.vue'),
+            component: () => import('#/views/account/info/index.vue'),
             meta: {
               title: '账户信息',
             },

@@ -28,7 +28,7 @@ defineProps({
   <div class="basic-title flex items-center justify-between text-lg">
     <div class="flex items-center">
       <IconifyIcon v-if="icon" :class="iconClass" :icon="icon" class="text-2xl" />
-      <span class="title mx-1 font-semibold">{{ title }}</span>
+      <span class="basic-title__text mx-1 font-semibold">{{ title }}</span>
       <HelpTooltip v-if="helpMessage">{{ helpMessage }}</HelpTooltip>
     </div>
     <slot></slot>
@@ -37,7 +37,7 @@ defineProps({
 <style lang="scss" scoped>
 .basic-title {
   &.before {
-    .title {
+    .basic-title__text {
       position: relative;
       padding-left: 6px;
 

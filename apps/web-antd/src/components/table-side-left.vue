@@ -42,7 +42,7 @@ function handleClick(item: SelectOption, index: number) {
 
 <template>
   <div class="table-side-left flex h-full flex-col overflow-hidden rounded border">
-    <BasicTitle :title="title" class="before h-[41px] overflow-hidden border-b p-2 !text-base" />
+    <BasicTitle :title="title" class="before h-[41px] border-b p-2 !text-base" />
     <div class="content flex-1 overflow-y-auto">
       <div v-if="data?.length" class="wrapper py-1">
         <div

@@ -37,24 +37,6 @@ const [Table, TableApi] = useVbenVxeGrid({
   },
   gridOptions: {
     columns,
-    data: [
-      {
-        packageId: 121_523_615,
-        packageCode: 'TEMP75042',
-        customerOrderNo: 'TS66008499',
-        customerReferenceNo: null,
-        updateTime: 1_720_669_786_455,
-        recipientCountryCode: 'US',
-        shippingmethodname: '赤道几内亚平邮小包',
-        predictionWeight: '0.230',
-        predictionFreight: '4.65',
-        createTime: 1_731_291_010_000,
-        printTime: null,
-        status: '4',
-        productskus: '*1;*3',
-        trackingNumber: 'test000113',
-      },
-    ],
     border: true,
     height: 'auto',
     columnConfig: {

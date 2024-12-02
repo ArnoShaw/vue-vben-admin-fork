@@ -3,11 +3,7 @@ import type { ExtendedModalApi, ModalProps } from './modal';
 
 import { computed, nextTick, provide, ref, useId, watch } from 'vue';
 
-import {
-  useIsMobile,
-  usePriorityValues,
-  useSimpleLocale,
-} from '@vben-core/composables';
+import { useIsMobile, usePriorityValues, useSimpleLocale } from '@vben-core/composables';
 import { Expand, Shrink } from '@vben-core/icons';
 import {
   Dialog,
@@ -80,19 +76,11 @@ const {
   titleTooltip,
 } = usePriorityValues(props, state);
 
-const shouldFullscreen = computed(
-  () => (fullscreen.value && header.value) || isMobile.value,
-);
+const shouldFullscreen = computed(() => (fullscreen.value && header.value) || isMobile.value);
 
-const shouldDraggable = computed(
-  () => draggable.value && !shouldFullscreen.value && header.value,
-);
+const shouldDraggable = computed(() => draggable.value && !shouldFullscreen.value && header.value);
 
-const { dragging, transform } = useModalDraggable(
-  dialogRef,
-  headerRef,
-  shouldDraggable,
-);
+const { dragging, transform } = useModalDraggable(dialogRef, headerRef, shouldDraggable);
 
 watch(
   () => state?.value?.isOpen,
@@ -163,11 +151,7 @@ function handleFocusOutside(e: Event) {
 }
 </script>
 <template>
-  <Dialog
-    :modal="false"
-    :open="state?.isOpen"
-    @update:open="() => modalApi?.close()"
-  >
+  <Dialog :modal="false" :open="state?.isOpen" @update:open="() => modalApi?.close()">
     <DialogContent
       ref="contentRef"
       :class="
@@ -177,8 +161,7 @@ function handleFocusOutside(e: Event) {
           {
             'border-border border': bordered,
             'shadow-3xl': !bordered,
-            'left-0 top-0 size-full max-h-full !translate-x-0 !translate-y-0':
-              shouldFullscreen,
+            'left-0 top-0 size-full max-h-full !translate-x-0 !translate-y-0': shouldFullscreen,
             'top-1/2 !-translate-y-1/2': centered && !shouldFullscreen,
             'duration-300': !dragging,
           },
@@ -236,15 +219,11 @@ function handleFocusOutside(e: Event) {
         ref="wrapperRef"
         :class="
           cn('relative min-h-40 flex-1 overflow-y-auto p-3', contentClass, {
-            'overflow-hidden': showLoading,
+            'pointer-events-none overflow-hidden': showLoading,
           })
         "
       >
-        <VbenLoading
-          v-if="showLoading"
-          class="size-full h-auto min-h-full"
-          spinning
-        />
+        <VbenLoading v-if="showLoading" class="size-full h-auto min-h-full" spinning />
         <slot></slot>
       </div>
 

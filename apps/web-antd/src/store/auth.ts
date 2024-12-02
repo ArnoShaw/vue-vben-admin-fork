@@ -6,7 +6,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants';
-import { resetAllStores, useAccessStore } from '@vben/stores';
+import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
@@ -16,7 +16,7 @@ import { apis } from '#/services/apis';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
-  // const userStore = useUserStore();
+  const userStore = useUserStore();
   const router = useRouter();
 
   const loginLoading = ref(false);
@@ -85,10 +85,10 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    // const { user } = (await apis.profile.profile({})) as defs.apis.ProfileVo;
-    // userStore.setUserInfo(user);
-    // return user;
-    return {};
+    const { user } = (await apis.profile.profile({})) as defs.apis.ProfileVo;
+    userStore.setUserInfo(user);
+    return user;
+    // return {};
   }
 
   function $reset() {

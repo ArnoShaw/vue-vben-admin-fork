@@ -113,7 +113,7 @@ function createRequestClient(baseURL: string) {
       const errorMessage =
         responseData?.msg ?? responseData?.message ?? $t('ui.fallback.http.internalServerError');
       // 如果没有错误信息，则会根据状态码进行提示
-      message.error(errorMessage || msg);
+      message.error(msg ?? errorMessage);
     }),
   );
 

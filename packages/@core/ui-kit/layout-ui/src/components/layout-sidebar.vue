@@ -191,7 +191,10 @@ watchEffect(() => {
 function calcMenuWidthStyle(isHiddenDom: boolean): CSSProperties {
   const { extraWidth, fixedExtra, isSidebarMixed, show, width } = props;
 
-  let widthValue = `${width + (isSidebarMixed && fixedExtra && extraVisible.value ? extraWidth : 0)}px`;
+  let widthValue =
+    width === 0
+      ? '0px'
+      : `${width + (isSidebarMixed && fixedExtra && extraVisible.value ? extraWidth : 0)}px`;
 
   const { collapseWidth } = props;
 
@@ -292,19 +295,11 @@ function handleMouseleave() {
         v-model:collapsed="extraCollapse"
       />
 
-      <SidebarFixedButton
-        v-if="!extraCollapse"
-        v-model:expand-on-hover="expandOnHover"
-      />
+      <SidebarFixedButton v-if="!extraCollapse" v-model:expand-on-hover="expandOnHover" />
       <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
         <slot name="extra-title"></slot>
       </div>
-      <VbenScrollbar
-        :style="extraContentStyle"
-        class="border-border py-2"
-        shadow
-        shadow-border
-      >
+      <VbenScrollbar :style="extraContentStyle" class="border-border py-2" shadow shadow-border>
         <slot name="extra"></slot>
       </VbenScrollbar>
     </div>

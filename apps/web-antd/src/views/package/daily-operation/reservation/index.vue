@@ -18,17 +18,6 @@ const [Table] = useVbenVxeGrid({
   formOptions: {},
   gridOptions: {
     columns: baseColumns,
-    data: [
-      {
-        mailbagweight: 2,
-        channelcnname: '混合邮寄方式',
-        packagenumber: 1,
-        chargezonename: '混合计费分区',
-        reservationtime: '2024-11-18 11:46:27',
-        receivemailbagid: 989_920,
-        mailbagcode: 'RRCS0104531',
-      },
-    ],
     border: true,
     height: 'auto',
     columnConfig: {
