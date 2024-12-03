@@ -661,6 +661,9 @@ importers:
       '@vueuse/core':
         specifier: 'catalog:'
         version: 12.0.0(typescript@5.7.2)
+      '@vxe-ui/plugin-render-antd':
+        specifier: ^4.0.7
+        version: 4.0.7
       ant-design-vue:
         specifier: 'catalog:'
         version: 4.2.6(vue@3.5.13(typescript@5.7.2))
@@ -4355,6 +4358,9 @@ packages:
 
   '@types/bintrees@1.0.6':
     resolution: {integrity: sha512-pZWT4Bz+tWwxlDspSjdoIza4PE5lbGI4Xvs3FZV/2v5m5SDA8LwNpU8AXxlndmARO7OaQ1Vf3zFenOsNMzaRkQ==}
+
+  '@types/blueimp-md5@2.18.2':
+    resolution: {integrity: sha512-dJ9yRry9Olt5GAWlgCtE5dK9d/Dfhn/V7hna86eEO2Pn76+E8Y0S0n61iEUEGhWXXgtKtHxtZLVNwL8X+vLHzg==}
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
@@ -13347,6 +13353,8 @@ snapshots:
   '@types/argparse@1.0.38': {}
 
   '@types/bintrees@1.0.6': {}
+
+  '@types/blueimp-md5@2.18.2': {}
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:

@@ -50,3 +50,8 @@
 .ant-app .form-valid-error .ant-picker-focused {
   box-shadow: 0 0 0 2px rgb(255 38 5 / 6%);
 }
+
+/** 输入框、下拉框禁用状态字体颜色 */
+.ant-input-disabled {
+  color: inherit !important;
+}

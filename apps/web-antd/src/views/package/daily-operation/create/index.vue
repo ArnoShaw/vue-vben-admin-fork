@@ -226,7 +226,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <Page :loading="true" auto-content-height content-class="!p-0">
+  <Page auto-content-height content-class="!p-0">
     <div class="absolute h-full w-full overflow-auto">
       <div class="p-4">
         <div class="card-box relative rounded-b-none p-4">

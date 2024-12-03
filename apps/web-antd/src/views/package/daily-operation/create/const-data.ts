@@ -111,7 +111,7 @@ export const formSchemas = (
   {
     fieldName: 'packageCodCurrencyCode',
     label: 'COD币种',
-    rules: 'required',
+    rules: 'selectRequired',
     labelWidth: 80,
     dependencies: {
       triggerFields: ['packageCodFlag'],
@@ -276,7 +276,7 @@ export const formSchemas = (
     fieldName: 'recipientCountryCode',
     label: '国家/地区',
     component: 'Select',
-    rules: 'required',
+    rules: 'selectRequired',
     // componentProps: {
     //   onChange: onSearchShipping,
     //   api: apis.common.getCountryList,

@@ -56,7 +56,7 @@ export const baseSchema: VbenFormSchema[] = [
     label: '目的国家',
     labelWidth: 75,
     component: 'Select',
-    rules: 'required',
+    rules: 'selectRequired',
     componentProps: {
       options: [],
       showSearch: true,
