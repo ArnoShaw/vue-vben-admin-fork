@@ -12,6 +12,10 @@ import UserInfo from '#/views/overview/components/user-info.vue';
 import { baseSchema } from './const-data';
 import ModalBindMobile from './modal-bind-mobile.vue';
 
+defineOptions({
+  name: 'SettingAccountInfo',
+});
+
 const { userName, userCode } = useUserStore().userInfo || {};
 
 const [Modal, ModalApi] = useVbenModal({

@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   qrCodeLoginPath: '/auth/qrcode-login',
   registerPath: '/auth/register',
-  showCodeLogin: false,
+  showCodeLogin: true,
   showForgetPassword: true,
   showQrcodeLogin: false,
   showRegister: true,
@@ -156,7 +156,7 @@ defineExpose({
     >
       <VbenButton
         v-if="showCodeLogin"
-        class="w-1/2"
+        class="w-full"
         variant="outline"
         @click="handleGo(codeLoginPath)"
       >

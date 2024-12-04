@@ -285,10 +285,6 @@ async function handleSubmit() {
                 <template #action="{ row }">
                   <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
                   <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
-                  <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
-                  <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
-                  <a class="vben-link mr-3" @click="handleEditProduct(row)">编辑</a>
-                  <a class="vben-link" @click="handleDeleteProduct(row)">移除</a>
                 </template>
               </DeclareTable>
             </template>

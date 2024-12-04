@@ -94,7 +94,7 @@ function handleUpload(file: File, type: string) {
 
 function beforeUpload(file: File, type: string) {
   if (![FILE_MIMES.JPG, FILE_MIMES.PNG].includes(file.type)) {
-    message.warning('请选择jpg/png图片');
+    message.warning('仅支持PNG、JPG格式图片');
     return false;
   }
   if (file.size / 1024 / 1024 > 10) {
@@ -152,7 +152,7 @@ function beforeUpload(file: File, type: string) {
     <Alert :show-icon="false" banner class="mt-8">
       <template #message> 注意事项： </template>
       <template #description>
-        <p>1. 附件截图请上传 GIF、JPEG、JPG、PNG 格式，单个图片文件大小不超过2M。</p>
+        <p>1. 附件截图请上传 JPG、PNG 格式，单个图片文件大小不超过2M。</p>
         <p>2. 确保截图清晰可见网址，体现具体退款原因、退款金额和对应的追踪号/顺友流水号。</p>
         <p>3. 单个包裹申请理赔的次数不超过3次。</p>
       </template>
