@@ -5,11 +5,7 @@ import { computed, useSlots, watch } from 'vue';
 
 import { useRefresh } from '@vben/hooks';
 import { $t } from '@vben/locales';
-import {
-  preferences,
-  updatePreferences,
-  usePreferences,
-} from '@vben/preferences';
+import { preferences, updatePreferences, usePreferences } from '@vben/preferences';
 import { useLockStore } from '@vben/stores';
 import { cloneDeep, mapTree } from '@vben/utils';
 import { VbenAdminLayout } from '@vben-core/layout-ui';
@@ -20,13 +16,7 @@ import { LayoutContent, LayoutContentSpinner } from './content';
 import { Copyright } from './copyright';
 import { LayoutFooter } from './footer';
 import { LayoutHeader } from './header';
-import {
-  LayoutExtraMenu,
-  LayoutMenu,
-  LayoutMixedMenu,
-  useExtraMenu,
-  useMixedMenu,
-} from './menu';
+import { LayoutExtraMenu, LayoutMenu, LayoutMixedMenu, useExtraMenu, useMixedMenu } from './menu';
 import { LayoutTabbar } from './tabbar';
 
 defineOptions({ name: 'BasicLayout' });
@@ -101,19 +91,22 @@ const {
   sidebarExtraVisible,
 } = useExtraMenu();
 
-const {
-  handleMenuSelect,
-  headerActive,
-  headerMenus,
-  sidebarActive,
-  sidebarMenus,
-  sidebarVisible,
-} = useMixedMenu();
+const { handleMenuSelect, headerActive, headerMenus, sidebarActive, sidebarMenus, sidebarVisible } =
+  useMixedMenu();
 
-function wrapperMenus(menus: MenuRecordRaw[]) {
-  return mapTree(menus, (item) => {
-    return { ...cloneDeep(item), name: $t(item.name) };
-  });
+/**
+ * 包装菜单，翻译菜单名称
+ * @param menus 原始菜单数据
+ * @param deep 是否深度包装。对于双列布局，只需要包装第一层，因为更深层的数据会在扩展菜单中重新包装
+ */
+function wrapperMenus(menus: MenuRecordRaw[], deep: boolean = true) {
+  return deep
+    ? mapTree(menus, (item) => {
+        return { ...cloneDeep(item), name: $t(item.name) };
+      })
+    : menus.map((item) => {
+        return { ...cloneDeep(item), name: $t(item.name) };
+      });
 }
 
 function toggleSidebar() {
@@ -178,16 +171,12 @@ const headerSlots = computed(() => {
     @update:sidebar-collapse="
       (value: boolean) => updatePreferences({ sidebar: { collapsed: value } })
     "
-    @update:sidebar-enable="
-      (value: boolean) => updatePreferences({ sidebar: { enable: value } })
-    "
+    @update:sidebar-enable="(value: boolean) => updatePreferences({ sidebar: { enable: value } })"
     @update:sidebar-expand-on-hover="
-      (value: boolean) =>
-        updatePreferences({ sidebar: { expandOnHover: value } })
+      (value: boolean) => updatePreferences({ sidebar: { expandOnHover: value } })
     "
     @update:sidebar-extra-collapse="
-      (value: boolean) =>
-        updatePreferences({ sidebar: { extraCollapse: value } })
+      (value: boolean) => updatePreferences({ sidebar: { extraCollapse: value } })
     "
   >
     <!-- logo -->
@@ -203,14 +192,8 @@ const headerSlots = computed(() => {
     </template>
     <!-- 头部区域 -->
     <template #header>
-      <LayoutHeader
-        :theme="theme"
-        @clear-preferences-and-logout="clearPreferencesAndLogout"
-      >
-        <template
-          v-if="!showHeaderNav && preferences.breadcrumb.enable"
-          #breadcrumb
-        >
+      <LayoutHeader :theme="theme" @clear-preferences-and-logout="clearPreferencesAndLogout">
+        <template v-if="!showHeaderNav && preferences.breadcrumb.enable" #breadcrumb>
           <Breadcrumb
             :hide-when-only-one="preferences.breadcrumb.hideOnlyOne"
             :show-home="preferences.breadcrumb.showHome"
@@ -257,7 +240,7 @@ const headerSlots = computed(() => {
     <template #mixed-menu>
       <LayoutMixedMenu
         :active-path="extraActiveMenu"
-        :menus="wrapperMenus(headerMenus)"
+        :menus="wrapperMenus(headerMenus, false)"
         :rounded="isMenuRounded"
         :theme="sidebarTheme"
         @default-select="handleDefaultSelect"
@@ -276,11 +259,7 @@ const headerSlots = computed(() => {
       />
     </template>
     <template #side-extra-title>
-      <VbenLogo
-        v-if="preferences.logo.enable"
-        :text="preferences.app.name"
-        :theme="theme"
-      />
+      <VbenLogo v-if="preferences.logo.enable" :text="preferences.app.name" :theme="theme" />
     </template>
 
     <template #tabbar>
@@ -303,10 +282,7 @@ const headerSlots = computed(() => {
     <!-- 页脚 -->
     <template v-if="preferences.footer.enable" #footer>
       <LayoutFooter>
-        <Copyright
-          v-if="preferences.copyright.enable"
-          v-bind="preferences.copyright"
-        />
+        <Copyright v-if="preferences.copyright.enable" v-bind="preferences.copyright" />
       </LayoutFooter>
     </template>
 

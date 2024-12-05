@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
+import { computed, nextTick, onMounted, ref, type StyleValue, useTemplateRef } from 'vue';
+
+import { preferences } from '@vben-core/preferences';
+import { cn } from '@vben-core/shared/utils';
 
 interface Props {
   title?: string;
@@ -9,6 +12,10 @@ interface Props {
    * 根据content可见高度自适应
    */
   autoContentHeight?: boolean;
+  /** 头部固定 */
+  fixedHeader?: boolean;
+  headerClass?: string;
+  footerClass?: string;
 }
 
 defineOptions({
@@ -20,6 +27,7 @@ const {
   description = '',
   autoContentHeight = false,
   title = '',
+  fixedHeader = false,
 } = defineProps<Props>();
 
 const headerHeight = ref(0);
@@ -28,6 +36,16 @@ const shouldAutoHeight = ref(false);
 
 const headerRef = useTemplateRef<HTMLDivElement>('headerRef');
 const footerRef = useTemplateRef<HTMLDivElement>('footerRef');
+
+const headerStyle = computed<StyleValue>(() => {
+  return fixedHeader
+    ? {
+        position: 'sticky',
+        zIndex: 200,
+        top: preferences.header.mode === 'fixed' ? 'var(--vben-header-height)' : 0,
+      }
+    : undefined;
+});
 
 const contentStyle = computed(() => {
   if (autoContentHeight) {
@@ -63,7 +81,14 @@ onMounted(() => {
     <div
       v-if="description || $slots.description || title || $slots.title || $slots.extra"
       ref="headerRef"
-      class="bg-card relative px-6 py-4"
+      :class="
+        cn(
+          'bg-card relative px-6 py-4',
+          headerClass,
+          fixedHeader ? 'border-border border-b transition-all duration-200' : '',
+        )
+      "
+      :style="headerStyle"
     >
       <slot name="title">
         <div v-if="title" class="mb-2 flex text-lg font-semibold">
@@ -89,7 +114,9 @@ onMounted(() => {
     <div
       v-if="$slots.footer"
       ref="footerRef"
-      class="bg-card align-center absolute bottom-0 left-0 right-0 flex px-6 py-4"
+      :class="
+        cn(footerClass, 'bg-card align-center absolute bottom-0 left-0 right-0 flex px-6 py-4')
+      "
     >
       <slot name="footer"></slot>
     </div>

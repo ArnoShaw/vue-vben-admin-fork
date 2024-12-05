@@ -12,29 +12,23 @@ import { ApiSelect, globalShareState, IconPicker } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
 import {
-  AutoComplete,
-  Button,
-  Checkbox,
-  CheckboxGroup,
-  DatePicker,
-  Divider,
-  Input,
-  InputNumber,
-  InputPassword,
-  Mentions,
-  notification,
-  Radio,
-  RadioGroup,
-  RangePicker,
-  Rate,
-  Select,
-  Space,
-  Switch,
-  Textarea,
-  TimePicker,
-  TreeSelect,
-  Upload,
-} from 'ant-design-vue';
+  NButton,
+  NCheckbox,
+  NCheckboxGroup,
+  NDatePicker,
+  NDivider,
+  NInput,
+  NInputNumber,
+  NRadioGroup,
+  NSelect,
+  NSpace,
+  NSwitch,
+  NTimePicker,
+  NTreeSelect,
+  NUpload,
+} from 'naive-ui';
+
+import { message } from '#/adapter/naive';
 
 const withDefaultPlaceholder = <T extends Component>(component: T, type: 'input' | 'select') => {
   return (props: any, { attrs, slots }: Omit<SetupContext, 'expose'>) => {
@@ -46,26 +40,17 @@ const withDefaultPlaceholder = <T extends Component>(component: T, type: 'input'
 // 这里需要自行根据业务组件库进行适配，需要用到的组件都需要在这里类型说明
 export type ComponentType =
   | 'ApiSelect'
-  | 'AutoComplete'
   | 'Checkbox'
   | 'CheckboxGroup'
   | 'DatePicker'
-  | 'DefaultButton'
   | 'Divider'
   | 'IconPicker'
   | 'Input'
   | 'InputNumber'
-  | 'InputPassword'
-  | 'Mentions'
-  | 'PrimaryButton'
-  | 'Radio'
   | 'RadioGroup'
-  | 'RangePicker'
-  | 'Rate'
   | 'Select'
   | 'Space'
   | 'Switch'
-  | 'Textarea'
   | 'TimePicker'
   | 'TreeSelect'
   | 'Upload'
@@ -83,43 +68,34 @@ async function initComponentAdapter() {
         {
           ...props,
           ...attrs,
-          component: Select,
-          loadingSlot: 'suffixIcon',
+          component: NSelect,
           modelField: 'value',
-          visibleEvent: 'onVisibleChange',
         },
         slots,
       );
     },
-    AutoComplete,
-    Checkbox,
-    CheckboxGroup,
-    DatePicker,
+    Checkbox: NCheckbox,
+    CheckboxGroup: NCheckboxGroup,
+    DatePicker: NDatePicker,
     // 自定义默认按钮
     DefaultButton: (props, { attrs, slots }) => {
-      return h(Button, { ...props, attrs, type: 'default' }, slots);
+      return h(NButton, { ...props, attrs, type: 'default' }, slots);
     },
-    Divider,
-    IconPicker,
-    Input: withDefaultPlaceholder(Input, 'input'),
-    InputNumber: withDefaultPlaceholder(InputNumber, 'input'),
-    InputPassword: withDefaultPlaceholder(InputPassword, 'input'),
-    Mentions: withDefaultPlaceholder(Mentions, 'input'),
     // 自定义主要按钮
     PrimaryButton: (props, { attrs, slots }) => {
-      return h(Button, { ...props, attrs, type: 'primary' }, slots);
+      return h(NButton, { ...props, attrs, type: 'primary' }, slots);
     },
-    Radio,
-    RadioGroup,
-    RangePicker,
-    Rate,
-    Select: withDefaultPlaceholder(Select, 'select'),
-    Space,
-    Switch,
-    Textarea: withDefaultPlaceholder(Textarea, 'input'),
-    TimePicker,
-    TreeSelect: withDefaultPlaceholder(TreeSelect, 'select'),
-    Upload,
+    Divider: NDivider,
+    IconPicker,
+    Input: withDefaultPlaceholder(NInput, 'input'),
+    InputNumber: withDefaultPlaceholder(NInputNumber, 'input'),
+    RadioGroup: NRadioGroup,
+    Select: withDefaultPlaceholder(NSelect, 'select'),
+    Space: NSpace,
+    Switch: NSwitch,
+    TimePicker: NTimePicker,
+    TreeSelect: withDefaultPlaceholder(NTreeSelect, 'select'),
+    Upload: NUpload,
   };
 
   // 将组件注册到全局共享状态中
@@ -129,10 +105,8 @@ async function initComponentAdapter() {
   globalShareState.defineMessage({
     // 复制成功消息提示
     copyPreferencesSuccess: (title, content) => {
-      notification.success({
-        description: content,
-        message: title,
-        placement: 'bottomRight',
+      message.success(content || title, {
+        duration: 0,
       });
     },
   });

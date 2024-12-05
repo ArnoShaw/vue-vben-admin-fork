@@ -1,5 +1,6 @@
 import type { ApplicationPluginOptions } from '../typing';
 
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { fs } from '@vben/node-utils';
@@ -8,11 +9,9 @@ import dotenv from 'dotenv';
 
 const getBoolean = (value: string | undefined) => value === 'true';
 
-const getString = (value: string | undefined, fallback: string) =>
-  value ?? fallback;
+const getString = (value: string | undefined, fallback: string) => value ?? fallback;
 
-const getNumber = (value: string | undefined, fallback: number) =>
-  Number(value) || fallback;
+const getNumber = (value: string | undefined, fallback: number) => Number(value) || fallback;
 
 /**
  * 获取当前环境下生效的配置文件名
@@ -21,12 +20,11 @@ function getConfFiles() {
   const script = process.env.npm_lifecycle_script as string;
   const reg = /--mode ([\d_a-z]+)/;
   const result = reg.exec(script);
-
+  let mode = 'production';
   if (result) {
-    const mode = result[1];
-    return ['.env', `.env.${mode}`];
+    mode = result[1] as string;
   }
-  return ['.env', '.env.production'];
+  return ['.env', '.env.local', `.env.${mode}`, `.env.${mode}.local`];
 }
 
 /**
@@ -42,11 +40,14 @@ async function loadEnv<T = Record<string, string>>(
 
   for (const confFile of confFiles) {
     try {
-      const envPath = await fs.readFile(join(process.cwd(), confFile), {
-        encoding: 'utf8',
-      });
-      const env = dotenv.parse(envPath);
-      envConfig = { ...envConfig, ...env };
+      const confFilePath = join(process.cwd(), confFile);
+      if (existsSync(confFilePath)) {
+        const envPath = await fs.readFile(confFilePath, {
+          encoding: 'utf8',
+        });
+        const env = dotenv.parse(envPath);
+        envConfig = { ...envConfig, ...env };
+      }
     } catch (error) {
       console.error(`Error while parsing ${confFile}`, error);
     }
