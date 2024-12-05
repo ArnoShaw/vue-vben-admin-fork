@@ -45,8 +45,8 @@ const [Modal, ModalApi] = useVbenModal({
     <Table>
       <template #toolbar-actions>
         <BasicTitle
-          help-message="为了确保我们的客户能得到最优质的服务和最美好的体验，您们的“投诉和建议”是我们的前进的方向！"
-          icon="icon-park-outline:log"
+          help-message="为了确保我们的客户能得到最优质的服务和最美好的体验，您的“投诉和建议”是我们的前进的方向！"
+          icon="mingcute:user-question-line"
           icon-class="text-primary"
           title="投诉和建议"
         />

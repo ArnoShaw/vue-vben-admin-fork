@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
     },
     name: 'Package',
     path: '/package',
+    redirect: '/package/daily-operation/create',
     children: [
       {
         name: 'PackageDailyOperation',

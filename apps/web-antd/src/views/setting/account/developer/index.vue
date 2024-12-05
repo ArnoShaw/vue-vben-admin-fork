@@ -37,7 +37,7 @@ function handleCopy(text: string) {
   <Page>
     <div class="card-box p-4">
       <BasicTitle icon="ant-design:code-outlined" icon-class="text-primary" title="开发者" />
-      <Alert :show-icon="false" banner class="mt-4">
+      <Alert :show-icon="false" banner class="mt-4 p-2">
         <template #message> ERP下单指引 </template>
         <template #description>
           <p>1. 如您使用第三方ERP下单，且需使用顺友物流发货，请在对应ERP进行相关授权设置。</p>

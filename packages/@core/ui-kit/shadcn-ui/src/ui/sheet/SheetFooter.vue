@@ -5,14 +5,7 @@ const props = defineProps<{ class?: any }>();
 </script>
 
 <template>
-  <div
-    :class="
-      cn(
-        'flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-x-2',
-        props.class,
-      )
-    "
-  >
+  <div :class="cn('flex flex-row flex-col-reverse justify-end gap-x-2', props.class)">
     <slot></slot>
   </div>
 </template>

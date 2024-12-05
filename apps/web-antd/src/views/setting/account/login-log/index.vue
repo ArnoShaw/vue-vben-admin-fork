@@ -59,7 +59,7 @@ const [Table] = useVbenVxeGrid({
           help-message="查询账户登陆IP和地理位置日志"
           icon="icon-park-outline:log"
           icon-class="text-primary"
-          title="登录日志"
+          title="登录日志（近30天）"
         />
       </template>
     </Table>

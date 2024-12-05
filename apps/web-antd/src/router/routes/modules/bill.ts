@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
     },
     name: 'Bill',
     path: '/bill',
+    redirect: '/bill/management/not-paid',
     children: [
       {
         name: 'BillManagement',
@@ -25,7 +26,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'BillManagementNotPaid',
             path: 'not-paid',
-            component: () => import('#/views/package/daily-operation/create/index.vue'),
+            component: () => import('#/views/bill/management/not-paid/index.vue'),
             meta: {
               title: '未出账',
             },

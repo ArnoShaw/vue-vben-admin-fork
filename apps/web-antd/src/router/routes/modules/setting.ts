@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
     },
     name: 'Setting',
     path: '/setting',
+    redirect: '/setting/account/info',
     children: [
       {
         name: 'SettingAccount',
@@ -98,18 +99,34 @@ const routes: RouteRecordRaw[] = [
       },
       {
         name: 'SettingFinance',
-        path: 'finance',
-        redirect: '/setting/finance/',
+        path: 'billing',
+        redirect: '/setting/billing/',
         meta: {
-          title: '财务设置',
+          title: '账务设置',
         },
         children: [
           {
             name: 'SettingFinanceExchangeRate',
             path: 'exchange-rate',
-            component: () => import('#/views/setting/finance/exchange-rate/index.vue'),
+            component: () => import('#/views/setting/billing/exchange-rate/index.vue'),
             meta: {
               title: '汇率',
+            },
+          },
+          {
+            name: 'SettingFinanceCollectionError',
+            path: 'collection-error',
+            component: () => import('#/views/setting/billing/collection-error/index.vue'),
+            meta: {
+              title: '揽收误差',
+            },
+          },
+          {
+            name: 'SettingFinancePackageError',
+            path: 'package-error',
+            component: () => import('#/views/setting/billing/package-error/index.vue'),
+            meta: {
+              title: '单件误差',
             },
           },
         ],

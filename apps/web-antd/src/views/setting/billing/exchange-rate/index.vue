@@ -44,7 +44,7 @@ const [TableAll] = useVbenVxeGrid({
       isHover: true,
     },
     pagerConfig: {
-      // autoHidden: true,
+      autoHidden: true,
     },
     toolbarConfig: {
       custom: true,
@@ -59,11 +59,7 @@ const [TableAll] = useVbenVxeGrid({
   <Page auto-content-height>
     <Table class="h-1/3 min-h-[200px]">
       <template #toolbar-actions>
-        <BasicTitle
-          icon="material-symbols:download"
-          icon-class="text-primary"
-          title="汇率｜常用币种"
-        />
+        <BasicTitle icon="ri:exchange-cny-line" icon-class="text-primary" title="汇率｜常用币种" />
       </template>
       <template #toolbar-tools>
         <span class="text-red-500">汇率每日定时更新时间：01:00</span>
@@ -73,7 +69,7 @@ const [TableAll] = useVbenVxeGrid({
       <template #toolbar-actions>
         <BasicTitle
           help-message="除常用币种"
-          icon="material-symbols:download"
+          icon="ri:exchange-cny-line"
           icon-class="text-primary"
           title="汇率｜全部币种"
         />
