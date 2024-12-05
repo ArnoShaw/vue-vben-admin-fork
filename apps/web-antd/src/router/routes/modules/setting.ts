@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountInfo',
             path: 'info',
-            component: () => import('#/views/account/info/index.vue'),
+            component: () => import('#/views/setting/account/info/index.vue'),
             meta: {
               title: '账户信息',
             },
@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountModifyPassword',
             path: 'modify-password',
-            component: () => import('#/views/account/modify-password/index.vue'),
+            component: () => import('#/views/setting/account/modify-password/index.vue'),
             meta: {
               title: '修改密码',
             },
@@ -41,7 +41,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountDeveloper',
             path: 'developer',
-            component: () => import('#/views/account/developer/index.vue'),
+            component: () => import('#/views/setting/account/developer/index.vue'),
             meta: {
               title: '开发者',
             },
@@ -49,7 +49,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountTrackingNubmer',
             path: 'tracking-number',
-            component: () => import('#/views/account/tracking-number/index.vue'),
+            component: () => import('#/views/setting/account/tracking-number/index.vue'),
             meta: {
               title: '下载追踪号',
             },
@@ -57,7 +57,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountQuotationSheet',
             path: 'quotation-sheet',
-            component: () => import('#/views/account/quotation-sheet/index.vue'),
+            component: () => import('#/views/setting/account/quotation-sheet/index.vue'),
             meta: {
               title: '下载报价表',
             },
@@ -65,7 +65,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountPlatformAccount',
             path: 'platform-account',
-            component: () => import('#/views/account/platform-account/index.vue'),
+            component: () => import('#/views/setting/account/platform-account/index.vue'),
             meta: {
               title: '平台账号',
             },
@@ -73,7 +73,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountLoginLog',
             path: 'login-log',
-            component: () => import('#/views/account/login-log/index.vue'),
+            component: () => import('#/views/setting/account/login-log/index.vue'),
             meta: {
               title: '登录日志',
             },
@@ -81,7 +81,7 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountComplaints',
             path: 'complaints',
-            component: () => import('#/views/account/complaints/index.vue'),
+            component: () => import('#/views/setting/account/complaints/index.vue'),
             meta: {
               title: '投诉建议',
             },
@@ -89,9 +89,27 @@ const routes: RouteRecordRaw[] = [
           {
             name: 'SettingAccountDeclareInfo',
             path: 'declare-info',
-            component: () => import('#/views/account/declare-info/index.vue'),
+            component: () => import('#/views/setting/account/declare-info/index.vue'),
             meta: {
               title: '申报信息',
+            },
+          },
+        ],
+      },
+      {
+        name: 'SettingFinance',
+        path: 'finance',
+        redirect: '/setting/finance/',
+        meta: {
+          title: '财务设置',
+        },
+        children: [
+          {
+            name: 'SettingFinanceExchangeRate',
+            path: 'exchange-rate',
+            component: () => import('#/views/setting/finance/exchange-rate/index.vue'),
+            meta: {
+              title: '汇率',
             },
           },
         ],
