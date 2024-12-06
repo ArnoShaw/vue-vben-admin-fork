@@ -1,4 +1,3 @@
-<!-- eslint-disable unicorn/no-nested-ternary -->
 <script setup lang="ts">
 import type { Recordable } from '@vben/types';
 

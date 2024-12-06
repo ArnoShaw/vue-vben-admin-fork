@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { Page } from '@vben/common-ui';
+import { Page, useVbenDrawer } from '@vben/common-ui';
 
-import { useThrottleFn } from '@vueuse/core';
 import { Button, Dropdown, Menu, MenuItem, message } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
-import TableSideLeft from '#/components/table-side-left.vue';
+import TableAction from '#/components/table-action.vue';
 
 import { columns, formSchema } from './const-data';
+import DrawerInfo from './drawer-info.vue';
 
 defineOptions({
-  name: 'PackageMyPackageOutOfStock',
+  name: 'BillManagementUnbilled',
 });
 
 // const selectAll = ref();
@@ -20,11 +20,10 @@ defineOptions({
 const exportLoading = ref(false);
 
 const [Table, TableApi] = useVbenVxeGrid({
-  // tableTitle: '标记有货',
   formOptions: {
     schema: formSchema,
-    collapsedRows: 1,
-    collapsed: true,
+    collapsedRows: 2,
+    showCollapseButton: false,
     wrapperClass: 'grid-cols-12',
     actionWrapperClass: 'col-start-9 col-end-13',
     commonConfig: {
@@ -35,6 +34,15 @@ const [Table, TableApi] = useVbenVxeGrid({
     columns,
     border: true,
     height: 'auto',
+    // proxyConfig: {
+    //   ajax: {
+    //     query: async (_: any, { status }: any) => {
+    //       TableApi.setGridOptions({
+    //         columns: columns(status),
+    //       });
+    //     },
+    //   },
+    // },
     columnConfig: {
       minWidth: 105,
     },
@@ -45,7 +53,7 @@ const [Table, TableApi] = useVbenVxeGrid({
     },
     rowConfig: {
       isHover: true,
-      keyField: 'packageid',
+      keyField: 'packageId',
     },
     pagerConfig: {
       autoHidden: true,
@@ -58,12 +66,19 @@ const [Table, TableApi] = useVbenVxeGrid({
   },
 });
 
+// function getSelectedKeys() {
+//   return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);
+// }
+const [Drawer, DrawerApi] = useVbenDrawer({
+  connectedComponent: DrawerInfo,
+});
+
 async function handleExport(selectAll: boolean) {
   if (
     TableApi.grid.getData().length === 0 ||
     (TableApi.grid.getCheckboxRecords().length === 0 && !selectAll)
   )
-    return message.warning('请选择包裹');
+    return message.warning('请选择账单');
   exportLoading.value = true;
   try {
     // const res = await apis.packagePrediction.exportExcel(
@@ -78,57 +93,53 @@ async function handleExport(selectAll: boolean) {
   }
 }
 
-const handelSearchPrediction = useThrottleFn(() => {
-  TableApi.formApi.setFieldValue('packageStatus', 1);
-  TableApi.reload();
-}, 500);
+function handleView(row: any) {
+  DrawerApi.setData(row);
+  DrawerApi.open();
+}
 </script>
 
 <template>
   <Page auto-content-height>
     <Table>
       <template #toolbar-actions>
-        已标记为有货的包裹请在 【
-        <a class="vben-link" @click="handelSearchPrediction"> 等待预报 </a>
-        】中查看
+        <span class="font-semibold">账单周期：</span> 每自然周（2024-12-02至2024-12-09）
+        <span class="ml-4 font-semibold">最后结账日：</span> 2024-12-10
+        <span class="ml-4 font-semibold">当期费用：</span> ¥98.14
       </template>
       <template #toolbar-tools>
-        <Dropdown>
-          <Button :loading="exportLoading" class="mr-2" type="primary"> 标记为有货 </Button>
-          <template #overlay>
-            <Menu>
-              <MenuItem>
-                <a href="javascript:" @click="handleExport(false)">标记选中</a>
-              </MenuItem>
-              <MenuItem>
-                <a href="javascript:" @click="handleExport(true)">标记全部</a>
-              </MenuItem>
-            </Menu>
-          </template>
-        </Dropdown>
         <Dropdown>
           <Button
             :loading="exportLoading"
             class="mr-2"
+            type="primary"
             v-auth="'POST:/client/package/operation/prediction/exportExcel'"
           >
-            批量删除
+            导出Excel
           </Button>
           <template #overlay>
             <Menu>
               <MenuItem>
-                <a href="javascript:" @click="handleExport(false)">删除选中</a>
+                <a href="javascript:" @click="handleExport(false)">导出选中</a>
               </MenuItem>
               <MenuItem>
-                <a href="javascript:" @click="handleExport(true)">删除全部</a>
+                <a href="javascript:" @click="handleExport(true)">导出全部</a>
               </MenuItem>
             </Menu>
           </template>
         </Dropdown>
       </template>
-      <template #left>
-        <TableSideLeft class="mr-2 w-[200px]" title="SKU" />
+      <template #action="{ row }">
+        <TableAction
+          :actions="[
+            {
+              label: '查看资料',
+              onClick: handleView.bind(null, row),
+            },
+          ]"
+        />
       </template>
     </Table>
+    <Drawer />
   </Page>
 </template>

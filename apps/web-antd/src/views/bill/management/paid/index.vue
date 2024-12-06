@@ -1,20 +1,19 @@
-<!-- eslint-disable unicorn/no-nested-ternary -->
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { Page, useVbenDrawer } from '@vben/common-ui';
+import { Page, useVbenDrawer, useVbenModal } from '@vben/common-ui';
 
-import { Button, Dropdown, Menu, MenuItem, message } from 'ant-design-vue';
+import { Button, message } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import TableAction from '#/components/table-action.vue';
 
+import DrawerCostInfo from './components/drawer-cost-info.vue';
+import ModalPaymentInfo from './components/modal-payment-info.vue';
 import { columns, formSchema } from './const-data';
-import DrawerViewInfo from './drawer-info.vue';
-import DrawerRetryClaim from './drawer-retry.vue';
 
 defineOptions({
-  name: 'PackageMyPackageAbnormal',
+  name: 'BillManagementPaid',
 });
 
 // const selectAll = ref();
@@ -22,12 +21,11 @@ defineOptions({
 const exportLoading = ref(false);
 
 const [Table, TableApi] = useVbenVxeGrid({
-  tableTitle: '包裹理赔列表',
+  tableTitle: '已支付列表',
   formOptions: {
-    schema: formSchema(2, onStatusChange),
+    schema: formSchema,
     collapsedRows: 2,
     showCollapseButton: false,
-    collapsed: true,
     wrapperClass: 'grid-cols-12',
     actionWrapperClass: 'col-start-9 col-end-13',
     commonConfig: {
@@ -35,7 +33,7 @@ const [Table, TableApi] = useVbenVxeGrid({
     },
   },
   gridOptions: {
-    columns: columns(2),
+    columns,
     border: true,
     height: 'auto',
     // proxyConfig: {
@@ -73,24 +71,18 @@ const [Table, TableApi] = useVbenVxeGrid({
 // function getSelectedKeys() {
 //   return TableApi.grid.getCheckboxRecords().map((item) => item.packageId);
 // }
-const [DrawerInfo, DrawerInfoApi] = useVbenDrawer({
-  connectedComponent: DrawerViewInfo,
+
+const [DrawerCost, DrawerCostApi] = useVbenDrawer({
+  connectedComponent: DrawerCostInfo,
 });
 
-const [DrawerRetry, DrawerRetryApi] = useVbenDrawer({
-  connectedComponent: DrawerRetryClaim,
+const [ModalPayment, ModalPaymentApi] = useVbenModal({
+  connectedComponent: ModalPaymentInfo,
 });
 
-function onStatusChange(status: number) {
-  TableApi.formApi.updateSchema(formSchema(status, onStatusChange));
-}
-
-async function handleExport(selectAll: boolean) {
-  if (
-    TableApi.grid.getData().length === 0 ||
-    (TableApi.grid.getCheckboxRecords().length === 0 && !selectAll)
-  )
-    return message.warning('请选择包裹');
+async function handleExport() {
+  if (TableApi.grid.getData().length === 0 || TableApi.grid.getCheckboxRecords().length === 0)
+    return message.warning('请选择账单');
   exportLoading.value = true;
   try {
     // const res = await apis.packagePrediction.exportExcel(
@@ -105,14 +97,14 @@ async function handleExport(selectAll: boolean) {
   }
 }
 
-function handleRetry(row: any) {
-  DrawerRetryApi.setData(row);
-  DrawerRetryApi.open();
+function handleViewPayment(row: any) {
+  ModalPaymentApi.setData(row);
+  ModalPaymentApi.open();
 }
 
-function handleView(row: any) {
-  DrawerInfoApi.setData(row);
-  DrawerInfoApi.open();
+function handleViewCost(row: any) {
+  DrawerCostApi.setData(row);
+  DrawerCostApi.open();
 }
 </script>
 
@@ -120,44 +112,40 @@ function handleView(row: any) {
   <Page auto-content-height>
     <Table>
       <template #toolbar-tools>
-        <Dropdown>
-          <Button
-            :loading="exportLoading"
-            class="mr-2"
-            type="primary"
-            v-auth="'POST:/client/package/operation/prediction/exportExcel'"
-          >
-            导出Excel
-          </Button>
-          <template #overlay>
-            <Menu>
-              <MenuItem>
-                <a href="javascript:" @click="handleExport(false)">导出选中</a>
-              </MenuItem>
-              <MenuItem>
-                <a href="javascript:" @click="handleExport(true)">导出全部</a>
-              </MenuItem>
-            </Menu>
-          </template>
-        </Dropdown>
+        <Button
+          :loading="exportLoading"
+          class="mr-2"
+          v-auth="'POST:/client/package/operation/prediction/exportExcel'"
+          @click="handleExport"
+        >
+          下载账单
+        </Button>
+        <Button
+          :loading="exportLoading"
+          class="mr-2"
+          type="primary"
+          v-auth="'POST:/client/package/operation/prediction/exportExcel'"
+          @click="handleExport"
+        >
+          下载费用明细
+        </Button>
       </template>
       <template #action="{ row }">
         <TableAction
           :actions="[
             {
-              label: '查看资料',
-              onClick: handleView.bind(null, row),
+              label: '支付信息',
+              onClick: handleViewPayment.bind(null, row),
             },
             {
-              label: '重新理赔',
-              disabled: row.clientChoice === 1 && row.clientChoice !== 0,
-              onClick: handleRetry.bind(null, row),
+              label: '费用信息',
+              onClick: handleViewCost.bind(null, row),
             },
           ]"
         />
       </template>
     </Table>
-    <DrawerInfo />
-    <DrawerRetry />
+    <DrawerCost />
+    <ModalPayment />
   </Page>
 </template>

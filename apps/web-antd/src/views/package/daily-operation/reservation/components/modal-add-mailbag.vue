@@ -8,7 +8,7 @@ import { Button, Input, InputNumber, Select } from 'ant-design-vue';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import BasicTitle from '#/components/basic-title.vue';
 
-import { addColumns, totalColumns } from '../const-data';
+import { addColumns } from '../const-data';
 
 const emit = defineEmits(['success']);
 
@@ -20,32 +20,33 @@ const shippingMethodOptions = ref<any>([
 ]);
 const chargeZoneOptions = ref<any>([]);
 
-const [TableTotal] = useVbenVxeGrid({
-  gridClass: 'p-0',
-  gridOptions: {
-    columns: totalColumns,
-    border: true,
-    height: 'auto',
-    minHeight: 150,
-    columnConfig: {
-      minWidth: 80,
-    },
-    rowConfig: {
-      isHover: true,
-      keyField: 'id',
-    },
-    pagerConfig: {
-      autoHidden: true,
-    },
-  },
-});
+// const [TableTotal] = useVbenVxeGrid({
+//   gridClass: 'p-0',
+//   gridOptions: {
+//     columns: totalColumns,
+//     border: true,
+//     minHeight: 150,
+//     maxHeight: 350,
+//     columnConfig: {
+//       minWidth: 80,
+//     },
+//     rowConfig: {
+//       isHover: true,
+//       keyField: 'id',
+//     },
+//     pagerConfig: {
+//       autoHidden: true,
+//     },
+//   },
+// });
 
 const [TableAdd, TableAddApi] = useVbenVxeGrid({
   gridClass: 'p-0',
   gridOptions: {
     columns: addColumns,
     border: true,
-    height: 430,
+    minHeight: 150,
+    maxHeight: 450,
     editRules: {
       mailbagCode: [{ required: true, content: '请输入邮袋编号' }],
       shippingMethodId: [{ required: true, content: '请选择邮寄方式' }],

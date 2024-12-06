@@ -100,7 +100,7 @@ const routes: RouteRecordRaw[] = [
       {
         name: 'SettingFinance',
         path: 'billing',
-        redirect: '/setting/billing/',
+        redirect: '/setting/billing/exchange-rate',
         meta: {
           title: '账务设置',
         },

@@ -1,4 +1,3 @@
-<!-- eslint-disable unicorn/no-nested-ternary -->
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -26,7 +25,6 @@ const [Table, TableApi] = useVbenVxeGrid({
     schema: formSchema,
     collapsedRows: 2,
     showCollapseButton: false,
-    collapsed: true,
     wrapperClass: 'grid-cols-12',
     actionWrapperClass: 'col-start-9 col-end-13',
     commonConfig: {

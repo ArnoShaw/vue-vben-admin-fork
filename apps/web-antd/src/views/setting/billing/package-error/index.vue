@@ -40,7 +40,7 @@ const type_2 = ref(3);
       />
       <Alert :show-icon="false" banner class="mt-2 p-2">
         <template #description>
-          如果您确定您预报的重量足够准确，您可以设置预报重量与我司单件称重重量的之间的容许误差，我们将为您拦截误差超过您的设定的包裹，以方便您及时发现工作中可能存在的疏漏。
+          如果您确定预报的重量足够准确，您可以设置预报重量与我司单件称重重量的之间的容许误差，我们将为您拦截误差超过您的设定的包裹，以方便您及时发现工作中可能存在的疏漏。
         </template>
       </Alert>
       <Alert :show-icon="false" banner class="mt-2 p-2" type="info">

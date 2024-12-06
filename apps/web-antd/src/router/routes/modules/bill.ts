@@ -13,22 +13,56 @@ const routes: RouteRecordRaw[] = [
     },
     name: 'Bill',
     path: '/bill',
-    redirect: '/bill/management/not-paid',
+    redirect: '/bill/management/unbilled',
     children: [
       {
         name: 'BillManagement',
         path: 'management',
-        redirect: '/bill/management/not-paid',
+        redirect: '/bill/management/unbilled',
         meta: {
           title: '账单管理',
         },
         children: [
           {
-            name: 'BillManagementNotPaid',
-            path: 'not-paid',
-            component: () => import('#/views/bill/management/not-paid/index.vue'),
+            name: 'BillManagementUnbilled',
+            path: 'unbilled',
+            component: () => import('#/views/bill/management/unbilled/index.vue'),
             meta: {
               title: '未出账',
+            },
+          },
+          {
+            name: 'BillManagementPaid',
+            path: 'paid',
+            component: () => import('#/views/bill/management/paid/index.vue'),
+            meta: {
+              title: '已支付',
+            },
+          },
+        ],
+      },
+      {
+        name: 'BillFinanceManagement',
+        path: 'finance-management',
+        redirect: '/bill/finance-management/',
+        meta: {
+          title: '财务管理',
+        },
+        children: [
+          // {
+          //   name: 'BillFinanceManagementRecharge',
+          //   path: 'recharge',
+          //   component: () => import('#/views/bill/finance-management/recharge/index.vue'),
+          //   meta: {
+          //     title: '充值',
+          //   },
+          // },
+          {
+            name: 'BillFinanceManagementAssetFlow',
+            path: 'asset-flow',
+            component: () => import('#/views/bill/finance-management/asset-flow/index.vue'),
+            meta: {
+              title: '资产流水',
             },
           },
         ],

@@ -263,6 +263,10 @@ export interface FormRenderProps<T extends BaseFormComponentType = BaseFormCompo
    */
   form?: FormContext<GenericObject>;
   /**
+   * 是否隐藏间隔条纹
+   */
+  hideDivider?: boolean;
+  /**
    * 表单项布局
    */
   layout?: FormLayout;
