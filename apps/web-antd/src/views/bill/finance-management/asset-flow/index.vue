@@ -10,7 +10,7 @@ import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { baseColumns, baseSchema } from './const-data';
 
 defineOptions({
-  name: 'PackageDailyOperationRecord',
+  name: 'BillFinanceManagementAssetFlow',
 });
 
 const exportLoading = ref(false);

@@ -2,22 +2,17 @@
 // @ts-nocheck auto generated apis
 
 /**
-    * @description 短信验证码
-短信验证码
+    * @description 短信验证码(需要阿里云验证码才能获取)
+短信验证码(需要阿里云验证码才能获取)
     */
 
 import type { AxiosRequestConfig } from '@vben/request';
 import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
-class Params {
-  /** 用户手机号 */
-  mobile: string;
-}
-
-export type RequestTypes = Params;
-export type ResponseTypes = defs.apis.RVoid;
-const smsCode = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/resource/sms/code', params, config);
+export type RequestTypes = defs.apis.SmsCodeBo;
+export type ResponseTypes = defs.apis.RString;
+const smsCode = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
+  return requestClient.post<ResponseTypes>('/resource/sms/code', { data: bodyParams }, config);
 };
 export default smsCode;

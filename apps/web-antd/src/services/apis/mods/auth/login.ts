@@ -13,6 +13,6 @@ import { requestClient } from '#/api/request';
 export type RequestTypes = string;
 export type ResponseTypes = defs.apis.RLoginVo;
 const login = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.post<ResponseTypes>('/auth/login', bodyParams, config);
+  return requestClient.post<ResponseTypes>('/auth/login', { data: bodyParams }, config);
 };
 export default login;

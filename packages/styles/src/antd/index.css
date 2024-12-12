@@ -55,3 +55,14 @@
 .ant-input-disabled {
   color: inherit !important;
 }
+
+/** 树形选择水平对齐  */
+.ant-tree-treenode {
+  .ant-tree-switcher {
+    line-height: 20px;
+  }
+
+  .ant-tree-checkbox {
+    margin-top: 0;
+  }
+}

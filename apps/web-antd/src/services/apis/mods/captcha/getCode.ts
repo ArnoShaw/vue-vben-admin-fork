@@ -15,6 +15,6 @@ class Params {}
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RCaptchaVo;
 const getCode = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/auth/code', params, config);
+  return requestClient.get<ResponseTypes>('/auth/code', { params }, config);
 };
 export default getCode;

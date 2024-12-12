@@ -2,7 +2,6 @@ import { acceptHMRUpdate, defineStore } from 'pinia';
 
 interface BasicUserInfo {
   [key: string]: any;
-  companyId: number;
   /**
    * 头像
    */
@@ -29,7 +28,34 @@ interface BasicUserInfo {
   userType: string;
 }
 
+interface AllUsersInfo {
+  avatar: string;
+  email: string;
+  gender: string; // 性别：1-男 2-女
+  mobile: string;
+  nickname: string;
+  qq: string;
+  status: string; // 用户状态：1-正常 0-禁用
+  userId: number;
+  username: string;
+}
+
+interface CompanyInfo {
+  companyCode: string;
+  companyId: number;
+  companyName: string;
+  signupType: number; // 1: 个人 0/null: 公司
+}
+
 interface AccessState {
+  /**
+   * 所有运维用户
+   */
+  allUsers: AllUsersInfo[];
+  /**
+   * 公司信息
+   */
+  companyInfo: CompanyInfo | null;
   /**
    * 用户信息
    */
@@ -45,6 +71,12 @@ interface AccessState {
  */
 export const useUserStore = defineStore('core-user', {
   actions: {
+    setAllUsers(users: AllUsersInfo[]) {
+      this.allUsers = users ?? [];
+    },
+    setCompanyInfo(company: CompanyInfo) {
+      this.companyInfo = company;
+    },
     setUserInfo(userInfo: BasicUserInfo | null) {
       // 设置用户信息
       this.userInfo = userInfo;
@@ -56,7 +88,10 @@ export const useUserStore = defineStore('core-user', {
       this.userRoles = roles;
     },
   },
+  persist: { pick: ['allUsers'] },
   state: (): AccessState => ({
+    allUsers: [],
+    companyInfo: null,
     userInfo: null,
     userRoles: [],
   }),

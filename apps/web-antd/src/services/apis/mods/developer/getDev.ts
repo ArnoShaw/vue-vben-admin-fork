@@ -15,6 +15,6 @@ class Params {}
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RSyCCompanyDetailVo;
 const getDev = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/dev/detail', params, config);
+  return requestClient.get<ResponseTypes>('/dev/detail', { params }, config);
 };
 export default getDev;

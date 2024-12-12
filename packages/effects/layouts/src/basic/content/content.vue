@@ -17,8 +17,7 @@ defineOptions({ name: 'LayoutContent' });
 const tabbarStore = useTabbarStore();
 const { keepAlive } = usePreferences();
 
-const { getCachedTabs, getExcludeCachedTabs, renderRouteView } =
-  storeToRefs(tabbarStore);
+const { getCachedTabs, getExcludeCachedTabs, renderRouteView } = storeToRefs(tabbarStore);
 
 // 页面切换动画
 function getTransitionName(_route: RouteLocationNormalizedLoaded) {
@@ -49,15 +48,10 @@ function getTransitionName(_route: RouteLocationNormalizedLoaded) {
  * 转换组件，自动添加 name
  * @param component
  */
-function transformComponent(
-  component: VNode,
-  route: RouteLocationNormalizedLoadedGeneric,
-) {
+function transformComponent(component: VNode, route: RouteLocationNormalizedLoadedGeneric) {
   // 组件视图未找到，如果有设置后备视图，则返回后备视图，如果没有，则抛出错误
   if (!component) {
-    console.error(
-      'Component view not found，please check the route configuration',
-    );
+    console.error('Component view not found，please check the route configuration');
     return undefined;
   }
 
@@ -91,11 +85,7 @@ function transformComponent(
     <IFrameRouterView />
     <RouterView v-slot="{ Component, route }">
       <Transition :name="getTransitionName(route)" appear mode="out-in">
-        <KeepAlive
-          v-if="keepAlive"
-          :exclude="getExcludeCachedTabs"
-          :include="getCachedTabs"
-        >
+        <KeepAlive v-if="keepAlive" :exclude="getExcludeCachedTabs" :include="getCachedTabs">
           <component
             :is="transformComponent(Component, route)"
             v-if="renderRouteView"
@@ -103,11 +93,7 @@ function transformComponent(
             :key="route.fullPath"
           />
         </KeepAlive>
-        <component
-          :is="Component"
-          v-else-if="renderRouteView"
-          :key="route.fullPath"
-        />
+        <component :is="Component" v-else-if="renderRouteView" :key="route.fullPath" />
       </Transition>
     </RouterView>
   </div>

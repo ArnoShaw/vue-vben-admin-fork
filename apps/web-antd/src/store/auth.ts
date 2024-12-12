@@ -1,12 +1,10 @@
-import type { Recordable } from '@vben/types';
-
 import type { defs } from '#/services/apis/api';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants';
-import { resetAllStores, useAccessStore } from '@vben/stores';
+import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
@@ -16,7 +14,7 @@ import { apis } from '#/services/apis';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
-  // const userStore = useUserStore();
+  const userStore = useUserStore();
   const router = useRouter();
 
   const loginLoading = ref(false);
@@ -26,21 +24,17 @@ export const useAuthStore = defineStore('auth', () => {
    * Asynchronously handle the login process
    * @param params 登录表单数据
    */
-  async function authLogin(params: Recordable<any>, onSuccess?: () => Promise<void> | void) {
+  async function authLogin(data: defs.apis.LoginVo, onSuccess?: () => Promise<void> | void) {
     // 异步处理用户登录操作并获取 access_token
     try {
       loginLoading.value = true;
-      // const { accessToken } = await loginApi(params);
-      const { access_token } = (await apis.auth.login(params as any, {
-        headers: { Encrypted: true },
-      })) as defs.apis.LoginVo;
-
       // 如果成功获取到 access_token
+      const { access_token } = data;
       if (access_token) {
         accessStore.setAccessToken(access_token);
 
         // 获取用户信息并存储到 accessStore 中
-        const { user: userInfo, permissions } = (await fetchUserInfo()) as defs.apis.ProfileVo;
+        const { user, permissions = [] } = (await fetchUserInfo()) as defs.apis.ProfileVo;
 
         accessStore.setAccessCodes(permissions);
 
@@ -49,27 +43,21 @@ export const useAuthStore = defineStore('auth', () => {
         } else {
           onSuccess ? await onSuccess?.() : await router.push(DEFAULT_HOME_PATH);
         }
-
-        if (userInfo?.userName) {
+        if (user?.userName) {
           notification.success({
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.userName}`,
+            description: `${$t('authentication.loginSuccessDesc')}:${user?.userName}`,
             duration: 3,
             message: $t('authentication.loginSuccess'),
           });
         }
       }
-    } finally {
-      loginLoading.value = false;
-    }
+    } catch {}
   }
 
   async function logout(redirect: boolean = true) {
-    // try {
-    //   await logoutApi();
-    // } catch {
-    //   // 不做任何处理
-    // }
-    await apis.auth.logout({});
+    try {
+      await apis.auth.logout({});
+    } catch {}
     resetAllStores();
     accessStore.setLoginExpired(false);
 
@@ -85,10 +73,10 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    // const { user } = (await apis.profile.profile({})) as defs.apis.ProfileVo;
-    // userStore.setUserInfo(user);
-    // return user;
-    return {};
+    const { user, company, permissions } = (await apis.profile.profile({})) as any;
+    userStore.setUserInfo(user);
+    userStore.setCompanyInfo(company);
+    return { user, company, permissions };
   }
 
   function $reset() {

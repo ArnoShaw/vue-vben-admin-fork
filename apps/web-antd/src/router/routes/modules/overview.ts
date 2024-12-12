@@ -24,6 +24,7 @@ const routes: RouteRecordRaw[] = [
           affixTab: true,
           icon: 'lucide:layout-dashboard',
           title: $t('page.overview.index'),
+          keepAlive: true,
         },
       },
     ],

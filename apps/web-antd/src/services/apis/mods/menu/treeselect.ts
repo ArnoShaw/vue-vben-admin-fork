@@ -18,6 +18,6 @@ class Params {
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RListTreeInteger;
 const treeselect = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/system/menu/treeselect', params, config);
+  return requestClient.get<ResponseTypes>('/system/menu/treeselect', { params }, config);
 };
 export default treeselect;

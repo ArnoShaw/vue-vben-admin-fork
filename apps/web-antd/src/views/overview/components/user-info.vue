@@ -1,11 +1,20 @@
 <script lang="ts" setup>
+import type { defs } from '#/services/apis/api';
+
+import { useRoute, useRouter } from 'vue-router';
+
 import { F7MoneyYenCircle, HeroiconsCreditCard, IonWalletOutline } from '@vben/icons';
 import { preferences } from '@vben/preferences';
 import { useUserStore } from '@vben/stores';
 
 import { Avatar, Button } from 'ant-design-vue';
 
+withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
+  data: () => ({}),
+});
 const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
 </script>
 <template>
   <div class="card-box flex flex-wrap justify-between">
@@ -19,42 +28,56 @@ const userStore = useUserStore();
         <h1 class="text-md break-words font-semibold md:text-xl">
           {{ userStore.userInfo?.userName }}
         </h1>
-        <a class="vben-link">修改个人信息 ></a>
-        <span class="text-foreground/80 mt-1">
-          上次登录时间：{{ userStore.userInfo?.lastLoginTime }}
-        </span>
+        <div class="mb-4 mt-2 h-[21px]">
+          <a
+            v-if="route.name === 'Overview'"
+            class="vben-link text-[13px]"
+            @click="router.push({ name: 'SettingAccountInfo' })"
+          >
+            修改个人信息 >
+          </a>
+        </div>
+        <div class="text-foreground/80 text-[13px]">
+          上次登录时间：
+          <p>{{ userStore.userInfo?.lastLoginTime }}</p>
+        </div>
       </div>
     </div>
     <div class="flex justify-end">
       <div
-        class="border-border group flex min-w-[200px] flex-col items-center border-l border-r p-4"
+        class="border-border group flex min-w-[180px] flex-col items-center border-l border-r px-2 py-4"
       >
         <F7MoneyYenCircle
           class="text-primary size-10 transition-all duration-300 group-hover:scale-125"
         />
         <span class="text-foreground/80 mt-1">账户余额</span>
-        <span class="mt-2">¥4423432.34 元</span>
-        <span class="mt-2">H232344.34 元</span>
-        <span class="mb-3 mt-2">$626426.34 元</span>
-        <Button class="!text-xs" size="small" type="primary">充值</Button>
+        <span class="mt-2">{{ `¥ ${data?.accountInfo?.companyAsset || 0} 元` }}</span>
+        <span v-for="item in data?.foreignAccountList" :key="item.currencySymbol">
+          {{ `${item.currencySymbol} ${item.accountAsset} 元` }}
+        </span>
+        <Button class="mt-3 !text-xs" size="small" type="primary">充值</Button>
       </div>
       <div class="border-border group flex min-w-[200px] flex-col items-center border-r p-4">
         <HeroiconsCreditCard
           class="text-primary size-10 transition-all duration-300 group-hover:scale-125"
         />
         <span class="text-foreground/80 mt-1">信用额度</span>
-        <span class="mt-2">¥44432.34 元</span>
-        <span class="mt-2">H2344.34 元</span>
-        <span class="mb-3 mt-2">$6266.34 元</span>
+        <span class="mt-2">{{ `¥ ${data?.accountInfo?.companyCreditLimit || 0} 元` }}</span>
+        <span v-for="item in data?.foreignAccountList" :key="item.currencySymbol">
+          {{ `${item.currencySymbol} ${item.creditLimitAmount} 元` }}
+        </span>
+        <p class="mt-3 w-full"></p>
       </div>
       <div class="border-border group flex min-w-[200px] flex-col items-center p-4">
         <IonWalletOutline
           class="text-primary size-10 transition-all duration-300 group-hover:scale-125"
         />
         <span class="text-foreground/80 mt-1">可用额度</span>
-        <span class="mt-2">¥44232.34 元</span>
-        <span class="mt-2">H2344.34 元</span>
-        <span class="mb-3 mt-2">$6266.34 元</span>
+        <span class="mt-2">{{ `¥ ${data?.accountInfo?.companyUsableCredit || 0} 元` }}</span>
+        <span v-for="item in data?.foreignAccountList" :key="item.currencySymbol">
+          {{ `${item.currencySymbol} ${item.usableCreditAmount} 元` }}
+        </span>
+        <p class="mt-3 w-full"></p>
       </div>
     </div>
   </div>

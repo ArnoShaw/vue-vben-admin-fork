@@ -31,7 +31,7 @@ const gridOptions: VxeGridProps = {
         },
       },
     },
-    { field: 'time', title: '发表时间', width: 200 },
+    { field: 'createTime', title: '发表时间', width: 200 },
   ],
   border: true,
   data: unref(list),
@@ -48,6 +48,8 @@ const [Grid, gridApi] = useVbenVxeGrid({ gridOptions });
 
 const [Drawer, DrawerApi] = useVbenDrawer({
   title: '公告',
+  cancelText: '关闭',
+  showConfirmButton: false,
   onOpenChange(isOpen) {
     list.value = isOpen ? DrawerApi.getData() || [] : [];
     gridApi.setGridOptions({

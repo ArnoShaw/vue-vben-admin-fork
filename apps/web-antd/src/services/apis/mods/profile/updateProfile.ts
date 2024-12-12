@@ -13,6 +13,6 @@ import { requestClient } from '#/api/request';
 export type RequestTypes = defs.apis.SysUserProfileBo;
 export type ResponseTypes = defs.apis.RVoid;
 const updateProfile = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.put<ResponseTypes>('/system/user/profile', bodyParams, config);
+  return requestClient.put<ResponseTypes>('/system/user/profile', { data: bodyParams }, config);
 };
 export default updateProfile;

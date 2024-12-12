@@ -12,7 +12,7 @@ import TableSideLeft from '#/components/table-side-left.vue';
 import { columns, formSchema } from './const-data';
 
 defineOptions({
-  name: 'PackageMyPackageOutOfStock',
+  name: 'PackageMyPackageInStock',
 });
 
 // const selectAll = ref();

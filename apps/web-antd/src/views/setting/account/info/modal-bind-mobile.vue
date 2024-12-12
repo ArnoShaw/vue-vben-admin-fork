@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { useVbenModal, type VbenFormSchema, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { useThrottleFn } from '@vueuse/core';
+import { message } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
-import { apis } from '#/services/apis';
 
 const schema: VbenFormSchema[] = [
   {
@@ -23,31 +20,37 @@ const schema: VbenFormSchema[] = [
       .min(1, { message: '请输入手机号码' })
       .regex(/^1[3-9]\d{9}$/, '请输入正确的手机号码'),
   },
-  {
-    component: 'VbenInput',
-    componentProps: {
-      placeholder: '图形验证码',
-    },
-    fieldName: 'code',
-    label: '图形验证码',
-    rules: z.string().min(1, { message: '请输入计算结果' }),
-    formItemClass: 'col-span-9',
-  },
-  {
-    component: 'VbenInput',
-    fieldName: 'codeImg',
-    hideLabel: true,
-    formItemClass: 'ml-2 col-span-3',
-  },
+  // {
+  //   component: 'VbenInput',
+  //   componentProps: {
+  //     placeholder: '图形验证码',
+  //   },
+  //   fieldName: 'code',
+  //   label: '图形验证码',
+  //   rules: z.string().min(1, { message: '请输入计算结果' }),
+  //   formItemClass: 'col-span-9',
+  // },
+  // {
+  //   component: 'VbenInput',
+  //   fieldName: 'codeImg',
+  //   hideLabel: true,
+  //   formItemClass: 'ml-2 col-span-3',
+  // },
   {
     component: 'VbenPinInput',
-    componentProps: ({ mobile }: any, { validateField }: any) => {
+    componentProps: ({ mobile }, { validateField }) => {
       return {
         maxTime: 120,
+        mobile,
+        sendCodeError: async (msg: string) => {
+          message.error(msg);
+        },
+        sendCodeSuccess: async () => {
+          message.success('发送成功');
+        },
         handleSendCode: async () => {
           const { valid } = await validateField('mobile');
           if (!valid) throw new Error('请输入手机号码');
-          await apis.captcha.smsCode({ mobile });
         },
         createText: (countdown: number) => {
           const text =
@@ -63,8 +66,8 @@ const schema: VbenFormSchema[] = [
   },
 ];
 
-const codeUuid = ref();
-const codeImg = ref();
+// const codeUuid = ref();
+// const codeImg = ref();
 
 const [Form, FormApi] = useVbenForm({
   schema,
@@ -81,7 +84,7 @@ const [Modal, ModalApi] = useVbenModal({
   draggable: true,
   onOpenChange(isOpen) {
     if (isOpen) {
-      getCodeImg();
+      // getCodeImg();
     }
   },
   async onConfirm() {
@@ -91,19 +94,19 @@ const [Modal, ModalApi] = useVbenModal({
   },
 });
 
-async function getCodeImg() {
-  const { uuid, img }: any = await apis.captcha.getCode({});
-  codeUuid.value = uuid;
-  codeImg.value = img;
-}
+// async function getCodeImg() {
+//   const { uuid, img }: any = await apis.captcha.getCode({});
+//   codeUuid.value = uuid;
+//   codeImg.value = img;
+// }
 
-const updateCode = useThrottleFn(getCodeImg, 500);
+// const updateCode = useThrottleFn(getCodeImg, 500);
 </script>
 
 <template>
   <Modal>
     <Form>
-      <template #codeImg>
+      <!-- <template #codeImg>
         <div class="flex w-full justify-end">
           <img
             :src="`data:image/png;base64,${codeImg}`"
@@ -112,7 +115,7 @@ const updateCode = useThrottleFn(getCodeImg, 500);
             @click="updateCode"
           />
         </div>
-      </template>
+      </template> -->
     </Form>
   </Modal>
 </template>

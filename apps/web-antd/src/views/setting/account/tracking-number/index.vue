@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import type { defs } from '#/services/apis/api';
+
+import { ref } from 'vue';
+
 import { Page } from '@vben/common-ui';
-import { formatDateTime } from '@vben/utils';
+import { downloadExcel, formatDate, formatDateTime } from '@vben/utils';
+
+import { Modal } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import BasicTitle from '#/components/basic-title.vue';
 import TableAction from '#/components/table-action.vue';
+import { apis } from '#/services/apis';
 
 defineOptions({
   name: 'SettingAccountTrackingNubmer',
@@ -16,6 +23,18 @@ const [Table] = useVbenVxeGrid({
     height: 'auto',
     columnConfig: {
       minWidth: 100,
+    },
+    proxyConfig: {
+      ajax: {
+        query: async ({ page, sort }: any) => {
+          return await apis.tracking.trackingList({
+            pageNum: page.currentPage,
+            pageSize: page.pageSize,
+            order: sort.order,
+            orderByColumn: sort.field,
+          } as any);
+        },
+      },
     },
     rowConfig: {
       isHover: true,
@@ -30,28 +49,28 @@ const [Table] = useVbenVxeGrid({
     },
     columns: [
       {
-        field: 'tracking_number_pool_name',
+        field: 'trackingNumberPoolName',
         minWidth: 180,
         title: '邮寄方式',
       },
       {
-        field: 'trackingnocount',
+        field: 'trackingNoCount',
         title: '全部',
       },
       {
-        field: 'usednumb',
+        field: 'usedNum',
         title: '已使用',
       },
       {
-        field: 'usenumb',
+        field: 'unUseNum',
         title: '未使用',
       },
       {
-        field: 'downloadcount',
+        field: 'downloadCount',
         title: '已下载',
       },
       {
-        field: 'lastdownloadtime',
+        field: 'lastDownloadTime',
         width: 165,
         title: '最后下载日期',
         formatter: ({ cellValue }: any) => {
@@ -60,7 +79,7 @@ const [Table] = useVbenVxeGrid({
       },
       {
         title: '操作',
-        width: 120,
+        width: 160,
         field: 'action',
         showOverflow: false,
         slots: { default: 'action' },
@@ -70,7 +89,34 @@ const [Table] = useVbenVxeGrid({
   },
 });
 
-function handleReDownload(_row: any) {}
+const exportLoading = ref(false);
+
+async function handleReDownload(row: defs.apis.TrackingNoVo, type: number) {
+  // 重新下载二次确认
+  if (type === 0)
+    Modal.confirm({
+      title: '确认下载',
+      content: '您是否要下载最后一次成功的追踪号',
+      onOk: () => doDownload(row, type),
+    });
+  else doDownload(row, type);
+}
+
+async function doDownload(row: defs.apis.TrackingNoVo, type: number) {
+  const { trackingNumberPoolId = 0, trackingNumberPoolName } = row;
+  exportLoading.value = true;
+  try {
+    const res = await apis.tracking.exportTracking(
+      { id: trackingNumberPoolId, type },
+      { headers: { Native: true }, responseType: 'blob' },
+    );
+    const suffix = res.headers?.['content-disposition']?.split?.('.')?.reverse?.()?.[0] || 'xlsx';
+    if (res)
+      downloadExcel(res, `${trackingNumberPoolName}-${formatDate(Date.now())}`, `.${suffix}`);
+  } finally {
+    exportLoading.value = false;
+  }
+}
 </script>
 
 <template>
@@ -89,11 +135,14 @@ function handleReDownload(_row: any) {}
           :actions="[
             {
               label: '下载',
+              loading: exportLoading,
+              onClick: handleReDownload.bind(null, row, 1),
             },
             {
               label: '重新下载',
+              loading: exportLoading,
               // auth: 'POST:/client/package/operation/print/printPDF',
-              onClick: handleReDownload.bind(null, row),
+              onClick: handleReDownload.bind(null, row, 0),
             },
           ]"
         />

@@ -5,7 +5,7 @@ import { formatDateTime } from '@vben/utils';
 
 export const baseColumns: VxeGridProps['columns'] = [
   {
-    field: 'username',
+    field: 'userName',
     minWidth: 180,
     sortable: true,
     title: '账号',
@@ -39,7 +39,7 @@ export const baseColumns: VxeGridProps['columns'] = [
 
 export const baseSchema: VbenFormSchema[] = [
   {
-    fieldName: 'searchValue',
+    fieldName: 'keyword',
     label: '平台账号',
     labelWidth: 60,
     component: 'Input',

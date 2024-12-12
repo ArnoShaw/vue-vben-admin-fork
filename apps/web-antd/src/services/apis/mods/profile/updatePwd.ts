@@ -2,8 +2,8 @@
 // @ts-nocheck auto generated apis
 
 /**
-    * @description 重置密码(加密)
-重置密码(加密)
+    * @description 重置密码(接口加密)
+重置密码(接口加密)
     */
 
 import type { AxiosRequestConfig } from '@vben/request';
@@ -13,6 +13,10 @@ import { requestClient } from '#/api/request';
 export type RequestTypes = defs.apis.SysUserPasswordBo;
 export type ResponseTypes = defs.apis.RVoid;
 const updatePwd = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.put<ResponseTypes>('/system/user/profile/updatePwd', bodyParams, config);
+  return requestClient.put<ResponseTypes>(
+    '/system/user/profile/updatePwd',
+    { data: bodyParams },
+    config,
+  );
 };
 export default updatePwd;

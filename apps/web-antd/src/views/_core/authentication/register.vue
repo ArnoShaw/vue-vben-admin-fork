@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router';
 import { AuthenticationRegister, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { useThrottleFn } from '@vueuse/core';
+import { message } from 'ant-design-vue';
 
 import { apis } from '#/services/apis';
 
@@ -91,29 +91,20 @@ const formSchema = computed((): VbenFormSchema[] => {
         .regex(/^1[3-9]\d{9}$/, '请输入正确的手机号码'),
     },
     {
-      component: 'VbenInput',
-      componentProps: {
-        placeholder: '图形验证码',
-      },
-      fieldName: 'code',
-      label: '验证码',
-      rules: z.string().min(1, { message: '请输入计算结果' }),
-      formItemClass: 'col-span-1',
-    },
-    {
-      component: 'VbenInput',
-      fieldName: 'codeImg',
-      formItemClass: 'col-span-1 ml-2',
-    },
-    {
       component: 'VbenPinInput',
       componentProps: ({ mobile }, { validateField }) => {
         return {
           maxTime: 120,
+          mobile,
+          sendCodeError: async (msg: string) => {
+            message.error(msg);
+          },
+          sendCodeSuccess: async () => {
+            message.success('发送成功');
+          },
           handleSendCode: async () => {
             const { valid } = await validateField('mobile');
             if (!valid) throw new Error('请输入手机号码');
-            await apis.captcha.smsCode({ mobile });
           },
           createText: (countdown: number) => {
             const text =
@@ -152,49 +143,29 @@ const formSchema = computed((): VbenFormSchema[] => {
   ];
 });
 
-const codeImg = ref();
 const formState = reactive<defs.apis.RegisterBody>({
   grantType: 'password',
-  code: '',
-  uuid: '',
   username: '',
   password: '',
   mobile: '',
   smsCode: '',
 });
 
-async function getCodeImg() {
-  const { uuid, img }: any = await apis.captcha.getCode({});
-  formState.uuid = uuid;
-  codeImg.value = img;
-}
-
-getCodeImg();
-
-const updateCode = useThrottleFn(getCodeImg, 500);
-
 async function handleSubmit(value: Recordable<any>) {
   const { code, username, password, mobile, smsCode } = value;
-  await apis.auth
-    .register(
-      { ...formState, code, username, password, mobile, smsCode },
-      {
-        headers: {
-          Encrypted: true,
-        },
+  await apis.auth.register(
+    { ...formState, code, username, password, mobile, smsCode },
+    {
+      headers: {
+        Encrypted: true,
       },
-    )
-    .catch(() => updateCode());
+    },
+  );
+  message.success('注册成功， 请登录');
   router.push({ name: 'Login' });
 }
 </script>
 
 <template>
-  <AuthenticationRegister
-    :code-img="codeImg"
-    :form-schema="formSchema"
-    :loading="loading"
-    @submit="handleSubmit"
-    @update-code="updateCode"
-  />
+  <AuthenticationRegister :form-schema="formSchema" :loading="loading" @submit="handleSubmit" />
 </template>

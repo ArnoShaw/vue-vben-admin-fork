@@ -20,6 +20,6 @@ class Params {
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RVoid;
 const send = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/resource/sse/send', params, config);
+  return requestClient.get<ResponseTypes>('/resource/sse/send', { params }, config);
 };
 export default send;

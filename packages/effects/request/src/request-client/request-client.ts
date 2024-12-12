@@ -58,29 +58,29 @@ class RequestClient {
   /**
    * DELETE请求方法
    */
-  public delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return this.request<T>(url, { ...config, method: 'DELETE' });
+  public delete<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+    return this.request<T>(url, { ...data, ...config, method: 'DELETE' });
   }
 
   /**
    * GET请求方法
    */
-  public get<T = any>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> {
-    return this.request<T>(url, { params, ...config, method: 'GET' });
+  public get<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+    return this.request<T>(url, { ...data, ...config, method: 'GET' });
   }
 
   /**
    * POST请求方法
    */
   public post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    return this.request<T>(url, { ...config, data, method: 'POST' });
+    return this.request<T>(url, { ...config, ...data, method: 'POST' });
   }
 
   /**
    * PUT请求方法
    */
   public put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    return this.request<T>(url, { ...config, data, method: 'PUT' });
+    return this.request<T>(url, { ...config, ...data, method: 'PUT' });
   }
 
   /**

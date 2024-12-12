@@ -1,9 +1,9 @@
 /**
  * @description operlog
  */
-import clean from './clean';
-import remove_2 from './remove_2';
-import exporting from './exporting';
-import list_2 from './list_2';
+import cleanOperlog from './cleanOperlog';
+import removeOperlog from './removeOperlog';
+import exportOperlog from './exportOperlog';
+import operlogList from './operlogList';
 
-export { clean, remove_2, exporting, list_2 };
+export { cleanOperlog, removeOperlog, exportOperlog, operlogList };

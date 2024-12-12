@@ -18,6 +18,6 @@ class Params {
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RVoid;
 const emailCode = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/resource/email/code', params, config);
+  return requestClient.get<ResponseTypes>('/resource/email/code', { params }, config);
 };
 export default emailCode;

@@ -15,6 +15,6 @@ class Params {}
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RProfileVo;
 const profile = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/system/user/profile', params, config);
+  return requestClient.get<ResponseTypes>('/system/user/profile', { params }, config);
 };
 export default profile;

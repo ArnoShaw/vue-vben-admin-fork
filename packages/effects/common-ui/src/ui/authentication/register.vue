@@ -33,7 +33,6 @@ interface Props {
    * @zh_CN 按钮文本
    */
   submitButtonText?: string;
-  codeImg?: string;
 }
 
 defineOptions({
@@ -47,7 +46,6 @@ const props = withDefaults(defineProps<Props>(), {
   submitButtonText: '',
   subTitle: '',
   title: '',
-  codeImg: '',
 });
 
 const emit = defineEmits<{
@@ -96,18 +94,7 @@ defineExpose({
         </slot>
       </template>
     </Title>
-    <Form>
-      <template #codeImg>
-        <div class="flex w-full justify-end">
-          <img
-            :src="`data:image/png;base64,${codeImg}`"
-            alt=""
-            class="h-[39px] w-[104px] cursor-pointer rounded-sm"
-            @click="emit('updateCode')"
-          />
-        </div>
-      </template>
-    </Form>
+    <Form />
 
     <VbenButton
       :class="{

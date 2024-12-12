@@ -8,6 +8,8 @@ const notice = ref<any>({});
 const [Modal, ModalApi] = useVbenModal({
   title: '公告',
   draggable: true,
+  showConfirmButton: false,
+  cancelText: '关闭',
   onOpenChange(isOpen) {
     isOpen ? (notice.value = ModalApi.getData() || {}) : (notice.value = {});
   },

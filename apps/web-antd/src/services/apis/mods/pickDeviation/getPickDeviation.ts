@@ -15,6 +15,6 @@ class Params {}
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RSyCCompanyPickDeviationVo;
 const getPickDeviation = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/pick/detail', params, config);
+  return requestClient.get<ResponseTypes>('/pick/deviation/detail', { params }, config);
 };
 export default getPickDeviation;

@@ -28,7 +28,7 @@ export const downloadExcel = (
   // 创建一个隐藏的<a>元素用于触发下载
   const alink = document.createElement('a');
   alink.download = fileName;
-  alink.style.display = 'none';
+  // alink.style.display = 'none';
 
   // 根据数据类型设置<a>元素的href属性
   alink.href = isString(data) ? data : URL.createObjectURL(blob as Blob);
@@ -38,6 +38,6 @@ export const downloadExcel = (
   alink.click();
 
   // 下载完成后清理资源
-  URL.revokeObjectURL(alink.href);
-  alink.remove();
+  // URL.revokeObjectURL(alink.href);
+  // alink.remove();
 };

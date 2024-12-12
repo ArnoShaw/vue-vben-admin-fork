@@ -15,6 +15,6 @@ class Params {}
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.SseEmitter;
 const connect = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/resource/sse', params, config);
+  return requestClient.get<ResponseTypes>('/resource/sse', { params }, config);
 };
 export default connect;

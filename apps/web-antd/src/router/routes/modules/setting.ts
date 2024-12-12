@@ -29,6 +29,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/info/index.vue'),
             meta: {
               title: '账户信息',
+              keepAlive: true,
             },
           },
           {
@@ -37,6 +38,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/modify-password/index.vue'),
             meta: {
               title: '修改密码',
+              keepAlive: true,
             },
           },
           {
@@ -45,6 +47,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/developer/index.vue'),
             meta: {
               title: '开发者',
+              keepAlive: true,
             },
           },
           {
@@ -53,6 +56,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/tracking-number/index.vue'),
             meta: {
               title: '下载追踪号',
+              keepAlive: true,
             },
           },
           {
@@ -61,6 +65,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/quotation-sheet/index.vue'),
             meta: {
               title: '下载报价表',
+              keepAlive: true,
             },
           },
           {
@@ -69,6 +74,16 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/platform-account/index.vue'),
             meta: {
               title: '平台账号',
+              keepAlive: true,
+            },
+          },
+          {
+            name: 'SettingAccountManagement',
+            path: 'management',
+            component: () => import('#/views/setting/account/management/index.vue'),
+            meta: {
+              title: '子账号',
+              keepAlive: true,
             },
           },
           {
@@ -77,6 +92,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/login-log/index.vue'),
             meta: {
               title: '登录日志',
+              keepAlive: true,
             },
           },
           {
@@ -85,6 +101,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/complaints/index.vue'),
             meta: {
               title: '投诉建议',
+              keepAlive: true,
             },
           },
           {
@@ -93,6 +110,25 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/account/declare-info/index.vue'),
             meta: {
               title: '申报信息',
+              keepAlive: true,
+            },
+          },
+          {
+            name: 'SettingAccountTimelinessDashBoard',
+            path: 'timeliness-dashboard',
+            component: () => import('#/views/setting/account/timeliness-dashboard/index.vue'),
+            meta: {
+              title: '时效看板',
+              keepAlive: true,
+            },
+          },
+          {
+            name: 'SettingAccountContract',
+            path: 'contract',
+            component: () => import('#/views/setting/account/contract/index.vue'),
+            meta: {
+              title: '合同信息',
+              keepAlive: true,
             },
           },
         ],
@@ -111,6 +147,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/billing/exchange-rate/index.vue'),
             meta: {
               title: '汇率',
+              keepAlive: true,
             },
           },
           {
@@ -119,6 +156,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/billing/collection-error/index.vue'),
             meta: {
               title: '揽收误差',
+              keepAlive: true,
             },
           },
           {
@@ -127,6 +165,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/setting/billing/package-error/index.vue'),
             meta: {
               title: '单件误差',
+              keepAlive: true,
             },
           },
         ],

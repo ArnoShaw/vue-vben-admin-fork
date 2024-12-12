@@ -2,8 +2,11 @@
 import { Page, type VbenFormSchema } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
+import { message } from 'ant-design-vue';
+
 import { useVbenForm, z } from '#/adapter/form';
 import BasicTitle from '#/components/basic-title.vue';
+import { apis } from '#/services/apis';
 
 defineOptions({
   name: 'SettingAccountModifyPassword',
@@ -18,7 +21,7 @@ const schema: VbenFormSchema[] = [
     rules: z
       .string({ required_error: $t('authentication.passwordTip') })
       .min(1, { message: $t('authentication.passwordTip') }),
-    fieldName: 'password',
+    fieldName: 'oldPassword',
     label: '旧密码',
   },
   {
@@ -64,10 +67,20 @@ const schema: VbenFormSchema[] = [
   },
 ];
 
-const [Form] = useVbenForm({
+const [Form, FormApi] = useVbenForm({
   schema,
   commonConfig: {
     labelWidth: 80,
+  },
+  handleSubmit: async ({ oldPassword, newPassword }) => {
+    FormApi.setState({ submitButtonOptions: { loading: true } });
+    try {
+      await apis.profile.updatePwd({ oldPassword, newPassword }, { headers: { Encrypted: true } });
+      FormApi.resetForm();
+      message.success('修改成功');
+    } finally {
+      FormApi.setState({ submitButtonOptions: { loading: false } });
+    }
   },
 });
 </script>
@@ -82,5 +95,3 @@ const [Form] = useVbenForm({
     </div>
   </Page>
 </template>
-
-<style scoped></style>

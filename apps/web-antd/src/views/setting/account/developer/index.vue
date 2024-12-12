@@ -85,5 +85,3 @@ function handleCopy(text: string) {
     </div>
   </Page>
 </template>
-
-<style scoped></style>

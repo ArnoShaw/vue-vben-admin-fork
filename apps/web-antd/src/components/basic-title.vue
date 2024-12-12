@@ -2,8 +2,7 @@
 import type { PropType } from 'vue';
 
 import { IconifyIcon } from '@vben/icons';
-
-import HelpTooltip from '../../../../packages/@core/ui-kit/shadcn-ui/src/components/tooltip/help-tooltip.vue';
+import { VbenHelpTooltip } from '@vben-core/shadcn-ui';
 
 defineProps({
   icon: {
@@ -29,7 +28,7 @@ defineProps({
     <div class="flex items-center">
       <IconifyIcon v-if="icon" :class="iconClass" :icon="icon" class="text-2xl" />
       <span class="basic-title__text mx-1 font-semibold">{{ title }}</span>
-      <HelpTooltip v-if="helpMessage">{{ helpMessage }}</HelpTooltip>
+      <VbenHelpTooltip v-if="helpMessage">{{ helpMessage }}</VbenHelpTooltip>
     </div>
     <slot></slot>
   </div>

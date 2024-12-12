@@ -18,6 +18,6 @@ class Params {
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RVoid;
 const editPickDeviation = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/pick/update', params, config);
+  return requestClient.get<ResponseTypes>('/pick/deviation/update', { params }, config);
 };
 export default editPickDeviation;

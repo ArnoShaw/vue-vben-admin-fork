@@ -133,7 +133,7 @@ function handleView(row: any) {
         <TableAction
           :actions="[
             {
-              label: '查看资料',
+              label: '查看明细',
               onClick: handleView.bind(null, row),
             },
           ]"

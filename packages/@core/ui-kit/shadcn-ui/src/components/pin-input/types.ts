@@ -25,6 +25,20 @@ interface PinInputProps {
    * 最大重试时间
    */
   maxTime?: number;
+  /**
+   * 手机号
+   */
+  mobile?: string;
+  /**
+   * 自定义验证码发送错误
+   * @returns
+   */
+  sendCodeError?: (msg: string) => Promise<void>;
+  /**
+   * 自定义验证码发送成功
+   * @returns
+   */
+  sendCodeSuccess?: () => Promise<void>;
 }
 
 export type { PinInputProps };

@@ -1,13 +1,17 @@
-import { type VbenFormSchema } from '@vben/common-ui';
+import { type VbenFormSchema, z } from '@vben/common-ui';
+import { useUserStore } from '@vben/stores';
 
+import { apis } from '#/services/apis';
+
+const company = useUserStore().companyInfo;
 const genderList = [
   {
     label: '先生',
-    value: 1,
+    value: 0,
   },
   {
     label: '女士',
-    value: 2,
+    value: 1,
   },
 ];
 
@@ -25,14 +29,40 @@ export const baseSchema: VbenFormSchema[] = [
     disabled: true,
   },
   {
+    fieldName: 'signupType',
+    label: '注册类型',
+    rules: 'required',
+    defaultValue: 0,
+    component: 'RadioGroup',
+    componentProps: {
+      options: [
+        {
+          label: '公司',
+          value: 0,
+        },
+        {
+          label: '个人',
+          value: 1,
+        },
+      ],
+    },
+    dependencies: {
+      show() {
+        return (company?.signupType ?? '') === '';
+      },
+      triggerFields: ['signupType'],
+    },
+    formItemClass: 'col-span-12',
+  },
+  {
     fieldName: 'companyName',
-    label: '公司全称',
+    label: company?.signupType === 1 ? '真实姓名' : '公司全称',
     component: 'Input',
     disabled: true,
   },
   {
-    fieldName: 'businessLicensenumber',
-    label: '社会信用代码',
+    fieldName: 'businessLicenseNumber',
+    label: company?.signupType === 1 ? '身份证号码' : '社会信用代码',
     component: 'Input',
     disabled: true,
   },
@@ -42,26 +72,51 @@ export const baseSchema: VbenFormSchema[] = [
     component: 'Input',
   },
   {
-    fieldName: 'balance',
+    fieldName: 'moneyRemindLimit',
     label: '余额提醒',
     component: 'Input',
   },
   {
     fieldName: 'companyState',
     label: '办公地址',
-    component: 'Select',
-    formItemClass: 'col-span-4 mr-2',
+    component: 'ApiSelect',
+    componentProps: {
+      api: () => apis.common.getRegionSelect({ type: 2, countryCode: 'CN' }),
+    },
+    formItemClass: 'col-span-3 mr-2',
   },
   {
     fieldName: 'companyCity',
     hideLabel: true,
     component: 'Select',
+    dependencies: {
+      triggerFields: ['companyState'],
+      async componentProps({ companyState }) {
+        let res = [];
+        if (companyState)
+          res = (await apis.common.getRegionSelect({ type: 3, id: companyState })) as any;
+        return {
+          options: res,
+        };
+      },
+    },
     formItemClass: 'col-span-2 mr-2',
   },
   {
     fieldName: 'companyArea',
     hideLabel: true,
     component: 'Select',
+    dependencies: {
+      triggerFields: ['companyCity'],
+      async componentProps({ companyCity }) {
+        let res = [];
+        if (companyCity)
+          res = (await apis.common.getRegionSelect({ type: 4, id: companyCity })) as any;
+        return {
+          options: res,
+        };
+      },
+    },
     formItemClass: 'col-span-2 mr-2',
   },
   {
@@ -71,24 +126,50 @@ export const baseSchema: VbenFormSchema[] = [
     componentProps: {
       placeholder: '请填写办公详细地址',
     },
-    formItemClass: 'col-span-4',
+    rules: z.string().min(2, '只允许输入2-200个字符').max(200, '只允许输入200个字符'),
+    formItemClass: 'col-span-5',
   },
   {
     fieldName: 'pickupState',
     label: '揽收地址',
-    component: 'Select',
-    formItemClass: 'col-span-4 mr-2',
+    component: 'ApiSelect',
+    componentProps: {
+      api: () => apis.common.getRegionSelect({ type: 2, countryCode: 'CN' }),
+    },
+    formItemClass: 'col-span-3 mr-2',
   },
   {
     fieldName: 'pickupCity',
     hideLabel: true,
     component: 'Select',
+    dependencies: {
+      triggerFields: ['pickupState'],
+      async componentProps({ pickupState }) {
+        let res = [];
+        if (pickupState)
+          res = (await apis.common.getRegionSelect({ type: 3, id: pickupState })) as any;
+        return {
+          options: res,
+        };
+      },
+    },
     formItemClass: 'col-span-2 mr-2',
   },
   {
     fieldName: 'pickupArea',
     hideLabel: true,
     component: 'Select',
+    dependencies: {
+      triggerFields: ['pickupCity'],
+      async componentProps({ pickupCity }) {
+        let res = [];
+        if (pickupCity)
+          res = (await apis.common.getRegionSelect({ type: 4, id: pickupCity })) as any;
+        return {
+          options: res,
+        };
+      },
+    },
     formItemClass: 'col-span-2 mr-2',
   },
   {
@@ -98,7 +179,8 @@ export const baseSchema: VbenFormSchema[] = [
     componentProps: {
       placeholder: '请填写揽收详细地址',
     },
-    formItemClass: 'col-span-4',
+    rules: z.string().min(2, '只允许输入2-200个字符').max(200, '只允许输入200个字符'),
+    formItemClass: 'col-span-5',
   },
   {
     fieldName: 'contacts',
@@ -106,7 +188,7 @@ export const baseSchema: VbenFormSchema[] = [
     labelWidth: 0,
     formItemClass: 'col-span-12',
     componentProps: {
-      class: 'before text-base',
+      class: 'before !text-base',
       title: '相关联系人',
       helpMessage:
         '请正确填写贵公司的相关联系人，以便在包裹出现异常时我们能够及时通知您。（至少填写一个联系人）',
@@ -124,13 +206,14 @@ export const baseSchema: VbenFormSchema[] = [
     },
   },
   {
-    fieldName: 'businesscontactname',
+    fieldName: 'businessContactName',
     label: '称呼',
     component: 'Input',
+    rules: z.string().min(0).max(20, '只允许输入20个字符').optional(),
     formItemClass: 'col-span-3 mr-2',
   },
   {
-    fieldName: 'businesscontactsex',
+    fieldName: 'businessContactSex',
     hideLabel: true,
     component: 'Select',
     componentProps: {
@@ -139,24 +222,39 @@ export const baseSchema: VbenFormSchema[] = [
     formItemClass: 'col-span-1',
   },
   {
-    fieldName: 'businesscontactmobile',
+    fieldName: 'businessContactMobile',
     label: '手机',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^1\d{10}$/, '请输入正确的手机号码')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
-    fieldName: 'businesscontactqq',
+    fieldName: 'businessContactQq',
     label: 'QQ',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^[1-9]\d{4,9}$/, '请输入正确的QQ号')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-2',
   },
   {
-    fieldName: 'businesscontactemail',
+    fieldName: 'businessContactEmail',
     label: '邮箱',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .email('请输入正确的邮箱地址')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
@@ -171,13 +269,14 @@ export const baseSchema: VbenFormSchema[] = [
     },
   },
   {
-    fieldName: 'operatorcontactname',
+    fieldName: 'operatorContactName',
     label: '称呼',
     component: 'Input',
+    rules: z.string().min(0).max(20, '只允许输入20个字符').optional(),
     formItemClass: 'col-span-3 mr-2',
   },
   {
-    fieldName: 'operatorcontactsex',
+    fieldName: 'operatorContactSex',
     hideLabel: true,
     component: 'Select',
     componentProps: {
@@ -186,24 +285,39 @@ export const baseSchema: VbenFormSchema[] = [
     formItemClass: 'col-span-1',
   },
   {
-    fieldName: 'operatorcontactmobile',
+    fieldName: 'operatorContactMobile',
     label: '手机',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^1\d{10}$/, '请输入正确的手机号码')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
-    fieldName: 'operatorcontactqq',
+    fieldName: 'operatorContactQq',
     label: 'QQ',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^[1-9]\d{4,9}$/, '请输入正确的QQ号')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-2',
   },
   {
-    fieldName: 'operatorcontactemail',
+    fieldName: 'operatorContactEmail',
     label: '邮箱',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .email('请输入正确的邮箱地址')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
@@ -218,13 +332,14 @@ export const baseSchema: VbenFormSchema[] = [
     },
   },
   {
-    fieldName: 'financecontactname',
+    fieldName: 'financeContactName',
     label: '称呼',
+    rules: z.string().min(0).max(20, '只允许输入20个字符').optional(),
     component: 'Input',
     formItemClass: 'col-span-3 mr-2',
   },
   {
-    fieldName: 'financecontactsex',
+    fieldName: 'financeContactSex',
     hideLabel: true,
     component: 'Select',
     componentProps: {
@@ -233,24 +348,39 @@ export const baseSchema: VbenFormSchema[] = [
     formItemClass: 'col-span-1',
   },
   {
-    fieldName: 'financecontactmobile',
+    fieldName: 'financeContactMobile',
     label: '手机',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^1\d{10}$/, '请输入正确的手机号码')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
-    fieldName: 'financecontactqq',
+    fieldName: 'financeContactQq',
     label: 'QQ',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^[1-9]\d{4,9}$/, '请输入正确的QQ号')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-2',
   },
   {
-    fieldName: 'financecontactemail',
+    fieldName: 'financeContactEmail',
     label: '邮箱',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .email('请输入正确的邮箱地址')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
@@ -265,13 +395,14 @@ export const baseSchema: VbenFormSchema[] = [
     },
   },
   {
-    fieldName: 'collectcontactname',
+    fieldName: 'collectContactName',
     label: '称呼',
+    rules: z.string().min(0).max(20, '只允许输入20个字符').optional(),
     component: 'Input',
     formItemClass: 'col-span-3 mr-2',
   },
   {
-    fieldName: 'collectcontactsex',
+    fieldName: 'collectContactSex',
     hideLabel: true,
     component: 'Select',
     componentProps: {
@@ -280,24 +411,40 @@ export const baseSchema: VbenFormSchema[] = [
     formItemClass: 'col-span-1',
   },
   {
-    fieldName: 'collectcontactmobile',
+    fieldName: 'collectContactMobile',
     label: '手机',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^1\d{10}$/, '请输入正确的手机号码')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
   {
-    fieldName: 'collectcontactqq',
+    fieldName: 'collectContactQq',
     label: 'QQ',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .regex(/^[1-9]\d{4,9}$/, '请输入正确的QQ号')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-2',
   },
   {
-    fieldName: 'collectcontactemail',
+    fieldName: 'collectContactEmail',
     label: '邮箱',
     labelWidth: 50,
     component: 'Input',
+    rules: z
+      .string()
+      .max(50, '请输入正确的邮箱地址')
+      .email('请输入正确的邮箱地址')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-3',
   },
 ];

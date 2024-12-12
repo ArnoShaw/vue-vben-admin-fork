@@ -73,7 +73,7 @@ function createRequestClient(baseURL: string) {
     fulfilled: async (config: InternalAxiosRequestConfig) => {
       const accessStore = useAccessStore();
       if (config.headers?.Encrypted) handleEncrypt(config);
-      config.headers.Authorization = formatToken(accessStore.accessToken);
+      config.headers.CToken = formatToken(accessStore.accessToken);
       config.headers['Accept-Language'] = preferences.app.locale;
       return config;
     },
@@ -82,9 +82,11 @@ function createRequestClient(baseURL: string) {
   // response数据解构
   client.addResponseInterceptor<HttpResponse>({
     fulfilled: (response) => {
-      const { data: responseData, status } = response;
-
+      const { data: responseData, status, config } = response;
+      // 返回原生响应responseData 通常用于下载文件流
+      const { Native } = config.headers;
       const { code, data } = responseData;
+      if (Native) return responseData;
       if (status >= 200 && status < 400 && code === 200) {
         return data;
       }
@@ -109,7 +111,20 @@ function createRequestClient(baseURL: string) {
     errorMessageResponseInterceptor((msg: string, error) => {
       // 这里可以根据业务进行定制,你可以拿到 error 内的信息进行定制化处理，根据不同的 code 做不同的提示，而不是直接使用 message.error 提示 msg
       // 当前mock接口返回的错误字段是 error 或者 message
-      const responseData = error?.response?.data ?? {};
+      const { config, response } = error;
+      const responseData = response?.data ?? {};
+      // 下载文件流报错处理
+      if (config.responseType === 'blob' && responseData?.type === 'application/json') {
+        const data = new FileReader(); // 文件API用于读取文件
+        data.readAsText(responseData, 'utf8'); // 将文件以utf8编码方式读取，结果为string文本
+        data.addEventListener('load', () => {
+          // 文件读取完成触发
+          const dataResult: any = data.result; // result为读取后的结果
+          const parseObj = JSON.parse(dataResult); // 将读取后的string文本转为json数据
+          message.error(parseObj?.msg ?? '');
+        });
+        return;
+      }
       const errorMessage =
         responseData?.msg ?? responseData?.message ?? $t('ui.fallback.http.internalServerError');
       // 如果没有错误信息，则会根据状态码进行提示

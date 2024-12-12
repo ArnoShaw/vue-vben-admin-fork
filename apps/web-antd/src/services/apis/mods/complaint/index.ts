@@ -1,7 +1,7 @@
 /**
  * @description complaint
  */
-import getExchangeRateList from './getExchangeRateList';
-import getExchangeRateList_3 from './getExchangeRateList_3';
+import addComplaintList from './addComplaintList';
+import getComplaintList from './getComplaintList';
 
-export { getExchangeRateList, getExchangeRateList_3 };
+export { addComplaintList, getComplaintList };

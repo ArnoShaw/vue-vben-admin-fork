@@ -29,6 +29,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/create/index.vue'),
             meta: {
               title: '新建包裹',
+              keepAlive: true,
             },
           },
           {
@@ -37,6 +38,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/calculation/index.vue'),
             meta: {
               title: '运费试算',
+              keepAlive: true,
             },
           },
           {
@@ -45,6 +47,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/import/index.vue'),
             meta: {
               title: '批量导入',
+              keepAlive: true,
             },
           },
           {
@@ -53,6 +56,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/prediction/index.vue'),
             meta: {
               title: '包裹预报',
+              keepAlive: true,
             },
           },
           {
@@ -61,6 +65,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/print/index.vue'),
             meta: {
               title: '面单打印',
+              keepAlive: true,
             },
           },
           {
@@ -69,6 +74,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/reservation/index.vue'),
             meta: {
               title: '预约揽收',
+              keepAlive: true,
             },
           },
           {
@@ -77,6 +83,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/daily-operation/record/index.vue'),
             meta: {
               title: '揽收记录',
+              keepAlive: true,
             },
           },
         ],
@@ -95,6 +102,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/all/index.vue'),
             meta: {
               title: '全部包裹',
+              keepAlive: true,
             },
           },
           {
@@ -104,6 +112,7 @@ const routes: RouteRecordRaw[] = [
             meta: {
               title: '编辑包裹',
               hideInMenu: true,
+              keepAlive: true,
             },
           },
           {
@@ -112,6 +121,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/out-of-stock/index.vue'),
             meta: {
               title: '标记缺货',
+              keepAlive: true,
             },
           },
           {
@@ -120,6 +130,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/in-stock/index.vue'),
             meta: {
               title: '标记有货',
+              keepAlive: true,
             },
           },
           {
@@ -128,6 +139,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/claim/index.vue'),
             meta: {
               title: '包裹理赔',
+              keepAlive: true,
             },
           },
           {
@@ -136,6 +148,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/abnormal/index.vue'),
             meta: {
               title: '包裹异常',
+              keepAlive: true,
             },
           },
           {
@@ -144,6 +157,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/returns/index.vue'),
             meta: {
               title: '包裹退件',
+              keepAlive: true,
             },
           },
           {
@@ -152,6 +166,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/package/my-package/delivery-abnormal/index.vue'),
             meta: {
               title: '派送异常',
+              keepAlive: true,
             },
           },
         ],

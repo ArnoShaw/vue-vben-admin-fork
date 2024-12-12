@@ -1,9 +1,12 @@
 /**
  * @description user
  */
-import edit from './edit';
-import add from './add';
-import remove from './remove';
-import list from './list';
+import editSubUser from './editSubUser';
+import addSubUser from './addSubUser';
+import bindMenu from './bindMenu';
+import removeSubUser from './removeSubUser';
+import userList from './userList';
+import getMenu from './getMenu';
+import resetSubUser from './resetSubUser';
 
-export { edit, add, remove, list };
+export { editSubUser, addSubUser, bindMenu, removeSubUser, userList, getMenu, resetSubUser };

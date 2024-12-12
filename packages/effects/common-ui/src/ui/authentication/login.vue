@@ -11,14 +11,11 @@ import { $t } from '@vben/locales';
 import { useVbenForm } from '@vben-core/form-ui';
 import { VbenButton, VbenCheckbox } from '@vben-core/shadcn-ui';
 
-import { objectOmit } from '@vueuse/core';
-
 import Title from './auth-title.vue';
 import ThirdPartyLogin from './third-party-login.vue';
 
 interface Props extends AuthenticationProps {
   formSchema: VbenFormSchema[];
-  codeImg?: string;
 }
 
 defineOptions({
@@ -41,7 +38,6 @@ const props = withDefaults(defineProps<Props>(), {
   submitButtonText: '',
   subTitle: '',
   title: '',
-  codeImg: '',
 });
 
 const emit = defineEmits<{
@@ -71,10 +67,9 @@ const rememberMe = ref(!!localUsername);
 async function handleSubmit() {
   const { valid } = await formApi.validate();
   const values = await formApi.getValues();
-  const _values = objectOmit(values, ['codeImg']);
   if (valid) {
     localStorage.setItem(REMEMBER_ME_KEY, rememberMe.value ? values?.username : '');
-    emit('submit', { ..._values, grantType: 'password' });
+    emit('submit', values);
   }
 }
 
@@ -110,18 +105,7 @@ defineExpose({
       </Title>
     </slot>
 
-    <Form>
-      <template #codeImg>
-        <div class="flex w-full justify-end">
-          <img
-            :src="`data:image/png;base64,${codeImg}`"
-            alt=""
-            class="h-[39px] w-[104px] cursor-pointer rounded-sm"
-            @click="emit('updateCode')"
-          />
-        </div>
-      </template>
-    </Form>
+    <Form />
 
     <div v-if="showRememberMe || showForgetPassword" class="mb-6 flex justify-between">
       <div class="flex-center">

@@ -1,8 +1,4 @@
-import type {
-  AccessModeType,
-  GenerateMenuAndRoutesOptions,
-  RouteRecordRaw,
-} from '@vben/types';
+import type { AccessModeType, GenerateMenuAndRoutesOptions, RouteRecordRaw } from '@vben/types';
 
 import {
   cloneDeep,
@@ -12,10 +8,7 @@ import {
   mapTree,
 } from '@vben/utils';
 
-async function generateAccessible(
-  mode: AccessModeType,
-  options: GenerateMenuAndRoutesOptions,
-) {
+async function generateAccessible(mode: AccessModeType, options: GenerateMenuAndRoutesOptions) {
   const { router } = options;
 
   options.routes = cloneDeep(options.routes);
@@ -38,10 +31,7 @@ async function generateAccessible(
  * @param mode
  * @param options
  */
-async function generateRoutes(
-  mode: AccessModeType,
-  options: GenerateMenuAndRoutesOptions,
-) {
+async function generateRoutes(mode: AccessModeType, options: GenerateMenuAndRoutesOptions) {
   const { forbiddenComponent, roles, routes } = options;
 
   let resultRoutes: RouteRecordRaw[] = routes;
@@ -51,11 +41,7 @@ async function generateRoutes(
       break;
     }
     case 'frontend': {
-      resultRoutes = await generateRoutesByFrontend(
-        routes,
-        roles || [],
-        forbiddenComponent,
-      );
+      resultRoutes = await generateRoutesByFrontend(routes, roles || [], forbiddenComponent);
       break;
     }
   }

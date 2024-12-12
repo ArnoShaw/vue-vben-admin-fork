@@ -104,7 +104,7 @@ export default class MyGenerator extends CodeGenerator {
     const ${inter.name} = async (${requestParams}, ${requestConfig}) => {
       return requestClient.${inter.method}<ResponseTypes>(
         '${inter.path.replaceAll(reg, '')}'${reg.test(inter.path) ? '+ params' : ''},
-        ${bodyParamsCode ? 'bodyParams' : 'params'},
+        ${bodyParamsCode ? '{ data: bodyParams }' : '{ params }'},
         config,
       );
     };

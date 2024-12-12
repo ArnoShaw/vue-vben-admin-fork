@@ -68,10 +68,7 @@ async function handleSubmit() {
   const { valid } = await formApi.validate();
   const values = await formApi.getValues();
   if (valid) {
-    emit('submit', {
-      code: values?.code,
-      phoneNumber: values?.phoneNumber,
-    });
+    emit('submit', values);
   }
 }
 
@@ -87,9 +84,7 @@ defineExpose({
 <template>
   <div>
     <Title>
-      <slot name="title">
-        {{ title || $t('authentication.welcomeBack') }} 📲
-      </slot>
+      <slot name="title"> {{ title || $t('authentication.welcomeBack') }} 📲 </slot>
       <template #desc>
         <span class="text-muted-foreground">
           <slot name="subTitle">

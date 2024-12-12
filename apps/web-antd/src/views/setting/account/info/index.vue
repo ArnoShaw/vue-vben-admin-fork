@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { defs } from '#/services/apis/api';
+
+import { ref, unref } from 'vue';
+
 import { Page, useVbenModal } from '@vben/common-ui';
 import { useUserStore } from '@vben/stores';
 
@@ -6,6 +10,7 @@ import { Button, InputNumber } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import BasicTitle from '#/components/basic-title.vue';
+import { apis } from '#/services/apis';
 import ServiceStaff from '#/views/overview/components/service-staff.vue';
 import UserInfo from '#/views/overview/components/user-info.vue';
 
@@ -16,7 +21,10 @@ defineOptions({
   name: 'SettingAccountInfo',
 });
 
-const { userName, userCode } = useUserStore().userInfo || {};
+const userStore = useUserStore();
+
+const info = ref<defs.apis.OverviewVo>({});
+const detail = ref<defs.apis.SyCCompanyVo>({});
 
 const [Modal, ModalApi] = useVbenModal({
   connectedComponent: ModalBindMobile,
@@ -35,28 +43,43 @@ const [Form, FormApi] = useVbenForm({
   },
 });
 
-FormApi.setValues({ userName, userCode });
+async function getInfo() {
+  const res = (await apis.home.overview({})) as any;
+  info.value = res || {};
+}
+async function getDetail() {
+  const res = (await apis.home.completeCompanyDetail({})) as any;
+  const { userName = '', userCode = '' } = userStore.userInfo || {};
+  const { mobile } = unref(info).accountInfo || {};
+  detail.value = res || {};
+  FormApi.setValues({ ...unref(detail), ...unref(detail).detail, userName, userCode, mobile });
+}
+
+getInfo();
+
+getDetail();
 </script>
 
 <template>
   <Page auto-content-height content-class="!p-0">
     <div class="absolute h-full w-full overflow-auto">
-      <div class="p-4">
-        <UserInfo />
-        <ServiceStaff />
+      <div class="min-w-[830px] p-4">
+        <UserInfo :data="info" />
+        <ServiceStaff :data="info" />
         <div class="card-box mt-4 rounded-b-none p-4">
           <BasicTitle icon="tdesign:user" icon-class="text-primary" title="顺友用户信息" />
           <Form class="mt-4">
             <template #mobile>
-              <a class="vben-link" @click="ModalApi.open()">绑定</a>
+              <a class="vben-link" @click="ModalApi.open()">未绑定</a>
             </template>
-            <template #balance>
+            <template #moneyRemindLimit="slotProps">
               可用余额<span class="mx-2">&lt;</span>
               <InputNumber
+                v-bind="slotProps"
                 :max="99999999.99"
                 :min="0"
                 :precision="2"
-                class="mr-1 w-[120px]"
+                class="mr-1 !w-[120px]"
               />时，发送邮件给财务联系人
             </template>
           </Form>

@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import type { defs } from '#/services/apis/api';
+
 import { PhWarningBold } from '@vben/icons';
+
+withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
+  data: () => ({}),
+});
 </script>
 
 <template>
@@ -13,19 +19,19 @@ import { PhWarningBold } from '@vben/icons';
     <div class="flex">
       <div class="flex-1 rounded-bl-xl transition-all hover:shadow-xl">
         <div class="bg-warning/20 p-2">海外退件</div>
-        <div class="p-2 text-lg">1</div>
+        <div class="p-2 text-lg">{{ data?.overseasReturn || 0 }}</div>
       </div>
       <div class="flex-1 transition-all hover:shadow-xl">
         <div class="bg-warning/20 p-2">安检退件</div>
-        <div class="p-2 text-lg">2</div>
+        <div class="p-2 text-lg">{{ data?.securityCheck || 0 }}</div>
       </div>
       <div class="flex-1 transition-all hover:shadow-xl">
         <div class="bg-warning/20 p-2">异常包裹</div>
-        <div class="p-2 text-lg">3</div>
+        <div class="p-2 text-lg">{{ data?.sortingReturn || 0 }}</div>
       </div>
       <div class="flex-1 rounded-br-xl transition-all hover:shadow-xl">
         <div class="bg-warning/20 p-2">派送异常</div>
-        <div class="p-2 text-lg">4</div>
+        <div class="p-2 text-lg">{{ 0 }}</div>
       </div>
     </div>
   </div>

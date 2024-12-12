@@ -13,6 +13,6 @@ import { requestClient } from '#/api/request';
 export type RequestTypes = defs.apis.SyCCompanyDetailBo;
 export type ResponseTypes = defs.apis.RVoid;
 const editDev = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.put<ResponseTypes>('/dev/update', bodyParams, config);
+  return requestClient.put<ResponseTypes>('/dev/update', { data: bodyParams }, config);
 };
 export default editDev;

@@ -1,26 +1,35 @@
 <script setup lang="ts">
+import type { defs } from '#/services/apis/api';
+
 import { Page, useVbenModal } from '@vben/common-ui';
 
-import { Button } from 'ant-design-vue';
+import { Button, message, Modal } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import TableAction from '#/components/table-action.vue';
+import { apis } from '#/services/apis';
 
 import { baseColumns, baseSchema } from './const-data';
 import ModalAddAccount from './modal-add-account.vue';
-import ModalUpload from './modal-upload.vue';
+import ModalUploadComp from './modal-upload.vue';
 
 defineOptions({
   name: 'SettingAccountPlatformAccount',
 });
 
-const [Table] = useVbenVxeGrid({
+const [Table, TableApi] = useVbenVxeGrid({
   tableTitle: '平台账号列表',
   formOptions: {
     schema: baseSchema,
     showCollapseButton: false,
     wrapperClass: 'grid-cols-12',
     actionWrapperClass: 'col-span-8',
+    submitOnEnter: true,
+  },
+  gridEvents: {
+    sortChange: () => {
+      TableApi.query();
+    },
   },
   gridOptions: {
     columns: baseColumns,
@@ -28,6 +37,22 @@ const [Table] = useVbenVxeGrid({
     height: 'auto',
     columnConfig: {
       minWidth: 100,
+    },
+    proxyConfig: {
+      ajax: {
+        query: async ({ page, sort }: any, formValues: any) => {
+          return await apis.thirdPlatformAccount.thirdPlatformList({
+            pageNum: page.currentPage,
+            pageSize: page.pageSize,
+            order: sort.order,
+            orderByColumn: sort.field,
+            ...formValues,
+          } as any);
+        },
+      },
+    },
+    sortConfig: {
+      remote: true,
     },
     rowConfig: {
       isHover: true,
@@ -43,15 +68,26 @@ const [Table] = useVbenVxeGrid({
   },
 });
 
-const [Modal, ModalUploadApi] = useVbenModal({
-  connectedComponent: ModalUpload,
+const [ModalUpload, ModalUploadApi] = useVbenModal({
+  connectedComponent: ModalUploadComp,
 });
 
 const [ModalAdd, ModalAddApi] = useVbenModal({
   connectedComponent: ModalAddAccount,
 });
 
-function handleDelete(_row: any) {}
+function handleDelete(row: defs.apis.SyCCompanyThirdplatformAccountVo) {
+  const { platformAccountId = 0, userName } = row;
+  Modal.confirm({
+    iconType: 'warning',
+    title: '删除',
+    content: `您确定要删除账号“${userName}”吗？`,
+    onOk: async () => {
+      await apis.thirdPlatformAccount.editThirdPlatform({ platformAccountId } as any);
+      message.success('删除成功');
+    },
+  });
+}
 </script>
 
 <template>
@@ -73,7 +109,7 @@ function handleDelete(_row: any) {}
         />
       </template>
     </Table>
-    <Modal />
+    <ModalUpload />
     <ModalAdd />
   </Page>
 </template>

@@ -1,3 +1,159 @@
+class AssetBo {
+  /** 交易开始时间 */
+  beginTime = '';
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 交易结束时间 */
+  endTime = '';
+
+  /** 交易类型(0:充值；1：消费) */
+  tradeType = undefined;
+}
+
+class AssetVo {
+  /** 交易流水号 */
+  companyAssetChangeCode = '';
+
+  /** 资产流水id */
+  companyAssetChangeId = undefined;
+
+  /** 交易时间 */
+  createTime = '';
+
+  /** 币种名称 */
+  currencyName = '';
+
+  /** 币种符号 */
+  currencySymbol = '';
+
+  /** 单据编号 */
+  receiptsCode = '';
+
+  /** 单据名称 */
+  receiptsName = '';
+
+  /** 交易后账户余额 */
+  tradeBalanceAfter = undefined;
+
+  /** 交易前账户余额 */
+  tradeBalanceBefore = undefined;
+
+  /** 交易金额 */
+  tradeConfirmAmount = undefined;
+
+  /** 交易类型 */
+  tradeType = '';
+}
+
+class BatchImportResultVO {
+  /** additionalMsg */
+  additionalMsg = '';
+
+  /** errorFileUrl */
+  errorFileUrl = '';
+
+  /** errorMsg */
+  errorMsg = '';
+}
+
+class CalCuLatePriceBO {
+  /** 国家 */
+  country = '';
+
+  /** 高 */
+  height = '';
+
+  /** 长 */
+  length = '';
+
+  /** 收件邮编 */
+  port = '';
+
+  /** 入仓重量 */
+  weight = '';
+
+  /** 宽 */
+  width = '';
+}
+
+class CalCuLatePriceDataVO {
+  /** 加收费用 */
+  additional = '';
+
+  /** 合计 */
+  amt = undefined;
+
+  /** chargeZoneId */
+  chargeZoneId = undefined;
+
+  /** 国家 */
+  country = '';
+
+  /** 币种 */
+  currencyCode = '';
+
+  /** degreeid */
+  degreeid = undefined;
+
+  /** 计算公式 */
+  formula = '';
+
+  /** highWeight */
+  highWeight = '';
+
+  /** iffuel */
+  iffuel = undefined;
+
+  /** lowWeight */
+  lowWeight = '';
+
+  /** 备注 */
+  note = '';
+
+  /** packType */
+  packType = '';
+
+  /** premium */
+  premium = undefined;
+
+  /** priceid */
+  priceid = '';
+
+  /** 报价名称 */
+  pricename = '';
+
+  /** pricestyle */
+  pricestyle = undefined;
+
+  /** productTypeId */
+  productTypeId = undefined;
+
+  /** 折扣 */
+  rebate = '';
+
+  /** 邮寄方式 */
+  shippingMethodCnName = '';
+
+  /** shippingMethodId */
+  shippingMethodId = undefined;
+
+  /** 结算重量 */
+  weight = undefined;
+}
+
+class CalCuLatePriceVO {
+  /** 国家中文名称 */
+  countryCnName = '';
+
+  /** 国家代码 */
+  countryCode = '';
+
+  /** 查询结果 */
+  rows = [];
+}
+
 class CaptchaVo {
   /** 是否开启验证码 */
   captchaEnabled = false;
@@ -9,6 +165,46 @@ class CaptchaVo {
   uuid = '';
 }
 
+class ChannelPriceVO {
+  /** 邮路id */
+  channelId = undefined;
+
+  /** 邮路名称(中文) */
+  channelName = '';
+
+  /** 计费分区ID */
+  chargeZoneId = undefined;
+
+  /** 币别编码 */
+  currencyCode = '';
+
+  /** 运费 */
+  estimateFreight = undefined;
+
+  /** 是否有追踪号 */
+  hasTrackingNumberFlag = '';
+
+  /** 时效 */
+  overTime = '';
+
+  /** 材积重 */
+  predictionVolumnWeight = undefined;
+
+  /** 新邮寄方式ID */
+  shippingMethodId = undefined;
+
+  /** 邮路ZoneID */
+  shippingZoneId = undefined;
+
+  /** 是否支持投保 */
+  supportInsure = '';
+}
+
+class CommonIdBOInteger {
+  /** id */
+  id = undefined;
+}
+
 class CommonIdListBOInteger {
   /** ids */
   ids = [];
@@ -17,6 +213,223 @@ class CommonIdListBOInteger {
 class CommonIdListBOLong {
   /** ids */
   ids = [];
+}
+
+class CompanyContractVO {
+  /** 合同id */
+  contractId = undefined;
+
+  /** 合同状态（0：未发起，1：待签署，2：签署中，3：已签署） */
+  contractStatus = undefined;
+
+  /** 是否是历史存档用户 */
+  limitFlg = false;
+
+  /** 签署期限 */
+  signDeadline = '';
+
+  /** 签署链接 */
+  signUrl = '';
+
+  /** 注册类型 0/null：公司 1：个人 */
+  signupType = undefined;
+
+  /** 合同类型（0：纸质合同，1：电子合同） */
+  templateType = undefined;
+}
+
+class CompanyVo {
+  /** 公司编码 */
+  companyCode = '';
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 公司名称 */
+  companyName = '';
+
+  /** 注册类型 0/null：公司 1：个人 */
+  signupType = undefined;
+}
+
+class CompleteCompanyBO {
+  /** 公司业务联系人邮箱 */
+  businessContactEmail = '';
+
+  /** 公司业务联系人手机 */
+  businessContactMobile = '';
+
+  /** 公司业务联系人名称 */
+  businessContactName = '';
+
+  /** 公司业务联系人QQ */
+  businessContactQq = '';
+
+  /** 公司业务联系人性别（0：男；1：女） */
+  businessContactSex = undefined;
+
+  /** 社会信用代码/身份证号码 */
+  businessLicenseNumber = '';
+
+  /** 公司上传的证件路径 */
+  certificatePath = '';
+
+  /** 办公详细地址 */
+  companyAddress = '';
+
+  /** 办公城市id */
+  companyCity = undefined;
+
+  /** 公司编码 */
+  companyCode = '';
+
+  /** companyDetailId */
+  companyDetailId = undefined;
+
+  /** 公司名称 */
+  companyName = '';
+
+  /** 办公省份id */
+  companyState = undefined;
+
+  /** 公司财务联系人邮箱 */
+  financeContactEmail = '';
+
+  /** 公司财务联系人手机 */
+  financeContactMobile = '';
+
+  /** 公司财务联系人名称 */
+  financeContactName = '';
+
+  /** 公司财务联系人QQ */
+  financeContactQq = '';
+
+  /** 公司财务联系人性别（0：男；1：女） */
+  financeContactSex = undefined;
+
+  /** 身份证国徽面 */
+  idCardEmblemPath = '';
+
+  /** 身份证人像面 */
+  idCardHeadPath = '';
+
+  /** 公司操作联系人邮箱 */
+  operatorContactEmail = '';
+
+  /** 公司操作联系人手机 */
+  operatorContactMobile = '';
+
+  /** 公司操作联系人名称 */
+  operatorContactName = '';
+
+  /** 公司操作联系人QQ */
+  operatorContactQq = '';
+
+  /** 公司操作联系人性别（0：男；1：女） */
+  operatorContactSex = undefined;
+
+  /** 揽收详细地址 */
+  pickupAddress = '';
+
+  /** 揽收城市id */
+  pickupCity = undefined;
+
+  /** 揽收省份id */
+  pickupState = undefined;
+
+  /** 公司审核状态(0：待完善资料 1:待审核 2:审核失败 3:审核成功) */
+  ratifyStatus = undefined;
+
+  /** 商户类型 */
+  signupType = undefined;
+}
+
+class ContractRemindVo {
+  /** 是否为电子合同 */
+  electronicContracts = false;
+
+  /** 合同到期时间 */
+  signDeadlineTime = '';
+}
+
+class DataInfoAssetVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoRechargeVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSyCCompanyThirdplatformAccountVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSyCPackageProduct {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSyCPackageProductVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSyCUserComplaintVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSyCUserOperLogVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSyExchangeRateVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoSysLogininforVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoTrackingNoVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
 }
 
 class DownloadBO {
@@ -76,14 +489,14 @@ class MetaVo {
 }
 
 class OverviewVo {
-  /** abnormal */
-  abnormal = undefined;
-
   /** accountInfo */
   accountInfo = new SyAccountInfoVo();
 
-  /** disposeStatus */
-  disposeStatus = undefined;
+  /** 合同签署状态 */
+  contractRemind = false;
+
+  /** 是否为电子合同 */
+  electronicContracts = false;
 
   /** 账户外币 */
   foreignAccountList = [];
@@ -97,11 +510,333 @@ class OverviewVo {
   /** 安检退件数 */
   securityCheck = undefined;
 
-  /** 检查是否弹窗提醒客户未提供营业执照或身份证正反面证件 */
+  /** 检查是否弹窗提醒客户未提供营业执照或身份证正反面证件，如果是，先弹出完善信息页面 */
   showProvideTip = false;
+
+  /** 合同到期时间 */
+  signDeadlineTime = '';
+
+  /** 分拣未处理退件总数 */
+  sortingReturn = undefined;
 
   /** 后端版本号 */
   version = '';
+
+  /** 等待发货数量 */
+  waitDeliveryCount = undefined;
+
+  /** 等待预报数量 */
+  waitPredictionCount = undefined;
+
+  /** 等待揽收数量 */
+  waitReceivedCount = undefined;
+
+  /** 等待入仓数量 */
+  waitStorageCount = undefined;
+
+  /** 昨日发货数量 */
+  yesterdayDeliveredCount = undefined;
+
+  /** 昨日揽收数量 */
+  yesterdayReceivedCount = undefined;
+}
+
+class PackageInfoBO {
+  /** 备用字段1 */
+  backup1 = '';
+
+  /** 邮路编码 */
+  channelCode = '';
+
+  /** 邮路ID */
+  channelId = '';
+
+  /** 邮路分区ID */
+  chargeZoneId = '';
+
+  /** 公司ID */
+  companyId = '';
+
+  /** 币种 */
+  currencyCode = '';
+
+  /** 客户订单号 */
+  customerOrderNo = '';
+
+  /** 客户参考号 */
+  customerReferenceNo = '';
+
+  /** 商品申报总价值币种 */
+  declaredCurrencyCode = '';
+
+  /** 商品申报总价值 */
+  declaredValueTotal = undefined;
+
+  /** dutyType */
+  dutyType = '';
+
+  /** 导入Excel专用Index */
+  excelIndex = undefined;
+
+  /** forcast */
+  forcast = '';
+
+  /** 是否支持投保 */
+  insuranceFlag = '';
+
+  /** 投保金额 */
+  insureAmount = undefined;
+
+  /** IOSS识别号，欧盟 */
+  iossVatId = '';
+
+  /** 是否退税 */
+  isDrawBack = undefined;
+
+  /** 用来记录包裹编辑的操作者 */
+  operationUserId = '';
+
+  /** 分支机构 */
+  organizationId = undefined;
+
+  /** 内单号 */
+  otherNumber = '';
+
+  /** 海外退件 1 有 0 没有 默认0 */
+  overseasRefund = false;
+
+  /** 产品属性列表 */
+  packageAttributes = '';
+
+  /** COD金额 */
+  packageCodAmount = undefined;
+
+  /** COD币种 */
+  packageCodCurrencyCode = '';
+
+  /** 顺友物流单号 */
+  packageCode = '';
+
+  /** 包裹高 */
+  packageHeight = undefined;
+
+  /** 包裹ID */
+  packageId = undefined;
+
+  /** 包裹实际保费 */
+  packageInsure = undefined;
+
+  /** 包裹长 */
+  packageLength = undefined;
+
+  /** 包裹销售金额 */
+  packageSalesAmount = undefined;
+
+  /** 包裹宽 */
+  packageWidth = undefined;
+
+  /** ports */
+  ports = '';
+
+  /** 预报失败原因 */
+  predictionFailReason = '';
+
+  /** 包裹估算运费 */
+  predictionFreight = undefined;
+
+  /** 体积重 */
+  predictionVolumnWeight = undefined;
+
+  /** 包裹重量 */
+  predictionWeight = undefined;
+
+  /** 产品列表 */
+  productList = [];
+
+  /** 收件人地址1 */
+  recipientAddress1 = '';
+
+  /** 收件人地址2 */
+  recipientAddress2 = '';
+
+  /** 收件人地址3 */
+  recipientAddress3 = '';
+
+  /** 收件人城市 */
+  recipientCity = '';
+
+  /** 收件人国家代码 */
+  recipientCountryCode = '';
+
+  /** 收件人国家名称 用于Wish下单面单打印获取目的国名称 */
+  recipientCountryEnName = '';
+
+  /** 收件人邮箱 */
+  recipientEmail = '';
+
+  /** 收件人全地址 */
+  recipientFullAddress = '';
+
+  /** 身份证号码 */
+  recipientIdentityNumber = '';
+
+  /** 收件人手机 */
+  recipientMobile = '';
+
+  /** 收件人名称 */
+  recipientName = '';
+
+  /** 收件人电话 */
+  recipientPhone = '';
+
+  /** 收件人邮编 */
+  recipientPostCode = '';
+
+  /** 收件人省州 */
+  recipientState = '';
+
+  /** 收件人税号 */
+  recipientTaxNumber = '';
+
+  /** 请求IP地址 */
+  requestIpAddr = '';
+
+  /** requetIpAddr */
+  requetIpAddr = '';
+
+  /** 映射名称 */
+  ruleName = '';
+
+  /** 寄件人地址 */
+  senderAddress = '';
+
+  /** 寄件人城市 */
+  senderCity = '';
+
+  /** 寄件人国家 */
+  senderCountryCode = '';
+
+  /** 寄件人街道 */
+  senderDistrict = '';
+
+  /** 寄件人邮箱 */
+  senderEmail = '';
+
+  /** EORI号(欧盟经济主体注册识别号) */
+  senderEori = '';
+
+  /** 寄件人全地址 */
+  senderFullAddress = '';
+
+  /** 寄件人姓名 */
+  senderName = '';
+
+  /** 寄件人电话 */
+  senderPhone = '';
+
+  /** 寄件人邮编 */
+  senderPostCode = '';
+
+  /** 寄件人省州 */
+  senderState = '';
+
+  /** 寄件人税号 */
+  senderTaxNumber = '';
+
+  /** 发货时间 */
+  shippedTime = '';
+
+  /** 新的邮寄方式代码 */
+  shippingMethodCode = '';
+
+  /** 新的邮寄方式ID */
+  shippingMethodId = undefined;
+
+  /** 邮路分区ID */
+  shippingZoneId = '';
+
+  /** 分拣时间 */
+  sortingTime = '';
+
+  /** 处理来源 0:客户系统 1：API 2：EXCEL 3：菜鸟物流 4：马帮ERP */
+  source = '';
+
+  /** 包裹状态 */
+  status = '';
+
+  /** 是否有库存 */
+  stockFlag = '';
+
+  /** 退税金额 */
+  taxRefundAmount = undefined;
+
+  /** 是否退税 */
+  taxRefundFlag = undefined;
+
+  /** 追踪号 */
+  trackingNumber = '';
+
+  /** 用户ID */
+  userId = '';
+}
+
+class PackageProduct {
+  /** 方便API调用(海关编码) */
+  apiCustomCode = '';
+
+  /** 方便API调用(英文品名) */
+  apiDeclareEnName = '';
+
+  /** 方便API调用(申报价值) */
+  apiDeclarePrice = undefined;
+
+  /** 申报币种 */
+  currencyCode = '';
+
+  /** 申报产品海关编码 */
+  customCode = '';
+
+  /** 申报产品中文名称 */
+  declareCnName = '';
+
+  /** 申报产品英文名称 */
+  declareEnName = '';
+
+  /** 申报产品单价 */
+  declarePrice = undefined;
+
+  /** 申报产品海关编码 */
+  hsCode = '';
+
+  /** 用于换单时更新申报价值 */
+  packageProductId = undefined;
+
+  /** 产品图片链接 */
+  productImageUrl = '';
+
+  /** 申报产品材质 */
+  productMaterial = '';
+
+  /** 申报产品用途 */
+  productPurpose = '';
+
+  /** 产品SKU */
+  productSku = '';
+
+  /** 申报产品数量 */
+  quantity = undefined;
+
+  /** reviseCustomCode */
+  reviseCustomCode = '';
+
+  /** 修订报关单价（USD） */
+  reviseDeclarePrice = undefined;
+
+  /** 修订报关产品英文名称 */
+  reviseEnName = '';
+
+  /** totalPrice */
+  totalPrice = undefined;
 }
 
 class PageQuery {
@@ -118,12 +853,34 @@ class PageQuery {
   pageSize = undefined;
 }
 
+class ProductListBO {
+  /** 公司id */
+  companyId = undefined;
+
+  /** 产品名称 */
+  productName = '';
+}
+
 class ProfileVo {
-  /** permissions */
+  /** company */
+  company = new CompanyVo();
+
+  /** 权限 */
   permissions = [];
 
   /** user */
   user = new SysUserVo();
+}
+
+class RCalCuLatePriceVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new CalCuLatePriceVO();
+
+  /** msg */
+  msg = '';
 }
 
 class RCaptchaVo {
@@ -132,6 +889,39 @@ class RCaptchaVo {
 
   /** data */
   data = new CaptchaVo();
+
+  /** msg */
+  msg = '';
+}
+
+class RCompanyContractVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new CompanyContractVO();
+
+  /** msg */
+  msg = '';
+}
+
+class RContractRemindVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new ContractRemindVo();
+
+  /** msg */
+  msg = '';
+}
+
+class RListChannelPriceVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
 
   /** msg */
   msg = '';
@@ -192,12 +982,67 @@ class RListSyCMenuVo {
   msg = '';
 }
 
+class RListSyExchangeRateVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RListSysUserVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RListTimelinesBoardVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
 class RListTreeInteger {
   /** code */
   code = undefined;
 
   /** data */
   data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RListTreeVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RLocalDateTime {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = '';
 
   /** msg */
   msg = '';
@@ -258,6 +1103,39 @@ class RProfileVo {
   msg = '';
 }
 
+class RRechargeDetailVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new RechargeDetailVo();
+
+  /** msg */
+  msg = '';
+}
+
+class RSavePackageVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new SavePackageVO();
+
+  /** msg */
+  msg = '';
+}
+
+class RString {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = '';
+
+  /** msg */
+  msg = '';
+}
+
 class RSyCCompanyDetailVo {
   /** code */
   code = undefined;
@@ -291,6 +1169,17 @@ class RSyCCompanyPickDeviationVo {
   msg = '';
 }
 
+class RSyCCompanyVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new SyCCompanyVo();
+
+  /** msg */
+  msg = '';
+}
+
 class RSyCMenuVo {
   /** code */
   code = undefined;
@@ -313,6 +1202,17 @@ class RSysUserVo {
   msg = '';
 }
 
+class RUploadInitVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new UploadInitVO();
+
+  /** msg */
+  msg = '';
+}
+
 class RVoid {
   /** code */
   code = undefined;
@@ -322,6 +1222,126 @@ class RVoid {
 
   /** msg */
   msg = '';
+}
+
+class RechargeBo {
+  /** 创建开始时间 */
+  beginTime = '';
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 创建结束时间 */
+  endTime = '';
+
+  /** 支付状态(0:待支付;1:支付中;2:支付失败;3:支付成功) */
+  paymentStatus = undefined;
+
+  /** 搜索内容 */
+  searchValue = '';
+
+  /** 付款方式(1:支付宝;2:微信;8:网银支付;4:银行转账) */
+  tradeMode = undefined;
+
+  /** 交易状态(0:等待顺友确认;1:已确认;) */
+  tradeStatus = undefined;
+}
+
+class RechargeDetailVo {
+  /** 交易金额 */
+  officialExchangeRate = undefined;
+
+  /** 收款方账号 */
+  payeeBankCardNumber = '';
+
+  /** 收款方开户行 */
+  payeeBankName = '';
+
+  /** 收款方户名 */
+  payeeName = '';
+
+  /** 付款方账号 */
+  payerBankCardNumber = '';
+
+  /** 付款方开户行 */
+  payerBankName = '';
+
+  /** 付款方户名 */
+  payerName = '';
+
+  /** 付款状态 */
+  paymentStatus = undefined;
+
+  /** 交易币种 */
+  receiptPath = '';
+
+  /** 充值订单id */
+  rechargeOrderId = undefined;
+
+  /** 付款交易号 */
+  relevantVoucher = '';
+
+  /** 交易金额 */
+  tradeAmount = undefined;
+
+  /** 交易币种 */
+  tradeAmountCurrency = '';
+
+  /** 付款方式 */
+  tradeMode = undefined;
+
+  /** 交易状态 */
+  tradeStatus = '';
+}
+
+class RechargeVo {
+  /** 创建人id */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 收款账号 */
+  payeeBankCardNumber = '';
+
+  /** 收款账户 */
+  payeeBankName = '';
+
+  /** 付款账号 */
+  payerBankCardNumber = '';
+
+  /** 付款账户 */
+  payerBankName = '';
+
+  /** 付款状态 */
+  paymentStatus = undefined;
+
+  /** 付款状态说明 */
+  paymentStatusStr = '';
+
+  /** 付款金额 */
+  rechargeAmount = '';
+
+  /** 付款交易流水号 */
+  rechargeCode = '';
+
+  /** 充值订单id */
+  rechargeOrderId = undefined;
+
+  /** 充值备注 */
+  rechargeRemark = '';
+
+  /** 付款方式 */
+  tradeMode = undefined;
+
+  /** 付款方式说明 */
+  tradeModeStr = '';
+
+  /** 交易状态 */
+  tradeStatus = '';
+
+  /** 创建人 */
+  userName = '';
 }
 
 class RegisterBody {
@@ -487,6 +1507,28 @@ class RouterVo {
   redirect = '';
 }
 
+class SavePackageVO {
+  /** 是否合同逾期 */
+  flg = false;
+
+  /** 冻结详情 */
+  freezeDetail = '';
+
+  /** 是否冻结 */
+  isFreeze = false;
+
+  /** 是否审核未通过 */
+  ratifyStatus = false;
+}
+
+class SmsCodeBo {
+  /** captchaVerifyParam */
+  captchaVerifyParam = '';
+
+  /** mobile */
+  mobile = '';
+}
+
 class SseEmitter {
   /** timeout */
   timeout = undefined;
@@ -499,7 +1541,7 @@ class SyAccountInfoVo {
   /** 即将过期的账单数量 */
   billCount = undefined;
 
-  /** businessPersonnel */
+  /** 客服专员ID */
   businessPersonnel = undefined;
 
   /** businessUser */
@@ -535,7 +1577,7 @@ class SyAccountInfoVo {
   /** 公司已用额度(CNY) */
   companyUsedCredit = undefined;
 
-  /** financePersonnel */
+  /** 财务专员ID */
   financePersonnel = undefined;
 
   /** financeUser */
@@ -559,13 +1601,13 @@ class SyAccountInfoVo {
   /** 公司审核状态(0：待完善资料 1:待审核 2:审核失败 3:审核成功) */
   ratifyStatus = undefined;
 
-  /** receivePersonnel */
+  /** 揽收专员ID */
   receivePersonnel = undefined;
 
   /** receiveUser */
   receiveUser = new RemoteSysUserVO();
 
-  /** servicePersonnel */
+  /** 业务专员ID */
   servicePersonnel = undefined;
 
   /** serviceUser */
@@ -1001,6 +2043,255 @@ class SyCCompanyPickDeviationVo {
   pickupLesserInterceptValue = undefined;
 }
 
+class SyCCompanyThirdplatformAccountBo {
+  /** 描述 */
+  description = '';
+
+  /** 流水号 */
+  platformAccountId = undefined;
+
+  /** 所属平台 1 wishpost, 2 vovapost , 3 DHGate1 */
+  platformType = undefined;
+
+  /** 平台账号 */
+  userName = '';
+}
+
+class SyCCompanyThirdplatformAccountVo {
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 描述 */
+  description = '';
+
+  /** 流水号 */
+  platformAccountId = undefined;
+
+  /** 所属平台 1 wishpost, 2 vovapost , 3 DHGate1 */
+  platformType = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
+
+  /** 平台账号 */
+  userName = '';
+}
+
+class SyCCompanyVo {
+  /** 账户名称 */
+  accountName = '';
+
+  /** 银行卡号 */
+  bankNumber = '';
+
+  /** 公司结账日 */
+  billAccountDay = undefined;
+
+  /** 开单公司 */
+  billCompanyId = undefined;
+
+  /** 公司结账周期 */
+  billCycleId = undefined;
+
+  /** 计费节点 */
+  billNode = undefined;
+
+  /** 社会信用代码/身份证号码 */
+  businessLicenseNumber = '';
+
+  /** 业务专员 */
+  businessPersonnel = undefined;
+
+  /** 公司上传的证件路径 */
+  certificatePath = '';
+
+  /** 1:均摊重量 2:入仓重量 3:预报重量 */
+  chargeWeightType = undefined;
+
+  /** 公司账户余额(CNY) */
+  companyAmount = undefined;
+
+  /** 账户资产 */
+  companyAsset = undefined;
+
+  /** 公司编码 */
+  companyCode = '';
+
+  /** 公司信用额度(CNY) */
+  companyCreditLimit = undefined;
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 公司名称 */
+  companyName = '';
+
+  /** 分支机构 */
+  companyOrganizationId = undefined;
+
+  /** 公司已用额度(CNY) */
+  companyUsedCredit = undefined;
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** detail */
+  detail = new SyCCompanyDetailVo();
+
+  /** (入账节点：1结单,2离开处理中心,3到达始发港,4离开始发港,5到达目的国,6目的国清关,7到达OE) */
+  entryNode = undefined;
+
+  /** 财务专员 */
+  financePersonnel = undefined;
+
+  /** financialPersonnel */
+  financialPersonnel = undefined;
+
+  /** 自动对账 1、是；2、否 */
+  flgAutoAccount = undefined;
+
+  /** 0或null:未冻结;1:冻结 */
+  freezeStatus = undefined;
+
+  /** 结单拦截超重%(已分重量大于应分重量) */
+  greaterInterceptPercent = undefined;
+
+  /** 结单拦截超重KG(已分重量大于应分重量) */
+  greaterInterceptWeigh = undefined;
+
+  /** 身份证国徽面 */
+  idCardEmblemPath = '';
+
+  /** 身份证人像面 */
+  idCardHeadPath = '';
+
+  /** 公司下次账单日期 */
+  lastBillCycleTime = '';
+
+  /** 公司上次结单时间 */
+  lastChargeTime = '';
+
+  /** 最后揽收日期 */
+  lastReceiveTime = '';
+
+  /** 最后揽收重量(kg) */
+  lastReceiveWeight = undefined;
+
+  /** 最后充值日期 */
+  lastRechargeTime = '';
+
+  /** 催款邮件最后发送日期 */
+  lastUrgePayEmailTime = '';
+
+  /** 催款短信最后发送时间 */
+  lastUrgePaySmsTime = '';
+
+  /** 结单拦截不足%(已分重量小于应分重量) */
+  lesserInterceptPercent = undefined;
+
+  /** 结单拦截不足KG(已分重量小于应分重量) */
+  lesserInterceptWeigh = undefined;
+
+  /** 余额提醒设置 */
+  moneyRemindLimit = undefined;
+
+  /** 开户行名称 */
+  openingBank = '';
+
+  /** 包裹大于预报拦截方式（0：按重量差设置；1：按百分比设置;2:不拦截）） */
+  packageGreaterInterceptMode = undefined;
+
+  /** 包裹大于预报拦截值（方式为0时单位为kg；方式为1时加入百分比） */
+  packageGreaterInterceptValue = undefined;
+
+  /** 包裹小于于预报拦截方式（0：按重量差设置；1：按百分比设置;2:不拦截）） */
+  packageLesserInterceptMode = undefined;
+
+  /** 包裹小于预报拦截值（方式为0时单位为kg；方式为1时加入百分比） */
+  packageLesserInterceptValue = undefined;
+
+  /** payoneer授权码 */
+  payoneerCode = '';
+
+  /** payoneer帐号 */
+  payoneerId = '';
+
+  /** payoneer刷新时间 */
+  payoneerRefreshTime = '';
+
+  /** payoneer刷新令牌 */
+  payoneerRefreshToken = '';
+
+  /** payoneer访问令牌 */
+  payoneerToken = '';
+
+  /** 称重大于揽收拦截方式（0：按重量差设置；1：按百分比设置;2:不拦截） */
+  pickupGreaterInterceptMode = undefined;
+
+  /** 揽收大于预报拦截值（方式为0时单位为kg；方式为1时加入百分比） */
+  pickupGreaterInterceptValue = undefined;
+
+  /** 称重小于揽收拦截方式（0：按重量差设置；1：按百分比设置;2:不拦截）） */
+  pickupLesserInterceptMode = undefined;
+
+  /** 揽收大于预报拦截值（方式为0时单位为kg；方式为1时加入百分比） */
+  pickupLesserInterceptValue = undefined;
+
+  /** 审核备注 */
+  ratifyMemo = '';
+
+  /** 公司审核状态(0：待完善资料 1:待审核 2:审核失败 3:审核成功) */
+  ratifyStatus = undefined;
+
+  /** 揽收专员 */
+  receivePersonnel = undefined;
+
+  /** 推荐人 */
+  recommendedBy = '';
+
+  /** 客服专员 */
+  servicePersonnel = undefined;
+
+  /** 注册类型 0/null：公司 1：个人 */
+  signupType = undefined;
+
+  /** 结单申请人 */
+  statementApplyBy = undefined;
+
+  /** 结单申请时间 */
+  statementApplyTime = '';
+
+  /** 结单失败原因 */
+  statementFailReason = '';
+
+  /** 结单状态 0/null:等待结单 1：结单失败 2：结单中 */
+  statementStatus = undefined;
+
+  /** 计费方式 0/null均摊计费  1入仓计费 */
+  statementType = undefined;
+
+  /** 归属公司ID */
+  superCompanyId = undefined;
+
+  /** 证件有效期 */
+  termOfValidity = '';
+
+  /** 超时拦截(0/null默认拦截   1不拦截) */
+  timeoutIntercept = undefined;
+
+  /** 更新人 */
+  updateBy = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
+}
+
 class SyCMenuVo {
   /** 组件路径 */
   component = '';
@@ -1049,6 +2340,117 @@ class SyCMenuVo {
 
   /** 显示状态（0显示 1隐藏） */
   visible = '';
+}
+
+class SyCPackageProduct {
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 申报币种 */
+  currencyCode = '';
+
+  /** 海关编码 */
+  customCode = '';
+
+  /** 报关产品中文名称 */
+  declareCnName = '';
+
+  /** 报关产品英文名称 */
+  declareEnName = '';
+
+  /** 报关单价 */
+  declarePrice = undefined;
+
+  /** 包裹商品流水号 */
+  productId = undefined;
+
+  /** 产品材质 */
+  productMaterial = '';
+
+  /** 产品用途 */
+  productPurpose = '';
+
+  /** 产品SKU */
+  productSku = '';
+
+  /** 更新人 */
+  updateBy = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
+}
+
+class SyCPackageProductBo {
+  /** 申报币种 */
+  currencyCode = '';
+
+  /** 海关编码 */
+  customCode = '';
+
+  /** 报关产品中文名称 */
+  declareCnName = '';
+
+  /** 报关产品英文名称 */
+  declareEnName = '';
+
+  /** 报关单价 */
+  declarePrice = undefined;
+
+  /** 包裹商品流水号 */
+  productId = undefined;
+
+  /** 产品材质 */
+  productMaterial = '';
+
+  /** 产品用途 */
+  productPurpose = '';
+
+  /** 产品SKU */
+  productSku = '';
+}
+
+class SyCPackageProductVo {
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** createBy */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 申报币种 */
+  currencyCode = '';
+
+  /** 海关编码 */
+  customCode = '';
+
+  /** 报关产品中文名称 */
+  declareCnName = '';
+
+  /** 报关产品英文名称 */
+  declareEnName = '';
+
+  /** 报关单价 */
+  declarePrice = undefined;
+
+  /** 包裹商品流水号 */
+  productId = undefined;
+
+  /** 产品材质 */
+  productMaterial = '';
+
+  /** 产品用途 */
+  productPurpose = '';
+
+  /** 产品SKU */
+  productSku = '';
 }
 
 class SyCUserComplaintBo {
@@ -1113,6 +2515,124 @@ class SyCUserComplaintVo {
 
   /** 联系名称 */
   linkName = '';
+}
+
+class SyCUserOperLogBo {
+  /** 业务类型（0其它 1新增 2修改 3删除） */
+  businessType = undefined;
+
+  /** 业务类型数组 */
+  businessTypes = [];
+
+  /** 客户公司id */
+  companyId = undefined;
+
+  /** 消耗时间 */
+  costTime = undefined;
+
+  /** 部门名称 */
+  deptName = '';
+
+  /** 错误消息 */
+  errorMsg = '';
+
+  /** 返回参数 */
+  jsonResult = '';
+
+  /** 方法名称 */
+  method = '';
+
+  /** 日志主键 */
+  operId = undefined;
+
+  /** 主机地址 */
+  operIp = '';
+
+  /** 操作地点 */
+  operLocation = '';
+
+  /** 操作人员 */
+  operName = '';
+
+  /** 请求参数 */
+  operParam = '';
+
+  /** 操作时间 */
+  operTime = '';
+
+  /** 请求URL */
+  operUrl = '';
+
+  /** 操作类别（0其它 1后台用户 2手机端用户） */
+  operatorType = undefined;
+
+  /** 请求方式 */
+  requestMethod = '';
+
+  /** 操作状态（0正常 1异常） */
+  status = undefined;
+
+  /** 模块标题 */
+  title = '';
+}
+
+class SyCUserOperLogVo {
+  /** 业务类型（0其它 1新增 2修改 3删除） */
+  businessType = undefined;
+
+  /** 业务类型数组 */
+  businessTypes = [];
+
+  /** 客户公司id */
+  companyId = undefined;
+
+  /** 消耗时间 */
+  costTime = undefined;
+
+  /** 部门名称 */
+  deptName = '';
+
+  /** 错误消息 */
+  errorMsg = '';
+
+  /** 返回参数 */
+  jsonResult = '';
+
+  /** 方法名称 */
+  method = '';
+
+  /** 日志主键 */
+  operId = undefined;
+
+  /** 主机地址 */
+  operIp = '';
+
+  /** 操作地点 */
+  operLocation = '';
+
+  /** 操作人员 */
+  operName = '';
+
+  /** 请求参数 */
+  operParam = '';
+
+  /** 操作时间 */
+  operTime = '';
+
+  /** 请求URL */
+  operUrl = '';
+
+  /** 操作类别（0其它 1后台用户 2手机端用户） */
+  operatorType = undefined;
+
+  /** 请求方式 */
+  requestMethod = '';
+
+  /** 操作状态（0正常 1异常） */
+  status = undefined;
+
+  /** 模块标题 */
+  title = '';
 }
 
 class SyExchangeRateVo {
@@ -1238,12 +2758,6 @@ class SysMenuBo {
   /** 组件路径 */
   component = '';
 
-  /** 创建者 */
-  createBy = undefined;
-
-  /** 创建时间 */
-  createTime = '';
-
   /** 菜单图标 */
   icon = '';
 
@@ -1265,9 +2779,6 @@ class SysMenuBo {
   /** 显示顺序 */
   orderNum = undefined;
 
-  /** 请求参数 */
-  params = undefined;
-
   /** 父菜单ID */
   parentId = undefined;
 
@@ -1286,129 +2797,22 @@ class SysMenuBo {
   /** 菜单状态（0正常 1停用） */
   status = undefined;
 
-  /** 更新者 */
-  updateBy = undefined;
-
-  /** 更新时间 */
-  updateTime = '';
-
   /** 显示状态（0显示 1隐藏） */
   visible = undefined;
 }
 
-class SysOperLogBo {
-  /** 业务类型（0其它 1新增 2修改 3删除） */
-  businessType = undefined;
+class SysUserBindMobileBo {
+  /** 图形验证码 */
+  code = '';
 
-  /** 业务类型数组 */
-  businessTypes = [];
+  /** 手机号码 */
+  mobile = '';
 
-  /** 消耗时间 */
-  costTime = undefined;
+  /** 手机验证码 */
+  smsCode = '';
 
-  /** 部门名称 */
-  deptName = '';
-
-  /** 错误消息 */
-  errorMsg = '';
-
-  /** 返回参数 */
-  jsonResult = '';
-
-  /** 方法名称 */
-  method = '';
-
-  /** 日志主键 */
-  operId = undefined;
-
-  /** 主机地址 */
-  operIp = '';
-
-  /** 操作地点 */
-  operLocation = '';
-
-  /** 操作人员 */
-  operName = '';
-
-  /** 请求参数 */
-  operParam = '';
-
-  /** 操作时间 */
-  operTime = '';
-
-  /** 请求URL */
-  operUrl = '';
-
-  /** 操作类别（0其它 1后台用户 2手机端用户） */
-  operatorType = undefined;
-
-  /** 请求参数 */
-  params = undefined;
-
-  /** 请求方式 */
-  requestMethod = '';
-
-  /** 操作状态（0正常 1异常） */
-  status = undefined;
-
-  /** 模块标题 */
-  title = '';
-}
-
-class SysOperLogVo {
-  /** 业务类型（0其它 1新增 2修改 3删除） */
-  businessType = undefined;
-
-  /** 业务类型数组 */
-  businessTypes = [];
-
-  /** 消耗时间 */
-  costTime = undefined;
-
-  /** 部门名称 */
-  deptName = '';
-
-  /** 错误消息 */
-  errorMsg = '';
-
-  /** 返回参数 */
-  jsonResult = '';
-
-  /** 方法名称 */
-  method = '';
-
-  /** 日志主键 */
-  operId = undefined;
-
-  /** 主机地址 */
-  operIp = '';
-
-  /** 操作地点 */
-  operLocation = '';
-
-  /** 操作人员 */
-  operName = '';
-
-  /** 请求参数 */
-  operParam = '';
-
-  /** 操作时间 */
-  operTime = '';
-
-  /** 请求URL */
-  operUrl = '';
-
-  /** 操作类别（0其它 1后台用户 2手机端用户） */
-  operatorType = undefined;
-
-  /** 请求方式 */
-  requestMethod = '';
-
-  /** 操作状态（0正常 1异常） */
-  status = undefined;
-
-  /** 模块标题 */
-  title = '';
+  /** 唯一标识 */
+  uuid = '';
 }
 
 class SysUserBo {
@@ -1423,6 +2827,9 @@ class SysUserBo {
 
   /** 用户邮箱 */
   email = '';
+
+  /** 用户头像 */
+  headPortraitPath = '';
 
   /** 手机号码 */
   mobile = '';
@@ -1467,6 +2874,14 @@ class SysUserEditPasswordBo {
 
   /** 唯一标识 */
   uuid = '';
+}
+
+class SysUserMenuBindBo {
+  /** menuIdList */
+  menuIdList = [];
+
+  /** userId */
+  userId = undefined;
 }
 
 class SysUserPasswordBo {
@@ -1517,6 +2932,17 @@ class SysUserProfileBo {
   updateTime = '';
 }
 
+class SysUserUnbindMobileBo {
+  /** 图形验证码 */
+  code = '';
+
+  /** 手机验证码 */
+  smsCode = '';
+
+  /** 唯一标识 */
+  uuid = '';
+}
+
 class SysUserVo {
   /** 公司流水号 */
   companyId = undefined;
@@ -1539,6 +2965,9 @@ class SysUserVo {
   /** 手机号码 */
   mobile = '';
 
+  /** 注册类型 0/null：公司 1：个人 */
+  signupType = undefined;
+
   /** 账号状态(0:未启用 1:已启用 2:已停用) */
   status = undefined;
 
@@ -1555,60 +2984,314 @@ class SysUserVo {
   userType = '';
 }
 
+class TableDataInfoAssetVo {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoAssetVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoRechargeVo {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoRechargeVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoSyCCompanyThirdplatformAccountVo {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoSyCCompanyThirdplatformAccountVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoSyCPackageProduct {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoSyCPackageProduct();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoSyCPackageProductVo {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoSyCPackageProductVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
 class TableDataInfoSyCUserComplaintVo {
   /** 消息状态码 */
   code = undefined;
 
+  /** data */
+  data = new DataInfoSyCUserComplaintVo();
+
   /** 消息内容 */
   msg = '';
+}
 
-  /** 列表数据 */
-  rows = [];
+class TableDataInfoSyCUserOperLogVo {
+  /** 消息状态码 */
+  code = undefined;
 
-  /** 总记录数 */
-  total = undefined;
+  /** data */
+  data = new DataInfoSyCUserOperLogVo();
+
+  /** 消息内容 */
+  msg = '';
 }
 
 class TableDataInfoSyExchangeRateVo {
   /** 消息状态码 */
   code = undefined;
 
+  /** data */
+  data = new DataInfoSyExchangeRateVo();
+
   /** 消息内容 */
   msg = '';
-
-  /** 列表数据 */
-  rows = [];
-
-  /** 总记录数 */
-  total = undefined;
 }
 
 class TableDataInfoSysLogininforVo {
   /** 消息状态码 */
   code = undefined;
 
+  /** data */
+  data = new DataInfoSysLogininforVo();
+
   /** 消息内容 */
   msg = '';
-
-  /** 列表数据 */
-  rows = [];
-
-  /** 总记录数 */
-  total = undefined;
 }
 
-class TableDataInfoSysOperLogVo {
+class TableDataInfoTrackingNoVo {
   /** 消息状态码 */
   code = undefined;
 
+  /** data */
+  data = new DataInfoTrackingNoVo();
+
   /** 消息内容 */
   msg = '';
+}
 
-  /** 列表数据 */
-  rows = [];
+class TimelinesBoardBo {
+  /** analyticsDate */
+  analyticsDate = undefined;
 
-  /** 总记录数 */
-  total = undefined;
+  /** analyticsNode */
+  analyticsNode = undefined;
+
+  /** keyword */
+  keyword = '';
+}
+
+class TimelinesBoardVo {
+  /** 异常数量 */
+  abnormalNumber = undefined;
+
+  /** 0/null：入仓统计 1：发货统计 */
+  analyticsType = undefined;
+
+  /** 邮路ID */
+  channelId = undefined;
+
+  /** 邮路中文名称 */
+  channelcnname = '';
+
+  /** 国家中文名称 */
+  countryCnName = '';
+
+  /** 国家代码 */
+  countryCode = '';
+
+  /** 签收数量 */
+  deliveredNumber = undefined;
+
+  /** 10天签收数量 */
+  deliveredNumber1 = undefined;
+
+  /** 45天签收数量 */
+  deliveredNumber10 = undefined;
+
+  /** 60天签收数量 */
+  deliveredNumber11 = undefined;
+
+  /** 90天签收数量 */
+  deliveredNumber12 = undefined;
+
+  /** 120天签收数量 */
+  deliveredNumber13 = undefined;
+
+  /** 180天签收数量（暂不启用） */
+  deliveredNumber14 = undefined;
+
+  /** 11天签收数量 */
+  deliveredNumber2 = undefined;
+
+  /** 12天签收数量 */
+  deliveredNumber3 = undefined;
+
+  /** 13天签收数量 */
+  deliveredNumber4 = undefined;
+
+  /** 14天签收数量 */
+  deliveredNumber5 = undefined;
+
+  /** 15天签收数量 */
+  deliveredNumber6 = undefined;
+
+  /** 20天签收数量 */
+  deliveredNumber7 = undefined;
+
+  /** 25天签收数量 */
+  deliveredNumber8 = undefined;
+
+  /** 30天签收数量 */
+  deliveredNumber9 = undefined;
+
+  /** 包裹数量 */
+  packageNumber = undefined;
+
+  /** 10天入仓数量 */
+  packageNumber1 = undefined;
+
+  /** 45天入仓数量 */
+  packageNumber10 = undefined;
+
+  /** 60天入仓数量 */
+  packageNumber11 = undefined;
+
+  /** 90天入仓数量 */
+  packageNumber12 = undefined;
+
+  /** 120天入仓数量 */
+  packageNumber13 = undefined;
+
+  /** 180天入仓数量（暂不启用） */
+  packageNumber14 = undefined;
+
+  /** 11天入仓数量 */
+  packageNumber2 = undefined;
+
+  /** 12天入仓数量 */
+  packageNumber3 = undefined;
+
+  /** 13天入仓数量 */
+  packageNumber4 = undefined;
+
+  /** 14天入仓数量 */
+  packageNumber5 = undefined;
+
+  /** 15天入仓数量 */
+  packageNumber6 = undefined;
+
+  /** 20天入仓数量 */
+  packageNumber7 = undefined;
+
+  /** 25天入仓数量 */
+  packageNumber8 = undefined;
+
+  /** 30天入仓数量 */
+  packageNumber9 = undefined;
+
+  /** 总妥投率 */
+  rate = undefined;
+
+  /** 10天妥投率 */
+  rate1 = undefined;
+
+  /** 45天妥投率 */
+  rate10 = undefined;
+
+  /** 60天妥投率 */
+  rate11 = undefined;
+
+  /** 90天妥投率 */
+  rate12 = undefined;
+
+  /** 120天妥投率 */
+  rate13 = undefined;
+
+  /** 180天妥投率（暂不启用） */
+  rate14 = undefined;
+
+  /** 11天妥投率 */
+  rate2 = undefined;
+
+  /** 12天妥投率 */
+  rate3 = undefined;
+
+  /** 13天妥投率 */
+  rate4 = undefined;
+
+  /** 14天妥投率 */
+  rate5 = undefined;
+
+  /** 15天妥投率 */
+  rate6 = undefined;
+
+  /** 20天妥投率 */
+  rate7 = undefined;
+
+  /** 25天妥投率 */
+  rate8 = undefined;
+
+  /** 30天妥投率 */
+  rate9 = undefined;
+}
+
+class TrackingNoDownloadBOInteger {
+  /** id */
+  id = undefined;
+
+  /** type */
+  type = undefined;
+}
+
+class TrackingNoVo {
+  /** 下载数量 */
+  downloadCount = undefined;
+
+  /** 最后下载时间 */
+  lastDownloadTime = '';
+
+  /** 追踪号总数 */
+  trackingNoCount = undefined;
+
+  /** 追踪号池id */
+  trackingNumberPoolId = undefined;
+
+  /** 追踪号池名称 */
+  trackingNumberPoolName = '';
+
+  /** 未下载数量 */
+  unDownloadCount = undefined;
+
+  /** 未使用数 */
+  unUseNum = undefined;
+
+  /** 已使用数 */
+  usedNum = undefined;
 }
 
 class TreeInteger {
@@ -1651,40 +3334,115 @@ class TreeNodeConfig {
   weightKey = '';
 }
 
+class TreeVO {
+  /** checked */
+  checked = false;
+
+  /** halfChecked */
+  halfChecked = false;
+
+  /** id */
+  id = undefined;
+
+  /** label */
+  label = '';
+
+  /** parentId */
+  parentId = undefined;
+}
+
+class UploadInitVO {
+  /** true 合同过期 预报不能成功 */
+  flg = false;
+
+  /** importResultVO */
+  importResultVO = new BatchImportResultVO();
+
+  /** isSpecify */
+  isSpecify = false;
+
+  /** 客户未审核 ，预报不能成功 */
+  ratifyStatus = false;
+}
+
 export const apis = {
+  AssetBo,
+  AssetVo,
+  BatchImportResultVO,
+  CalCuLatePriceBO,
+  CalCuLatePriceDataVO,
+  CalCuLatePriceVO,
   CaptchaVo,
+  ChannelPriceVO,
+  CommonIdBOInteger,
   CommonIdListBOInteger,
   CommonIdListBOLong,
+  CompanyContractVO,
+  CompanyVo,
+  CompleteCompanyBO,
+  ContractRemindVo,
+  DataInfoAssetVo,
+  DataInfoRechargeVo,
+  DataInfoSyCCompanyThirdplatformAccountVo,
+  DataInfoSyCPackageProduct,
+  DataInfoSyCPackageProductVo,
+  DataInfoSyCUserComplaintVo,
+  DataInfoSyCUserOperLogVo,
+  DataInfoSyExchangeRateVo,
+  DataInfoSysLogininforVo,
+  DataInfoTrackingNoVo,
   DownloadBO,
   ForeignCurrencyVo,
   LoginVo,
   MetaVo,
   OverviewVo,
+  PackageInfoBO,
+  PackageProduct,
   PageQuery,
+  ProductListBO,
   ProfileVo,
+  RCalCuLatePriceVO,
   RCaptchaVo,
+  RCompanyContractVO,
+  RContractRemindVo,
+  RListChannelPriceVO,
   RListMapStringObject,
   RListRemoteSysOrganizationVO,
   RListRemoteSysUserVO,
   RListRouterVo,
   RListSyCMenuVo,
+  RListSyExchangeRateVo,
+  RListSysUserVo,
+  RListTimelinesBoardVo,
   RListTreeInteger,
+  RListTreeVO,
+  RLocalDateTime,
   RLoginVo,
   RMapStringListRemoteDictDataVO,
   RObject,
   ROverviewVo,
   RProfileVo,
+  RRechargeDetailVo,
+  RSavePackageVO,
+  RString,
   RSyCCompanyDetailVo,
   RSyCCompanyPackageDeviationVo,
   RSyCCompanyPickDeviationVo,
+  RSyCCompanyVo,
   RSyCMenuVo,
   RSysUserVo,
+  RUploadInitVO,
   RVoid,
+  RechargeBo,
+  RechargeDetailVo,
+  RechargeVo,
   RegisterBody,
   RemoteDictDataVO,
   RemoteSysOrganizationVO,
   RemoteSysUserVO,
   RouterVo,
+  SavePackageVO,
+  SmsCodeBo,
   SseEmitter,
   SyAccountInfoVo,
   SyCCompanyDetailBo,
@@ -1693,26 +3451,47 @@ export const apis = {
   SyCCompanyPackageDeviationVo,
   SyCCompanyPickDeviationBo,
   SyCCompanyPickDeviationVo,
+  SyCCompanyThirdplatformAccountBo,
+  SyCCompanyThirdplatformAccountVo,
+  SyCCompanyVo,
   SyCMenuVo,
+  SyCPackageProduct,
+  SyCPackageProductBo,
+  SyCPackageProductVo,
   SyCUserComplaintBo,
   SyCUserComplaintVo,
+  SyCUserOperLogBo,
+  SyCUserOperLogVo,
   SyExchangeRateVo,
   SySysNotice,
   SysLogininforBo,
   SysLogininforVo,
   SysMenuBo,
-  SysOperLogBo,
-  SysOperLogVo,
+  SysUserBindMobileBo,
   SysUserBo,
   SysUserEditPasswordBo,
+  SysUserMenuBindBo,
   SysUserPasswordBo,
   SysUserPasswordForgotBo,
   SysUserProfileBo,
+  SysUserUnbindMobileBo,
   SysUserVo,
+  TableDataInfoAssetVo,
+  TableDataInfoRechargeVo,
+  TableDataInfoSyCCompanyThirdplatformAccountVo,
+  TableDataInfoSyCPackageProduct,
+  TableDataInfoSyCPackageProductVo,
   TableDataInfoSyCUserComplaintVo,
+  TableDataInfoSyCUserOperLogVo,
   TableDataInfoSyExchangeRateVo,
   TableDataInfoSysLogininforVo,
-  TableDataInfoSysOperLogVo,
+  TableDataInfoTrackingNoVo,
+  TimelinesBoardBo,
+  TimelinesBoardVo,
+  TrackingNoDownloadBOInteger,
+  TrackingNoVo,
   TreeInteger,
   TreeNodeConfig,
+  TreeVO,
+  UploadInitVO,
 };

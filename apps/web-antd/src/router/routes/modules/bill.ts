@@ -29,6 +29,16 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/bill/management/unbilled/index.vue'),
             meta: {
               title: '未出账',
+              keepAlive: true,
+            },
+          },
+          {
+            name: 'BillManagementBilled',
+            path: 'billed',
+            component: () => import('#/views/bill/management/billed/index.vue'),
+            meta: {
+              title: '已出账',
+              keepAlive: true,
             },
           },
           {
@@ -37,6 +47,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('#/views/bill/management/paid/index.vue'),
             meta: {
               title: '已支付',
+              keepAlive: true,
             },
           },
         ],
@@ -49,20 +60,22 @@ const routes: RouteRecordRaw[] = [
           title: '财务管理',
         },
         children: [
-          // {
-          //   name: 'BillFinanceManagementRecharge',
-          //   path: 'recharge',
-          //   component: () => import('#/views/bill/finance-management/recharge/index.vue'),
-          //   meta: {
-          //     title: '充值',
-          //   },
-          // },
+          {
+            name: 'BillFinanceManagementRecharge',
+            path: 'recharge',
+            component: () => import('#/views/bill/finance-management/recharge/index.vue'),
+            meta: {
+              title: '充值',
+              keepAlive: true,
+            },
+          },
           {
             name: 'BillFinanceManagementAssetFlow',
             path: 'asset-flow',
             component: () => import('#/views/bill/finance-management/asset-flow/index.vue'),
             meta: {
               title: '资产流水',
+              keepAlive: true,
             },
           },
         ],

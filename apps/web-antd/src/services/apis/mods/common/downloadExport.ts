@@ -13,6 +13,6 @@ import { requestClient } from '#/api/request';
 export type RequestTypes = defs.apis.DownloadBO;
 export type ResponseTypes = any;
 const downloadExport = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.post<ResponseTypes>('/common/file/download', bodyParams, config);
+  return requestClient.post<ResponseTypes>('/common/file/download', { data: bodyParams }, config);
 };
 export default downloadExport;

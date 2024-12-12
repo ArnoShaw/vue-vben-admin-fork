@@ -22,6 +22,6 @@ class Params {
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RListMapStringObject;
 const getRegionSelect = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/common/location/optionselect', params, config);
+  return requestClient.get<ResponseTypes>('/common/location/optionselect', { params }, config);
 };
 export default getRegionSelect;

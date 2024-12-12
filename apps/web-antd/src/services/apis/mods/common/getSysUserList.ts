@@ -20,6 +20,6 @@ class Params {
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RListRemoteSysUserVO;
 const getSysUserList = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/common/getSysUserList', params, config);
+  return requestClient.get<ResponseTypes>('/common/getSysUserListByRoleId', { params }, config);
 };
 export default getSysUserList;

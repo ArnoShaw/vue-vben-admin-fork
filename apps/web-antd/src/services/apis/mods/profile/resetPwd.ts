@@ -2,8 +2,8 @@
 // @ts-nocheck auto generated apis
 
 /**
-    * @description 忘记密码，第三步(加密)
-忘记密码，第三步(加密)
+    * @description 忘记密码，第三步(接口加密)
+忘记密码，第三步(接口加密)
     */
 
 import type { AxiosRequestConfig } from '@vben/request';
@@ -13,6 +13,10 @@ import { requestClient } from '#/api/request';
 export type RequestTypes = defs.apis.SysUserEditPasswordBo;
 export type ResponseTypes = defs.apis.RVoid;
 const resetPwd = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.put<ResponseTypes>('/system/user/profile/resetPwd', bodyParams, config);
+  return requestClient.put<ResponseTypes>(
+    '/system/user/profile/resetPwd',
+    { data: bodyParams },
+    config,
+  );
 };
 export default resetPwd;

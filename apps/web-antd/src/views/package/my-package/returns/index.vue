@@ -12,7 +12,7 @@ import { columns, formSchema } from './const-data';
 import ModalSignatureInfo from './modal-signature-info.vue';
 
 defineOptions({
-  name: 'PackageMyPackageAbnormal',
+  name: 'PackageMyPackageReturns',
 });
 
 // const selectAll = ref();

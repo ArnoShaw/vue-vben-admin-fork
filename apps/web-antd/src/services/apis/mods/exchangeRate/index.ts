@@ -1,7 +1,7 @@
 /**
  * @description exchangeRate
  */
-import getExchangeRateList_2 from './getExchangeRateList_2';
-import getExchangeRateList_1 from './getExchangeRateList_1';
+import getRateExchangeRateList from './getRateExchangeRateList';
+import getOftenExchangeRateList from './getOftenExchangeRateList';
 
-export { getExchangeRateList_2, getExchangeRateList_1 };
+export { getRateExchangeRateList, getOftenExchangeRateList };

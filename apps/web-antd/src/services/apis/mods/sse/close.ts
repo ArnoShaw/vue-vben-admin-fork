@@ -15,6 +15,6 @@ class Params {}
 export type RequestTypes = Params;
 export type ResponseTypes = defs.apis.RVoid;
 const close = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.get<ResponseTypes>('/resource/sse/close', params, config);
+  return requestClient.get<ResponseTypes>('/resource/sse/close', { params }, config);
 };
 export default close;

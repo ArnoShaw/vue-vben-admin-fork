@@ -13,7 +13,7 @@ import DrawerViewInfo from './drawer-info.vue';
 import DrawerRetryClaim from './drawer-retry.vue';
 
 defineOptions({
-  name: 'PackageMyPackageAbnormal',
+  name: 'PackageMyPackageClaim',
 });
 
 // const selectAll = ref();
