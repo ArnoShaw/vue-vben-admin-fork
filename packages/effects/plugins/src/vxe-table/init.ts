@@ -16,6 +16,7 @@ import {
   VxeInput,
   VxeLoading,
   VxeModal,
+  VxeNumberInput,
   VxePager,
   // VxeList,
   // VxeModal,
@@ -36,13 +37,7 @@ import enUS from 'vxe-pc-ui/lib/language/en-US';
 
 // 导入默认的语言
 import zhCN from 'vxe-pc-ui/lib/language/zh-CN';
-import {
-  VxeColgroup,
-  VxeColumn,
-  VxeGrid,
-  VxeTable,
-  VxeToolbar,
-} from 'vxe-table';
+import { VxeColgroup, VxeColumn, VxeGrid, VxeTable, VxeToolbar } from 'vxe-table';
 
 import { extendsDefaultFormatter } from './extends';
 
@@ -82,6 +77,7 @@ export function initVxeTable() {
   // VxeUI.component(VxeList);
   VxeUI.component(VxeLoading);
   VxeUI.component(VxeModal);
+  VxeUI.component(VxeNumberInput);
   // VxeUI.component(VxeOptgroup);
   // VxeUI.component(VxeOption);
   VxeUI.component(VxePager);

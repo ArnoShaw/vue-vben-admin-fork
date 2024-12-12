@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { DrawerProps, ExtendedDrawerApi } from './drawer';
 
-import { provide, ref, useId, watch } from 'vue';
+import { computed, provide, ref, useId, watch } from 'vue';
 
 import { useIsMobile, usePriorityValues, useSimpleLocale } from '@vben-core/composables';
 import { X } from '@vben-core/icons';
@@ -19,6 +19,7 @@ import {
   VbenLoading,
   VisuallyHidden,
 } from '@vben-core/shadcn-ui';
+import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
 import { globalShareState } from '@vben-core/shared/global-state';
 import { cn } from '@vben-core/shared/utils';
 
@@ -27,7 +28,9 @@ interface Props extends DrawerProps {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  appendToMain: false,
   drawerApi: undefined,
+  zIndex: 1000,
 });
 
 const components = globalShareState.getComponents();
@@ -42,6 +45,7 @@ const { isMobile } = useIsMobile();
 const state = props.drawerApi?.useStore?.();
 
 const {
+  appendToMain,
   cancelText,
   class: drawerClass,
   closable,
@@ -63,6 +67,7 @@ const {
   showConfirmButton,
   title,
   titleTooltip,
+  zIndex,
 } = usePriorityValues(props, state);
 
 watch(
@@ -106,10 +111,15 @@ function handleFocusOutside(e: Event) {
   e.preventDefault();
   e.stopPropagation();
 }
+
+const getAppendTo = computed(() => {
+  return appendToMain.value ? `#${ELEMENT_ID_MAIN_CONTENT}` : undefined;
+});
 </script>
 <template>
   <Sheet :modal="false" :open="state?.isOpen" @update:open="() => drawerApi?.close()">
     <SheetContent
+      :append-to="getAppendTo"
       :class="
         cn('flex w-[520px] flex-col', drawerClass, {
           '!w-full': isMobile || placement === 'bottom' || placement === 'top',
@@ -119,6 +129,7 @@ function handleFocusOutside(e: Event) {
       :modal="modal"
       :open="state?.isOpen"
       :side="placement"
+      :z-index="zIndex"
       @close-auto-focus="handleFocusOutside"
       @escape-key-down="escapeKeyDown"
       @focus-outside="handleFocusOutside"

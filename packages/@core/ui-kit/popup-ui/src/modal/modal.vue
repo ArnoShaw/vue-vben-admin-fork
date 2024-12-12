@@ -18,6 +18,7 @@ import {
   VbenLoading,
   VisuallyHidden,
 } from '@vben-core/shadcn-ui';
+import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
 import { globalShareState } from '@vben-core/shared/global-state';
 import { cn } from '@vben-core/shared/utils';
 
@@ -28,6 +29,7 @@ interface Props extends ModalProps {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  appendToMain: false,
   modalApi: undefined,
 });
 
@@ -48,6 +50,7 @@ const { isMobile } = useIsMobile();
 const state = props.modalApi?.useStore?.();
 
 const {
+  appendToMain,
   bordered,
   cancelText,
   centered,
@@ -74,6 +77,7 @@ const {
   showConfirmButton,
   title,
   titleTooltip,
+  zIndex,
 } = usePriorityValues(props, state);
 
 const shouldFullscreen = computed(() => (fullscreen.value && header.value) || isMobile.value);
@@ -149,11 +153,15 @@ function handleFocusOutside(e: Event) {
   e.preventDefault();
   e.stopPropagation();
 }
+const getAppendTo = computed(() => {
+  return appendToMain.value ? `#${ELEMENT_ID_MAIN_CONTENT}` : undefined;
+});
 </script>
 <template>
   <Dialog :modal="false" :open="state?.isOpen" @update:open="() => modalApi?.close()">
     <DialogContent
       ref="contentRef"
+      :append-to="getAppendTo"
       :class="
         cn(
           'left-0 right-0 top-[10vh] mx-auto flex max-h-[80%] w-[520px] flex-col p-0 sm:rounded-[var(--radius)]',
@@ -170,6 +178,7 @@ function handleFocusOutside(e: Event) {
       :modal="modal"
       :open="state?.isOpen"
       :show-close="closable"
+      :z-index="zIndex"
       close-class="top-3"
       @close-auto-focus="handleFocusOutside"
       @closed="() => modalApi?.onClosed()"

@@ -294,6 +294,10 @@ export interface ActionButtonOptions extends VbenButtonProps {
 export interface VbenFormProps<T extends BaseFormComponentType = BaseFormComponentType>
   extends Omit<FormRenderProps<T>, 'componentBindEventMap' | 'componentMap' | 'form'> {
   /**
+   * 操作按钮是否反转（提交按钮前置）
+   */
+  actionButtonsReverse?: boolean;
+  /**
    * 表单操作区域class
    */
   actionWrapperClass?: ClassType;

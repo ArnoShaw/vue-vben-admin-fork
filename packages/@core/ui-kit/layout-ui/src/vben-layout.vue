@@ -11,6 +11,7 @@ import {
 } from '@vben-core/composables';
 import { Menu } from '@vben-core/icons';
 import { VbenIconButton } from '@vben-core/shadcn-ui';
+import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
 
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 
@@ -431,6 +432,8 @@ function handleHeaderToggle() {
     emit('toggleSidebar');
   }
 }
+
+const idMainContent = ELEMENT_ID_MAIN_CONTENT;
 </script>
 
 <template>
@@ -523,6 +526,7 @@ function handleHeaderToggle() {
 
       <!-- </div> -->
       <LayoutContent
+        :id="idMainContent"
         :content-compact="contentCompact"
         :content-compact-width="contentCompactWidth"
         :padding="contentPadding"
