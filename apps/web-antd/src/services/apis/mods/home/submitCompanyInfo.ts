@@ -10,14 +10,13 @@ import type { AxiosRequestConfig } from '@vben/request';
 import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
-class Params {
-  /** bo */
-  bo: defs.apis.CompleteCompanyBO;
-}
-
-export type RequestTypes = Params;
+export type RequestTypes = defs.apis.CompleteCompanyBO;
 export type ResponseTypes = defs.apis.RVoid;
-const submitCompanyInfo = async (params: RequestTypes, config?: AxiosRequestConfig) => {
-  return requestClient.post<ResponseTypes>('/overview/submitCompanyInfo', { params }, config);
+const submitCompanyInfo = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
+  return requestClient.post<ResponseTypes>(
+    '/overview/submitCompanyInfo',
+    { data: bodyParams },
+    config,
+  );
 };
 export default submitCompanyInfo;

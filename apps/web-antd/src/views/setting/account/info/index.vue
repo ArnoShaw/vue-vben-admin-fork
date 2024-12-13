@@ -58,6 +58,10 @@ async function getDetail() {
 getInfo();
 
 getDetail();
+
+function handleSubmit() {
+  FormApi.validate();
+}
 </script>
 
 <template>
@@ -87,7 +91,7 @@ getDetail();
         <div
           class="bg-card z-100 border-border sticky bottom-0 mt-2 rounded-xl rounded-t-none border p-2 text-center"
         >
-          <Button type="primary">保存</Button>
+          <Button type="primary" @click="handleSubmit">保存</Button>
         </div>
       </div>
     </div>

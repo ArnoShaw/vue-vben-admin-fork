@@ -9,6 +9,7 @@ import getSysUserList_1 from './getSysUserList_1';
 import getSysUserList from './getSysUserList';
 import getRegionSelect from './getRegionSelect';
 import getExchangeRateList from './getExchangeRateList';
+import uploadWatermark from './uploadWatermark';
 
 export {
   downloadExport,
@@ -19,4 +20,5 @@ export {
   getSysUserList,
   getRegionSelect,
   getExchangeRateList,
+  uploadWatermark,
 };

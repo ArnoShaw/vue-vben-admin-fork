@@ -29,32 +29,6 @@ export const baseSchema: VbenFormSchema[] = [
     disabled: true,
   },
   {
-    fieldName: 'signupType',
-    label: '注册类型',
-    rules: 'required',
-    defaultValue: 0,
-    component: 'RadioGroup',
-    componentProps: {
-      options: [
-        {
-          label: '公司',
-          value: 0,
-        },
-        {
-          label: '个人',
-          value: 1,
-        },
-      ],
-    },
-    dependencies: {
-      show() {
-        return (company?.signupType ?? '') === '';
-      },
-      triggerFields: ['signupType'],
-    },
-    formItemClass: 'col-span-12',
-  },
-  {
     fieldName: 'companyName',
     label: company?.signupType === 1 ? '真实姓名' : '公司全称',
     component: 'Input',
@@ -126,13 +100,19 @@ export const baseSchema: VbenFormSchema[] = [
     componentProps: {
       placeholder: '请填写办公详细地址',
     },
-    rules: z.string().min(2, '只允许输入2-200个字符').max(200, '只允许输入200个字符'),
+    rules: z
+      .string()
+      .min(2, '只允许输入2-200个字符')
+      .max(200, '只允许输入2-200个字符')
+      .optional()
+      .or(z.string().refine((val) => !val)),
     formItemClass: 'col-span-5',
   },
   {
     fieldName: 'pickupState',
     label: '揽收地址',
     component: 'ApiSelect',
+    rules: 'selectRequired',
     componentProps: {
       api: () => apis.common.getRegionSelect({ type: 2, countryCode: 'CN' }),
     },
@@ -142,6 +122,7 @@ export const baseSchema: VbenFormSchema[] = [
     fieldName: 'pickupCity',
     hideLabel: true,
     component: 'Select',
+    rules: 'selectRequired',
     dependencies: {
       triggerFields: ['pickupState'],
       async componentProps({ pickupState }) {
@@ -159,6 +140,7 @@ export const baseSchema: VbenFormSchema[] = [
     fieldName: 'pickupArea',
     hideLabel: true,
     component: 'Select',
+    rules: 'selectRequired',
     dependencies: {
       triggerFields: ['pickupCity'],
       async componentProps({ pickupCity }) {
@@ -179,7 +161,11 @@ export const baseSchema: VbenFormSchema[] = [
     componentProps: {
       placeholder: '请填写揽收详细地址',
     },
-    rules: z.string().min(2, '只允许输入2-200个字符').max(200, '只允许输入200个字符'),
+    rules: z
+      .string()
+      .min(1, '请填写揽收详细地址')
+      .min(2, '只允许输入2-200个字符')
+      .max(200, '只允许输入2-200个字符'),
     formItemClass: 'col-span-5',
   },
   {
@@ -191,7 +177,7 @@ export const baseSchema: VbenFormSchema[] = [
       class: 'before !text-base',
       title: '相关联系人',
       helpMessage:
-        '请正确填写贵公司的相关联系人，以便在包裹出现异常时我们能够及时通知您。（至少填写一个联系人）',
+        '请正确填写贵公司的相关联系人，以便在包裹出现异常时我们能够及时通知您。（至少填写一位联系人）',
     },
   },
   {

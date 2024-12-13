@@ -18,12 +18,6 @@ export const HeroiconsCreditCard = createIconifyIcon('heroicons:credit-card');
 
 export const IonWalletOutline = createIconifyIcon('ion:wallet-outline');
 
-export const IconParkOutlineTransactionOrder = createIconifyIcon(
-  'icon-park-outline:transaction-order',
-);
-
-export const PhWarningBold = createIconifyIcon('ph:warning-bold');
-
 export const IconParkOutlineVolumeNotice = createIconifyIcon('icon-park-outline:volume-notice');
 
 export const RiMoreFill = createIconifyIcon('ri:more-fill');

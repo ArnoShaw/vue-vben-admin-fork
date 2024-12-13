@@ -44,7 +44,19 @@ interface CompanyInfo {
   companyCode: string;
   companyId: number;
   companyName: string;
-  signupType: number; // 1: 个人 0/null: 公司
+  ratifyMemo: string;
+  /**
+   * 审批状态 0:待完善资料 1:待审核 2:审核失败 3:审核成功
+   */
+  ratifyStatus: number;
+  /**
+   * 补齐证件弹窗显示状态
+   */
+  showProvideTip: boolean;
+  /**
+   * 注册状态 1:个人 0/null:公司
+   */
+  signupType: number;
 }
 
 interface AccessState {

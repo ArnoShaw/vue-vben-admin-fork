@@ -11,7 +11,7 @@ import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
 export type RequestTypes = defs.apis.SmsCodeBo;
-export type ResponseTypes = defs.apis.RString;
+export type ResponseTypes = defs.apis.RVoid;
 const smsCode = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
   return requestClient.post<ResponseTypes>('/resource/sms/code', { data: bodyParams }, config);
 };

@@ -1,38 +1,46 @@
 <script setup lang="ts">
 import type { defs } from '#/services/apis/api';
 
-import { PhWarningBold } from '@vben/icons';
+import { computed } from 'vue';
 
-withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
+import { Card, CardContent, CardHeader, CardTitle } from '@vben-core/shadcn-ui';
+
+const props = withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
   data: () => ({}),
+});
+
+const items = computed(() => {
+  const data = props.data;
+  return [
+    { title: '海外退件', content: data?.overseasReturn },
+    { title: '安检退件', content: data?.securityCheck },
+    { title: '异常包裹', content: data?.sortingReturn },
+    { title: '派送异常', content: 0 },
+  ];
 });
 </script>
 
 <template>
-  <div class="card-box group mt-4 pt-2 text-center">
-    <p class="flex items-center px-4 pb-2 text-left text-lg font-semibold">
-      <PhWarningBold
-        class="text-warning mr-2 text-xl transition-all duration-300 group-hover:scale-125"
-      />
-      异常情况（30天内）
-    </p>
-    <div class="flex">
-      <div class="flex-1 rounded-bl-xl transition-all hover:shadow-xl">
-        <div class="bg-warning/20 p-2">海外退件</div>
-        <div class="p-2 text-lg">{{ data?.overseasReturn || 0 }}</div>
-      </div>
-      <div class="flex-1 transition-all hover:shadow-xl">
-        <div class="bg-warning/20 p-2">安检退件</div>
-        <div class="p-2 text-lg">{{ data?.securityCheck || 0 }}</div>
-      </div>
-      <div class="flex-1 transition-all hover:shadow-xl">
-        <div class="bg-warning/20 p-2">异常包裹</div>
-        <div class="p-2 text-lg">{{ data?.sortingReturn || 0 }}</div>
-      </div>
-      <div class="flex-1 rounded-br-xl transition-all hover:shadow-xl">
-        <div class="bg-warning/20 p-2">派送异常</div>
-        <div class="p-2 text-lg">{{ 0 }}</div>
-      </div>
-    </div>
-  </div>
+  <Card class="mt-4">
+    <CardHeader class="py-4">
+      <CardTitle class="text-lg">异常情况（30天）</CardTitle>
+    </CardHeader>
+    <CardContent class="flex flex-wrap p-0">
+      <template v-for="(item, index) in items" :key="item.title">
+        <div
+          :class="{
+            'border-r-0': index === 3,
+          }"
+          class="border-border group w-1/4 cursor-pointer border-r border-t p-2 transition-all hover:shadow-xl"
+        >
+          <div class="flex items-center justify-center">
+            <span class="text-md text-foreground/80 ml-4">{{ item.title }}</span>
+          </div>
+          <div class="mt-2 flex justify-center text-base font-medium">
+            {{ item.content || 0 }}
+          </div>
+        </div>
+      </template>
+    </CardContent>
+  </Card>
 </template>

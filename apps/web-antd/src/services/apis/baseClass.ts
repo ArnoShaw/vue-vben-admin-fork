@@ -1,3 +1,14 @@
+class ApplyInterceptBO {
+  /** 包裹id */
+  packageId = undefined;
+
+  /** 端口 */
+  ports = '';
+
+  /** 用户ID */
+  userId = '';
+}
+
 class AssetBo {
   /** 交易开始时间 */
   beginTime = '';
@@ -45,6 +56,53 @@ class AssetVo {
 
   /** 交易类型 */
   tradeType = '';
+}
+
+class BankTransferFormBeanBO {
+  /** 银行转账主键ID */
+  companyBankTransferId = undefined;
+
+  /** 录入人 */
+  entryBy = undefined;
+
+  /** 录入时间 */
+  entryTime = '';
+
+  /** 收款方银行卡流水号 */
+  payeeBankCardId = undefined;
+
+  /** 收款方账号 */
+  payeeBankCardNumber = '';
+
+  /** 收款方开户行 */
+  payeeBankName = '';
+
+  /** 付款方账号 */
+  payeeName = '';
+
+  /** 付款方账号 */
+  payerBankCardNumber = '';
+
+  /** 付款方账号 */
+  payerBankName = '';
+
+  /** 转账名称 */
+  payerName = '';
+
+  /** 上传凭证地址 */
+  receiptPath = '';
+
+  /** 回单序列号 */
+  receiptSerialNumber = '';
+
+  /** 备注 */
+  remark = '';
+
+  /** 交易金额 */
+  tradeAmount = undefined;
+
+  /** 交易币种 */
+  tradeCurrency = '';
 }
 
 class BatchImportResultVO {
@@ -248,6 +306,15 @@ class CompanyVo {
   /** 公司名称 */
   companyName = '';
 
+  /** 审核备注 */
+  ratifyMemo = '';
+
+  /** 公司审核状态(0：待完善资料 1:待审核 2:审核失败 3:审核成功) */
+  ratifyStatus = undefined;
+
+  /** 检查是否弹窗提醒客户未提供营业执照或身份证正反面证件，如果是，先弹出完善信息页面 */
+  showProvideTip = false;
+
   /** 注册类型 0/null：公司 1：个人 */
   signupType = undefined;
 }
@@ -368,6 +435,14 @@ class DataInfoRechargeVo {
   total = undefined;
 }
 
+class DataInfoSyBsPackageVO {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
 class DataInfoSyCCompanyThirdplatformAccountVo {
   /** 列表数据 */
   rows = [];
@@ -416,6 +491,14 @@ class DataInfoSyExchangeRateVo {
   total = undefined;
 }
 
+class DataInfoSyPrintBsPackageVO {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
 class DataInfoSysLogininforVo {
   /** 列表数据 */
   rows = [];
@@ -432,9 +515,82 @@ class DataInfoTrackingNoVo {
   total = undefined;
 }
 
+class DataInfoUnBilledChargeSortVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DataInfoUnBilledChargeVo {
+  /** 列表数据 */
+  rows = [];
+
+  /** 总记录数 */
+  total = undefined;
+}
+
+class DopreDictionBO {
+  /** 公司id */
+  companyId = '';
+
+  /** 包裹id */
+  packageId = '';
+
+  /** 用户id */
+  userId = '';
+}
+
 class DownloadBO {
   /** filePath */
   filePath = '';
+}
+
+class ExportExcelBO {
+  /** true or false */
+  checkedFlag = '';
+
+  /** 公司id */
+  companyId = undefined;
+
+  /** 这里其实是预报时间，只是页面上用了createDate这个名字 */
+  createDate = '';
+
+  /** 开始时间 */
+  createTimeFrom = '';
+
+  /** 结束时间 */
+  createTimeTo = '';
+
+  /** 排序方式 */
+  order = '';
+
+  /** 包裹id数组 */
+  packageIds = [];
+
+  /** 预报状态 */
+  predictStatus = undefined;
+
+  /** 搜索文本 */
+  searchText = '';
+
+  /** 邮递方式id */
+  shippingMethodId = undefined;
+
+  /** 排序字段 */
+  sort = '';
+
+  /** 库存状态 */
+  stockStatus = '';
+}
+
+class FileVO {
+  /** fileName */
+  fileName = '';
+
+  /** url */
+  url = '';
 }
 
 class ForeignCurrencyVo {
@@ -510,9 +666,6 @@ class OverviewVo {
   /** 安检退件数 */
   securityCheck = undefined;
 
-  /** 检查是否弹窗提醒客户未提供营业执照或身份证正反面证件，如果是，先弹出完善信息页面 */
-  showProvideTip = false;
-
   /** 合同到期时间 */
   signDeadlineTime = '';
 
@@ -539,6 +692,41 @@ class OverviewVo {
 
   /** 昨日揽收数量 */
   yesterdayReceivedCount = undefined;
+}
+
+class PackageIdListBO {
+  /** 公司id */
+  companyId = '';
+
+  /** 开始时间 */
+  createTimeFrom = '';
+
+  /** 结束时间 */
+  createTimeTo = '';
+
+  /** 包裹id列表 */
+  packageIds = [];
+
+  /** 邮递方式 */
+  paramShippingMethodId = '';
+
+  /** 预报状态 */
+  predictStatus = '';
+
+  /** 预报日期 */
+  predictedDays = '';
+
+  /** 搜索推荐 */
+  searchText = '';
+
+  /** 是否选中所有 Y 是 */
+  selectAll = '';
+
+  /** 库存状态 */
+  stockStatus = '';
+
+  /** version */
+  version = '';
 }
 
 class PackageInfoBO {
@@ -780,6 +968,32 @@ class PackageInfoBO {
   userId = '';
 }
 
+class PackageListViewBO {
+  /** 公司id */
+  companyId = undefined;
+
+  /** 开始时间 */
+  createTimeFrom = '';
+
+  /** 结束时间 */
+  createTimeTo = '';
+
+  /** 邮递方式 */
+  paramShippingMethodId = '';
+
+  /** 预报状态 */
+  predictStatus = '';
+
+  /** 预报天数 */
+  predictedDays = '';
+
+  /** 搜索文本 */
+  searchText = '';
+
+  /** 库存状态 */
+  stockStatus = '';
+}
+
 class PackageProduct {
   /** 方便API调用(海关编码) */
   apiCustomCode = '';
@@ -853,6 +1067,147 @@ class PageQuery {
   pageSize = undefined;
 }
 
+class PredictionBO {
+  /** 公司id */
+  companyId = undefined;
+
+  /** 开始时间 */
+  createTimeFrom = '';
+
+  /** 结束时间 */
+  createTimeTo = '';
+
+  /** 搜索条件 */
+  searchText = '';
+}
+
+class PredictionBatchModifyBO {
+  /** 修改邮寄方式ID */
+  modifyShippingMethodId = '';
+
+  /** packageIdListBO */
+  packageIdListBO = new PackageIdListBO();
+
+  /** 用户id */
+  userId = '';
+}
+
+class PredictionBatchRevokeBO {
+  /** packageIdListBO */
+  packageIdListBO = new PackageIdListBO();
+
+  /** 运维、客户端的区分标志 */
+  ports = '';
+
+  /** 用户id */
+  userId = '';
+}
+
+class PredictionVO {
+  /** 预报失败 */
+  failurePredictCount = undefined;
+
+  /** 已预报 */
+  predictedCount = undefined;
+
+  /** 预报中 */
+  predictingCount = undefined;
+
+  /** 等待预报及预报失败 */
+  waitAndFailurePredictCount = undefined;
+
+  /** 等待预报 */
+  waitPredictCount = undefined;
+}
+
+class PrintPDFBO {
+  /** 包裹ID */
+  packageId = undefined;
+
+  /** 页面传递操作端口名称 */
+  ports = '';
+
+  /** 页面传递用户Id */
+  userId = undefined;
+}
+
+class PrintPackageBO {
+  /** 公司id */
+  companyId = '';
+
+  /** 创建日期 */
+  createdDays = '';
+
+  /** 打印状态 */
+  printStatus = '';
+
+  /** 日期 */
+  printedDays = '';
+
+  /** sku类型 */
+  skuType = '';
+
+  /** 库存状态 */
+  stockStatus = '';
+
+  /** version */
+  version = '';
+}
+
+class PrintPackageListViewBO {
+  /** 公司id */
+  companyId = undefined;
+
+  /** 创建时间 */
+  createdDays = '';
+
+  /** 开始时间 */
+  forecastTimeFrom = '';
+
+  /** 结束时间 */
+  forecastTimeTo = '';
+
+  /** 打印状态 */
+  printStatus = '';
+
+  /** 打印日期 */
+  printedDays = '';
+
+  /** 搜索文本 */
+  searchText = '';
+
+  /** 邮寄方式 */
+  shippingMethodId = undefined;
+
+  /** 库存状态 */
+  stockStatus = '';
+}
+
+class PrintPdfBatchBO {
+  /** 排序方式 */
+  order = '';
+
+  /** 包裹id列表 */
+  packageIdList = [];
+
+  /** 页面传递操作端口名称,yunwei 代表运维操作人员，client代表客户 */
+  ports = '';
+
+  /** 排序字段 */
+  sort = '';
+
+  /** 用户id */
+  userId = undefined;
+}
+
+class ProductAttributesVO {
+  /** 商品属性名称 */
+  attributeName = '';
+
+  /** 商品属性ID */
+  productAttributeId = undefined;
+}
+
 class ProductListBO {
   /** 公司id */
   companyId = undefined;
@@ -916,6 +1271,28 @@ class RContractRemindVo {
   msg = '';
 }
 
+class RFileVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new FileVO();
+
+  /** msg */
+  msg = '';
+}
+
+class RInteger {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = undefined;
+
+  /** msg */
+  msg = '';
+}
+
 class RListChannelPriceVO {
   /** code */
   code = undefined;
@@ -928,6 +1305,17 @@ class RListChannelPriceVO {
 }
 
 class RListMapStringObject {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RListProductAttributesVO {
   /** code */
   code = undefined;
 
@@ -971,6 +1359,17 @@ class RListRouterVo {
   msg = '';
 }
 
+class RListSyBsPackageProductVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
 class RListSyCMenuVo {
   /** code */
   code = undefined;
@@ -983,6 +1382,17 @@ class RListSyCMenuVo {
 }
 
 class RListSyExchangeRateVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RListSySysBankAccountVO {
   /** code */
   code = undefined;
 
@@ -1092,6 +1502,17 @@ class ROverviewVo {
   msg = '';
 }
 
+class RPredictionVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new PredictionVO();
+
+  /** msg */
+  msg = '';
+}
+
 class RProfileVo {
   /** code */
   code = undefined;
@@ -1125,12 +1546,34 @@ class RSavePackageVO {
   msg = '';
 }
 
+class RShippingMethodListVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new ShippingMethodListVO();
+
+  /** msg */
+  msg = '';
+}
+
 class RString {
   /** code */
   code = undefined;
 
   /** data */
   data = '';
+
+  /** msg */
+  msg = '';
+}
+
+class RSyBsPackageDetailVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new SyBsPackageDetailVO();
 
   /** msg */
   msg = '';
@@ -1345,9 +1788,6 @@ class RechargeVo {
 }
 
 class RegisterBody {
-  /** 验证码 */
-  code = '';
-
   /** 授权类型 */
   grantType = '';
 
@@ -1362,9 +1802,6 @@ class RegisterBody {
 
   /** 用户名 */
   username = '';
-
-  /** 唯一标识 */
-  uuid = '';
 }
 
 class RemoteDictDataVO {
@@ -1481,6 +1918,17 @@ class RemoteSysUserVO {
   username = '';
 }
 
+class RevokePredictBatchBO {
+  /** 包裹ID列表 */
+  packageIdList = [];
+
+  /** 客户端 */
+  ports = '';
+
+  /** 用户ID */
+  userId = undefined;
+}
+
 class RouterVo {
   /** 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式--如组件页面 */
   alwaysShow = false;
@@ -1521,9 +1969,57 @@ class SavePackageVO {
   ratifyStatus = false;
 }
 
+class ShippingMethodListBO {
+  /** 公司id */
+  companyId = '';
+
+  /** 开始时间 */
+  createTimeFrom = '';
+
+  /** 结束时间 */
+  createTimeTo = '';
+
+  /** 预报状态 */
+  predictStatus = '';
+
+  /** 预报日期 */
+  predictedDays = '';
+
+  /** 搜索条件 */
+  searchText = '';
+
+  /** 库存状态 */
+  stockStatus = '';
+
+  /** version */
+  version = '';
+}
+
+class ShippingMethodListVO {
+  /** shippingMethodVOList */
+  shippingMethodVOList = [];
+
+  /** total */
+  total = undefined;
+}
+
+class ShippingMethodVO {
+  /** 总数 */
+  pnum = undefined;
+
+  /** 邮递方式名称 */
+  shippingMethodCnName = '';
+
+  /** 邮递方式id */
+  shippingMethodId = undefined;
+}
+
 class SmsCodeBo {
   /** captchaVerifyParam */
   captchaVerifyParam = '';
+
+  /** error */
+  error = false;
 
   /** mobile */
   mobile = '';
@@ -1621,6 +2117,897 @@ class SyAccountInfoVo {
 
   /** 主账号用户名 */
   userName = '';
+}
+
+class SyBsPackageDetailVO {
+  /** 到港时间 */
+  arrivedPortTime = '';
+
+  /** 预留字段1 */
+  backup1 = '';
+
+  /** 预留字段2 */
+  backup2 = '';
+
+  /** 预留字段3 */
+  backup3 = '';
+
+  /** 预留字段4 */
+  backup4 = '';
+
+  /** 预留字段5 */
+  backup5 = '';
+
+  /** 装袋操作人 */
+  baggingBy = undefined;
+
+  /** 装袋类型(0:实扫装袋;1:随机装袋;2:虚拟装袋) */
+  baggingMethod = '';
+
+  /** 装袋时间 */
+  baggingTime = '';
+
+  /** 改单授权人ID */
+  changeChannelAuthorizerId = undefined;
+
+  /** 换单人 */
+  changeLabelBy = undefined;
+
+  /** 授权者改单id */
+  changeLabelCertigierId = undefined;
+
+  /** 改单邮路id */
+  changeLabelChannelId = undefined;
+
+  /** 改单邮路分区id */
+  changeLabelChannelareaId = undefined;
+
+  /** 改单计费分区 */
+  changeLabelCharzoneId = undefined;
+
+  /** 换单机构 */
+  changeLabelOrganizationId = undefined;
+
+  /** 改单模板id */
+  changeLabelTemplateId = undefined;
+
+  /** 换单时间 */
+  changeLabelTime = '';
+
+  /** 改单追踪号 */
+  changeLabelTrackingNumber = '';
+
+  /** 邮路流水号 重命名 */
+  channelId = undefined;
+
+  /** 计费分区流水号 */
+  chargeZoneId = undefined;
+
+  /** 选中包裹属性 */
+  checkedPackageAttributeList = [];
+
+  /** 清关成功 */
+  clearanceFinishTime = '';
+
+  /** 清关中 */
+  clearanceProcessTime = '';
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 币种代码 */
+  currencyCode = '';
+
+  /** 客户订单号 */
+  customerOrderNo = '';
+
+  /** 客户参考号 */
+  customerReferenceNo = '';
+
+  /** 妥投时间 */
+  deliveredTime = '';
+
+  /** 包裹销毁人 */
+  destroyBy = undefined;
+
+  /** 包裹销毁时间 */
+  destroyTime = '';
+
+  /** 首次尾程节点时间 */
+  firstTrackTime = '';
+
+  /** 是否投保(0:不投保 1:投保) */
+  insuranceFlag = '';
+
+  /** 投保保单号 */
+  insuranceNumber = '';
+
+  /** IOSS识别号 */
+  iossVatId = '';
+
+  /** 是否退税 */
+  isDrawBack = undefined;
+
+  /** 上次执行抓取的任务的优先级，空或者0是最低的。优先级高于该值的抓取任务可以忽略last_query_time从而执行抓取。 */
+  lastQueryFrom = undefined;
+
+  /** 最后查询时间 */
+  lastQueryTime = '';
+
+  /** 离港发货操作人 */
+  leavePortBy = undefined;
+
+  /** 离港发货时间 */
+  leavePortTime = '';
+
+  /** 离开转运中心操作人 */
+  leaveTransitcenterBy = undefined;
+
+  /** 离开转运中心时间 */
+  leaveTransitcenterTime = '';
+
+  /** 交航失败操作人 */
+  leaveportReturnBy = undefined;
+
+  /** 交航退件出库操作人 */
+  leaveportReturnCustomerBy = undefined;
+
+  /** 交航退件出库时间 */
+  leaveportReturnCustomerTime = '';
+
+  /** 交航退件收货人 */
+  leaveportReturnReceiveBy = undefined;
+
+  /** 交航退件收货时间 */
+  leaveportReturnReceiveTime = '';
+
+  /** 交航失败时间 */
+  leaveportReturnTime = '';
+
+  /** 邮袋编号 */
+  mailbagCode = '';
+
+  /** 改单前邮路ID */
+  originChannelId = undefined;
+
+  /** 改单前邮路分区ID */
+  originChannelareaId = undefined;
+
+  /** 改单前计费分区ID */
+  originChargezoneId = undefined;
+
+  /** 始发国出口清关 */
+  originCustomsTime = '';
+
+  /** 改单前追踪号 */
+  originTrackingNumber = '';
+
+  /** 内单号 */
+  otherNumber = '';
+
+  /** 包裹出库退回人 */
+  outBy = undefined;
+
+  /** 包裹出库退回时间 */
+  outTime = '';
+
+  /** 出境邮袋流水号 */
+  outboundMailbagId = undefined;
+
+  /** 海外退件 */
+  overseasRefund = false;
+
+  /** OCD金额 */
+  packageCodAmount = undefined;
+
+  /** OCD币种 */
+  packageCodCurrencyCode = '';
+
+  /** 包裹编码 */
+  packageCode = '';
+
+  /** 包裹错误流水号 */
+  packageErrorCode = '';
+
+  /** 包裹高度(cm) */
+  packageHeight = undefined;
+
+  /** 包裹流水号 */
+  packageId = undefined;
+
+  /** 包裹保险费 */
+  packageInsurance = undefined;
+
+  /** 包裹投保金额 */
+  packageInsureAmount = undefined;
+
+  /** 包裹长度(cm) */
+  packageLength = undefined;
+
+  /** 包裹销售金额（USD） */
+  packageSalesAmount = undefined;
+
+  /** 2:API、3:菜鸟、4:马帮、5:速卖、6:通途、7:Vova、8:Wish、9普源、10:敦煌、31:新菜鸟 */
+  packageSource = '';
+
+  /** 包裹宽度(cm) */
+  packageWidth = undefined;
+
+  /** 电子保单PDF路径 */
+  pdfInsurancePath = '';
+
+  /** 预报人 */
+  predictionBy = undefined;
+
+  /** 包裹预报错误信息 */
+  predictionFailReason = '';
+
+  /** 包裹预估(预报)运费(CNY) */
+  predictionFreight = undefined;
+
+  /** 预报时间 */
+  predictionTime = '';
+
+  /** 包裹预报体积计重 */
+  predictionVolumnWeight = undefined;
+
+  /** 包裹预报重量（KG） */
+  predictionWeight = undefined;
+
+  /** 最后打印人 */
+  printBy = undefined;
+
+  /** 最后打印时间 */
+  printTime = '';
+
+  /** 到达目的国操作人 */
+  reachCountryBy = undefined;
+
+  /** 到达目的国时间 */
+  reachCountryTime = '';
+
+  /** 到达OE操作人 */
+  reachOeBy = undefined;
+
+  /** 到达OE时间 */
+  reachOeTime = '';
+
+  /** 到达转运中心操作人 */
+  reachTransitcenterBy = undefined;
+
+  /** 到达转运中心时间 */
+  reachTransitcenterTime = '';
+
+  /** 收件人地址1 */
+  recipientAddress1 = '';
+
+  /** 收件人地址2 */
+  recipientAddress2 = '';
+
+  /** 收件人地址3 */
+  recipientAddress3 = '';
+
+  /** 收件人城市 */
+  recipientCity = '';
+
+  /** 收件国家代码 */
+  recipientCountryCode = '';
+
+  /** 收件人邮箱 */
+  recipientEmail = '';
+
+  /** 收件人完整地址 */
+  recipientFullAddress = '';
+
+  /** 身份证号码 */
+  recipientIdentityNumber = '';
+
+  /** 收件人手机 */
+  recipientMobile = '';
+
+  /** 收件人 */
+  recipientName = '';
+
+  /** 收件人联系电话 */
+  recipientPhone = '';
+
+  /** 收件人邮编 */
+  recipientPostCode = '';
+
+  /** 收件人省州 */
+  recipientState = '';
+
+  /** 个人税号 */
+  recipientTaxNumber = '';
+
+  /** 包裹退回处理中心退回人 */
+  returnCenterBy = undefined;
+
+  /** 包裹退回处理中心时间 */
+  returnCenterTime = '';
+
+  /** 预报请求撤销人 */
+  revokePredictionBy = undefined;
+
+  /** 预报撤销失败原因 */
+  revokePredictionFailReason = '';
+
+  /** 预报撤销状态(0:撤销失败；1：撤销成功) */
+  revokePredictionStatus = '';
+
+  /** 预报撤销时间 */
+  revokePredictionTime = '';
+
+  /** 销售日期 */
+  saleTime = '';
+
+  /** 寄件人地址 */
+  senderAddress = '';
+
+  /** 寄件人城市 */
+  senderCity = '';
+
+  /** 寄件人国家代码 */
+  senderCountryCode = '';
+
+  /** 寄件人行政区 */
+  senderDistrict = '';
+
+  /** 寄件人邮箱 */
+  senderEmail = '';
+
+  /** 发件人全地址 */
+  senderFullAddress = '';
+
+  /** 发件人姓名 */
+  senderName = '';
+
+  /** 发件人电话 */
+  senderPhone = '';
+
+  /** 发件人邮编 */
+  senderPostcode = '';
+
+  /** 寄件人省州 */
+  senderState = '';
+
+  /** 寄件人税号 */
+  senderTaxNumber = '';
+
+  /** 包裹发货人 */
+  shippedBy = undefined;
+
+  /** 包裹发货时间 */
+  shippedTime = '';
+
+  /** 邮路流水号 */
+  shippingMethodId = undefined;
+
+  /** 邮路分区流水号 */
+  shippingZoneId = undefined;
+
+  /** 标记包裹缺货时间 */
+  signStockTime = '';
+
+  /** 入仓人 */
+  sortingResultBy = undefined;
+
+  /** 入仓时间 */
+  sortingResultTime = '';
+
+  /** 入仓重量 */
+  sortingResultWeight = undefined;
+
+  /** 包裹状态(0:等待分配物流;1:分配物流失败;2:分配物流成功(等待预报);3:预报失败;4:已预报[等待入仓];5:已入仓[完成分拣);6:分拣转仓中;7:已装袋;8:出境邮袋转仓中9:已发货;10:预报中;11:已离港;12:已离开转运中心;13:已到达目的国;14:已到达OE;15:已到达转运中心;16:已退回处理中心;17:待退回寄件人;18:已退回寄件人;19:寄件人已确认海外退件收货;20:派送处理中;21:包裹无法派送;22:派送成功;23:包裹已销毁;24:交航失败;25:交航退件出库;26:寄件人已确认交航退件收货;27:客户拦截;28:运维拦截;35:线下退件) */
+  status = '';
+
+  /** 包裹是否缺货(0：不缺货；1:缺货) */
+  stockFlag = '';
+
+  /** 退税手续费 */
+  taxRefundAmount = undefined;
+
+  /** 是否退税 */
+  taxRefundFlag = undefined;
+
+  /** 跟踪号 */
+  trackingNumber = '';
+
+  /** 交接末端配送 */
+  transportHandoverTime = '';
+
+  /** 更新人 */
+  updateBy = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
+}
+
+class SyBsPackageProductVO {
+  /** backup1 */
+  backup1 = '';
+
+  /** backup2 */
+  backup2 = '';
+
+  /** backup3 */
+  backup3 = '';
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 申报币种 */
+  currencyCode = '';
+
+  /** 海关编码 */
+  customCode = '';
+
+  /** 报关产品中文名称 */
+  declareCnName = '';
+
+  /** 报关产品英文名称 */
+  declareEnName = '';
+
+  /** 报关单价（USD） */
+  declarePrice = undefined;
+
+  /** 包裹流水号 */
+  packageId = undefined;
+
+  /** 包裹商品流水号 */
+  packageProductId = undefined;
+
+  /** 产品材质 */
+  productMaterial = '';
+
+  /** 产品用途 */
+  productPurpose = '';
+
+  /** 产品SKU */
+  productSku = '';
+
+  /** 报关产品数量 */
+  quantity = undefined;
+
+  /** 修订报关产品中文名称 */
+  reviseCnName = '';
+
+  /** 修订海关编码 */
+  reviseCustomCode = '';
+
+  /** 修订报关单价（USD） */
+  reviseDeclarePrice = undefined;
+
+  /** 修订报关产品英文名称 */
+  reviseEnName = '';
+
+  /** 总价 */
+  totalPrice = undefined;
+
+  /** 更新人 */
+  updateBy = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
+}
+
+class SyBsPackageVO {
+  /** 到港时间 */
+  arrivedPortTime = '';
+
+  /** 预留字段1 */
+  backup1 = '';
+
+  /** 预留字段2 */
+  backup2 = '';
+
+  /** 预留字段3 */
+  backup3 = '';
+
+  /** 预留字段4 */
+  backup4 = '';
+
+  /** 预留字段5 */
+  backup5 = '';
+
+  /** 装袋操作人 */
+  baggingBy = undefined;
+
+  /** 装袋类型(0:实扫装袋;1:随机装袋;2:虚拟装袋) */
+  baggingMethod = '';
+
+  /** 装袋时间 */
+  baggingTime = '';
+
+  /** 改单授权人ID */
+  changeChannelAuthorizerId = undefined;
+
+  /** 换单人 */
+  changeLabelBy = undefined;
+
+  /** 授权者改单id */
+  changeLabelCertigierId = undefined;
+
+  /** 改单邮路id */
+  changeLabelChannelId = undefined;
+
+  /** 改单邮路分区id */
+  changeLabelChannelareaId = undefined;
+
+  /** 改单计费分区 */
+  changeLabelCharzoneId = undefined;
+
+  /** 换单机构 */
+  changeLabelOrganizationId = undefined;
+
+  /** 改单模板id */
+  changeLabelTemplateId = undefined;
+
+  /** 换单时间 */
+  changeLabelTime = '';
+
+  /** 改单追踪号 */
+  changeLabelTrackingNumber = '';
+
+  /** 邮路流水号 重命名 */
+  channelId = undefined;
+
+  /** 计费分区流水号 */
+  chargeZoneId = undefined;
+
+  /** 清关成功 */
+  clearanceFinishTime = '';
+
+  /** 清关中 */
+  clearanceProcessTime = '';
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 币种代码 */
+  currencyCode = '';
+
+  /** 客户订单号 */
+  customerOrderNo = '';
+
+  /** 客户参考号 */
+  customerReferenceNo = '';
+
+  /** 妥投时间 */
+  deliveredTime = '';
+
+  /** 包裹销毁人 */
+  destroyBy = undefined;
+
+  /** 包裹销毁时间 */
+  destroyTime = '';
+
+  /** 首次尾程节点时间 */
+  firstTrackTime = '';
+
+  /** 是否冻结 */
+  freezeStatus = undefined;
+
+  /** 是否投保(0:不投保 1:投保) */
+  insuranceFlag = '';
+
+  /** 投保保单号 */
+  insuranceNumber = '';
+
+  /** IOSS识别号 */
+  iossVatId = '';
+
+  /** 是否退税 */
+  isDrawback = undefined;
+
+  /** 上次执行抓取的任务的优先级，空或者0是最低的。优先级高于该值的抓取任务可以忽略last_query_time从而执行抓取。 */
+  lastQueryFrom = undefined;
+
+  /** 最后查询时间 */
+  lastQueryTime = '';
+
+  /** 离港发货操作人 */
+  leavePortBy = undefined;
+
+  /** 离港发货时间 */
+  leavePortTime = '';
+
+  /** 离开转运中心操作人 */
+  leaveTransitcenterBy = undefined;
+
+  /** 离开转运中心时间 */
+  leaveTransitcenterTime = '';
+
+  /** 交航失败操作人 */
+  leaveportReturnBy = undefined;
+
+  /** 交航退件出库操作人 */
+  leaveportReturnCustomerBy = undefined;
+
+  /** 交航退件出库时间 */
+  leaveportReturnCustomerTime = '';
+
+  /** 交航退件收货人 */
+  leaveportReturnReceiveBy = undefined;
+
+  /** 交航退件收货时间 */
+  leaveportReturnReceiveTime = '';
+
+  /** 交航失败时间 */
+  leaveportReturnTime = '';
+
+  /** 邮袋编号 */
+  mailbagCode = '';
+
+  /** 改单前邮路ID */
+  originChannelId = undefined;
+
+  /** 改单前邮路分区ID */
+  originChannelareaId = undefined;
+
+  /** 改单前计费分区ID */
+  originChargezoneId = undefined;
+
+  /** 始发国出口清关 */
+  originCustomsTime = '';
+
+  /** 改单前追踪号 */
+  originTrackingNumber = '';
+
+  /** 内单号 */
+  otherNumber = '';
+
+  /** 包裹出库退回人 */
+  outBy = undefined;
+
+  /** 包裹出库退回时间 */
+  outTime = '';
+
+  /** 出境邮袋流水号 */
+  outboundMailbagId = undefined;
+
+  /** 海外退件 */
+  overseasRefund = false;
+
+  /** OCD金额 */
+  packageCodAmount = undefined;
+
+  /** OCD币种 */
+  packageCodCurrencyCode = '';
+
+  /** 包裹编码 */
+  packageCode = '';
+
+  /** 包裹错误流水号 */
+  packageErrorCode = '';
+
+  /** 包裹高度(cm) */
+  packageHeight = undefined;
+
+  /** 包裹流水号 */
+  packageId = undefined;
+
+  /** 包裹保险费 */
+  packageInsurance = undefined;
+
+  /** 包裹投保金额 */
+  packageInsureAmount = undefined;
+
+  /** 包裹长度(cm) */
+  packageLength = undefined;
+
+  /** 包裹销售金额（USD） */
+  packageSalesAmount = undefined;
+
+  /** 2:API、3:菜鸟、4:马帮、5:速卖、6:通途、7:Vova、8:Wish、9普源、10:敦煌、31:新菜鸟 */
+  packageSource = '';
+
+  /** 包裹宽度(cm) */
+  packageWidth = undefined;
+
+  /** 电子保单PDF路径 */
+  pdfInsurancePath = '';
+
+  /** 预报人 */
+  predictionBy = undefined;
+
+  /** 包裹预报错误信息 */
+  predictionFailReason = '';
+
+  /** 包裹预估(预报)运费(CNY) */
+  predictionFreight = undefined;
+
+  /** 预报时间 */
+  predictionTime = '';
+
+  /** 包裹预报体积计重 */
+  predictionVolumnWeight = undefined;
+
+  /** 包裹预报重量（KG） */
+  predictionWeight = undefined;
+
+  /** 最后打印人 */
+  printBy = undefined;
+
+  /** 最后打印时间 */
+  printTime = '';
+
+  /** 到达目的国操作人 */
+  reachCountryBy = undefined;
+
+  /** 到达目的国时间 */
+  reachCountryTime = '';
+
+  /** 到达OE操作人 */
+  reachOeBy = undefined;
+
+  /** 到达OE时间 */
+  reachOeTime = '';
+
+  /** 到达转运中心操作人 */
+  reachTransitcenterBy = undefined;
+
+  /** 到达转运中心时间 */
+  reachTransitcenterTime = '';
+
+  /** 收件人地址1 */
+  recipientAddress1 = '';
+
+  /** 收件人地址2 */
+  recipientAddress2 = '';
+
+  /** 收件人地址3 */
+  recipientAddress3 = '';
+
+  /** 收件人城市 */
+  recipientCity = '';
+
+  /** 收件国家代码 */
+  recipientCountryCode = '';
+
+  /** 收件人邮箱 */
+  recipientEmail = '';
+
+  /** 收件人完整地址 */
+  recipientFullAddress = '';
+
+  /** 身份证号码 */
+  recipientIdentityNumber = '';
+
+  /** 收件人手机 */
+  recipientMobile = '';
+
+  /** 收件人 */
+  recipientName = '';
+
+  /** 收件人联系电话 */
+  recipientPhone = '';
+
+  /** 收件人邮编 */
+  recipientPostCode = '';
+
+  /** 收件人省州 */
+  recipientState = '';
+
+  /** 个人税号 */
+  recipientTaxNumber = '';
+
+  /** 包裹退回处理中心退回人 */
+  returnCenterBy = undefined;
+
+  /** 包裹退回处理中心时间 */
+  returnCenterTime = '';
+
+  /** 预报请求撤销人 */
+  revokePredictionBy = undefined;
+
+  /** 预报撤销失败原因 */
+  revokePredictionFailReason = '';
+
+  /** 预报撤销状态(0:撤销失败；1：撤销成功) */
+  revokePredictionStatus = '';
+
+  /** 预报撤销时间 */
+  revokePredictionTime = '';
+
+  /** 销售日期 */
+  saleTime = '';
+
+  /** 寄件人地址 */
+  senderAddress = '';
+
+  /** 寄件人城市 */
+  senderCity = '';
+
+  /** 寄件人国家代码 */
+  senderCountryCode = '';
+
+  /** 寄件人行政区 */
+  senderDistrict = '';
+
+  /** 寄件人邮箱 */
+  senderEmail = '';
+
+  /** 发件人全地址 */
+  senderFullAddress = '';
+
+  /** 发件人姓名 */
+  senderName = '';
+
+  /** 发件人电话 */
+  senderPhone = '';
+
+  /** 发件人邮编 */
+  senderPostcode = '';
+
+  /** 寄件人省州 */
+  senderState = '';
+
+  /** 寄件人税号 */
+  senderTaxNumber = '';
+
+  /** 包裹发货人 */
+  shippedBy = undefined;
+
+  /** 包裹发货时间 */
+  shippedTime = '';
+
+  /** 邮路流水号 */
+  shippingMethodId = undefined;
+
+  /** 邮路分区流水号 */
+  shippingZoneId = undefined;
+
+  /** 标记包裹缺货时间 */
+  signStockTime = '';
+
+  /** 入仓人 */
+  sortingResultBy = undefined;
+
+  /** 入仓时间 */
+  sortingResultTime = '';
+
+  /** 入仓重量 */
+  sortingResultWeight = undefined;
+
+  /** 包裹状态(0:等待分配物流;1:分配物流失败;2:分配物流成功(等待预报);3:预报失败;4:已预报[等待入仓];5:已入仓[完成分拣);6:分拣转仓中;7:已装袋;8:出境邮袋转仓中9:已发货;10:预报中;11:已离港;12:已离开转运中心;13:已到达目的国;14:已到达OE;15:已到达转运中心;16:已退回处理中心;17:待退回寄件人;18:已退回寄件人;19:寄件人已确认海外退件收货;20:派送处理中;21:包裹无法派送;22:派送成功;23:包裹已销毁;24:交航失败;25:交航退件出库;26:寄件人已确认交航退件收货;27:客户拦截;28:运维拦截;35:线下退件) */
+  status = '';
+
+  /** 包裹是否缺货(0：不缺货；1:缺货) */
+  stockFlag = '';
+
+  /** 退税手续费 */
+  taxRefundAmount = undefined;
+
+  /** 是否退税 */
+  taxRefundFlag = undefined;
+
+  /** 跟踪号 */
+  trackingNumber = '';
+
+  /** 交接末端配送 */
+  transportHandoverTime = '';
+
+  /** 更新人 */
+  upLocalDateTimeBy = undefined;
+
+  /** 更新时间 */
+  upLocalDateTimeTime = '';
 }
 
 class SyCCompanyDetailBo {
@@ -2655,6 +4042,121 @@ class SyExchangeRateVo {
   updatedTime = '';
 }
 
+class SyPrintBsPackageVO {
+  /** 创建时间 */
+  createTime = '';
+
+  /** 客户订单号 */
+  customerOrderNo = '';
+
+  /** 客户参考号 */
+  customerReferenceNo = '';
+
+  /** 包裹编码 */
+  packageCode = '';
+
+  /** 包裹流水号 */
+  packageId = undefined;
+
+  /** 包裹预估(预报)运费(CNY) */
+  predictionFreight = undefined;
+
+  /** 包裹预报重量（KG） */
+  predictionWeight = undefined;
+
+  /** 最后打印时间 */
+  printTime = '';
+
+  /** productskus */
+  productskus = '';
+
+  /** 收件国家代码 */
+  recipientCountryCode = '';
+
+  /** 邮寄方式名称 */
+  shippingmethodname = '';
+
+  /** 包裹状态(0:等待分配物流;1:分配物流失败;2:分配物流成功(等待预报);3:预报失败;4:已预报[等待入仓];5:已入仓[完成分拣);6:分拣转仓中;7:已装袋;8:出境邮袋转仓中9:已发货;10:预报中;11:已离港;12:已离开转运中心;13:已到达目的国;14:已到达OE;15:已到达转运中心;16:已退回处理中心;17:待退回寄件人;18:已退回寄件人;19:寄件人已确认海外退件收货;20:派送处理中;21:包裹无法派送;22:派送成功;23:包裹已销毁;24:交航失败;25:交航退件出库;26:寄件人已确认交航退件收货;27:客户拦截;28:运维拦截;35:线下退件) */
+  status = '';
+
+  /** 追踪号 */
+  trackingNumber = '';
+
+  /** 更新时间 */
+  updateTime = '';
+}
+
+class SySysBankAccountVO {
+  /** 是否自动对账(0:否 1:是) */
+  accountType = undefined;
+
+  /** 人民币余额 */
+  balanceCny = undefined;
+
+  /** 人民币余额 */
+  balanceCnyStr = '';
+
+  /** 港币余额 */
+  balanceHkd = undefined;
+
+  /** 港币余额 */
+  balanceHkdStr = '';
+
+  /** 美元余额 */
+  balanceUsd = undefined;
+
+  /** 美元余额 */
+  balanceUsdStr = '';
+
+  /** 开户账号 */
+  bankAccount = '';
+
+  /** 银行账号流水号 */
+  bankAccountId = undefined;
+
+  /** 开户行 */
+  bankName = '';
+
+  /** 银行简称 */
+  bankShortName = '';
+
+  /** 人民币导入模板(默认1（不支持导入） 否则是官方数据格式下拉框选的值) */
+  cnyImportType = undefined;
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 港币导入模板(默认1（不支持导入） 否则是官方数据格式下拉框选的值) */
+  hkdImportType = undefined;
+
+  /** 备注 */
+  remarks = '';
+
+  /** 排序 */
+  sort = undefined;
+
+  /** 状态(0:停用;1:启用) */
+  status = undefined;
+
+  /** 交易状态（0/null:未交易 1:正在交易） */
+  tradeStatus = undefined;
+
+  /** 更新人 */
+  updateBy = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
+
+  /** 美元导入模板(默认1（不支持导入） 否则是官方数据格式下拉框选的值) */
+  usdImportType = undefined;
+
+  /** 户名 */
+  userName = '';
+}
+
 class SySysNotice {
   /** 公告内容 */
   content = '';
@@ -2802,17 +4304,11 @@ class SysMenuBo {
 }
 
 class SysUserBindMobileBo {
-  /** 图形验证码 */
-  code = '';
-
   /** 手机号码 */
   mobile = '';
 
   /** 手机验证码 */
   smsCode = '';
-
-  /** 唯一标识 */
-  uuid = '';
 }
 
 class SysUserBo {
@@ -2857,23 +4353,14 @@ class SysUserBo {
 }
 
 class SysUserEditPasswordBo {
-  /** 验证码 */
-  code = '';
-
   /** 手机号码 */
   mobile = '';
 
   /** 用户密码 */
   password = '';
 
-  /** smsCode */
+  /** 短信验证码 */
   smsCode = '';
-
-  /** userId */
-  userId = undefined;
-
-  /** 唯一标识 */
-  uuid = '';
 }
 
 class SysUserMenuBindBo {
@@ -2893,17 +4380,8 @@ class SysUserPasswordBo {
 }
 
 class SysUserPasswordForgotBo {
-  /** 图形验证码 */
-  code = '';
-
-  /** 手机号 */
-  mobile = '';
-
-  /** 用户名 */
-  userName = '';
-
-  /** 唯一标识 */
-  uuid = '';
+  /** 关键字（用户名或手机号） */
+  keyword = '';
 }
 
 class SysUserProfileBo {
@@ -2933,14 +4411,8 @@ class SysUserProfileBo {
 }
 
 class SysUserUnbindMobileBo {
-  /** 图形验证码 */
-  code = '';
-
   /** 手机验证码 */
   smsCode = '';
-
-  /** 唯一标识 */
-  uuid = '';
 }
 
 class SysUserVo {
@@ -3001,6 +4473,17 @@ class TableDataInfoRechargeVo {
 
   /** data */
   data = new DataInfoRechargeVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoSyBsPackageVO {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoSyBsPackageVO();
 
   /** 消息内容 */
   msg = '';
@@ -3072,6 +4555,17 @@ class TableDataInfoSyExchangeRateVo {
   msg = '';
 }
 
+class TableDataInfoSyPrintBsPackageVO {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoSyPrintBsPackageVO();
+
+  /** 消息内容 */
+  msg = '';
+}
+
 class TableDataInfoSysLogininforVo {
   /** 消息状态码 */
   code = undefined;
@@ -3089,6 +4583,28 @@ class TableDataInfoTrackingNoVo {
 
   /** data */
   data = new DataInfoTrackingNoVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoUnBilledChargeSortVo {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoUnBilledChargeSortVo();
+
+  /** 消息内容 */
+  msg = '';
+}
+
+class TableDataInfoUnBilledChargeVo {
+  /** 消息状态码 */
+  code = undefined;
+
+  /** data */
+  data = new DataInfoUnBilledChargeVo();
 
   /** 消息内容 */
   msg = '';
@@ -3351,6 +4867,134 @@ class TreeVO {
   parentId = undefined;
 }
 
+class UnBilledChargeBo {
+  /** 费用类型(0: 物流费用, 1: 其他费用, 2: 异常费用) */
+  chargeType = undefined;
+
+  /** 公司流水号 */
+  companyId = undefined;
+}
+
+class UnBilledChargeSortBo {
+  /** 费用id */
+  companyChargeId = undefined;
+
+  /** 分拣方式(0: 人工, 1: 逐单入仓) */
+  sortingFrom = undefined;
+
+  /** 有效性(0: 有效, 1: 异常) */
+  sortingType = undefined;
+}
+
+class UnBilledChargeSortVo {
+  /** 邮寄方式名称/邮路名称 */
+  channelCnName = '';
+
+  /** 邮路代码 */
+  channelCode = '';
+
+  /** 计费重 */
+  chargeWeight = undefined;
+
+  /** 目的国中文名 */
+  countryCnName = '';
+
+  /** 目的国英文名 */
+  countryEnName = '';
+
+  /** 币种 */
+  currencyCode = '';
+
+  /** 币种符号 */
+  currencySymbol = '';
+
+  /** 客户订单号 */
+  customerOrderNo = '';
+
+  /** 客户参考号 */
+  customerReferenceNo = '';
+
+  /** 保险费 */
+  insuranceAmount = undefined;
+
+  /** 保险单号 */
+  insuranceNumber = '';
+
+  /** 包裹流水号 */
+  packageCode = '';
+
+  /** 包裹数 */
+  packageNum = undefined;
+
+  /** 目的国 */
+  recipientCountryCode = '';
+
+  /** 运费 */
+  reviseFreight = undefined;
+
+  /** 保费 */
+  revisePremium = undefined;
+
+  /** 分拣重量 */
+  reviseWeight = undefined;
+
+  /** 邮寄方式代码 */
+  shippingMethodCode = '';
+
+  /** 分拣编码 */
+  sortingResultCode = '';
+
+  /** 分拣时间 */
+  sortingTime = '';
+
+  /** 体积重 */
+  srealVolumnWeight = undefined;
+
+  /** 退税手续费 */
+  taxRefundAmount = undefined;
+
+  /** 总费用 */
+  totalCharge = undefined;
+
+  /** 追踪号 */
+  trackingNumber = '';
+
+  /** 体积 */
+  volume = '';
+}
+
+class UnBilledChargeVo {
+  /** 费用 */
+  charge = undefined;
+
+  /** 费用编号 */
+  chargeCode = '';
+
+  /** 费用内容 */
+  chargeDetail = '';
+
+  /** 费用时间 */
+  chargeTime = '';
+
+  /** 费用类型 */
+  chargeType = undefined;
+
+  /** 费用id */
+  companyChargeId = undefined;
+
+  /** 费用生成时间 */
+  createTime = '';
+
+  /** 币种 */
+  currencyCode = '';
+
+  /** 币种名称 */
+  currencySecondName = '';
+
+  /** 币种符号 */
+  currencySymbol = '';
+}
+
 class UploadInitVO {
   /** true 合同过期 预报不能成功 */
   flg = false;
@@ -3366,8 +5010,10 @@ class UploadInitVO {
 }
 
 export const apis = {
+  ApplyInterceptBO,
   AssetBo,
   AssetVo,
+  BankTransferFormBeanBO,
   BatchImportResultVO,
   CalCuLatePriceBO,
   CalCuLatePriceDataVO,
@@ -3383,35 +5029,58 @@ export const apis = {
   ContractRemindVo,
   DataInfoAssetVo,
   DataInfoRechargeVo,
+  DataInfoSyBsPackageVO,
   DataInfoSyCCompanyThirdplatformAccountVo,
   DataInfoSyCPackageProduct,
   DataInfoSyCPackageProductVo,
   DataInfoSyCUserComplaintVo,
   DataInfoSyCUserOperLogVo,
   DataInfoSyExchangeRateVo,
+  DataInfoSyPrintBsPackageVO,
   DataInfoSysLogininforVo,
   DataInfoTrackingNoVo,
+  DataInfoUnBilledChargeSortVo,
+  DataInfoUnBilledChargeVo,
+  DopreDictionBO,
   DownloadBO,
+  ExportExcelBO,
+  FileVO,
   ForeignCurrencyVo,
   LoginVo,
   MetaVo,
   OverviewVo,
+  PackageIdListBO,
   PackageInfoBO,
+  PackageListViewBO,
   PackageProduct,
   PageQuery,
+  PredictionBO,
+  PredictionBatchModifyBO,
+  PredictionBatchRevokeBO,
+  PredictionVO,
+  PrintPDFBO,
+  PrintPackageBO,
+  PrintPackageListViewBO,
+  PrintPdfBatchBO,
+  ProductAttributesVO,
   ProductListBO,
   ProfileVo,
   RCalCuLatePriceVO,
   RCaptchaVo,
   RCompanyContractVO,
   RContractRemindVo,
+  RFileVO,
+  RInteger,
   RListChannelPriceVO,
   RListMapStringObject,
+  RListProductAttributesVO,
   RListRemoteSysOrganizationVO,
   RListRemoteSysUserVO,
   RListRouterVo,
+  RListSyBsPackageProductVO,
   RListSyCMenuVo,
   RListSyExchangeRateVo,
+  RListSySysBankAccountVO,
   RListSysUserVo,
   RListTimelinesBoardVo,
   RListTreeInteger,
@@ -3421,10 +5090,13 @@ export const apis = {
   RMapStringListRemoteDictDataVO,
   RObject,
   ROverviewVo,
+  RPredictionVO,
   RProfileVo,
   RRechargeDetailVo,
   RSavePackageVO,
+  RShippingMethodListVO,
   RString,
+  RSyBsPackageDetailVO,
   RSyCCompanyDetailVo,
   RSyCCompanyPackageDeviationVo,
   RSyCCompanyPickDeviationVo,
@@ -3440,11 +5112,18 @@ export const apis = {
   RemoteDictDataVO,
   RemoteSysOrganizationVO,
   RemoteSysUserVO,
+  RevokePredictBatchBO,
   RouterVo,
   SavePackageVO,
+  ShippingMethodListBO,
+  ShippingMethodListVO,
+  ShippingMethodVO,
   SmsCodeBo,
   SseEmitter,
   SyAccountInfoVo,
+  SyBsPackageDetailVO,
+  SyBsPackageProductVO,
+  SyBsPackageVO,
   SyCCompanyDetailBo,
   SyCCompanyDetailVo,
   SyCCompanyPackageDeviationBo,
@@ -3463,6 +5142,8 @@ export const apis = {
   SyCUserOperLogBo,
   SyCUserOperLogVo,
   SyExchangeRateVo,
+  SyPrintBsPackageVO,
+  SySysBankAccountVO,
   SySysNotice,
   SysLogininforBo,
   SysLogininforVo,
@@ -3478,14 +5159,18 @@ export const apis = {
   SysUserVo,
   TableDataInfoAssetVo,
   TableDataInfoRechargeVo,
+  TableDataInfoSyBsPackageVO,
   TableDataInfoSyCCompanyThirdplatformAccountVo,
   TableDataInfoSyCPackageProduct,
   TableDataInfoSyCPackageProductVo,
   TableDataInfoSyCUserComplaintVo,
   TableDataInfoSyCUserOperLogVo,
   TableDataInfoSyExchangeRateVo,
+  TableDataInfoSyPrintBsPackageVO,
   TableDataInfoSysLogininforVo,
   TableDataInfoTrackingNoVo,
+  TableDataInfoUnBilledChargeSortVo,
+  TableDataInfoUnBilledChargeVo,
   TimelinesBoardBo,
   TimelinesBoardVo,
   TrackingNoDownloadBOInteger,
@@ -3493,5 +5178,9 @@ export const apis = {
   TreeInteger,
   TreeNodeConfig,
   TreeVO,
+  UnBilledChargeBo,
+  UnBilledChargeSortBo,
+  UnBilledChargeSortVo,
+  UnBilledChargeVo,
   UploadInitVO,
 };

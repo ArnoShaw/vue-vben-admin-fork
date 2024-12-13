@@ -99,7 +99,7 @@ const { authPanelCenter, authPanelLeft, authPanelRight, isDark } = usePreference
     </div>
 
     <!-- 右侧认证面板 -->
-    <AuthenticationFormView v-if="authPanelRight" class="min-h-full w-[40%] flex-1">
+    <AuthenticationFormView v-if="authPanelRight" class="min-h-full w-[40%] min-w-[480px] flex-1">
       <template v-if="copyright" #copyright>
         <slot name="copyright">
           <Copyright v-if="preferences.copyright.enable" v-bind="preferences.copyright" />

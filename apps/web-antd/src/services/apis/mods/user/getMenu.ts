@@ -12,7 +12,7 @@ import { requestClient } from '#/api/request';
 
 class Params {
   /** subUserId */
-  subUserId: number;
+  subUserId?: number;
 }
 
 export type RequestTypes = Params;

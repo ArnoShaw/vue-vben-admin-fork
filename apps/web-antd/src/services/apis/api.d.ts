@@ -2,6 +2,17 @@
 
 export declare namespace defs {
   export namespace apis {
+    export interface ApplyInterceptBO {
+      /** 包裹id */
+      packageId: number;
+
+      /** 端口 */
+      ports?: string;
+
+      /** 用户ID */
+      userId?: string;
+    }
+
     export interface AssetBo {
       /** 交易开始时间 */
       beginTime?: string;
@@ -49,6 +60,53 @@ export declare namespace defs {
 
       /** 交易类型 */
       tradeType?: string;
+    }
+
+    export interface BankTransferFormBeanBO {
+      /** 银行转账主键ID */
+      companyBankTransferId?: number;
+
+      /** 录入人 */
+      entryBy?: number;
+
+      /** 录入时间 */
+      entryTime?: string;
+
+      /** 收款方银行卡流水号 */
+      payeeBankCardId?: number;
+
+      /** 收款方账号 */
+      payeeBankCardNumber?: string;
+
+      /** 收款方开户行 */
+      payeeBankName?: string;
+
+      /** 付款方账号 */
+      payeeName?: string;
+
+      /** 付款方账号 */
+      payerBankCardNumber?: string;
+
+      /** 付款方账号 */
+      payerBankName?: string;
+
+      /** 转账名称 */
+      payerName?: string;
+
+      /** 上传凭证地址 */
+      receiptPath?: string;
+
+      /** 回单序列号 */
+      receiptSerialNumber?: string;
+
+      /** 备注 */
+      remark?: string;
+
+      /** 交易金额 */
+      tradeAmount?: number;
+
+      /** 交易币种 */
+      tradeCurrency?: string;
     }
 
     export interface BatchImportResultVO {
@@ -252,6 +310,15 @@ export declare namespace defs {
       /** 公司名称 */
       companyName?: string;
 
+      /** 审核备注 */
+      ratifyMemo?: string;
+
+      /** 公司审核状态(0：待完善资料 1:待审核 2:审核失败 3:审核成功) */
+      ratifyStatus?: number;
+
+      /** 检查是否弹窗提醒客户未提供营业执照或身份证正反面证件，如果是，先弹出完善信息页面 */
+      showProvideTip?: boolean;
+
       /** 注册类型 0/null：公司 1：个人 */
       signupType?: number;
     }
@@ -372,6 +439,14 @@ export declare namespace defs {
       total?: number;
     }
 
+    export interface DataInfoSyBsPackageVO {
+      /** 列表数据 */
+      rows?: Array<apis.SyBsPackageVO>;
+
+      /** 总记录数 */
+      total?: number;
+    }
+
     export interface DataInfoSyCCompanyThirdplatformAccountVo {
       /** 列表数据 */
       rows?: Array<apis.SyCCompanyThirdplatformAccountVo>;
@@ -420,6 +495,14 @@ export declare namespace defs {
       total?: number;
     }
 
+    export interface DataInfoSyPrintBsPackageVO {
+      /** 列表数据 */
+      rows?: Array<apis.SyPrintBsPackageVO>;
+
+      /** 总记录数 */
+      total?: number;
+    }
+
     export interface DataInfoSysLogininforVo {
       /** 列表数据 */
       rows?: Array<apis.SysLogininforVo>;
@@ -436,9 +519,82 @@ export declare namespace defs {
       total?: number;
     }
 
+    export interface DataInfoUnBilledChargeSortVo {
+      /** 列表数据 */
+      rows?: Array<apis.UnBilledChargeSortVo>;
+
+      /** 总记录数 */
+      total?: number;
+    }
+
+    export interface DataInfoUnBilledChargeVo {
+      /** 列表数据 */
+      rows?: Array<apis.UnBilledChargeVo>;
+
+      /** 总记录数 */
+      total?: number;
+    }
+
+    export interface DopreDictionBO {
+      /** 公司id */
+      companyId: string;
+
+      /** 包裹id */
+      packageId: string;
+
+      /** 用户id */
+      userId: string;
+    }
+
     export interface DownloadBO {
       /** filePath */
       filePath?: string;
+    }
+
+    export interface ExportExcelBO {
+      /** true or false */
+      checkedFlag?: string;
+
+      /** 公司id */
+      companyId?: number;
+
+      /** 这里其实是预报时间，只是页面上用了createDate这个名字 */
+      createDate?: string;
+
+      /** 开始时间 */
+      createTimeFrom?: string;
+
+      /** 结束时间 */
+      createTimeTo?: string;
+
+      /** 排序方式 */
+      order?: string;
+
+      /** 包裹id数组 */
+      packageIds?: Array<number>;
+
+      /** 预报状态 */
+      predictStatus?: number;
+
+      /** 搜索文本 */
+      searchText?: string;
+
+      /** 邮递方式id */
+      shippingMethodId?: number;
+
+      /** 排序字段 */
+      sort?: string;
+
+      /** 库存状态 */
+      stockStatus?: string;
+    }
+
+    export interface FileVO {
+      /** fileName */
+      fileName?: string;
+
+      /** url */
+      url?: string;
     }
 
     export interface ForeignCurrencyVo {
@@ -514,9 +670,6 @@ export declare namespace defs {
       /** 安检退件数 */
       securityCheck?: number;
 
-      /** 检查是否弹窗提醒客户未提供营业执照或身份证正反面证件，如果是，先弹出完善信息页面 */
-      showProvideTip?: boolean;
-
       /** 合同到期时间 */
       signDeadlineTime?: string;
 
@@ -543,6 +696,41 @@ export declare namespace defs {
 
       /** 昨日揽收数量 */
       yesterdayReceivedCount?: number;
+    }
+
+    export interface PackageIdListBO {
+      /** 公司id */
+      companyId?: string;
+
+      /** 开始时间 */
+      createTimeFrom?: string;
+
+      /** 结束时间 */
+      createTimeTo?: string;
+
+      /** 包裹id列表 */
+      packageIds?: Array<number>;
+
+      /** 邮递方式 */
+      paramShippingMethodId?: string;
+
+      /** 预报状态 */
+      predictStatus?: string;
+
+      /** 预报日期 */
+      predictedDays?: string;
+
+      /** 搜索推荐 */
+      searchText?: string;
+
+      /** 是否选中所有 Y 是 */
+      selectAll?: string;
+
+      /** 库存状态 */
+      stockStatus?: string;
+
+      /** version */
+      version?: string;
     }
 
     export interface PackageInfoBO {
@@ -784,6 +972,32 @@ export declare namespace defs {
       userId: string;
     }
 
+    export interface PackageListViewBO {
+      /** 公司id */
+      companyId: number;
+
+      /** 开始时间 */
+      createTimeFrom?: string;
+
+      /** 结束时间 */
+      createTimeTo?: string;
+
+      /** 邮递方式 */
+      paramShippingMethodId?: string;
+
+      /** 预报状态 */
+      predictStatus?: string;
+
+      /** 预报天数 */
+      predictedDays?: string;
+
+      /** 搜索文本 */
+      searchText?: string;
+
+      /** 库存状态 */
+      stockStatus?: string;
+    }
+
     export interface PackageProduct {
       /** 方便API调用(海关编码) */
       apiCustomCode?: string;
@@ -857,6 +1071,147 @@ export declare namespace defs {
       pageSize?: number;
     }
 
+    export interface PredictionBO {
+      /** 公司id */
+      companyId?: number;
+
+      /** 开始时间 */
+      createTimeFrom?: string;
+
+      /** 结束时间 */
+      createTimeTo?: string;
+
+      /** 搜索条件 */
+      searchText?: string;
+    }
+
+    export interface PredictionBatchModifyBO {
+      /** 修改邮寄方式ID */
+      modifyShippingMethodId?: string;
+
+      /** packageIdListBO */
+      packageIdListBO?: apis.PackageIdListBO;
+
+      /** 用户id */
+      userId?: string;
+    }
+
+    export interface PredictionBatchRevokeBO {
+      /** packageIdListBO */
+      packageIdListBO?: apis.PackageIdListBO;
+
+      /** 运维、客户端的区分标志 */
+      ports?: string;
+
+      /** 用户id */
+      userId?: string;
+    }
+
+    export interface PredictionVO {
+      /** 预报失败 */
+      failurePredictCount?: number;
+
+      /** 已预报 */
+      predictedCount?: number;
+
+      /** 预报中 */
+      predictingCount?: number;
+
+      /** 等待预报及预报失败 */
+      waitAndFailurePredictCount?: number;
+
+      /** 等待预报 */
+      waitPredictCount?: number;
+    }
+
+    export interface PrintPDFBO {
+      /** 包裹ID */
+      packageId: number;
+
+      /** 页面传递操作端口名称 */
+      ports: string;
+
+      /** 页面传递用户Id */
+      userId: number;
+    }
+
+    export interface PrintPackageBO {
+      /** 公司id */
+      companyId?: string;
+
+      /** 创建日期 */
+      createdDays?: string;
+
+      /** 打印状态 */
+      printStatus?: string;
+
+      /** 日期 */
+      printedDays?: string;
+
+      /** sku类型 */
+      skuType?: string;
+
+      /** 库存状态 */
+      stockStatus?: string;
+
+      /** version */
+      version?: string;
+    }
+
+    export interface PrintPackageListViewBO {
+      /** 公司id */
+      companyId?: number;
+
+      /** 创建时间 */
+      createdDays?: string;
+
+      /** 开始时间 */
+      forecastTimeFrom?: string;
+
+      /** 结束时间 */
+      forecastTimeTo?: string;
+
+      /** 打印状态 */
+      printStatus?: string;
+
+      /** 打印日期 */
+      printedDays?: string;
+
+      /** 搜索文本 */
+      searchText?: string;
+
+      /** 邮寄方式 */
+      shippingMethodId?: number;
+
+      /** 库存状态 */
+      stockStatus?: string;
+    }
+
+    export interface PrintPdfBatchBO {
+      /** 排序方式 */
+      order?: string;
+
+      /** 包裹id列表 */
+      packageIdList?: Array<number>;
+
+      /** 页面传递操作端口名称,yunwei 代表运维操作人员，client代表客户 */
+      ports?: string;
+
+      /** 排序字段 */
+      sort?: string;
+
+      /** 用户id */
+      userId: number;
+    }
+
+    export interface ProductAttributesVO {
+      /** 商品属性名称 */
+      attributeName?: string;
+
+      /** 商品属性ID */
+      productAttributeId?: number;
+    }
+
     export interface ProductListBO {
       /** 公司id */
       companyId?: number;
@@ -920,6 +1275,28 @@ export declare namespace defs {
       msg?: string;
     }
 
+    export interface RFileVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.FileVO;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RInteger {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: number;
+
+      /** msg */
+      msg?: string;
+    }
+
     export interface RListChannelPriceVO {
       /** code */
       code?: number;
@@ -937,6 +1314,17 @@ export declare namespace defs {
 
       /** data */
       data?: Array<object>;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RListProductAttributesVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: Array<apis.ProductAttributesVO>;
 
       /** msg */
       msg?: string;
@@ -975,6 +1363,17 @@ export declare namespace defs {
       msg?: string;
     }
 
+    export interface RListSyBsPackageProductVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: Array<apis.SyBsPackageProductVO>;
+
+      /** msg */
+      msg?: string;
+    }
+
     export interface RListSyCMenuVo {
       /** code */
       code?: number;
@@ -992,6 +1391,17 @@ export declare namespace defs {
 
       /** data */
       data?: Array<apis.SyExchangeRateVo>;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RListSySysBankAccountVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: Array<apis.SySysBankAccountVO>;
 
       /** msg */
       msg?: string;
@@ -1096,6 +1506,17 @@ export declare namespace defs {
       msg?: string;
     }
 
+    export interface RPredictionVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.PredictionVO;
+
+      /** msg */
+      msg?: string;
+    }
+
     export interface RProfileVo {
       /** code */
       code?: number;
@@ -1129,12 +1550,34 @@ export declare namespace defs {
       msg?: string;
     }
 
+    export interface RShippingMethodListVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.ShippingMethodListVO;
+
+      /** msg */
+      msg?: string;
+    }
+
     export interface RString {
       /** code */
       code?: number;
 
       /** data */
       data?: string;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RSyBsPackageDetailVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.SyBsPackageDetailVO;
 
       /** msg */
       msg?: string;
@@ -1349,9 +1792,6 @@ export declare namespace defs {
     }
 
     export interface RegisterBody {
-      /** 验证码 */
-      code?: string;
-
       /** 授权类型 */
       grantType: string;
 
@@ -1366,9 +1806,6 @@ export declare namespace defs {
 
       /** 用户名 */
       username: string;
-
-      /** 唯一标识 */
-      uuid?: string;
     }
 
     export interface RemoteDictDataVO {
@@ -1485,6 +1922,17 @@ export declare namespace defs {
       username?: string;
     }
 
+    export interface RevokePredictBatchBO {
+      /** 包裹ID列表 */
+      packageIdList: Array<number>;
+
+      /** 客户端 */
+      ports?: string;
+
+      /** 用户ID */
+      userId: number;
+    }
+
     export interface RouterVo {
       /** 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式--如组件页面 */
       alwaysShow?: boolean;
@@ -1525,9 +1973,57 @@ export declare namespace defs {
       ratifyStatus?: boolean;
     }
 
+    export interface ShippingMethodListBO {
+      /** 公司id */
+      companyId?: string;
+
+      /** 开始时间 */
+      createTimeFrom?: string;
+
+      /** 结束时间 */
+      createTimeTo?: string;
+
+      /** 预报状态 */
+      predictStatus?: string;
+
+      /** 预报日期 */
+      predictedDays?: string;
+
+      /** 搜索条件 */
+      searchText?: string;
+
+      /** 库存状态 */
+      stockStatus?: string;
+
+      /** version */
+      version?: string;
+    }
+
+    export interface ShippingMethodListVO {
+      /** shippingMethodVOList */
+      shippingMethodVOList?: Array<apis.ShippingMethodVO>;
+
+      /** total */
+      total?: number;
+    }
+
+    export interface ShippingMethodVO {
+      /** 总数 */
+      pnum?: number;
+
+      /** 邮递方式名称 */
+      shippingMethodCnName?: string;
+
+      /** 邮递方式id */
+      shippingMethodId?: number;
+    }
+
     export interface SmsCodeBo {
       /** captchaVerifyParam */
       captchaVerifyParam: string;
+
+      /** error */
+      error?: boolean;
 
       /** mobile */
       mobile: string;
@@ -1625,6 +2121,897 @@ export declare namespace defs {
 
       /** 主账号用户名 */
       userName?: string;
+    }
+
+    export interface SyBsPackageDetailVO {
+      /** 到港时间 */
+      arrivedPortTime?: string;
+
+      /** 预留字段1 */
+      backup1?: string;
+
+      /** 预留字段2 */
+      backup2?: string;
+
+      /** 预留字段3 */
+      backup3?: string;
+
+      /** 预留字段4 */
+      backup4?: string;
+
+      /** 预留字段5 */
+      backup5?: string;
+
+      /** 装袋操作人 */
+      baggingBy?: number;
+
+      /** 装袋类型(0:实扫装袋;1:随机装袋;2:虚拟装袋) */
+      baggingMethod?: string;
+
+      /** 装袋时间 */
+      baggingTime?: string;
+
+      /** 改单授权人ID */
+      changeChannelAuthorizerId?: number;
+
+      /** 换单人 */
+      changeLabelBy?: number;
+
+      /** 授权者改单id */
+      changeLabelCertigierId?: number;
+
+      /** 改单邮路id */
+      changeLabelChannelId?: number;
+
+      /** 改单邮路分区id */
+      changeLabelChannelareaId?: number;
+
+      /** 改单计费分区 */
+      changeLabelCharzoneId?: number;
+
+      /** 换单机构 */
+      changeLabelOrganizationId?: number;
+
+      /** 改单模板id */
+      changeLabelTemplateId?: number;
+
+      /** 换单时间 */
+      changeLabelTime?: string;
+
+      /** 改单追踪号 */
+      changeLabelTrackingNumber?: string;
+
+      /** 邮路流水号 重命名 */
+      channelId?: number;
+
+      /** 计费分区流水号 */
+      chargeZoneId?: number;
+
+      /** 选中包裹属性 */
+      checkedPackageAttributeList?: Array<number>;
+
+      /** 清关成功 */
+      clearanceFinishTime?: string;
+
+      /** 清关中 */
+      clearanceProcessTime?: string;
+
+      /** 公司流水号 */
+      companyId?: number;
+
+      /** 创建人 */
+      createBy?: number;
+
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 币种代码 */
+      currencyCode?: string;
+
+      /** 客户订单号 */
+      customerOrderNo?: string;
+
+      /** 客户参考号 */
+      customerReferenceNo?: string;
+
+      /** 妥投时间 */
+      deliveredTime?: string;
+
+      /** 包裹销毁人 */
+      destroyBy?: number;
+
+      /** 包裹销毁时间 */
+      destroyTime?: string;
+
+      /** 首次尾程节点时间 */
+      firstTrackTime?: string;
+
+      /** 是否投保(0:不投保 1:投保) */
+      insuranceFlag?: string;
+
+      /** 投保保单号 */
+      insuranceNumber?: string;
+
+      /** IOSS识别号 */
+      iossVatId?: string;
+
+      /** 是否退税 */
+      isDrawBack?: number;
+
+      /** 上次执行抓取的任务的优先级，空或者0是最低的。优先级高于该值的抓取任务可以忽略last_query_time从而执行抓取。 */
+      lastQueryFrom?: number;
+
+      /** 最后查询时间 */
+      lastQueryTime?: string;
+
+      /** 离港发货操作人 */
+      leavePortBy?: number;
+
+      /** 离港发货时间 */
+      leavePortTime?: string;
+
+      /** 离开转运中心操作人 */
+      leaveTransitcenterBy?: number;
+
+      /** 离开转运中心时间 */
+      leaveTransitcenterTime?: string;
+
+      /** 交航失败操作人 */
+      leaveportReturnBy?: number;
+
+      /** 交航退件出库操作人 */
+      leaveportReturnCustomerBy?: number;
+
+      /** 交航退件出库时间 */
+      leaveportReturnCustomerTime?: string;
+
+      /** 交航退件收货人 */
+      leaveportReturnReceiveBy?: number;
+
+      /** 交航退件收货时间 */
+      leaveportReturnReceiveTime?: string;
+
+      /** 交航失败时间 */
+      leaveportReturnTime?: string;
+
+      /** 邮袋编号 */
+      mailbagCode?: string;
+
+      /** 改单前邮路ID */
+      originChannelId?: number;
+
+      /** 改单前邮路分区ID */
+      originChannelareaId?: number;
+
+      /** 改单前计费分区ID */
+      originChargezoneId?: number;
+
+      /** 始发国出口清关 */
+      originCustomsTime?: string;
+
+      /** 改单前追踪号 */
+      originTrackingNumber?: string;
+
+      /** 内单号 */
+      otherNumber?: string;
+
+      /** 包裹出库退回人 */
+      outBy?: number;
+
+      /** 包裹出库退回时间 */
+      outTime?: string;
+
+      /** 出境邮袋流水号 */
+      outboundMailbagId?: number;
+
+      /** 海外退件 */
+      overseasRefund?: boolean;
+
+      /** OCD金额 */
+      packageCodAmount?: number;
+
+      /** OCD币种 */
+      packageCodCurrencyCode?: string;
+
+      /** 包裹编码 */
+      packageCode?: string;
+
+      /** 包裹错误流水号 */
+      packageErrorCode?: string;
+
+      /** 包裹高度(cm) */
+      packageHeight?: number;
+
+      /** 包裹流水号 */
+      packageId?: number;
+
+      /** 包裹保险费 */
+      packageInsurance?: number;
+
+      /** 包裹投保金额 */
+      packageInsureAmount?: number;
+
+      /** 包裹长度(cm) */
+      packageLength?: number;
+
+      /** 包裹销售金额（USD） */
+      packageSalesAmount?: number;
+
+      /** 2:API、3:菜鸟、4:马帮、5:速卖、6:通途、7:Vova、8:Wish、9普源、10:敦煌、31:新菜鸟 */
+      packageSource?: string;
+
+      /** 包裹宽度(cm) */
+      packageWidth?: number;
+
+      /** 电子保单PDF路径 */
+      pdfInsurancePath?: string;
+
+      /** 预报人 */
+      predictionBy?: number;
+
+      /** 包裹预报错误信息 */
+      predictionFailReason?: string;
+
+      /** 包裹预估(预报)运费(CNY) */
+      predictionFreight?: number;
+
+      /** 预报时间 */
+      predictionTime?: string;
+
+      /** 包裹预报体积计重 */
+      predictionVolumnWeight?: number;
+
+      /** 包裹预报重量（KG） */
+      predictionWeight?: number;
+
+      /** 最后打印人 */
+      printBy?: number;
+
+      /** 最后打印时间 */
+      printTime?: string;
+
+      /** 到达目的国操作人 */
+      reachCountryBy?: number;
+
+      /** 到达目的国时间 */
+      reachCountryTime?: string;
+
+      /** 到达OE操作人 */
+      reachOeBy?: number;
+
+      /** 到达OE时间 */
+      reachOeTime?: string;
+
+      /** 到达转运中心操作人 */
+      reachTransitcenterBy?: number;
+
+      /** 到达转运中心时间 */
+      reachTransitcenterTime?: string;
+
+      /** 收件人地址1 */
+      recipientAddress1?: string;
+
+      /** 收件人地址2 */
+      recipientAddress2?: string;
+
+      /** 收件人地址3 */
+      recipientAddress3?: string;
+
+      /** 收件人城市 */
+      recipientCity?: string;
+
+      /** 收件国家代码 */
+      recipientCountryCode?: string;
+
+      /** 收件人邮箱 */
+      recipientEmail?: string;
+
+      /** 收件人完整地址 */
+      recipientFullAddress?: string;
+
+      /** 身份证号码 */
+      recipientIdentityNumber?: string;
+
+      /** 收件人手机 */
+      recipientMobile?: string;
+
+      /** 收件人 */
+      recipientName?: string;
+
+      /** 收件人联系电话 */
+      recipientPhone?: string;
+
+      /** 收件人邮编 */
+      recipientPostCode?: string;
+
+      /** 收件人省州 */
+      recipientState?: string;
+
+      /** 个人税号 */
+      recipientTaxNumber?: string;
+
+      /** 包裹退回处理中心退回人 */
+      returnCenterBy?: number;
+
+      /** 包裹退回处理中心时间 */
+      returnCenterTime?: string;
+
+      /** 预报请求撤销人 */
+      revokePredictionBy?: number;
+
+      /** 预报撤销失败原因 */
+      revokePredictionFailReason?: string;
+
+      /** 预报撤销状态(0:撤销失败；1：撤销成功) */
+      revokePredictionStatus?: string;
+
+      /** 预报撤销时间 */
+      revokePredictionTime?: string;
+
+      /** 销售日期 */
+      saleTime?: string;
+
+      /** 寄件人地址 */
+      senderAddress?: string;
+
+      /** 寄件人城市 */
+      senderCity?: string;
+
+      /** 寄件人国家代码 */
+      senderCountryCode?: string;
+
+      /** 寄件人行政区 */
+      senderDistrict?: string;
+
+      /** 寄件人邮箱 */
+      senderEmail?: string;
+
+      /** 发件人全地址 */
+      senderFullAddress?: string;
+
+      /** 发件人姓名 */
+      senderName?: string;
+
+      /** 发件人电话 */
+      senderPhone?: string;
+
+      /** 发件人邮编 */
+      senderPostcode?: string;
+
+      /** 寄件人省州 */
+      senderState?: string;
+
+      /** 寄件人税号 */
+      senderTaxNumber?: string;
+
+      /** 包裹发货人 */
+      shippedBy?: number;
+
+      /** 包裹发货时间 */
+      shippedTime?: string;
+
+      /** 邮路流水号 */
+      shippingMethodId?: number;
+
+      /** 邮路分区流水号 */
+      shippingZoneId?: number;
+
+      /** 标记包裹缺货时间 */
+      signStockTime?: string;
+
+      /** 入仓人 */
+      sortingResultBy?: number;
+
+      /** 入仓时间 */
+      sortingResultTime?: string;
+
+      /** 入仓重量 */
+      sortingResultWeight?: number;
+
+      /** 包裹状态(0:等待分配物流;1:分配物流失败;2:分配物流成功(等待预报);3:预报失败;4:已预报[等待入仓];5:已入仓[完成分拣);6:分拣转仓中;7:已装袋;8:出境邮袋转仓中9:已发货;10:预报中;11:已离港;12:已离开转运中心;13:已到达目的国;14:已到达OE;15:已到达转运中心;16:已退回处理中心;17:待退回寄件人;18:已退回寄件人;19:寄件人已确认海外退件收货;20:派送处理中;21:包裹无法派送;22:派送成功;23:包裹已销毁;24:交航失败;25:交航退件出库;26:寄件人已确认交航退件收货;27:客户拦截;28:运维拦截;35:线下退件) */
+      status?: string;
+
+      /** 包裹是否缺货(0：不缺货；1:缺货) */
+      stockFlag?: string;
+
+      /** 退税手续费 */
+      taxRefundAmount?: number;
+
+      /** 是否退税 */
+      taxRefundFlag?: number;
+
+      /** 跟踪号 */
+      trackingNumber?: string;
+
+      /** 交接末端配送 */
+      transportHandoverTime?: string;
+
+      /** 更新人 */
+      updateBy?: number;
+
+      /** 更新时间 */
+      updateTime?: string;
+    }
+
+    export interface SyBsPackageProductVO {
+      /** backup1 */
+      backup1?: string;
+
+      /** backup2 */
+      backup2?: string;
+
+      /** backup3 */
+      backup3?: string;
+
+      /** 创建人 */
+      createBy?: number;
+
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 申报币种 */
+      currencyCode?: string;
+
+      /** 海关编码 */
+      customCode?: string;
+
+      /** 报关产品中文名称 */
+      declareCnName?: string;
+
+      /** 报关产品英文名称 */
+      declareEnName?: string;
+
+      /** 报关单价（USD） */
+      declarePrice?: number;
+
+      /** 包裹流水号 */
+      packageId?: number;
+
+      /** 包裹商品流水号 */
+      packageProductId?: number;
+
+      /** 产品材质 */
+      productMaterial?: string;
+
+      /** 产品用途 */
+      productPurpose?: string;
+
+      /** 产品SKU */
+      productSku?: string;
+
+      /** 报关产品数量 */
+      quantity?: number;
+
+      /** 修订报关产品中文名称 */
+      reviseCnName?: string;
+
+      /** 修订海关编码 */
+      reviseCustomCode?: string;
+
+      /** 修订报关单价（USD） */
+      reviseDeclarePrice?: number;
+
+      /** 修订报关产品英文名称 */
+      reviseEnName?: string;
+
+      /** 总价 */
+      totalPrice?: number;
+
+      /** 更新人 */
+      updateBy?: number;
+
+      /** 更新时间 */
+      updateTime?: string;
+    }
+
+    export interface SyBsPackageVO {
+      /** 到港时间 */
+      arrivedPortTime?: string;
+
+      /** 预留字段1 */
+      backup1?: string;
+
+      /** 预留字段2 */
+      backup2?: string;
+
+      /** 预留字段3 */
+      backup3?: string;
+
+      /** 预留字段4 */
+      backup4?: string;
+
+      /** 预留字段5 */
+      backup5?: string;
+
+      /** 装袋操作人 */
+      baggingBy?: number;
+
+      /** 装袋类型(0:实扫装袋;1:随机装袋;2:虚拟装袋) */
+      baggingMethod?: string;
+
+      /** 装袋时间 */
+      baggingTime?: string;
+
+      /** 改单授权人ID */
+      changeChannelAuthorizerId?: number;
+
+      /** 换单人 */
+      changeLabelBy?: number;
+
+      /** 授权者改单id */
+      changeLabelCertigierId?: number;
+
+      /** 改单邮路id */
+      changeLabelChannelId?: number;
+
+      /** 改单邮路分区id */
+      changeLabelChannelareaId?: number;
+
+      /** 改单计费分区 */
+      changeLabelCharzoneId?: number;
+
+      /** 换单机构 */
+      changeLabelOrganizationId?: number;
+
+      /** 改单模板id */
+      changeLabelTemplateId?: number;
+
+      /** 换单时间 */
+      changeLabelTime?: string;
+
+      /** 改单追踪号 */
+      changeLabelTrackingNumber?: string;
+
+      /** 邮路流水号 重命名 */
+      channelId?: number;
+
+      /** 计费分区流水号 */
+      chargeZoneId?: number;
+
+      /** 清关成功 */
+      clearanceFinishTime?: string;
+
+      /** 清关中 */
+      clearanceProcessTime?: string;
+
+      /** 公司流水号 */
+      companyId?: number;
+
+      /** 创建人 */
+      createBy?: number;
+
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 币种代码 */
+      currencyCode?: string;
+
+      /** 客户订单号 */
+      customerOrderNo?: string;
+
+      /** 客户参考号 */
+      customerReferenceNo?: string;
+
+      /** 妥投时间 */
+      deliveredTime?: string;
+
+      /** 包裹销毁人 */
+      destroyBy?: number;
+
+      /** 包裹销毁时间 */
+      destroyTime?: string;
+
+      /** 首次尾程节点时间 */
+      firstTrackTime?: string;
+
+      /** 是否冻结 */
+      freezeStatus?: number;
+
+      /** 是否投保(0:不投保 1:投保) */
+      insuranceFlag?: string;
+
+      /** 投保保单号 */
+      insuranceNumber?: string;
+
+      /** IOSS识别号 */
+      iossVatId?: string;
+
+      /** 是否退税 */
+      isDrawback?: number;
+
+      /** 上次执行抓取的任务的优先级，空或者0是最低的。优先级高于该值的抓取任务可以忽略last_query_time从而执行抓取。 */
+      lastQueryFrom?: number;
+
+      /** 最后查询时间 */
+      lastQueryTime?: string;
+
+      /** 离港发货操作人 */
+      leavePortBy?: number;
+
+      /** 离港发货时间 */
+      leavePortTime?: string;
+
+      /** 离开转运中心操作人 */
+      leaveTransitcenterBy?: number;
+
+      /** 离开转运中心时间 */
+      leaveTransitcenterTime?: string;
+
+      /** 交航失败操作人 */
+      leaveportReturnBy?: number;
+
+      /** 交航退件出库操作人 */
+      leaveportReturnCustomerBy?: number;
+
+      /** 交航退件出库时间 */
+      leaveportReturnCustomerTime?: string;
+
+      /** 交航退件收货人 */
+      leaveportReturnReceiveBy?: number;
+
+      /** 交航退件收货时间 */
+      leaveportReturnReceiveTime?: string;
+
+      /** 交航失败时间 */
+      leaveportReturnTime?: string;
+
+      /** 邮袋编号 */
+      mailbagCode?: string;
+
+      /** 改单前邮路ID */
+      originChannelId?: number;
+
+      /** 改单前邮路分区ID */
+      originChannelareaId?: number;
+
+      /** 改单前计费分区ID */
+      originChargezoneId?: number;
+
+      /** 始发国出口清关 */
+      originCustomsTime?: string;
+
+      /** 改单前追踪号 */
+      originTrackingNumber?: string;
+
+      /** 内单号 */
+      otherNumber?: string;
+
+      /** 包裹出库退回人 */
+      outBy?: number;
+
+      /** 包裹出库退回时间 */
+      outTime?: string;
+
+      /** 出境邮袋流水号 */
+      outboundMailbagId?: number;
+
+      /** 海外退件 */
+      overseasRefund?: boolean;
+
+      /** OCD金额 */
+      packageCodAmount?: number;
+
+      /** OCD币种 */
+      packageCodCurrencyCode?: string;
+
+      /** 包裹编码 */
+      packageCode?: string;
+
+      /** 包裹错误流水号 */
+      packageErrorCode?: string;
+
+      /** 包裹高度(cm) */
+      packageHeight?: number;
+
+      /** 包裹流水号 */
+      packageId?: number;
+
+      /** 包裹保险费 */
+      packageInsurance?: number;
+
+      /** 包裹投保金额 */
+      packageInsureAmount?: number;
+
+      /** 包裹长度(cm) */
+      packageLength?: number;
+
+      /** 包裹销售金额（USD） */
+      packageSalesAmount?: number;
+
+      /** 2:API、3:菜鸟、4:马帮、5:速卖、6:通途、7:Vova、8:Wish、9普源、10:敦煌、31:新菜鸟 */
+      packageSource?: string;
+
+      /** 包裹宽度(cm) */
+      packageWidth?: number;
+
+      /** 电子保单PDF路径 */
+      pdfInsurancePath?: string;
+
+      /** 预报人 */
+      predictionBy?: number;
+
+      /** 包裹预报错误信息 */
+      predictionFailReason?: string;
+
+      /** 包裹预估(预报)运费(CNY) */
+      predictionFreight?: number;
+
+      /** 预报时间 */
+      predictionTime?: string;
+
+      /** 包裹预报体积计重 */
+      predictionVolumnWeight?: number;
+
+      /** 包裹预报重量（KG） */
+      predictionWeight?: number;
+
+      /** 最后打印人 */
+      printBy?: number;
+
+      /** 最后打印时间 */
+      printTime?: string;
+
+      /** 到达目的国操作人 */
+      reachCountryBy?: number;
+
+      /** 到达目的国时间 */
+      reachCountryTime?: string;
+
+      /** 到达OE操作人 */
+      reachOeBy?: number;
+
+      /** 到达OE时间 */
+      reachOeTime?: string;
+
+      /** 到达转运中心操作人 */
+      reachTransitcenterBy?: number;
+
+      /** 到达转运中心时间 */
+      reachTransitcenterTime?: string;
+
+      /** 收件人地址1 */
+      recipientAddress1?: string;
+
+      /** 收件人地址2 */
+      recipientAddress2?: string;
+
+      /** 收件人地址3 */
+      recipientAddress3?: string;
+
+      /** 收件人城市 */
+      recipientCity?: string;
+
+      /** 收件国家代码 */
+      recipientCountryCode?: string;
+
+      /** 收件人邮箱 */
+      recipientEmail?: string;
+
+      /** 收件人完整地址 */
+      recipientFullAddress?: string;
+
+      /** 身份证号码 */
+      recipientIdentityNumber?: string;
+
+      /** 收件人手机 */
+      recipientMobile?: string;
+
+      /** 收件人 */
+      recipientName?: string;
+
+      /** 收件人联系电话 */
+      recipientPhone?: string;
+
+      /** 收件人邮编 */
+      recipientPostCode?: string;
+
+      /** 收件人省州 */
+      recipientState?: string;
+
+      /** 个人税号 */
+      recipientTaxNumber?: string;
+
+      /** 包裹退回处理中心退回人 */
+      returnCenterBy?: number;
+
+      /** 包裹退回处理中心时间 */
+      returnCenterTime?: string;
+
+      /** 预报请求撤销人 */
+      revokePredictionBy?: number;
+
+      /** 预报撤销失败原因 */
+      revokePredictionFailReason?: string;
+
+      /** 预报撤销状态(0:撤销失败；1：撤销成功) */
+      revokePredictionStatus?: string;
+
+      /** 预报撤销时间 */
+      revokePredictionTime?: string;
+
+      /** 销售日期 */
+      saleTime?: string;
+
+      /** 寄件人地址 */
+      senderAddress?: string;
+
+      /** 寄件人城市 */
+      senderCity?: string;
+
+      /** 寄件人国家代码 */
+      senderCountryCode?: string;
+
+      /** 寄件人行政区 */
+      senderDistrict?: string;
+
+      /** 寄件人邮箱 */
+      senderEmail?: string;
+
+      /** 发件人全地址 */
+      senderFullAddress?: string;
+
+      /** 发件人姓名 */
+      senderName?: string;
+
+      /** 发件人电话 */
+      senderPhone?: string;
+
+      /** 发件人邮编 */
+      senderPostcode?: string;
+
+      /** 寄件人省州 */
+      senderState?: string;
+
+      /** 寄件人税号 */
+      senderTaxNumber?: string;
+
+      /** 包裹发货人 */
+      shippedBy?: number;
+
+      /** 包裹发货时间 */
+      shippedTime?: string;
+
+      /** 邮路流水号 */
+      shippingMethodId?: number;
+
+      /** 邮路分区流水号 */
+      shippingZoneId?: number;
+
+      /** 标记包裹缺货时间 */
+      signStockTime?: string;
+
+      /** 入仓人 */
+      sortingResultBy?: number;
+
+      /** 入仓时间 */
+      sortingResultTime?: string;
+
+      /** 入仓重量 */
+      sortingResultWeight?: number;
+
+      /** 包裹状态(0:等待分配物流;1:分配物流失败;2:分配物流成功(等待预报);3:预报失败;4:已预报[等待入仓];5:已入仓[完成分拣);6:分拣转仓中;7:已装袋;8:出境邮袋转仓中9:已发货;10:预报中;11:已离港;12:已离开转运中心;13:已到达目的国;14:已到达OE;15:已到达转运中心;16:已退回处理中心;17:待退回寄件人;18:已退回寄件人;19:寄件人已确认海外退件收货;20:派送处理中;21:包裹无法派送;22:派送成功;23:包裹已销毁;24:交航失败;25:交航退件出库;26:寄件人已确认交航退件收货;27:客户拦截;28:运维拦截;35:线下退件) */
+      status?: string;
+
+      /** 包裹是否缺货(0：不缺货；1:缺货) */
+      stockFlag?: string;
+
+      /** 退税手续费 */
+      taxRefundAmount?: number;
+
+      /** 是否退税 */
+      taxRefundFlag?: number;
+
+      /** 跟踪号 */
+      trackingNumber?: string;
+
+      /** 交接末端配送 */
+      transportHandoverTime?: string;
+
+      /** 更新人 */
+      upLocalDateTimeBy?: number;
+
+      /** 更新时间 */
+      upLocalDateTimeTime?: string;
     }
 
     export interface SyCCompanyDetailBo {
@@ -2659,6 +4046,121 @@ export declare namespace defs {
       updatedTime?: string;
     }
 
+    export interface SyPrintBsPackageVO {
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 客户订单号 */
+      customerOrderNo?: string;
+
+      /** 客户参考号 */
+      customerReferenceNo?: string;
+
+      /** 包裹编码 */
+      packageCode?: string;
+
+      /** 包裹流水号 */
+      packageId?: number;
+
+      /** 包裹预估(预报)运费(CNY) */
+      predictionFreight?: number;
+
+      /** 包裹预报重量（KG） */
+      predictionWeight?: number;
+
+      /** 最后打印时间 */
+      printTime?: string;
+
+      /** productskus */
+      productskus?: string;
+
+      /** 收件国家代码 */
+      recipientCountryCode?: string;
+
+      /** 邮寄方式名称 */
+      shippingmethodname?: string;
+
+      /** 包裹状态(0:等待分配物流;1:分配物流失败;2:分配物流成功(等待预报);3:预报失败;4:已预报[等待入仓];5:已入仓[完成分拣);6:分拣转仓中;7:已装袋;8:出境邮袋转仓中9:已发货;10:预报中;11:已离港;12:已离开转运中心;13:已到达目的国;14:已到达OE;15:已到达转运中心;16:已退回处理中心;17:待退回寄件人;18:已退回寄件人;19:寄件人已确认海外退件收货;20:派送处理中;21:包裹无法派送;22:派送成功;23:包裹已销毁;24:交航失败;25:交航退件出库;26:寄件人已确认交航退件收货;27:客户拦截;28:运维拦截;35:线下退件) */
+      status?: string;
+
+      /** 追踪号 */
+      trackingNumber?: string;
+
+      /** 更新时间 */
+      updateTime?: string;
+    }
+
+    export interface SySysBankAccountVO {
+      /** 是否自动对账(0:否 1:是) */
+      accountType?: number;
+
+      /** 人民币余额 */
+      balanceCny?: number;
+
+      /** 人民币余额 */
+      balanceCnyStr?: string;
+
+      /** 港币余额 */
+      balanceHkd?: number;
+
+      /** 港币余额 */
+      balanceHkdStr?: string;
+
+      /** 美元余额 */
+      balanceUsd?: number;
+
+      /** 美元余额 */
+      balanceUsdStr?: string;
+
+      /** 开户账号 */
+      bankAccount?: string;
+
+      /** 银行账号流水号 */
+      bankAccountId?: number;
+
+      /** 开户行 */
+      bankName?: string;
+
+      /** 银行简称 */
+      bankShortName?: string;
+
+      /** 人民币导入模板(默认1（不支持导入） 否则是官方数据格式下拉框选的值) */
+      cnyImportType?: number;
+
+      /** 创建人 */
+      createBy?: number;
+
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 港币导入模板(默认1（不支持导入） 否则是官方数据格式下拉框选的值) */
+      hkdImportType?: number;
+
+      /** 备注 */
+      remarks?: string;
+
+      /** 排序 */
+      sort?: number;
+
+      /** 状态(0:停用;1:启用) */
+      status?: number;
+
+      /** 交易状态（0/null:未交易 1:正在交易） */
+      tradeStatus?: number;
+
+      /** 更新人 */
+      updateBy?: number;
+
+      /** 更新时间 */
+      updateTime?: string;
+
+      /** 美元导入模板(默认1（不支持导入） 否则是官方数据格式下拉框选的值) */
+      usdImportType?: number;
+
+      /** 户名 */
+      userName?: string;
+    }
+
     export interface SySysNotice {
       /** 公告内容 */
       content?: string;
@@ -2806,17 +4308,11 @@ export declare namespace defs {
     }
 
     export interface SysUserBindMobileBo {
-      /** 图形验证码 */
-      code: string;
-
       /** 手机号码 */
       mobile: string;
 
       /** 手机验证码 */
       smsCode: string;
-
-      /** 唯一标识 */
-      uuid?: string;
     }
 
     export interface SysUserBo {
@@ -2861,23 +4357,14 @@ export declare namespace defs {
     }
 
     export interface SysUserEditPasswordBo {
-      /** 验证码 */
-      code?: string;
-
       /** 手机号码 */
       mobile?: string;
 
       /** 用户密码 */
       password: string;
 
-      /** smsCode */
+      /** 短信验证码 */
       smsCode: string;
-
-      /** userId */
-      userId: number;
-
-      /** 唯一标识 */
-      uuid?: string;
     }
 
     export interface SysUserMenuBindBo {
@@ -2897,17 +4384,8 @@ export declare namespace defs {
     }
 
     export interface SysUserPasswordForgotBo {
-      /** 图形验证码 */
-      code: string;
-
-      /** 手机号 */
-      mobile?: string;
-
-      /** 用户名 */
-      userName?: string;
-
-      /** 唯一标识 */
-      uuid?: string;
+      /** 关键字（用户名或手机号） */
+      keyword: string;
     }
 
     export interface SysUserProfileBo {
@@ -2937,14 +4415,8 @@ export declare namespace defs {
     }
 
     export interface SysUserUnbindMobileBo {
-      /** 图形验证码 */
-      code: string;
-
       /** 手机验证码 */
       smsCode: string;
-
-      /** 唯一标识 */
-      uuid?: string;
     }
 
     export interface SysUserVo {
@@ -3005,6 +4477,17 @@ export declare namespace defs {
 
       /** data */
       data?: apis.DataInfoRechargeVo;
+
+      /** 消息内容 */
+      msg?: string;
+    }
+
+    export interface TableDataInfoSyBsPackageVO {
+      /** 消息状态码 */
+      code?: number;
+
+      /** data */
+      data?: apis.DataInfoSyBsPackageVO;
 
       /** 消息内容 */
       msg?: string;
@@ -3076,6 +4559,17 @@ export declare namespace defs {
       msg?: string;
     }
 
+    export interface TableDataInfoSyPrintBsPackageVO {
+      /** 消息状态码 */
+      code?: number;
+
+      /** data */
+      data?: apis.DataInfoSyPrintBsPackageVO;
+
+      /** 消息内容 */
+      msg?: string;
+    }
+
     export interface TableDataInfoSysLogininforVo {
       /** 消息状态码 */
       code?: number;
@@ -3093,6 +4587,28 @@ export declare namespace defs {
 
       /** data */
       data?: apis.DataInfoTrackingNoVo;
+
+      /** 消息内容 */
+      msg?: string;
+    }
+
+    export interface TableDataInfoUnBilledChargeSortVo {
+      /** 消息状态码 */
+      code?: number;
+
+      /** data */
+      data?: apis.DataInfoUnBilledChargeSortVo;
+
+      /** 消息内容 */
+      msg?: string;
+    }
+
+    export interface TableDataInfoUnBilledChargeVo {
+      /** 消息状态码 */
+      code?: number;
+
+      /** data */
+      data?: apis.DataInfoUnBilledChargeVo;
 
       /** 消息内容 */
       msg?: string;
@@ -3355,6 +4871,134 @@ export declare namespace defs {
       parentId?: number;
     }
 
+    export interface UnBilledChargeBo {
+      /** 费用类型(0: 物流费用, 1: 其他费用, 2: 异常费用) */
+      chargeType: number;
+
+      /** 公司流水号 */
+      companyId?: number;
+    }
+
+    export interface UnBilledChargeSortBo {
+      /** 费用id */
+      companyChargeId?: number;
+
+      /** 分拣方式(0: 人工, 1: 逐单入仓) */
+      sortingFrom?: number;
+
+      /** 有效性(0: 有效, 1: 异常) */
+      sortingType?: number;
+    }
+
+    export interface UnBilledChargeSortVo {
+      /** 邮寄方式名称/邮路名称 */
+      channelCnName?: string;
+
+      /** 邮路代码 */
+      channelCode?: string;
+
+      /** 计费重 */
+      chargeWeight?: number;
+
+      /** 目的国中文名 */
+      countryCnName?: string;
+
+      /** 目的国英文名 */
+      countryEnName?: string;
+
+      /** 币种 */
+      currencyCode?: string;
+
+      /** 币种符号 */
+      currencySymbol?: string;
+
+      /** 客户订单号 */
+      customerOrderNo?: string;
+
+      /** 客户参考号 */
+      customerReferenceNo?: string;
+
+      /** 保险费 */
+      insuranceAmount?: number;
+
+      /** 保险单号 */
+      insuranceNumber?: string;
+
+      /** 包裹流水号 */
+      packageCode?: string;
+
+      /** 包裹数 */
+      packageNum?: number;
+
+      /** 目的国 */
+      recipientCountryCode?: string;
+
+      /** 运费 */
+      reviseFreight?: number;
+
+      /** 保费 */
+      revisePremium?: number;
+
+      /** 分拣重量 */
+      reviseWeight?: number;
+
+      /** 邮寄方式代码 */
+      shippingMethodCode?: string;
+
+      /** 分拣编码 */
+      sortingResultCode?: string;
+
+      /** 分拣时间 */
+      sortingTime?: string;
+
+      /** 体积重 */
+      srealVolumnWeight?: number;
+
+      /** 退税手续费 */
+      taxRefundAmount?: number;
+
+      /** 总费用 */
+      totalCharge?: number;
+
+      /** 追踪号 */
+      trackingNumber?: string;
+
+      /** 体积 */
+      volume?: string;
+    }
+
+    export interface UnBilledChargeVo {
+      /** 费用 */
+      charge?: number;
+
+      /** 费用编号 */
+      chargeCode?: string;
+
+      /** 费用内容 */
+      chargeDetail?: string;
+
+      /** 费用时间 */
+      chargeTime?: string;
+
+      /** 费用类型 */
+      chargeType?: number;
+
+      /** 费用id */
+      companyChargeId?: number;
+
+      /** 费用生成时间 */
+      createTime?: string;
+
+      /** 币种 */
+      currencyCode?: string;
+
+      /** 币种名称 */
+      currencySecondName?: string;
+
+      /** 币种符号 */
+      currencySymbol?: string;
+    }
+
     export interface UploadInitVO {
       /** true 合同过期 预报不能成功 */
       flg?: boolean;
@@ -3513,12 +5157,12 @@ export declare namespace API {
       export namespace smsCode {
         export class Params {}
 
-        export type Response = defs.apis.RString;
+        export type Response = defs.apis.RVoid;
         export const init: Response;
         export function request(
           params: Params,
           bodyParams: defs.apis.SmsCodeBo,
-        ): Promise<defs.apis.RString>;
+        ): Promise<defs.apis.RVoid>;
       }
     }
 
@@ -3651,6 +5295,19 @@ export declare namespace API {
         export type Response = defs.apis.RListSyExchangeRateVo;
         export const init: Response;
         export function request(params: Params): Promise<defs.apis.RListSyExchangeRateVo>;
+      }
+
+      /**
+        * 上传图像文件（可添加水印）
+上传图像文件（可添加水印）
+        * /common/watermark/upload
+        */
+      export namespace uploadWatermark {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(params: Params, bodyParams: object): Promise<defs.apis.RObject>;
       }
     }
 
@@ -3977,14 +5634,14 @@ export declare namespace API {
         * /overview/submitCompanyInfo
         */
       export namespace submitCompanyInfo {
-        export class Params {
-          /** bo */
-          bo: defs.apis.CompleteCompanyBO;
-        }
+        export class Params {}
 
         export type Response = defs.apis.RVoid;
         export const init: Response;
-        export function request(params: Params): Promise<defs.apis.RVoid>;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.CompleteCompanyBO,
+        ): Promise<defs.apis.RVoid>;
       }
     }
 
@@ -4006,6 +5663,109 @@ export declare namespace API {
           params: Params,
           bodyParams: object,
         ): Promise<defs.apis.RUploadInitVO>;
+      }
+    }
+
+    /**
+     * labelPrinting
+     */
+    export namespace labelPrinting {
+      /**
+        * 包裹列表
+包裹列表
+        * /client/package/operation/print/package/printPackageList
+        */
+      export namespace packageList {
+        export class Params {
+          /** bo */
+          bo: defs.apis.PrintPackageListViewBO;
+          /** pageQuery */
+          pageQuery: defs.apis.PageQuery;
+        }
+
+        export type Response = defs.apis.TableDataInfoSyPrintBsPackageVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.TableDataInfoSyPrintBsPackageVO>;
+      }
+
+      /**
+        * 批量打印和下载PDF
+批量打印和下载PDF
+        * /client/package/operation/print/printPdfBatch
+        */
+      export namespace printPDFAllPage {
+        export class Params {}
+
+        export type Response = defs.apis.RFileVO;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PrintPdfBatchBO,
+        ): Promise<defs.apis.RFileVO>;
+      }
+
+      /**
+        * 批量撤销预报
+批量撤销预报
+        * /client/package/operation/print/revokePredictBatch
+        */
+      export namespace revokePredictBatch {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.RevokePredictBatchBO,
+        ): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 获得邮寄方式列表
+获得邮寄方式列表
+        * /client/package/operation/print/shippingMethod/shippingMethodList
+        */
+      export namespace getShippingMethodList_1 {
+        export class Params {
+          /** bo */
+          bo: defs.apis.PrintPackageBO;
+        }
+
+        export type Response = defs.apis.RShippingMethodListVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RShippingMethodListVO>;
+      }
+
+      /**
+        * 查询等待打印的包裹数
+查询等待打印的包裹数
+        * /client/package/operation/print/waitPrintNumber
+        */
+      export namespace waitPrintNumber {
+        export class Params {
+          /** companyId */
+          companyId: number;
+        }
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 撤销预报
+撤销预报
+        * /client/package/operation/revokePrediction
+        */
+      export namespace revokePredictionMethod {
+        export class Params {}
+
+        export type Response = defs.apis.RVoid;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PrintPDFBO,
+        ): Promise<defs.apis.RVoid>;
       }
     }
 
@@ -4183,6 +5943,38 @@ export declare namespace API {
      */
     export namespace newPackage {
       /**
+        * 获取商品详情
+获取商品详情
+        * /client/package/base/detail
+        */
+      export namespace showPackageInfoBase {
+        export class Params {
+          /** packageId */
+          packageId: number;
+        }
+
+        export type Response = defs.apis.RSyBsPackageDetailVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RSyBsPackageDetailVO>;
+      }
+
+      /**
+        * 客户管理-代客操作-新建包裹-获取包裹商品列表
+客户管理-代客操作-新建包裹-获取包裹商品列表
+        * /client/package/product/list
+        */
+      export namespace getProductList {
+        export class Params {
+          /** packageId */
+          packageId: string;
+        }
+
+        export type Response = defs.apis.RListSyBsPackageProductVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RListSyBsPackageProductVO>;
+      }
+
+      /**
         * 客户管理-新建包裹-保存包裹
 客户管理-新建包裹-保存包裹
         * /client/package/save
@@ -4199,6 +5991,19 @@ export declare namespace API {
       }
 
       /**
+        * 查询商品属性
+查询商品属性
+        * /client/package/selectProductAttributeList
+        */
+      export namespace selectProductAttributeList {
+        export class Params {}
+
+        export type Response = defs.apis.RListProductAttributesVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RListProductAttributesVO>;
+      }
+
+      /**
         * 获取邮寄方式
 获取邮寄方式
         * /client/package/shippingmethod/list
@@ -4212,6 +6017,22 @@ export declare namespace API {
           params: Params,
           bodyParams: defs.apis.PackageInfoBO,
         ): Promise<defs.apis.RListChannelPriceVO>;
+      }
+
+      /**
+        * 客户管理-新建包裹-修改包裹
+客户管理-新建包裹-修改包裹
+        * /client/package/update
+        */
+      export namespace updatePackage {
+        export class Params {}
+
+        export type Response = defs.apis.RSavePackageVO;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PackageInfoBO,
+        ): Promise<defs.apis.RSavePackageVO>;
       }
 
       /**
@@ -4332,6 +6153,249 @@ export declare namespace API {
         export type Response = defs.apis.RVoid;
         export const init: Response;
         export function request(params: Params): Promise<defs.apis.RVoid>;
+      }
+    }
+
+    /**
+     * parcelForecast
+     */
+    export namespace parcelForecast {
+      /**
+        * 获取邮寄方式
+获取邮寄方式
+        * /client/package/operation/getShippingMethodList
+        */
+      export namespace getShippingMethodList_2 {
+        export class Params {
+          /** bo */
+          bo: defs.apis.ShippingMethodListBO;
+        }
+
+        export type Response = defs.apis.RShippingMethodListVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RShippingMethodListVO>;
+      }
+
+      /**
+        * 申请拦截
+申请拦截
+        * /client/package/operation/prediction/apply
+        */
+      export namespace applyInterceptPackage {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.ApplyInterceptBO,
+        ): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 批量删除
+批量删除
+        * /client/package/operation/prediction/batch/delete
+        */
+      export namespace batchDeletePackage {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PredictionBatchRevokeBO,
+        ): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 获取邮寄方式
+获取邮寄方式
+        * /client/package/operation/prediction/batch/modify
+        */
+      export namespace modifyBatch {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 批量修改预报包裹
+批量修改预报包裹
+        * /client/package/operation/prediction/batch/modify/save
+        */
+      export namespace save {
+        export class Params {}
+
+        export type Response = defs.apis.RVoid;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PredictionBatchModifyBO,
+        ): Promise<defs.apis.RVoid>;
+      }
+
+      /**
+        * 批量预报
+批量预报
+        * /client/package/operation/prediction/batch/predict
+        */
+      export namespace batchPredictMethod {
+        export class Params {}
+
+        export type Response = defs.apis.RUploadInitVO;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PredictionBatchModifyBO,
+        ): Promise<defs.apis.RUploadInitVO>;
+      }
+
+      /**
+        * 批量撤销预报
+批量撤销预报
+        * /client/package/operation/prediction/batch/revoke
+        */
+      export namespace batchRevokePrediction {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.PredictionBatchRevokeBO,
+        ): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 取消拦截
+取消拦截
+        * /client/package/operation/prediction/cancelIntercept
+        */
+      export namespace cancelIntercept {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.ApplyInterceptBO,
+        ): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 包裹预报
+包裹预报
+        * /client/package/operation/prediction/doprediction
+        */
+      export namespace pacakgePrediction {
+        export class Params {}
+
+        export type Response = defs.apis.RSavePackageVO;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.DopreDictionBO,
+        ): Promise<defs.apis.RSavePackageVO>;
+      }
+
+      /**
+        * 导出包裹
+导出包裹
+        * /client/package/operation/prediction/exportExcel
+        */
+      export namespace exportExcel {
+        export class Params {}
+
+        export type Response = any;
+        export const init: Response;
+        export function request(params: Params, bodyParams: defs.apis.ExportExcelBO): Promise<any>;
+      }
+
+      /**
+        * 包裹列表查询
+包裹列表查询
+        * /client/package/operation/prediction/packagelist
+        */
+      export namespace getPackageListView {
+        export class Params {
+          /** bo */
+          bo: defs.apis.PackageListViewBO;
+          /** pageQuery */
+          pageQuery: defs.apis.PageQuery;
+        }
+
+        export type Response = defs.apis.TableDataInfoSyBsPackageVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.TableDataInfoSyBsPackageVO>;
+      }
+
+      /**
+        * 预报状态中的各状态数量
+预报状态中的各状态数量
+        * /client/package/operation/prediction/refreshNum
+        */
+      export namespace refreshNum {
+        export class Params {
+          /** bo */
+          bo: defs.apis.PredictionBO;
+        }
+
+        export type Response = defs.apis.RPredictionVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RPredictionVO>;
+      }
+
+      /**
+        * 操作前校验用户是否冻结
+操作前校验用户是否冻结
+        * /client/package/operation/selectFreezeStatusById
+        */
+      export namespace selectFreezeStatusById {
+        export class Params {
+          /** companyId */
+          companyId: number;
+        }
+
+        export type Response = defs.apis.RInteger;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RInteger>;
+      }
+    }
+
+    /**
+     * pay
+     */
+    export namespace pay {
+      /**
+        * 新增银行转账声明
+新增银行转账声明
+        * /client/bill/finance/bankTransfer/save
+        */
+      export namespace saveBankTransfer {
+        export class Params {}
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.BankTransferFormBeanBO,
+        ): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 获取银行账号列表
+获取银行账号列表
+        * /client/pay/view/underline
+        */
+      export namespace underlineView {
+        export class Params {}
+
+        export type Response = defs.apis.RListSySysBankAccountVO;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RListSySysBankAccountVO>;
       }
     }
 
@@ -4653,6 +6717,19 @@ export declare namespace API {
       }
 
       /**
+        * 获取导入平台账号模板
+获取导入平台账号模板
+        * /thirdPlatform/account/export/template
+        */
+      export namespace exportThirdPlatformTemplate {
+        export class Params {}
+
+        export type Response = any;
+        export const init: Response;
+        export function request(params: Params): Promise<any>;
+      }
+
+      /**
         * 导入平台账号
 导入平台账号
         * /thirdPlatform/account/import
@@ -4790,6 +6867,67 @@ export declare namespace API {
     }
 
     /**
+     * unBilledCharge
+     */
+    export namespace unBilledCharge {
+      /**
+        * 获取费用明细
+获取费用明细
+        * /bill/unfinishedBill/detail
+        */
+      export namespace UnBilledChargeDetail {
+        export class Params {
+          /** companyChargeId */
+          companyChargeId: number;
+          /** chargeType */
+          chargeType: number;
+        }
+
+        export type Response = defs.apis.RObject;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 获取未出账费用列表
+获取未出账费用列表
+        * /bill/unfinishedBill/list
+        */
+      export namespace unBilledChargeList {
+        export class Params {
+          /** bo */
+          bo: defs.apis.UnBilledChargeBo;
+          /** pageQuery */
+          pageQuery: defs.apis.PageQuery;
+        }
+
+        export type Response = defs.apis.TableDataInfoUnBilledChargeVo;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.TableDataInfoUnBilledChargeVo>;
+      }
+
+      /**
+        * 获取分拣明细列表
+获取分拣明细列表
+        * /bill/unfinishedBill/sortList
+        */
+      export namespace unBilledChargeSortList {
+        export class Params {
+          /** bo */
+          bo: defs.apis.UnBilledChargeSortBo;
+          /** pageQuery */
+          pageQuery: defs.apis.PageQuery;
+        }
+
+        export type Response = defs.apis.TableDataInfoUnBilledChargeSortVo;
+        export const init: Response;
+        export function request(
+          params: Params,
+        ): Promise<defs.apis.TableDataInfoUnBilledChargeSortVo>;
+      }
+    }
+
+    /**
      * user
      */
     export namespace user {
@@ -4878,7 +7016,7 @@ export declare namespace API {
       export namespace getMenu {
         export class Params {
           /** subUserId */
-          subUserId: number;
+          subUserId?: number;
         }
 
         export type Response = defs.apis.RListTreeVO;

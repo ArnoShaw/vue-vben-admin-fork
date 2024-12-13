@@ -1,118 +1,78 @@
 <script setup lang="ts">
 import type { defs } from '#/services/apis/api';
 
-import { useUserStore } from '@vben/stores';
+import { computed } from 'vue';
 
-import { apis } from '#/services/apis';
+import { Card, CardContent, CardHeader, CardTitle, VbenIcon } from '@vben-core/shadcn-ui';
 
-withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
+const props = withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
   data: () => ({}),
 });
 
-const userStore = useUserStore();
-async function getAllUsers() {
-  const res = (await apis.common.getSysUserList({} as any)) as any;
-  userStore.setAllUsers(res ?? []);
-}
-getAllUsers();
-
-function getNickname(id: number) {
-  return userStore.allUsers.find((item) => item.userId === id)?.nickname || '未分配';
-}
-
-function getMobile(id: number) {
-  return userStore.allUsers.find((item) => item.userId === id)?.mobile || '';
-}
-
-function getEmail(id: number) {
-  return userStore.allUsers.find((item) => item.userId === id)?.email || '';
-}
+const items = computed(() => {
+  const { businessUser, serviceUser, financeUser, receiveUser } = props.data.accountInfo || {};
+  return [
+    {
+      title: '业务专员',
+      avatar: businessUser?.avatar || 'carbon:user-avatar',
+      email: businessUser?.email,
+      name: businessUser?.nickname,
+      mobile: businessUser?.mobile,
+    },
+    {
+      title: '客服专员',
+      avatar: serviceUser?.avatar || 'carbon:user-avatar',
+      email: serviceUser?.email,
+      name: serviceUser?.nickname,
+      mobile: serviceUser?.mobile,
+    },
+    {
+      title: '揽收专员',
+      avatar: receiveUser?.avatar || 'carbon:user-avatar',
+      email: receiveUser?.email,
+      name: receiveUser?.nickname,
+      mobile: receiveUser?.mobile,
+    },
+    {
+      title: '财务专员',
+      avatar: financeUser?.avatar || 'carbon:user-avatar',
+      email: financeUser?.email,
+      name: financeUser?.nickname,
+      mobile: financeUser?.mobile,
+    },
+  ];
+});
 </script>
 
 <template>
-  <div class="mt-4 flex h-[140px]">
-    <div class="card-box px-4 py-3 transition-all hover:shadow-xl">
-      <span>您的业务专员</span>
-      <div class="mt-2">
-        <p class="text-lg">
-          {{ getNickname(data?.accountInfo?.servicePersonnel || 0) }}
-        </p>
-        <p>
-          {{ getMobile(data?.accountInfo?.servicePersonnel || 0) }}
-        </p>
-      </div>
-      <div class="mt-3">{{ getEmail(data?.accountInfo?.servicePersonnel || 0) }}</div>
-    </div>
-    <div class="card-box mx-2 px-4 py-3 transition-all hover:shadow-xl">
-      <span>您的客服专员</span>
-      <div class="mt-2">
-        <p class="text-lg">
-          {{ getNickname(data?.accountInfo?.businessPersonnel || 0) }}
-        </p>
-        <p>
-          {{ getMobile(data?.accountInfo?.businessPersonnel || 0) }}
-        </p>
-      </div>
-      <div class="mt-3">{{ getEmail(data?.accountInfo?.businessPersonnel || 0) }}</div>
-    </div>
-    <div class="card-box mr-2 px-4 py-3 transition-all hover:shadow-xl">
-      <span>您的揽收专员</span>
-      <div class="mt-2">
-        <p class="text-lg">
-          {{ getNickname(data?.accountInfo?.receivePersonnel || 0) }}
-        </p>
-        <p>
-          {{ getMobile(data?.accountInfo?.receivePersonnel || 0) }}
-        </p>
-      </div>
-      <div class="mt-3">{{ getEmail(data?.accountInfo?.receivePersonnel || 0) }}</div>
-    </div>
-    <div class="card-box px-4 py-3 transition-all hover:shadow-xl">
-      <span>您的财务专员</span>
-      <div class="mt-2">
-        <p class="text-lg">
-          {{ getNickname(data?.accountInfo?.financePersonnel || 0) }}
-        </p>
-        <p>
-          {{ getMobile(data?.accountInfo?.financePersonnel || 0) }}
-        </p>
-      </div>
-      <div class="mt-3">{{ getEmail(data?.accountInfo?.financePersonnel || 0) }}</div>
-    </div>
-  </div>
+  <Card class="mt-4 xl:mb-4">
+    <CardHeader class="py-4">
+      <CardTitle class="text-lg">专属服务人员</CardTitle>
+    </CardHeader>
+    <CardContent class="flex flex-wrap p-0">
+      <template v-for="(item, index) in items" :key="item.title">
+        <div
+          :class="{
+            'border-r-0': index === 3,
+          }"
+          class="border-border group w-1/4 cursor-pointer border-r border-t p-4 transition-all hover:shadow-xl"
+        >
+          <div class="flex items-center">
+            <VbenIcon
+              :icon="item.avatar"
+              class="text-foreground/60 size-8 transition-all duration-300 group-hover:scale-110"
+            />
+            <span class="ml-4 text-lg font-medium">{{ item.name || '未分配' }}</span>
+          </div>
+          <div class="text-foreground/80 my-2 flex justify-between">
+            <span>{{ item.title }}</span>
+            <span>{{ item.mobile }}</span>
+          </div>
+          <div class="text-foreground/80 flex">
+            {{ item.email }}
+          </div>
+        </div>
+      </template>
+    </CardContent>
+  </Card>
 </template>
-
-<style lang="scss" scoped>
-.card-box {
-  flex: 1;
-  color: #fff;
-  word-break: break-word;
-  background-repeat: no-repeat;
-  background-position: right;
-
-  &:first-of-type {
-    background-color: #0d57a7;
-    background-image: url('../../../assets/img/viewcard1.png');
-  }
-
-  &:nth-of-type(2) {
-    background-color: #2eb042;
-    background-image: url('../../../assets/img/viewcard2.png');
-  }
-
-  &:nth-of-type(3) {
-    background-color: #424242;
-    background-image: url('../../../assets/img/viewcard3.png');
-  }
-
-  &:last-of-type {
-    background-color: #fd932b;
-    background-image: url('../../../assets/img/viewcard4.png');
-  }
-
-  & > span {
-    padding-bottom: 4px;
-    border-bottom: 1px solid #fff;
-  }
-}
-</style>
