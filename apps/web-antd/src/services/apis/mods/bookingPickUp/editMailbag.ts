@@ -2,23 +2,26 @@
 // @ts-nocheck auto generated apis
 
 /**
-    * @description 查询商品属性
-查询商品属性
+    * @description 编辑
+编辑
     */
 
 import type { AxiosRequestConfig } from '@vben/request';
 import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
-class Params {}
+class Params {
+  /** receiveMailbagId */
+  receiveMailbagId: number;
+}
 
 export type RequestTypes = Params;
-export type ResponseTypes = defs.apis.RListProductAttributesVo;
-const selectProductAttributeList = async (params: RequestTypes, config?: AxiosRequestConfig) => {
+export type ResponseTypes = defs.apis.RSyBsReceiveMailbagVo;
+const editMailbag = async (params: RequestTypes, config?: AxiosRequestConfig) => {
   return requestClient.get<ResponseTypes>(
-    '/client/package/selectProductAttributeList',
+    '/client/package/operation/reservation/mailbag/edit',
     { params },
     config,
   );
 };
-export default selectProductAttributeList;
+export default editMailbag;

@@ -1,18 +1,18 @@
 import type { VxeGridProps } from '@vben/plugins/vxe-table';
-import type { Fn } from '@vueuse/core';
 
 import { type VbenFormSchema, z } from '@vben/common-ui';
 
 import Decimal from 'decimal.js';
 
-// const CODCurrencyList = getOptionsByDict('sys_package_cod_currency_code');
-// const declareCurrencyCodes = getOptionsByDict('sy_bs_currency_code');
+import { apis } from '#/services/apis';
+import { getOptionsByDict } from '#/utils/dict';
+
+const CODCurrencyList = getOptionsByDict('client_sys_package_cod_currency_code');
+const declareCurrencyCodes = getOptionsByDict('client_sy_bs_currency_code');
 
 export const formSchemas = (
-  goodsSelectCb?: Fn,
-  isCODChangeCb?: Fn,
-  onSearchShipping?: Fn,
-  productAttrsList = [],
+  goodsSelectCb?: () => Promise<any>,
+  onSearchShipping?: () => Promise<any>,
 ): VbenFormSchema[] => [
   {
     fieldName: 'basic',
@@ -32,7 +32,7 @@ export const formSchemas = (
     componentProps: {
       placeholder: '必填，方便您 搜索、辨识您的订单，不可重复',
     },
-    rules: z.string().max(100, '只允许输入100个字符'),
+    rules: z.string().min(1, '请输入客户订单号').max(100, '只允许输入100个字符'),
     formItemClass: 'col-span-6',
   },
   {
@@ -48,10 +48,12 @@ export const formSchemas = (
   {
     fieldName: 'packageAttributes',
     label: '商品属性',
-    component: 'Select',
+    component: 'ApiSelect',
     componentProps: {
       mode: 'multiple',
-      options: productAttrsList,
+      api: () => apis.newPackage.selectProductAttributeList({}),
+      labelField: 'attributeName',
+      valueField: 'productAttributeId',
       onSelect: goodsSelectCb,
     },
     formItemClass: 'col-span-3',
@@ -81,7 +83,6 @@ export const formSchemas = (
     label: '是否COD',
     component: 'Checkbox',
     componentProps: {
-      onChange: isCODChangeCb,
       class: 'w-auto',
     },
     formItemClass: 'col-span-1',
@@ -121,7 +122,7 @@ export const formSchemas = (
     },
     component: 'Select',
     componentProps: {
-      // options: CODCurrencyList,
+      options: CODCurrencyList,
     },
     formItemClass: 'col-span-2',
   },
@@ -212,7 +213,7 @@ export const formSchemas = (
     fieldName: 'recipientName',
     label: '收件人姓名',
     component: 'Input',
-    rules: z.string().max(64, '只允许输入64个字符'),
+    rules: z.string().min(1, '请输入收件人姓名').max(64, '只允许输入64个字符'),
     formItemClass: 'col-span-6',
   },
   {
@@ -230,11 +231,16 @@ export const formSchemas = (
     fieldName: 'recipientPhone',
     label: '收件人电话',
     component: 'Input',
-    rules: z.string().max(32, '只允许输入32个字符').optional(),
+    rules: z.string().min(1, '请输入收件人电话').max(32, '只允许输入32个字符'),
     dependencies: {
       triggerFields: ['recipientMobile'],
       required(values) {
         return !values.recipientMobile;
+      },
+      rules(values) {
+        return values.recipientMobile
+          ? z.string().max(32, '只允许输入32个字符').optional()
+          : z.string().min(1, '请输入收件人电话').max(32, '只允许输入32个字符');
       },
     },
     formItemClass: 'col-span-6',
@@ -243,11 +249,16 @@ export const formSchemas = (
     fieldName: 'recipientMobile',
     label: '收件人手机',
     component: 'Input',
-    rules: z.string().max(32, '只允许输入32个字符').optional(),
+    rules: z.string().min(1, '请输入收件人手机').max(32, '只允许输入32个字符'),
     dependencies: {
       triggerFields: ['recipientPhone'],
       required(values) {
         return !values.recipientPhone;
+      },
+      rules(values) {
+        return values.recipientPhone
+          ? z.string().max(32, '只允许输入32个字符').optional()
+          : z.string().min(1, '请输入收件人手机').max(32, '只允许输入32个字符');
       },
     },
     formItemClass: 'col-span-6',
@@ -275,16 +286,14 @@ export const formSchemas = (
   {
     fieldName: 'recipientCountryCode',
     label: '国家/地区',
-    component: 'Select',
+    component: 'ApiSelect',
     rules: 'selectRequired',
-    // componentProps: {
-    //   onChange: onSearchShipping,
-    //   api: apis.common.getCountryList,
-    //   showSearch: true,
-    //   filterOption: (input: string, option: any) => {
-    //     return option.label.toLowerCase().includes(input.toLowerCase());
-    //   },
-    // },
+    componentProps: {
+      onChange: onSearchShipping,
+      api: () => apis.common.getRegionSelect({ type: 1 }),
+      showSearch: true,
+      optionFilterProp: 'label',
+    },
     formItemClass: 'col-span-3',
   },
   {
@@ -292,7 +301,7 @@ export const formSchemas = (
     label: '省/州',
     labelWidth: 60,
     component: 'Input',
-    rules: z.string().max(64, '只允许输入64个字符'),
+    rules: z.string().min(1, '请输入省/州').max(64, '只允许输入64个字符'),
     formItemClass: 'col-span-3',
   },
   {
@@ -300,7 +309,7 @@ export const formSchemas = (
     label: '城市',
     labelWidth: 60,
     component: 'Input',
-    rules: z.string().max(64, '只允许输入64个字符'),
+    rules: z.string().min(1, '请输入城市').max(64, '只允许输入64个字符'),
     formItemClass: 'col-span-3',
   },
   {
@@ -311,7 +320,7 @@ export const formSchemas = (
     componentProps: {
       onBlur: onSearchShipping,
     },
-    rules: z.string().max(32, '只允许输入32个字符'),
+    rules: z.string().min(1, '请输入邮编').max(32, '只允许输入32个字符'),
 
     formItemClass: 'col-span-3',
   },
@@ -319,7 +328,7 @@ export const formSchemas = (
     fieldName: 'recipientAddress1',
     label: '地址1',
     component: 'Input',
-    rules: z.string().max(200, '只允许输入200个字符'),
+    rules: z.string().min(1, '请输入地址').max(200, '只允许输入200个字符'),
     formItemClass: 'col-span-12',
   },
   {
@@ -477,13 +486,17 @@ export const formSchemas = (
 
 export const shippingColumns: VxeGridProps['columns'] = [
   {
+    type: 'radio',
+    width: 60,
+  },
+  {
     title: '邮寄方式',
     field: 'channelName',
   },
   {
     title: '追踪号？',
     field: 'hasTrackingNumberFlag',
-    // format: (val) => (val == '1' ? '有' : '无'),
+    formatter: ({ cellValue }) => (cellValue === '1' ? '有' : '无'),
   },
   {
     title: '预计时效（天）',
@@ -607,13 +620,9 @@ export const productSchema: VbenFormSchema[] = [
     component: 'Select',
     defaultValue: 'USD',
     componentProps: {
-      // options: declareCurrencyCodes,
+      options: declareCurrencyCodes,
       defaultValue: 'USD',
       showSearch: true,
-      options: [
-        { label: 'USD', value: 'USD' },
-        { label: 'CNY', value: 'CNY' },
-      ],
       allowClear: false,
     },
     formItemClass: 'col-span-2',

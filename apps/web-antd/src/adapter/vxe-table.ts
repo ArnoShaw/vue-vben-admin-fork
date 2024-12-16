@@ -30,7 +30,7 @@ setupVbenVxeTable({
           response: {
             result: 'rows',
             total: 'total',
-            list: 'rows',
+            list: ({ data }: any) => data,
           },
           showActiveMsg: true,
           showResponseMsg: false,

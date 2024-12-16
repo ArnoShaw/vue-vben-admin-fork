@@ -152,17 +152,22 @@ const formState = reactive<defs.apis.RegisterBody>({
 });
 
 async function handleSubmit(value: Recordable<any>) {
-  const { code, username, password, mobile, smsCode } = value;
-  await apis.auth.register(
-    { ...formState, code, username, password, mobile, smsCode },
-    {
-      headers: {
-        Encrypted: true,
+  const { username, password, mobile, smsCode } = value;
+  try {
+    loading.value = true;
+    await apis.auth.register(
+      { ...formState, username, password, mobile, smsCode },
+      {
+        headers: {
+          Encrypted: true,
+        },
       },
-    },
-  );
-  message.success('注册成功， 请登录');
-  router.push({ name: 'Login' });
+    );
+    message.success('注册成功， 请登录');
+    router.push({ name: 'Login' });
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 

@@ -14,14 +14,12 @@ defineOptions({
 
 const widgetGlobalSearch = defineModel<boolean>('widgetGlobalSearch');
 const widgetFullscreen = defineModel<boolean>('widgetFullscreen');
-const widgetLanguageToggle = defineModel<boolean>('widgetLanguageToggle');
+// const widgetLanguageToggle = defineModel<boolean>('widgetLanguageToggle');
 const widgetNotification = defineModel<boolean>('widgetNotification');
 const widgetThemeToggle = defineModel<boolean>('widgetThemeToggle');
 const widgetSidebarToggle = defineModel<boolean>('widgetSidebarToggle');
 const widgetLockScreen = defineModel<boolean>('widgetLockScreen');
-const appPreferencesButtonPosition = defineModel<string>(
-  'appPreferencesButtonPosition',
-);
+const appPreferencesButtonPosition = defineModel<string>('appPreferencesButtonPosition');
 const widgetRefresh = defineModel<boolean>('widgetRefresh');
 
 const positionItems = computed((): SelectOption[] => [
@@ -47,9 +45,9 @@ const positionItems = computed((): SelectOption[] => [
   <SwitchItem v-model="widgetThemeToggle">
     {{ $t('preferences.widget.themeToggle') }}
   </SwitchItem>
-  <SwitchItem v-model="widgetLanguageToggle">
+  <!-- <SwitchItem v-model="widgetLanguageToggle">
     {{ $t('preferences.widget.languageToggle') }}
-  </SwitchItem>
+  </SwitchItem> -->
   <SwitchItem v-model="widgetFullscreen">
     {{ $t('preferences.widget.fullscreen') }}
   </SwitchItem>

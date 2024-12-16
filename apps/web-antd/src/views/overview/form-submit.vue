@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import type { Recordable } from '@vben/types';
+
+import { reactive } from 'vue';
 
 import { IconifyIcon } from '@vben/icons';
 import { useUserStore } from '@vben/stores';
@@ -42,18 +44,32 @@ const [Form, FormApi] = useVbenForm({
   },
 });
 
-const { userCode = '', userName = '' } = useUserStore().userInfo || {};
+const { userCode = '', userName = '', mobile = '' } = useUserStore().userInfo || {};
 
-const formState = reactive({
+const formState = reactive<Recordable>({
   idCardHeadPath: '',
+  idCardHeadPathLoading: false,
   idCardEmblemPath: '',
+  idCardEmblemPathLoading: false,
   certificatePath: '',
-  loading_1: false,
-  loading_2: false,
-  loading_3: false,
+  certificatePathLoading: false,
 });
 
-onMounted(() => FormApi.setValues({ userCode, userName }));
+async function getDetail() {
+  FormApi.setState({ submitButtonOptions: { loading: true } });
+  try {
+    const res = ((await apis.home.completeCompanyDetail({})) as any) || {};
+    const { idCardHeadPath, idCardEmblemPath, certificatePath } = res;
+    formState.idCardHeadPath = idCardHeadPath;
+    formState.idCardEmblemPath = idCardEmblemPath;
+    formState.certificatePath = certificatePath;
+    FormApi.setValues({ ...res, ...res?.detail, userName, userCode, mobile });
+  } finally {
+    FormApi.setState({ submitButtonOptions: { loading: false } });
+  }
+}
+
+getDetail();
 
 function beforeUpload(file: File, type: string) {
   if (![FILE_MIMES.JPG, FILE_MIMES.PNG].includes(file.type)) {
@@ -79,29 +95,13 @@ async function doUpload(file: File, callback: (url: string) => void) {
   callback(url);
 }
 
-function handleUpload(file: File, type: string) {
-  if (type === 'idCardHeadPath') {
-    formState.loading_1 = true;
-    doUpload(file, (url: string) => {
-      formState.idCardHeadPath = url;
-      FormApi.setFieldValue('idCardHeadPath', url);
-      formState.loading_1 = false;
-    });
-  } else if (type === 'idCardEmblemPath') {
-    formState.loading_2 = true;
-    doUpload(file, (url: string) => {
-      formState.idCardEmblemPath = url;
-      FormApi.setFieldValue('idCardEmblemPath', url);
-      formState.loading_2 = false;
-    });
-  } else {
-    formState.loading_3 = true;
-    doUpload(file, (url: string) => {
-      formState.certificatePath = url;
-      FormApi.setFieldValue('certificatePath', url);
-      formState.loading_3 = false;
-    });
-  }
+function handleUpload(file: File, type: any) {
+  formState[`${type}Loading`] = true;
+  doUpload(file, (url: string) => {
+    formState[type] = url;
+    FormApi.setFieldValue(type, url);
+    formState[`${type}Loading`] = false;
+  });
 }
 </script>
 
@@ -139,7 +139,7 @@ function handleUpload(file: File, type: string) {
           >
             <img v-if="formState.idCardHeadPath" :src="formState.idCardHeadPath" alt="avatar" />
             <div v-else class="text-foreground/60 text-3xl">
-              <IconifyIcon v-if="formState.loading_1" icon="eos-icons:bubble-loading" />
+              <IconifyIcon v-if="formState.idCardHeadPathLoading" icon="eos-icons:bubble-loading" />
               <IconifyIcon v-else icon="ic:round-plus" />
             </div>
           </Upload>
@@ -156,7 +156,10 @@ function handleUpload(file: File, type: string) {
           >
             <img v-if="formState.idCardEmblemPath" :src="formState.idCardEmblemPath" alt="avatar" />
             <div v-else class="text-foreground/60 text-3xl">
-              <IconifyIcon v-if="formState.loading_2" icon="eos-icons:bubble-loading" />
+              <IconifyIcon
+                v-if="formState.idCardEmblemPathLoading"
+                icon="eos-icons:bubble-loading"
+              />
               <IconifyIcon v-else icon="ic:round-plus" />
             </div>
           </Upload>
@@ -173,7 +176,10 @@ function handleUpload(file: File, type: string) {
           >
             <img v-if="formState.certificatePath" :src="formState.certificatePath" alt="avatar" />
             <div v-else class="text-foreground/60 text-3xl">
-              <IconifyIcon v-if="formState.loading_3" icon="eos-icons:bubble-loading" />
+              <IconifyIcon
+                v-if="formState.certificatePathLoading"
+                icon="eos-icons:bubble-loading"
+              />
               <IconifyIcon v-else icon="ic:round-plus" />
             </div>
           </Upload>

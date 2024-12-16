@@ -7,8 +7,19 @@ import { defineOverridesPreferences } from '@vben/preferences';
  */
 export const overridesPreferences = defineOverridesPreferences({
   // overrides
+  theme: {
+    mode: 'light',
+  },
   app: {
     name: import.meta.env.VITE_APP_TITLE,
     accessMode: 'frontend',
+    enableCheckUpdates: false,
+  },
+  widget: {
+    languageToggle: false,
+    notification: false,
+  },
+  copyright: {
+    settingShow: false,
   },
 });

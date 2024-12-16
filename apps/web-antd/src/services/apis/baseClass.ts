@@ -105,7 +105,7 @@ class BankTransferFormBeanBO {
   tradeCurrency = '';
 }
 
-class BatchImportResultVO {
+class BatchImportResultVo {
   /** additionalMsg */
   additionalMsg = '';
 
@@ -136,7 +136,7 @@ class CalCuLatePriceBO {
   width = '';
 }
 
-class CalCuLatePriceDataVO {
+class CalCuLatePriceDataVo {
   /** 加收费用 */
   additional = '';
 
@@ -201,7 +201,7 @@ class CalCuLatePriceDataVO {
   weight = undefined;
 }
 
-class CalCuLatePriceVO {
+class CalCuLatePriceVo {
   /** 国家中文名称 */
   countryCnName = '';
 
@@ -258,6 +258,75 @@ class ChannelPriceVO {
   supportInsure = '';
 }
 
+class CheckMailbagCodeBO {
+  /** 邮件袋编号 */
+  mailCodeId = '';
+
+  /** 邮袋编号 */
+  value = '';
+}
+
+class CheckMailbagCodeVo {
+  /** 错误标识 */
+  flag = undefined;
+
+  /** 邮袋号 */
+  mailCodeId = '';
+
+  /** 错误信息 */
+  value = '';
+}
+
+class ComDetailVo {
+  /** 地址名称 */
+  areaName = '';
+
+  /** 城市中文名称 */
+  cityCnName = '';
+
+  /** 揽收公司id */
+  collectCompanyId = undefined;
+
+  /** 公司揽收联系人手机 */
+  collectContactMobile = '';
+
+  /** 公司揽收联系人名称 */
+  collectContactName = '';
+
+  /** 每日最多揽收次数 */
+  collectTimes = undefined;
+
+  /** 揽收类型（0：不可用，1：免费快递揽收，2：免费自有车队揽收， 3：收费揽收） */
+  collectType = undefined;
+
+  /** 公司揽收详细地址 */
+  pickupAddress = '';
+
+  /** 公司揽收区县 */
+  pickupArea = undefined;
+
+  /** 公司揽收城市 */
+  pickupCity = undefined;
+
+  /** 公司揽收省州 */
+  pickupState = undefined;
+
+  /** 阅读协议状态（0/null：未读，1：已读） */
+  readStatus = undefined;
+
+  /** 阅读协议时间 */
+  readTime = '';
+
+  /** 揽收服务商名称 */
+  serviceName = '';
+
+  /** 违禁物品 */
+  specialGoods = '';
+
+  /** 省份中文名称 */
+  stateCnName = '';
+}
+
 class CommonIdBOInteger {
   /** id */
   id = undefined;
@@ -273,7 +342,7 @@ class CommonIdListBOLong {
   ids = [];
 }
 
-class CompanyContractVO {
+class CompanyContractVo {
   /** 合同id */
   contractId = undefined;
 
@@ -491,7 +560,7 @@ class DataInfoSyExchangeRateVo {
   total = undefined;
 }
 
-class DataInfoSyPrintBsPackageVO {
+class DataInfoSyPrintBsPackageVo {
   /** 列表数据 */
   rows = [];
 
@@ -628,6 +697,11 @@ class LoginVo {
 
   /** 令牌权限 */
   scope = '';
+}
+
+class MailbagFormBO {
+  /** receiveMailbagList */
+  receiveMailbagList = [];
 }
 
 class MetaVo {
@@ -1200,7 +1274,7 @@ class PrintPdfBatchBO {
   userId = undefined;
 }
 
-class ProductAttributesVO {
+class ProductAttributesVo {
   /** 商品属性名称 */
   attributeName = '';
 
@@ -1227,12 +1301,12 @@ class ProfileVo {
   user = new SysUserVo();
 }
 
-class RCalCuLatePriceVO {
+class RCalCuLatePriceVo {
   /** code */
   code = undefined;
 
   /** data */
-  data = new CalCuLatePriceVO();
+  data = new CalCuLatePriceVo();
 
   /** msg */
   msg = '';
@@ -1249,12 +1323,23 @@ class RCaptchaVo {
   msg = '';
 }
 
-class RCompanyContractVO {
+class RCheckMailbagCodeVo {
   /** code */
   code = undefined;
 
   /** data */
-  data = new CompanyContractVO();
+  data = new CheckMailbagCodeVo();
+
+  /** msg */
+  msg = '';
+}
+
+class RCompanyContractVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new CompanyContractVo();
 
   /** msg */
   msg = '';
@@ -1315,7 +1400,7 @@ class RListMapStringObject {
   msg = '';
 }
 
-class RListProductAttributesVO {
+class RListProductAttributesVo {
   /** code */
   code = undefined;
 
@@ -1349,6 +1434,17 @@ class RListRemoteSysUserVO {
 }
 
 class RListRouterVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = [];
+
+  /** msg */
+  msg = '';
+}
+
+class RListShippingMethodForReservationVo {
   /** code */
   code = undefined;
 
@@ -1524,12 +1620,34 @@ class RProfileVo {
   msg = '';
 }
 
+class RReceiveMailBagVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new ReceiveMailBagVo();
+
+  /** msg */
+  msg = '';
+}
+
 class RRechargeDetailVo {
   /** code */
   code = undefined;
 
   /** data */
   data = new RechargeDetailVo();
+
+  /** msg */
+  msg = '';
+}
+
+class RReservationVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new ReservationVo();
 
   /** msg */
   msg = '';
@@ -1574,6 +1692,17 @@ class RSyBsPackageDetailVO {
 
   /** data */
   data = new SyBsPackageDetailVO();
+
+  /** msg */
+  msg = '';
+}
+
+class RSyBsReceiveMailbagVo {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new SyBsReceiveMailbagVo();
 
   /** msg */
   msg = '';
@@ -1634,23 +1763,23 @@ class RSyCMenuVo {
   msg = '';
 }
 
-class RSysUserVo {
+class RSysUserForgetVo {
   /** code */
   code = undefined;
 
   /** data */
-  data = new SysUserVo();
+  data = new SysUserForgetVo();
 
   /** msg */
   msg = '';
 }
 
-class RUploadInitVO {
+class RUploadInitVo {
   /** code */
   code = undefined;
 
   /** data */
-  data = new UploadInitVO();
+  data = new UploadInitVo();
 
   /** msg */
   msg = '';
@@ -1665,6 +1794,100 @@ class RVoid {
 
   /** msg */
   msg = '';
+}
+
+class RWechatPayVO {
+  /** code */
+  code = undefined;
+
+  /** data */
+  data = new WechatPayVO();
+
+  /** msg */
+  msg = '';
+}
+
+class ReceiveMailBagListVo {
+  /** 邮寄方式 */
+  channelCnName = '';
+
+  /** 计费分区 */
+  chargeZoneName = '';
+
+  /** 邮袋编号 */
+  mailbagCode = '';
+
+  /** 邮袋重量(kg) */
+  mailbagWeight = undefined;
+
+  /** 包裹数量 */
+  packageNumber = undefined;
+
+  /** 收货邮袋流水号 */
+  receiveMailbagId = undefined;
+
+  /** 预约时间 */
+  reservationTime = '';
+}
+
+class ReceiveMailBagVo {
+  /** 收寄包裹列表 */
+  receiveMailBagList = [];
+
+  /** 总数 */
+  total = undefined;
+}
+
+class ReceiveMailbagFormBO {
+  /** chargeZoneId */
+  chargeZoneId = undefined;
+
+  /** mailbagCode */
+  mailbagCode = '';
+
+  /** receiveMailbagId */
+  receiveMailbagId = undefined;
+
+  /** receiveMailbagTransferId */
+  receiveMailbagTransferId = undefined;
+
+  /** reservationPackageNumber */
+  reservationPackageNumber = undefined;
+
+  /** reservationTime */
+  reservationTime = '';
+
+  /** reservationWeight */
+  reservationWeight = undefined;
+
+  /** shippingMethodId */
+  shippingMethodId = undefined;
+}
+
+class ReceiveMailbagFormBean {
+  /** chargeZoneId */
+  chargeZoneId = undefined;
+
+  /** mailbagCode */
+  mailbagCode = '';
+
+  /** receiveMailbagId */
+  receiveMailbagId = undefined;
+
+  /** receiveMailbagTransferId */
+  receiveMailbagTransferId = undefined;
+
+  /** reservationPackageNumber */
+  reservationPackageNumber = undefined;
+
+  /** reservationTime */
+  reservationTime = '';
+
+  /** reservationWeight */
+  reservationWeight = undefined;
+
+  /** shippingMethodId */
+  shippingMethodId = undefined;
 }
 
 class RechargeBo {
@@ -1918,6 +2141,72 @@ class RemoteSysUserVO {
   username = '';
 }
 
+class ReservationDeleteBO {
+  /** receiveMailbagId */
+  receiveMailbagId = undefined;
+
+  /** receiveMailbagTransferId */
+  receiveMailbagTransferId = undefined;
+}
+
+class ReservationOrderInfoVo {
+  /** mailbagNumber */
+  mailbagNumber = undefined;
+
+  /** mailbagWeight */
+  mailbagWeight = undefined;
+
+  /** packageNumber */
+  packageNumber = undefined;
+
+  /** receiveMailbagTransferCode */
+  receiveMailbagTransferCode = '';
+
+  /** id */
+  receiveMailbagTransferId = undefined;
+}
+
+class ReservationVo {
+  /** 会跳转两个页面 */
+  addressList = [];
+
+  /** 查询特俗物品字典数据 */
+  clientSpecialGoods = [];
+
+  /** 查询客户当天的揽收次数 */
+  collectTimes = undefined;
+
+  /** comDetail */
+  comDetail = new ComDetailVo();
+
+  /** 公司id */
+  companyId = undefined;
+
+  /** 1.代表合同过期 默认为空 */
+  open = undefined;
+
+  /** 查询是否已读协议 */
+  readStatus = undefined;
+
+  /** syPackageNumber */
+  syPackageNumber = undefined;
+
+  /** 用户id */
+  userId = undefined;
+
+  /** 用户名称 */
+  userName = '';
+
+  /** vo */
+  vo = new ReservationOrderInfoVo();
+
+  /** 是否存在wish包裹数据 1存在 0不存在 */
+  wishFlag = undefined;
+
+  /** wishPackageNumber */
+  wishPackageNumber = undefined;
+}
+
 class RevokePredictBatchBO {
   /** 包裹ID列表 */
   packageIdList = [];
@@ -1969,6 +2258,17 @@ class SavePackageVO {
   ratifyStatus = false;
 }
 
+class ShippingMethodForReservationVo {
+  /** 邮寄方式编码 */
+  shippingMethodCode = '';
+
+  /** 邮寄方式ID */
+  shippingMethodId = undefined;
+
+  /** 邮寄方式名称 */
+  shippingMethodName = '';
+}
+
 class ShippingMethodListBO {
   /** 公司id */
   companyId = '';
@@ -2018,11 +2318,11 @@ class SmsCodeBo {
   /** captchaVerifyParam */
   captchaVerifyParam = '';
 
-  /** error */
-  error = false;
-
   /** mobile */
   mobile = '';
+
+  /** userId */
+  userId = undefined;
 }
 
 class SseEmitter {
@@ -3008,6 +3308,92 @@ class SyBsPackageVO {
 
   /** 更新时间 */
   upLocalDateTimeTime = '';
+}
+
+class SyBsReceiveMailbagVo {
+  /** 计费分区流水号(0代表混合) */
+  chargeZoneId = undefined;
+
+  /** 财务客户每日费用流水号 */
+  companyDailyChargeId = undefined;
+
+  /** 公司流水号 */
+  companyId = undefined;
+
+  /** 创建人 */
+  createBy = undefined;
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 拦截时间 */
+  interceptTime = '';
+
+  /** 拦截类型(0:欠费拦截;1:误差拦截) */
+  interceptType = undefined;
+
+  /** 邮袋编号 */
+  mailbagCode = '';
+
+  /** 所属机构流水号 */
+  organizationId = undefined;
+
+  /** 出境邮袋流水号 */
+  outboundMailbagId = undefined;
+
+  /** 揽收人 */
+  pickupBy = undefined;
+
+  /** 揽收时间 */
+  pickupTime = '';
+
+  /** 揽收重量 */
+  pickupWeight = undefined;
+
+  /** 收货条码流水号 */
+  receiveBarcodeId = undefined;
+
+  /** 收货邮袋流水号 */
+  receiveMailbagId = undefined;
+
+  /** 收货邮袋交接单流水号 */
+  receiveMailbagTransferId = undefined;
+
+  /** 实际称重 */
+  receiveWeight = undefined;
+
+  /** 收货人 */
+  receivedBy = undefined;
+
+  /** 收货时间 */
+  receivedTime = '';
+
+  /** 收货方式(0:账期收货 1:现结收货) */
+  receivedType = undefined;
+
+  /** 收货备注 */
+  remark = '';
+
+  /** 预约数量 */
+  reservationPackageNumber = undefined;
+
+  /** 揽收预约时间 */
+  reservationTime = '';
+
+  /** 预约重量 */
+  reservationWeight = undefined;
+
+  /** 邮寄方式流水号(0代表混合) */
+  shippingMethodId = undefined;
+
+  /** 邮袋状态(-1:待揽收;0:待收货 1:完成收货;2拦截;3:退回;4:原袋换标;5:转运中) */
+  status = undefined;
+
+  /** 更新人 */
+  updateBy = undefined;
+
+  /** 更新时间 */
+  updateTime = '';
 }
 
 class SyCCompanyDetailBo {
@@ -4042,7 +4428,7 @@ class SyExchangeRateVo {
   updatedTime = '';
 }
 
-class SyPrintBsPackageVO {
+class SyPrintBsPackageVo {
   /** 创建时间 */
   createTime = '';
 
@@ -4363,6 +4749,20 @@ class SysUserEditPasswordBo {
   smsCode = '';
 }
 
+class SysUserForgetVo {
+  /** 脱敏手机号码 */
+  sensitiveMobile = '';
+
+  /** 帐号状态（0正常 1停用） */
+  status = undefined;
+
+  /** 用户ID */
+  userId = undefined;
+
+  /** 用户账号 */
+  userName = '';
+}
+
 class SysUserMenuBindBo {
   /** menuIdList */
   menuIdList = [];
@@ -4380,8 +4780,14 @@ class SysUserPasswordBo {
 }
 
 class SysUserPasswordForgotBo {
+  /** 图形验证码 */
+  code = '';
+
   /** 关键字（用户名或手机号） */
   keyword = '';
+
+  /** 唯一标识 */
+  uuid = '';
 }
 
 class SysUserProfileBo {
@@ -4555,12 +4961,12 @@ class TableDataInfoSyExchangeRateVo {
   msg = '';
 }
 
-class TableDataInfoSyPrintBsPackageVO {
+class TableDataInfoSyPrintBsPackageVo {
   /** 消息状态码 */
   code = undefined;
 
   /** data */
-  data = new DataInfoSyPrintBsPackageVO();
+  data = new DataInfoSyPrintBsPackageVo();
 
   /** 消息内容 */
   msg = '';
@@ -4879,6 +5285,9 @@ class UnBilledChargeSortBo {
   /** 费用id */
   companyChargeId = undefined;
 
+  /** 费用id集合, 批量导出分拣明细,只用传这个参数 */
+  companyChargeIdList = [];
+
   /** 分拣方式(0: 人工, 1: 逐单入仓) */
   sortingFrom = undefined;
 
@@ -4995,12 +5404,12 @@ class UnBilledChargeVo {
   currencySymbol = '';
 }
 
-class UploadInitVO {
+class UploadInitVo {
   /** true 合同过期 预报不能成功 */
   flg = false;
 
   /** importResultVO */
-  importResultVO = new BatchImportResultVO();
+  importResultVO = new BatchImportResultVo();
 
   /** isSpecify */
   isSpecify = false;
@@ -5009,21 +5418,49 @@ class UploadInitVO {
   ratifyStatus = false;
 }
 
+class WechatPayBo {
+  /** orderId */
+  orderId = '';
+
+  /** paymentValue */
+  paymentValue = '';
+
+  /** scaleValue */
+  scaleValue = '';
+}
+
+class WechatPayVO {
+  /** codeUrl */
+  codeUrl = '';
+
+  /** orderId */
+  orderId = '';
+
+  /** orderNo */
+  orderNo = '';
+
+  /** realPayment */
+  realPayment = undefined;
+}
+
 export const apis = {
   ApplyInterceptBO,
   AssetBo,
   AssetVo,
   BankTransferFormBeanBO,
-  BatchImportResultVO,
+  BatchImportResultVo,
   CalCuLatePriceBO,
-  CalCuLatePriceDataVO,
-  CalCuLatePriceVO,
+  CalCuLatePriceDataVo,
+  CalCuLatePriceVo,
   CaptchaVo,
   ChannelPriceVO,
+  CheckMailbagCodeBO,
+  CheckMailbagCodeVo,
+  ComDetailVo,
   CommonIdBOInteger,
   CommonIdListBOInteger,
   CommonIdListBOLong,
-  CompanyContractVO,
+  CompanyContractVo,
   CompanyVo,
   CompleteCompanyBO,
   ContractRemindVo,
@@ -5036,7 +5473,7 @@ export const apis = {
   DataInfoSyCUserComplaintVo,
   DataInfoSyCUserOperLogVo,
   DataInfoSyExchangeRateVo,
-  DataInfoSyPrintBsPackageVO,
+  DataInfoSyPrintBsPackageVo,
   DataInfoSysLogininforVo,
   DataInfoTrackingNoVo,
   DataInfoUnBilledChargeSortVo,
@@ -5047,6 +5484,7 @@ export const apis = {
   FileVO,
   ForeignCurrencyVo,
   LoginVo,
+  MailbagFormBO,
   MetaVo,
   OverviewVo,
   PackageIdListBO,
@@ -5062,21 +5500,23 @@ export const apis = {
   PrintPackageBO,
   PrintPackageListViewBO,
   PrintPdfBatchBO,
-  ProductAttributesVO,
+  ProductAttributesVo,
   ProductListBO,
   ProfileVo,
-  RCalCuLatePriceVO,
+  RCalCuLatePriceVo,
   RCaptchaVo,
-  RCompanyContractVO,
+  RCheckMailbagCodeVo,
+  RCompanyContractVo,
   RContractRemindVo,
   RFileVO,
   RInteger,
   RListChannelPriceVO,
   RListMapStringObject,
-  RListProductAttributesVO,
+  RListProductAttributesVo,
   RListRemoteSysOrganizationVO,
   RListRemoteSysUserVO,
   RListRouterVo,
+  RListShippingMethodForReservationVo,
   RListSyBsPackageProductVO,
   RListSyCMenuVo,
   RListSyExchangeRateVo,
@@ -5092,19 +5532,27 @@ export const apis = {
   ROverviewVo,
   RPredictionVO,
   RProfileVo,
+  RReceiveMailBagVo,
   RRechargeDetailVo,
+  RReservationVo,
   RSavePackageVO,
   RShippingMethodListVO,
   RString,
   RSyBsPackageDetailVO,
+  RSyBsReceiveMailbagVo,
   RSyCCompanyDetailVo,
   RSyCCompanyPackageDeviationVo,
   RSyCCompanyPickDeviationVo,
   RSyCCompanyVo,
   RSyCMenuVo,
-  RSysUserVo,
-  RUploadInitVO,
+  RSysUserForgetVo,
+  RUploadInitVo,
   RVoid,
+  RWechatPayVO,
+  ReceiveMailBagListVo,
+  ReceiveMailBagVo,
+  ReceiveMailbagFormBO,
+  ReceiveMailbagFormBean,
   RechargeBo,
   RechargeDetailVo,
   RechargeVo,
@@ -5112,9 +5560,13 @@ export const apis = {
   RemoteDictDataVO,
   RemoteSysOrganizationVO,
   RemoteSysUserVO,
+  ReservationDeleteBO,
+  ReservationOrderInfoVo,
+  ReservationVo,
   RevokePredictBatchBO,
   RouterVo,
   SavePackageVO,
+  ShippingMethodForReservationVo,
   ShippingMethodListBO,
   ShippingMethodListVO,
   ShippingMethodVO,
@@ -5124,6 +5576,7 @@ export const apis = {
   SyBsPackageDetailVO,
   SyBsPackageProductVO,
   SyBsPackageVO,
+  SyBsReceiveMailbagVo,
   SyCCompanyDetailBo,
   SyCCompanyDetailVo,
   SyCCompanyPackageDeviationBo,
@@ -5142,7 +5595,7 @@ export const apis = {
   SyCUserOperLogBo,
   SyCUserOperLogVo,
   SyExchangeRateVo,
-  SyPrintBsPackageVO,
+  SyPrintBsPackageVo,
   SySysBankAccountVO,
   SySysNotice,
   SysLogininforBo,
@@ -5151,6 +5604,7 @@ export const apis = {
   SysUserBindMobileBo,
   SysUserBo,
   SysUserEditPasswordBo,
+  SysUserForgetVo,
   SysUserMenuBindBo,
   SysUserPasswordBo,
   SysUserPasswordForgotBo,
@@ -5166,7 +5620,7 @@ export const apis = {
   TableDataInfoSyCUserComplaintVo,
   TableDataInfoSyCUserOperLogVo,
   TableDataInfoSyExchangeRateVo,
-  TableDataInfoSyPrintBsPackageVO,
+  TableDataInfoSyPrintBsPackageVo,
   TableDataInfoSysLogininforVo,
   TableDataInfoTrackingNoVo,
   TableDataInfoUnBilledChargeSortVo,
@@ -5182,5 +5636,7 @@ export const apis = {
   UnBilledChargeSortBo,
   UnBilledChargeSortVo,
   UnBilledChargeVo,
-  UploadInitVO,
+  UploadInitVo,
+  WechatPayBo,
+  WechatPayVO,
 };

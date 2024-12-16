@@ -109,7 +109,7 @@ export declare namespace defs {
       tradeCurrency?: string;
     }
 
-    export interface BatchImportResultVO {
+    export interface BatchImportResultVo {
       /** additionalMsg */
       additionalMsg?: string;
 
@@ -140,7 +140,7 @@ export declare namespace defs {
       width?: string;
     }
 
-    export interface CalCuLatePriceDataVO {
+    export interface CalCuLatePriceDataVo {
       /** 加收费用 */
       additional?: string;
 
@@ -205,7 +205,7 @@ export declare namespace defs {
       weight?: number;
     }
 
-    export interface CalCuLatePriceVO {
+    export interface CalCuLatePriceVo {
       /** 国家中文名称 */
       countryCnName?: string;
 
@@ -213,7 +213,7 @@ export declare namespace defs {
       countryCode?: string;
 
       /** 查询结果 */
-      rows?: Array<apis.CalCuLatePriceDataVO>;
+      rows?: Array<apis.CalCuLatePriceDataVo>;
     }
 
     export interface CaptchaVo {
@@ -262,6 +262,75 @@ export declare namespace defs {
       supportInsure?: string;
     }
 
+    export interface CheckMailbagCodeBO {
+      /** 邮件袋编号 */
+      mailCodeId?: string;
+
+      /** 邮袋编号 */
+      value?: string;
+    }
+
+    export interface CheckMailbagCodeVo {
+      /** 错误标识 */
+      flag?: number;
+
+      /** 邮袋号 */
+      mailCodeId?: string;
+
+      /** 错误信息 */
+      value?: string;
+    }
+
+    export interface ComDetailVo {
+      /** 地址名称 */
+      areaName?: string;
+
+      /** 城市中文名称 */
+      cityCnName?: string;
+
+      /** 揽收公司id */
+      collectCompanyId?: number;
+
+      /** 公司揽收联系人手机 */
+      collectContactMobile?: string;
+
+      /** 公司揽收联系人名称 */
+      collectContactName?: string;
+
+      /** 每日最多揽收次数 */
+      collectTimes?: number;
+
+      /** 揽收类型（0：不可用，1：免费快递揽收，2：免费自有车队揽收， 3：收费揽收） */
+      collectType?: number;
+
+      /** 公司揽收详细地址 */
+      pickupAddress?: string;
+
+      /** 公司揽收区县 */
+      pickupArea?: number;
+
+      /** 公司揽收城市 */
+      pickupCity?: number;
+
+      /** 公司揽收省州 */
+      pickupState?: number;
+
+      /** 阅读协议状态（0/null：未读，1：已读） */
+      readStatus?: number;
+
+      /** 阅读协议时间 */
+      readTime?: string;
+
+      /** 揽收服务商名称 */
+      serviceName?: string;
+
+      /** 违禁物品 */
+      specialGoods?: string;
+
+      /** 省份中文名称 */
+      stateCnName?: string;
+    }
+
     export interface CommonIdBOInteger {
       /** id */
       id: number;
@@ -277,7 +346,7 @@ export declare namespace defs {
       ids?: Array<number>;
     }
 
-    export interface CompanyContractVO {
+    export interface CompanyContractVo {
       /** 合同id */
       contractId?: number;
 
@@ -340,7 +409,7 @@ export declare namespace defs {
       businessContactSex?: number;
 
       /** 社会信用代码/身份证号码 */
-      businessLicenseNumber?: string;
+      businessLicenseNumber: string;
 
       /** 公司上传的证件路径 */
       certificatePath?: string;
@@ -358,7 +427,7 @@ export declare namespace defs {
       companyDetailId?: number;
 
       /** 公司名称 */
-      companyName?: string;
+      companyName: string;
 
       /** 办公省份id */
       companyState?: number;
@@ -495,9 +564,9 @@ export declare namespace defs {
       total?: number;
     }
 
-    export interface DataInfoSyPrintBsPackageVO {
+    export interface DataInfoSyPrintBsPackageVo {
       /** 列表数据 */
-      rows?: Array<apis.SyPrintBsPackageVO>;
+      rows?: Array<apis.SyPrintBsPackageVo>;
 
       /** 总记录数 */
       total?: number;
@@ -632,6 +701,11 @@ export declare namespace defs {
 
       /** 令牌权限 */
       scope?: string;
+    }
+
+    export interface MailbagFormBO {
+      /** receiveMailbagList */
+      receiveMailbagList?: Array<apis.ReceiveMailbagFormBean>;
     }
 
     export interface MetaVo {
@@ -1204,7 +1278,7 @@ export declare namespace defs {
       userId: number;
     }
 
-    export interface ProductAttributesVO {
+    export interface ProductAttributesVo {
       /** 商品属性名称 */
       attributeName?: string;
 
@@ -1231,12 +1305,12 @@ export declare namespace defs {
       user?: apis.SysUserVo;
     }
 
-    export interface RCalCuLatePriceVO {
+    export interface RCalCuLatePriceVo {
       /** code */
       code?: number;
 
       /** data */
-      data?: apis.CalCuLatePriceVO;
+      data?: apis.CalCuLatePriceVo;
 
       /** msg */
       msg?: string;
@@ -1253,12 +1327,23 @@ export declare namespace defs {
       msg?: string;
     }
 
-    export interface RCompanyContractVO {
+    export interface RCheckMailbagCodeVo {
       /** code */
       code?: number;
 
       /** data */
-      data?: apis.CompanyContractVO;
+      data?: apis.CheckMailbagCodeVo;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RCompanyContractVo {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.CompanyContractVo;
 
       /** msg */
       msg?: string;
@@ -1319,12 +1404,12 @@ export declare namespace defs {
       msg?: string;
     }
 
-    export interface RListProductAttributesVO {
+    export interface RListProductAttributesVo {
       /** code */
       code?: number;
 
       /** data */
-      data?: Array<apis.ProductAttributesVO>;
+      data?: Array<apis.ProductAttributesVo>;
 
       /** msg */
       msg?: string;
@@ -1358,6 +1443,17 @@ export declare namespace defs {
 
       /** data */
       data?: Array<apis.RouterVo>;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RListShippingMethodForReservationVo {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: Array<apis.ShippingMethodForReservationVo>;
 
       /** msg */
       msg?: string;
@@ -1528,12 +1624,34 @@ export declare namespace defs {
       msg?: string;
     }
 
+    export interface RReceiveMailBagVo {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.ReceiveMailBagVo;
+
+      /** msg */
+      msg?: string;
+    }
+
     export interface RRechargeDetailVo {
       /** code */
       code?: number;
 
       /** data */
       data?: apis.RechargeDetailVo;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RReservationVo {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.ReservationVo;
 
       /** msg */
       msg?: string;
@@ -1578,6 +1696,17 @@ export declare namespace defs {
 
       /** data */
       data?: apis.SyBsPackageDetailVO;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface RSyBsReceiveMailbagVo {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.SyBsReceiveMailbagVo;
 
       /** msg */
       msg?: string;
@@ -1638,23 +1767,23 @@ export declare namespace defs {
       msg?: string;
     }
 
-    export interface RSysUserVo {
+    export interface RSysUserForgetVo {
       /** code */
       code?: number;
 
       /** data */
-      data?: apis.SysUserVo;
+      data?: apis.SysUserForgetVo;
 
       /** msg */
       msg?: string;
     }
 
-    export interface RUploadInitVO {
+    export interface RUploadInitVo {
       /** code */
       code?: number;
 
       /** data */
-      data?: apis.UploadInitVO;
+      data?: apis.UploadInitVo;
 
       /** msg */
       msg?: string;
@@ -1669,6 +1798,100 @@ export declare namespace defs {
 
       /** msg */
       msg?: string;
+    }
+
+    export interface RWechatPayVO {
+      /** code */
+      code?: number;
+
+      /** data */
+      data?: apis.WechatPayVO;
+
+      /** msg */
+      msg?: string;
+    }
+
+    export interface ReceiveMailBagListVo {
+      /** 邮寄方式 */
+      channelCnName?: string;
+
+      /** 计费分区 */
+      chargeZoneName?: string;
+
+      /** 邮袋编号 */
+      mailbagCode?: string;
+
+      /** 邮袋重量(kg) */
+      mailbagWeight?: number;
+
+      /** 包裹数量 */
+      packageNumber?: number;
+
+      /** 收货邮袋流水号 */
+      receiveMailbagId?: number;
+
+      /** 预约时间 */
+      reservationTime?: string;
+    }
+
+    export interface ReceiveMailBagVo {
+      /** 收寄包裹列表 */
+      receiveMailBagList?: Array<apis.ReceiveMailBagListVo>;
+
+      /** 总数 */
+      total?: number;
+    }
+
+    export interface ReceiveMailbagFormBO {
+      /** chargeZoneId */
+      chargeZoneId?: number;
+
+      /** mailbagCode */
+      mailbagCode?: string;
+
+      /** receiveMailbagId */
+      receiveMailbagId?: number;
+
+      /** receiveMailbagTransferId */
+      receiveMailbagTransferId?: number;
+
+      /** reservationPackageNumber */
+      reservationPackageNumber?: number;
+
+      /** reservationTime */
+      reservationTime?: string;
+
+      /** reservationWeight */
+      reservationWeight?: number;
+
+      /** shippingMethodId */
+      shippingMethodId?: number;
+    }
+
+    export interface ReceiveMailbagFormBean {
+      /** chargeZoneId */
+      chargeZoneId?: number;
+
+      /** mailbagCode */
+      mailbagCode?: string;
+
+      /** receiveMailbagId */
+      receiveMailbagId?: number;
+
+      /** receiveMailbagTransferId */
+      receiveMailbagTransferId?: number;
+
+      /** reservationPackageNumber */
+      reservationPackageNumber?: number;
+
+      /** reservationTime */
+      reservationTime?: string;
+
+      /** reservationWeight */
+      reservationWeight?: number;
+
+      /** shippingMethodId */
+      shippingMethodId?: number;
     }
 
     export interface RechargeBo {
@@ -1922,6 +2145,72 @@ export declare namespace defs {
       username?: string;
     }
 
+    export interface ReservationDeleteBO {
+      /** receiveMailbagId */
+      receiveMailbagId?: number;
+
+      /** receiveMailbagTransferId */
+      receiveMailbagTransferId?: number;
+    }
+
+    export interface ReservationOrderInfoVo {
+      /** mailbagNumber */
+      mailbagNumber?: number;
+
+      /** mailbagWeight */
+      mailbagWeight?: number;
+
+      /** packageNumber */
+      packageNumber?: number;
+
+      /** receiveMailbagTransferCode */
+      receiveMailbagTransferCode?: string;
+
+      /** id */
+      receiveMailbagTransferId?: number;
+    }
+
+    export interface ReservationVo {
+      /** 会跳转两个页面 */
+      addressList?: Array<apis.ComDetailVo>;
+
+      /** 查询特俗物品字典数据 */
+      clientSpecialGoods?: Array<apis.RemoteDictDataVO>;
+
+      /** 查询客户当天的揽收次数 */
+      collectTimes?: number;
+
+      /** comDetail */
+      comDetail?: apis.ComDetailVo;
+
+      /** 公司id */
+      companyId?: number;
+
+      /** 1.代表合同过期 默认为空 */
+      open?: number;
+
+      /** 查询是否已读协议 */
+      readStatus?: number;
+
+      /** syPackageNumber */
+      syPackageNumber?: number;
+
+      /** 用户id */
+      userId?: number;
+
+      /** 用户名称 */
+      userName?: string;
+
+      /** vo */
+      vo?: apis.ReservationOrderInfoVo;
+
+      /** 是否存在wish包裹数据 1存在 0不存在 */
+      wishFlag?: number;
+
+      /** wishPackageNumber */
+      wishPackageNumber?: number;
+    }
+
     export interface RevokePredictBatchBO {
       /** 包裹ID列表 */
       packageIdList: Array<number>;
@@ -1973,6 +2262,17 @@ export declare namespace defs {
       ratifyStatus?: boolean;
     }
 
+    export interface ShippingMethodForReservationVo {
+      /** 邮寄方式编码 */
+      shippingMethodCode?: string;
+
+      /** 邮寄方式ID */
+      shippingMethodId?: number;
+
+      /** 邮寄方式名称 */
+      shippingMethodName?: string;
+    }
+
     export interface ShippingMethodListBO {
       /** 公司id */
       companyId?: string;
@@ -2022,11 +2322,11 @@ export declare namespace defs {
       /** captchaVerifyParam */
       captchaVerifyParam: string;
 
-      /** error */
-      error?: boolean;
-
       /** mobile */
-      mobile: string;
+      mobile?: string;
+
+      /** userId */
+      userId?: number;
     }
 
     export interface SseEmitter {
@@ -3012,6 +3312,92 @@ export declare namespace defs {
 
       /** 更新时间 */
       upLocalDateTimeTime?: string;
+    }
+
+    export interface SyBsReceiveMailbagVo {
+      /** 计费分区流水号(0代表混合) */
+      chargeZoneId?: number;
+
+      /** 财务客户每日费用流水号 */
+      companyDailyChargeId?: number;
+
+      /** 公司流水号 */
+      companyId?: number;
+
+      /** 创建人 */
+      createBy?: number;
+
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 拦截时间 */
+      interceptTime?: string;
+
+      /** 拦截类型(0:欠费拦截;1:误差拦截) */
+      interceptType?: number;
+
+      /** 邮袋编号 */
+      mailbagCode?: string;
+
+      /** 所属机构流水号 */
+      organizationId?: number;
+
+      /** 出境邮袋流水号 */
+      outboundMailbagId?: number;
+
+      /** 揽收人 */
+      pickupBy?: number;
+
+      /** 揽收时间 */
+      pickupTime?: string;
+
+      /** 揽收重量 */
+      pickupWeight?: number;
+
+      /** 收货条码流水号 */
+      receiveBarcodeId?: number;
+
+      /** 收货邮袋流水号 */
+      receiveMailbagId?: number;
+
+      /** 收货邮袋交接单流水号 */
+      receiveMailbagTransferId?: number;
+
+      /** 实际称重 */
+      receiveWeight?: number;
+
+      /** 收货人 */
+      receivedBy?: number;
+
+      /** 收货时间 */
+      receivedTime?: string;
+
+      /** 收货方式(0:账期收货 1:现结收货) */
+      receivedType?: number;
+
+      /** 收货备注 */
+      remark?: string;
+
+      /** 预约数量 */
+      reservationPackageNumber?: number;
+
+      /** 揽收预约时间 */
+      reservationTime?: string;
+
+      /** 预约重量 */
+      reservationWeight?: number;
+
+      /** 邮寄方式流水号(0代表混合) */
+      shippingMethodId?: number;
+
+      /** 邮袋状态(-1:待揽收;0:待收货 1:完成收货;2拦截;3:退回;4:原袋换标;5:转运中) */
+      status?: number;
+
+      /** 更新人 */
+      updateBy?: number;
+
+      /** 更新时间 */
+      updateTime?: string;
     }
 
     export interface SyCCompanyDetailBo {
@@ -4046,7 +4432,7 @@ export declare namespace defs {
       updatedTime?: string;
     }
 
-    export interface SyPrintBsPackageVO {
+    export interface SyPrintBsPackageVo {
       /** 创建时间 */
       createTime?: string;
 
@@ -4367,6 +4753,20 @@ export declare namespace defs {
       smsCode: string;
     }
 
+    export interface SysUserForgetVo {
+      /** 脱敏手机号码 */
+      sensitiveMobile?: string;
+
+      /** 帐号状态（0正常 1停用） */
+      status?: number;
+
+      /** 用户ID */
+      userId?: number;
+
+      /** 用户账号 */
+      userName?: string;
+    }
+
     export interface SysUserMenuBindBo {
       /** menuIdList */
       menuIdList: Array<number>;
@@ -4384,8 +4784,14 @@ export declare namespace defs {
     }
 
     export interface SysUserPasswordForgotBo {
+      /** 图形验证码 */
+      code: string;
+
       /** 关键字（用户名或手机号） */
       keyword: string;
+
+      /** 唯一标识 */
+      uuid?: string;
     }
 
     export interface SysUserProfileBo {
@@ -4559,12 +4965,12 @@ export declare namespace defs {
       msg?: string;
     }
 
-    export interface TableDataInfoSyPrintBsPackageVO {
+    export interface TableDataInfoSyPrintBsPackageVo {
       /** 消息状态码 */
       code?: number;
 
       /** data */
-      data?: apis.DataInfoSyPrintBsPackageVO;
+      data?: apis.DataInfoSyPrintBsPackageVo;
 
       /** 消息内容 */
       msg?: string;
@@ -4873,7 +5279,7 @@ export declare namespace defs {
 
     export interface UnBilledChargeBo {
       /** 费用类型(0: 物流费用, 1: 其他费用, 2: 异常费用) */
-      chargeType: number;
+      chargeType?: number;
 
       /** 公司流水号 */
       companyId?: number;
@@ -4882,6 +5288,9 @@ export declare namespace defs {
     export interface UnBilledChargeSortBo {
       /** 费用id */
       companyChargeId?: number;
+
+      /** 费用id集合, 批量导出分拣明细,只用传这个参数 */
+      companyChargeIdList?: Array<number>;
 
       /** 分拣方式(0: 人工, 1: 逐单入仓) */
       sortingFrom?: number;
@@ -4999,18 +5408,43 @@ export declare namespace defs {
       currencySymbol?: string;
     }
 
-    export interface UploadInitVO {
+    export interface UploadInitVo {
       /** true 合同过期 预报不能成功 */
       flg?: boolean;
 
       /** importResultVO */
-      importResultVO?: apis.BatchImportResultVO;
+      importResultVO?: apis.BatchImportResultVo;
 
       /** isSpecify */
       isSpecify?: boolean;
 
       /** 客户未审核 ，预报不能成功 */
       ratifyStatus?: boolean;
+    }
+
+    export interface WechatPayBo {
+      /** orderId */
+      orderId?: string;
+
+      /** paymentValue */
+      paymentValue?: string;
+
+      /** scaleValue */
+      scaleValue?: string;
+    }
+
+    export interface WechatPayVO {
+      /** codeUrl */
+      codeUrl?: string;
+
+      /** orderId */
+      orderId?: string;
+
+      /** orderNo */
+      orderNo?: string;
+
+      /** realPayment */
+      realPayment?: number;
     }
   }
 }
@@ -5113,6 +5547,185 @@ export declare namespace API {
           params: Params,
           bodyParams: defs.apis.RegisterBody,
         ): Promise<defs.apis.RVoid>;
+      }
+    }
+
+    /**
+     * bookingPickUp
+     */
+    export namespace bookingPickUp {
+      /**
+        * 新增预约揽收
+新增预约揽收
+        * /client/package/operation/reservation/add
+        */
+      export namespace shipping {
+        export class Params {}
+
+        export type Response = defs.apis.RListShippingMethodForReservationVo;
+        export const init: Response;
+        export function request(
+          params: Params,
+        ): Promise<defs.apis.RListShippingMethodForReservationVo>;
+      }
+
+      /**
+        * 检验邮袋编码 通过flag进行错误提示
+检验邮袋编码 通过flag进行错误提示
+        * /client/package/operation/reservation/add/checkMailbagCode
+        */
+      export namespace checkMailbagCode {
+        export class Params {
+          /** bo */
+          bo: defs.apis.CheckMailbagCodeBO;
+        }
+
+        export type Response = defs.apis.RCheckMailbagCodeVo;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RCheckMailbagCodeVo>;
+      }
+
+      /**
+        * 加载计费分区---未选择为-1
+加载计费分区---未选择为-1
+        * /client/package/operation/reservation/chargeZone/chargeZoneList1
+        */
+      export namespace getChargeZoneList1 {
+        export class Params {
+          /** channelId */
+          channelId: number;
+        }
+
+        export type Response = defs.apis.RListShippingMethodForReservationVo;
+        export const init: Response;
+        export function request(
+          params: Params,
+        ): Promise<defs.apis.RListShippingMethodForReservationVo>;
+      }
+
+      /**
+        * 新增邮袋---保存
+新增邮袋---保存
+        * /client/package/operation/reservation/mailbag/add/save
+        */
+      export namespace addMailbagList {
+        export class Params {}
+
+        export type Response = defs.apis.RVoid;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.MailbagFormBO,
+        ): Promise<defs.apis.RVoid>;
+      }
+
+      /**
+        * 删除指定邮袋
+删除指定邮袋
+        * /client/package/operation/reservation/mailbag/delete
+        */
+      export namespace mailbagDelete {
+        export class Params {}
+
+        export type Response = defs.apis.RVoid;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.ReservationDeleteBO,
+        ): Promise<defs.apis.RVoid>;
+      }
+
+      /**
+        * 编辑
+编辑
+        * /client/package/operation/reservation/mailbag/edit
+        */
+      export namespace editMailbag {
+        export class Params {
+          /** receiveMailbagId */
+          receiveMailbagId: number;
+        }
+
+        export type Response = defs.apis.RSyBsReceiveMailbagVo;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RSyBsReceiveMailbagVo>;
+      }
+
+      /**
+        * 保存编辑信息
+保存编辑信息
+        * /client/package/operation/reservation/mailbag/edit/save
+        */
+      export namespace editSaveMailbag {
+        export class Params {
+          /** bo */
+          bo: defs.apis.ReceiveMailbagFormBO;
+        }
+
+        export type Response = defs.apis.RVoid;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RVoid>;
+      }
+
+      /**
+        * 判断邮袋是否可操作
+判断邮袋是否可操作
+        * /client/package/operation/reservation/mailbag/operation
+        */
+      export namespace mailbagIsReceive {
+        export class Params {
+          /** receiveMailbagId */
+          receiveMailbagId: number;
+        }
+
+        export type Response = defs.apis.RVoid;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RVoid>;
+      }
+
+      /**
+        * 查询指定预约单的邮袋列表
+查询指定预约单的邮袋列表
+        * /client/package/operation/reservation/mailbagList
+        */
+      export namespace getPackageList {
+        export class Params {
+          /** receiveMailbagTransferId */
+          receiveMailbagTransferId: number;
+        }
+
+        export type Response = defs.apis.RReceiveMailBagVo;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RReceiveMailBagVo>;
+      }
+
+      /**
+        * 打印交接单
+打印交接单
+        * /client/package/operation/reservation/print
+        */
+      export namespace mailbagPrint {
+        export class Params {}
+
+        export type Response = defs.apis.RFileVO;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.CommonIdBOInteger,
+        ): Promise<defs.apis.RFileVO>;
+      }
+
+      /**
+        * 揽收界面 跳转根据 CollectType跳转
+揽收界面 跳转根据 CollectType跳转
+        * /client/package/reservation
+        */
+      export namespace reservationHome {
+        export class Params {}
+
+        export type Response = defs.apis.RReservationVo;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RReservationVo>;
       }
     }
 
@@ -5389,9 +6002,9 @@ export declare namespace API {
       export namespace contractIndex {
         export class Params {}
 
-        export type Response = defs.apis.RCompanyContractVO;
+        export type Response = defs.apis.RCompanyContractVo;
         export const init: Response;
-        export function request(params: Params): Promise<defs.apis.RCompanyContractVO>;
+        export function request(params: Params): Promise<defs.apis.RCompanyContractVo>;
       }
 
       /**
@@ -5579,9 +6192,9 @@ export declare namespace API {
           bo: defs.apis.CalCuLatePriceBO;
         }
 
-        export type Response = defs.apis.RCalCuLatePriceVO;
+        export type Response = defs.apis.RCalCuLatePriceVo;
         export const init: Response;
-        export function request(params: Params): Promise<defs.apis.RCalCuLatePriceVO>;
+        export function request(params: Params): Promise<defs.apis.RCalCuLatePriceVo>;
       }
     }
 
@@ -5657,12 +6270,12 @@ export declare namespace API {
       export namespace uploadInit {
         export class Params {}
 
-        export type Response = defs.apis.RUploadInitVO;
+        export type Response = defs.apis.RUploadInitVo;
         export const init: Response;
         export function request(
           params: Params,
           bodyParams: object,
-        ): Promise<defs.apis.RUploadInitVO>;
+        ): Promise<defs.apis.RUploadInitVo>;
       }
     }
 
@@ -5683,9 +6296,9 @@ export declare namespace API {
           pageQuery: defs.apis.PageQuery;
         }
 
-        export type Response = defs.apis.TableDataInfoSyPrintBsPackageVO;
+        export type Response = defs.apis.TableDataInfoSyPrintBsPackageVo;
         export const init: Response;
-        export function request(params: Params): Promise<defs.apis.TableDataInfoSyPrintBsPackageVO>;
+        export function request(params: Params): Promise<defs.apis.TableDataInfoSyPrintBsPackageVo>;
       }
 
       /**
@@ -5998,9 +6611,9 @@ export declare namespace API {
       export namespace selectProductAttributeList {
         export class Params {}
 
-        export type Response = defs.apis.RListProductAttributesVO;
+        export type Response = defs.apis.RListProductAttributesVo;
         export const init: Response;
-        export function request(params: Params): Promise<defs.apis.RListProductAttributesVO>;
+        export function request(params: Params): Promise<defs.apis.RListProductAttributesVo>;
       }
 
       /**
@@ -6245,12 +6858,12 @@ export declare namespace API {
       export namespace batchPredictMethod {
         export class Params {}
 
-        export type Response = defs.apis.RUploadInitVO;
+        export type Response = defs.apis.RUploadInitVo;
         export const init: Response;
         export function request(
           params: Params,
           bodyParams: defs.apis.PredictionBatchModifyBO,
-        ): Promise<defs.apis.RUploadInitVO>;
+        ): Promise<defs.apis.RUploadInitVo>;
       }
 
       /**
@@ -6490,12 +7103,12 @@ export declare namespace API {
       export namespace forgotPwd {
         export class Params {}
 
-        export type Response = defs.apis.RSysUserVo;
+        export type Response = defs.apis.RSysUserForgetVo;
         export const init: Response;
         export function request(
           params: Params,
           bodyParams: defs.apis.SysUserPasswordForgotBo,
-        ): Promise<defs.apis.RSysUserVo>;
+        ): Promise<defs.apis.RSysUserForgetVo>;
       }
 
       /**
@@ -6871,6 +7484,22 @@ export declare namespace API {
      */
     export namespace unBilledCharge {
       /**
+        * 批量导出分拣明细
+批量导出分拣明细
+        * /bill/unfinishedBill/batchExportSort
+        */
+      export namespace batchExportUnBilledChargeSort {
+        export class Params {}
+
+        export type Response = any;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.UnBilledChargeSortBo,
+        ): Promise<any>;
+      }
+
+      /**
         * 获取费用明细
 获取费用明细
         * /bill/unfinishedBill/detail
@@ -6886,6 +7515,22 @@ export declare namespace API {
         export type Response = defs.apis.RObject;
         export const init: Response;
         export function request(params: Params): Promise<defs.apis.RObject>;
+      }
+
+      /**
+        * 单个导出分拣明细
+单个导出分拣明细
+        * /bill/unfinishedBill/exportSort
+        */
+      export namespace exportUnBilledChargeSort {
+        export class Params {}
+
+        export type Response = any;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.UnBilledChargeSortBo,
+        ): Promise<any>;
       }
 
       /**
@@ -7038,6 +7683,61 @@ export declare namespace API {
           params: Params,
           bodyParams: defs.apis.CommonIdBOInteger,
         ): Promise<defs.apis.RVoid>;
+      }
+    }
+
+    /**
+     * wechatPay
+     */
+    export namespace wechatPay {
+      /**
+        * 获取支付跳转地址
+获取支付跳转地址
+        * /client/pay/wechat
+        */
+      export namespace preparePay {
+        export class Params {}
+
+        export type Response = defs.apis.RWechatPayVO;
+        export const init: Response;
+        export function request(
+          params: Params,
+          bodyParams: defs.apis.WechatPayBo,
+        ): Promise<defs.apis.RWechatPayVO>;
+      }
+
+      /**
+        * 检查订单状态
+检查订单状态
+        * /client/pay/wechat/checkOrderStatus
+        */
+      export namespace checkOrderStatus {
+        export class Params {
+          /** orderId */
+          orderId: string;
+        }
+
+        export type Response = defs.apis.RString;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RString>;
+      }
+
+      /**
+        * 完成支付后获取支付结果
+完成支付后获取支付结果
+        * /client/pay/wechat/complete
+        */
+      export namespace completePay {
+        export class Params {
+          /** orderNo */
+          orderNo: string;
+          /** orderId */
+          orderId: string;
+        }
+
+        export type Response = defs.apis.RString;
+        export const init: Response;
+        export function request(params: Params): Promise<defs.apis.RString>;
       }
     }
   }

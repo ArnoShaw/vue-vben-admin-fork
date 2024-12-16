@@ -11,7 +11,7 @@ import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
 export type RequestTypes = defs.apis.SysUserPasswordForgotBo;
-export type ResponseTypes = defs.apis.RSysUserVo;
+export type ResponseTypes = defs.apis.RSysUserForgetVo;
 const forgotPwd = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
   return requestClient.put<ResponseTypes>(
     '/system/user/profile/forgotPwd',

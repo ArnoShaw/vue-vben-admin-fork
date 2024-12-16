@@ -20,9 +20,10 @@ const {
   handleSendCode = async () => {},
   loading = false,
   maxTime = 60,
-  mobile = '',
+  mobile = undefined,
   sendCodeError = async () => {},
   sendCodeSuccess = async () => {},
+  userId = undefined,
 } = defineProps<PinInputProps>();
 
 const emit = defineEmits<{
@@ -101,7 +102,7 @@ async function handleVerify(captchaVerifyParam: string) {
   let captchaResult = false;
   try {
     const { code, msg } = await apis.captcha.smsCode(
-      { captchaVerifyParam, mobile },
+      { captchaVerifyParam, mobile, userId },
       { headers: { Native: true } },
     );
     captchaResult = !((code ?? '') === '' || code === 5001);

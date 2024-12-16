@@ -12,6 +12,8 @@ import { defineStore } from 'pinia';
 import { $t } from '#/locales';
 import { apis } from '#/services/apis';
 
+import { useCommonStore } from './common';
+
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
   const userStore = useUserStore();
@@ -73,6 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
+    useCommonStore().getAllDict();
     const { user, company, permissions } = (await apis.profile.profile({})) as any;
     userStore.setUserInfo(user);
     userStore.setCompanyInfo(company);

@@ -2,21 +2,21 @@
 // @ts-nocheck auto generated apis
 
 /**
-    * @description 批量上传文件
-批量上传文件
+    * @description 打印交接单
+打印交接单
     */
 
 import type { AxiosRequestConfig } from '@vben/request';
 import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
-export type RequestTypes = object;
-export type ResponseTypes = defs.apis.RUploadInitVo;
-const uploadInit = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
+export type RequestTypes = defs.apis.CommonIdBOInteger;
+export type ResponseTypes = defs.apis.RFileVO;
+const mailbagPrint = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
   return requestClient.post<ResponseTypes>(
-    '/client/package/operation/importpackage/uploadInit',
+    '/client/package/operation/reservation/print',
     { data: bodyParams },
     config,
   );
 };
-export default uploadInit;
+export default mailbagPrint;

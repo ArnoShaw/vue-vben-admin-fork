@@ -3,7 +3,6 @@ import { ref, unref } from 'vue';
 
 import { useVbenModal } from '@vben/common-ui';
 
-import { useLocalStorage } from '@vueuse/core';
 import { Button, message, Textarea } from 'ant-design-vue';
 
 const emit = defineEmits(['success']);
@@ -69,7 +68,7 @@ function handleSubmit() {
     if (!countryCode) return message.warning('收件人国家未能识别');
   }
   if (recipientName) {
-    useLocalStorage('_RECIPIENT_COUNTRY_CODE_', info);
+    localStorage.setItem('_RECIPIENT_COUNTRY_CODE_', JSON.stringify(info));
   }
   emit('success', info);
   ModalApi.close();

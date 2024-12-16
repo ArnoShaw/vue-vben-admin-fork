@@ -1,5 +1,6 @@
 import * as asset from './asset';
 import * as auth from './auth';
+import * as bookingPickUp from './bookingPickUp';
 import * as captcha from './captcha';
 import * as common from './common';
 import * as complaint from './complaint';
@@ -27,10 +28,12 @@ import * as timeliness from './timeliness';
 import * as tracking from './tracking';
 import * as unBilledCharge from './unBilledCharge';
 import * as user from './user';
+import * as wechatPay from './wechatPay';
 
 export {
   asset,
   auth,
+  bookingPickUp,
   captcha,
   common,
   complaint,
@@ -58,4 +61,5 @@ export {
   tracking,
   unBilledCharge,
   user,
+  wechatPay,
 };

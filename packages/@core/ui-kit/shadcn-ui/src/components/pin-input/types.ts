@@ -39,6 +39,10 @@ interface PinInputProps {
    * @returns
    */
   sendCodeSuccess?: () => Promise<void>;
+  /**
+   * 用户ID
+   */
+  userId?: number;
 }
 
 export type { PinInputProps };

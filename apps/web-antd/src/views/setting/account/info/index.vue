@@ -49,8 +49,7 @@ async function getInfo() {
 }
 async function getDetail() {
   const res = (await apis.home.completeCompanyDetail({})) as any;
-  const { userName = '', userCode = '' } = userStore.userInfo || {};
-  const { mobile } = unref(info).accountInfo || {};
+  const { userName = '', userCode = '', mobile = '' } = userStore.userInfo || {};
   detail.value = res || {};
   FormApi.setValues({ ...unref(detail), ...unref(detail).detail, userName, userCode, mobile });
 }
@@ -71,10 +70,14 @@ function handleSubmit() {
         <UserInfo :data="info" />
         <ServiceStaff :data="info" />
         <div class="card-box mt-4 rounded-b-none p-4">
-          <BasicTitle icon="tdesign:user" icon-class="text-primary" title="顺友用户信息" />
+          <BasicTitle icon-class="text-primary" title="顺友用户信息" />
           <Form class="mt-4">
-            <template #mobile>
-              <a class="vben-link" @click="ModalApi.open()">未绑定</a>
+            <template #mobile="slotProps">
+              {{ slotProps.value || '' }}
+              <a class="vben-link ml-2" @click="ModalApi.open()">
+                {{ slotProps.value ? '解绑' : '未绑定' }}
+              </a>
+              <a v-if="slotProps.value" class="vben-link ml-2" @click="ModalApi.open()"> 换绑 </a>
             </template>
             <template #moneyRemindLimit="slotProps">
               可用余额<span class="mx-2">&lt;</span>

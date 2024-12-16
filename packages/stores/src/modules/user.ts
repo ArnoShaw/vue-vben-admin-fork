@@ -2,11 +2,13 @@ import { acceptHMRUpdate, defineStore } from 'pinia';
 
 interface BasicUserInfo {
   [key: string]: any;
+  companyId: number;
   /**
    * 头像
    */
   headPortraitPath: string;
   lastLoginTime: string;
+  mobile: string;
   /**
    * 用户角色
    */

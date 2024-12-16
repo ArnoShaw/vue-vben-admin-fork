@@ -72,8 +72,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{ logout: [] }>();
 const openPopover = ref(false);
 
-const { globalLockScreenShortcutKey, globalLogoutShortcutKey } =
-  usePreferences();
+const { globalLockScreenShortcutKey, globalLogoutShortcutKey } = usePreferences();
 const lockStore = useLockStore();
 const [LockModal, lockModalApi] = useVbenModal({
   connectedComponent: LockScreenModal,
@@ -159,19 +158,13 @@ if (enableShortcutKey.value) {
     <DropdownMenuTrigger>
       <div class="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
         <div class="hover:text-accent-foreground flex-center">
-          <VbenAvatar :alt="text" :src="avatar" class="size-8" dot />
+          <VbenAvatar :alt="text" :src="avatar" class="size-8" />
         </div>
       </div>
     </DropdownMenuTrigger>
     <DropdownMenuContent class="mr-2 min-w-[240px] p-0 pb-1">
       <DropdownMenuLabel class="flex items-center p-3">
-        <VbenAvatar
-          :alt="text"
-          :src="avatar"
-          class="size-12"
-          dot
-          dot-class="bottom-0 right-1 border-2 size-4 bg-green-500"
-        />
+        <VbenAvatar :alt="text" :src="avatar" class="size-12" />
         <div class="ml-2 w-full">
           <div
             v-if="tagText || text || $slots.tagText"

@@ -5,14 +5,8 @@ import { apis } from '#/services/apis';
 
 const company = useUserStore().companyInfo;
 const genderList = [
-  {
-    label: '先生',
-    value: 0,
-  },
-  {
-    label: '女士',
-    value: 1,
-  },
+  { label: '先生', value: 0 },
+  { label: '女士', value: 1 },
 ];
 
 export const baseSchema: VbenFormSchema[] = [

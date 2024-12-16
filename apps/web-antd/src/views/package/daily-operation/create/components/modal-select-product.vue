@@ -24,7 +24,6 @@ const [Grid, GridApi] = useVbenVxeGrid({
     height: 'auto',
     minHeight: 300,
     radioConfig: {
-      reserve: true,
       highlight: true,
       trigger: 'row',
       checkRowKey: 2,

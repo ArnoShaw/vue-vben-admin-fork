@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { defs } from '#/services/apis/api';
 
+import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { F7MoneyYenCircle, HeroiconsCreditCard, IonWalletOutline } from '@vben/icons';
@@ -15,6 +16,8 @@ withDefaults(defineProps<{ data: defs.apis.OverviewVo | undefined }>(), {
 const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
+
+const ratifySuccess = computed(() => userStore.companyInfo?.ratifyStatus === 3);
 </script>
 <template>
   <div class="card-box flex justify-between">
@@ -30,7 +33,7 @@ const route = useRoute();
         </h1>
         <div class="mb-4 mt-2 h-[21px]">
           <a
-            v-if="route.name === 'Overview'"
+            v-if="route.name === 'Overview' && ratifySuccess"
             class="vben-link text-[13px]"
             @click="router.push({ name: 'SettingAccountInfo' })"
           >
@@ -54,7 +57,7 @@ const route = useRoute();
       <span v-for="item in data?.foreignAccountList" :key="item.currencySymbol">
         {{ `${item.currencySymbol} ${item.accountAsset} 元` }}
       </span>
-      <Button class="mt-3 !text-xs" size="small" type="primary">充值</Button>
+      <Button v-if="ratifySuccess" class="mt-3 !text-xs" size="small" type="primary">充值</Button>
     </div>
     <div class="border-border group flex w-1/4 min-w-[180px] flex-col items-center border-r p-4">
       <HeroiconsCreditCard

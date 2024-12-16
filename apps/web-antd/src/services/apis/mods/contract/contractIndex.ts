@@ -13,7 +13,7 @@ import { requestClient } from '#/api/request';
 class Params {}
 
 export type RequestTypes = Params;
-export type ResponseTypes = defs.apis.RCompanyContractVO;
+export type ResponseTypes = defs.apis.RCompanyContractVo;
 const contractIndex = async (params: RequestTypes, config?: AxiosRequestConfig) => {
   return requestClient.get<ResponseTypes>('/contract/home', { params }, config);
 };

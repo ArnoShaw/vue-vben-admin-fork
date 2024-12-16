@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { defs } from '#/services/apis/api';
 
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { Page } from '@vben/common-ui';
@@ -28,7 +28,9 @@ const router = useRouter();
 const userStore = useUserStore();
 
 const info = ref<defs.apis.OverviewVo>();
-const goSubmit = ref(false);
+const showForm = ref(false);
+
+const ratifySuccess = computed(() => userStore.companyInfo?.ratifyStatus === 3);
 
 async function getInfo() {
   const res = (await apis.home.overview({})) as any;
@@ -40,30 +42,44 @@ getInfo();
 
 <template>
   <Page auto-content-height>
-    <section v-if="!goSubmit" class="h-full w-full min-w-[789px] items-start xl:flex">
-      <div v-if="userStore.companyInfo?.ratifyStatus === 3" class="w-full xl:w-3/4">
-        <UserInfo :data="info" />
-        <Alert
-          v-if="info?.accountInfo?.billCount && info?.accountInfo?.billCount > 0"
-          :show-icon="false"
-          banner
-          class="mt-2 rounded-xl"
-          type="error"
-        >
-          <template #message>
-            您存在 {{ info?.accountInfo?.billCount }} 张过期的账单，需要立刻处理。
-            <a class="vben-link" @click="router.push({ name: 'BillManagementBilled' })">现在处理</a>
-          </template>
-        </Alert>
-        <WaybillStatus :data="info" />
-        <AbnormalStatus :data="info" />
-        <ServiceStaff :data="info" />
-      </div>
-      <PendingReview v-else :data="info" @go-submit="goSubmit = true" />
-      <div class="flex w-full pb-4 xl:block xl:w-1/4 xl:pb-0 xl:pl-4">
-        <Announcement :data="info?.noticeList" />
-        <QuickNav />
-      </div>
+    <section v-if="!showForm" class="h-full w-full min-w-[789px] items-start xl:flex">
+      <template v-if="ratifySuccess">
+        <div class="w-full xl:w-3/4">
+          <UserInfo :data="info" />
+          <Alert
+            v-if="info?.accountInfo?.billCount && info?.accountInfo?.billCount > 0"
+            :show-icon="false"
+            banner
+            class="mt-2 rounded-xl"
+          >
+            <template #message>
+              您存在 {{ info?.accountInfo?.billCount }} 张过期的账单，需要立刻处理。
+              <a class="vben-link" @click="router.push({ name: 'BillManagementBilled' })">
+                现在处理
+              </a>
+            </template>
+          </Alert>
+          <Alert
+            v-if="info?.accountInfo?.amountShortage"
+            :show-icon="false"
+            banner
+            class="mt-2 rounded-xl"
+          >
+            <template #message>
+              您的账户余额不足，请及时充值。
+              <a class="vben-link"> 充值 </a>
+            </template>
+          </Alert>
+          <WaybillStatus :data="info" />
+          <AbnormalStatus :data="info" />
+          <ServiceStaff :data="info" />
+        </div>
+        <div class="flex w-full pb-4 xl:block xl:w-1/4 xl:pb-0 xl:pl-4">
+          <Announcement :data="info?.noticeList" />
+          <QuickNav />
+        </div>
+      </template>
+      <PendingReview v-else :data="info" @go-submit="showForm = true" />
     </section>
     <FormSubmit v-else />
   </Page>

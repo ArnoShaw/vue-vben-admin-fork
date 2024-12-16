@@ -11,7 +11,7 @@ import type { defs } from '../../api';
 import { requestClient } from '#/api/request';
 
 export type RequestTypes = defs.apis.PredictionBatchModifyBO;
-export type ResponseTypes = defs.apis.RUploadInitVO;
+export type ResponseTypes = defs.apis.RUploadInitVo;
 const batchPredictMethod = async (bodyParams: RequestTypes, config?: AxiosRequestConfig) => {
   return requestClient.put<ResponseTypes>(
     '/client/package/operation/prediction/batch/predict',

@@ -14,28 +14,28 @@ const items = computed(() => {
   return [
     {
       title: '业务专员',
-      avatar: businessUser?.avatar || 'carbon:user-avatar',
+      avatar: businessUser?.avatar || 'stash:user-avatar-light',
       email: businessUser?.email,
       name: businessUser?.nickname,
       mobile: businessUser?.mobile,
     },
     {
       title: '客服专员',
-      avatar: serviceUser?.avatar || 'carbon:user-avatar',
+      avatar: serviceUser?.avatar || 'stash:user-avatar-light',
       email: serviceUser?.email,
       name: serviceUser?.nickname,
       mobile: serviceUser?.mobile,
     },
     {
       title: '揽收专员',
-      avatar: receiveUser?.avatar || 'carbon:user-avatar',
+      avatar: receiveUser?.avatar || 'stash:user-avatar-light',
       email: receiveUser?.email,
       name: receiveUser?.nickname,
       mobile: receiveUser?.mobile,
     },
     {
       title: '财务专员',
-      avatar: financeUser?.avatar || 'carbon:user-avatar',
+      avatar: financeUser?.avatar || 'stash:user-avatar-light',
       email: financeUser?.email,
       name: financeUser?.nickname,
       mobile: financeUser?.mobile,
@@ -62,7 +62,7 @@ const items = computed(() => {
               :icon="item.avatar"
               class="text-foreground/60 size-8 transition-all duration-300 group-hover:scale-110"
             />
-            <span class="ml-4 text-lg font-medium">{{ item.name || '未分配' }}</span>
+            <span class="ml-4 text-base font-medium">{{ item.name || '未分配' }}</span>
           </div>
           <div class="text-foreground/80 my-2 flex justify-between">
             <span>{{ item.title }}</span>
