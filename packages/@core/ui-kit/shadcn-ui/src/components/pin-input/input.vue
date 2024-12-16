@@ -54,6 +54,10 @@ watch(
   },
 );
 
+watch(inputValue, (val) => {
+  modelValue.value = val.join('');
+});
+
 function handleComplete(e: string[]) {
   modelValue.value = e.join('');
   emit('complete');

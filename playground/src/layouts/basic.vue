@@ -7,12 +7,7 @@ import { AuthenticationLoginExpiredModal } from '@vben/common-ui';
 import { VBEN_DOC_URL, VBEN_GITHUB_URL } from '@vben/constants';
 import { useWatermark } from '@vben/hooks';
 import { BookOpenText, CircleHelp, MdiGithub } from '@vben/icons';
-import {
-  BasicLayout,
-  LockScreen,
-  Notification,
-  UserDropdown,
-} from '@vben/layouts';
+import { BasicLayout, LockScreen, Notification, UserDropdown } from '@vben/layouts';
 import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { openWindow } from '@vben/utils';
@@ -56,9 +51,7 @@ const userStore = useUserStore();
 const authStore = useAuthStore();
 const accessStore = useAccessStore();
 const { destroyWatermark, updateWatermark } = useWatermark();
-const showDot = computed(() =>
-  notifications.value.some((item) => !item.isRead),
-);
+const showDot = computed(() => notifications.value.some((item) => !item.isRead));
 
 const menus = computed(() => [
   {
@@ -132,6 +125,7 @@ watch(
         :text="userStore.userInfo?.realName"
         description="ann.vben@gmail.com"
         tag-text="Pro"
+        trigger="both"
         @logout="handleLogout"
       />
     </template>
@@ -144,10 +138,7 @@ watch(
       />
     </template>
     <template #extra>
-      <AuthenticationLoginExpiredModal
-        v-model:open="accessStore.loginExpired"
-        :avatar
-      >
+      <AuthenticationLoginExpiredModal v-model:open="accessStore.loginExpired" :avatar>
         <LoginForm />
       </AuthenticationLoginExpiredModal>
     </template>

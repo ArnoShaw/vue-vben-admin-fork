@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import type { ZodTypeAny } from 'zod';
 
-import type {
-  FormCommonConfig,
-  FormRenderProps,
-  FormSchema,
-  FormShape,
-} from '../types';
+import type { FormCommonConfig, FormRenderProps, FormSchema, FormShape } from '../types';
 
 import { computed } from 'vue';
 
@@ -22,16 +17,13 @@ import { getBaseRules, getDefaultValueInZodStack } from './helper';
 
 interface Props extends FormRenderProps {}
 
-const props = withDefaults(
-  defineProps<{ globalCommonConfig?: FormCommonConfig } & Props>(),
-  {
-    collapsedRows: 1,
-    commonConfig: () => ({}),
-    globalCommonConfig: () => ({}),
-    showCollapseButton: false,
-    wrapperClass: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3',
-  },
-);
+const props = withDefaults(defineProps<{ globalCommonConfig?: FormCommonConfig } & Props>(), {
+  collapsedRows: 1,
+  commonConfig: () => ({}),
+  globalCommonConfig: () => ({}),
+  showCollapseButton: false,
+  wrapperClass: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3',
+});
 
 const emits = defineEmits<{
   submit: [event: any];
@@ -89,7 +81,8 @@ const computedSchema = computed(
       componentProps = {},
       controlClass = '',
       disabled,
-      disabledOnChangeListener = false,
+      disabledOnChangeListener = true,
+      disabledOnInputListener = true,
       emptyStateValue = undefined,
       formFieldProps = {},
       formItemClass = '',
@@ -104,13 +97,12 @@ const computedSchema = computed(
 
       const hidden =
         // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
-        props.showCollapseButton && !!formCollapsed.value && keepIndex
-          ? keepIndex <= index
-          : false;
+        props.showCollapseButton && !!formCollapsed.value && keepIndex ? keepIndex <= index : false;
 
       return {
         disabled,
         disabledOnChangeListener,
+        disabledOnInputListener,
         emptyStateValue,
         hideLabel,
         hideRequiredMark,
@@ -124,12 +116,7 @@ const computedSchema = computed(
           ...formFieldProps,
           ...schema.formFieldProps,
         },
-        formItemClass: cn(
-          'flex-shrink-0',
-          { hidden },
-          formItemClass,
-          schema.formItemClass,
-        ),
+        formItemClass: cn('flex-shrink-0', { hidden }, formItemClass, schema.formItemClass),
         labelClass: cn(labelClass, schema.labelClass),
       };
     });
@@ -144,11 +131,7 @@ const computedSchema = computed(
         <!-- <div v-if="$slots[cSchema.fieldName]" :class="cSchema.formItemClass">
           <slot :definition="cSchema" :name="cSchema.fieldName"> </slot>
         </div> -->
-        <FormField
-          v-bind="cSchema"
-          :class="cSchema.formItemClass"
-          :rules="cSchema.rules"
-        >
+        <FormField v-bind="cSchema" :class="cSchema.formItemClass" :rules="cSchema.rules">
           <template #default="slotProps">
             <slot v-bind="slotProps" :name="cSchema.fieldName"> </slot>
           </template>

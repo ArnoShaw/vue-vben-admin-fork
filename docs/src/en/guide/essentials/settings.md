@@ -162,8 +162,7 @@ const defaultPreferences: Preferences = {
     colorWeakMode: false,
     compact: false,
     contentCompact: 'wide',
-    defaultAvatar:
-      'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
+    defaultAvatar: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
     dynamicTitle: true,
     enableCheckUpdates: true,
     enablePreferences: true,
@@ -217,6 +216,7 @@ const defaultPreferences: Preferences = {
     globalSearch: true,
   },
   sidebar: {
+    autoActivateChild: false,
     collapsed: false,
     collapsedShowTitle: false,
     enable: true,

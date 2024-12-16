@@ -5,18 +5,14 @@ import type { ComponentType } from './component';
 import { setupVbenForm, useVbenForm as useForm, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { initComponentAdapter } from './component';
-
-initComponentAdapter();
 setupVbenForm<ComponentType>({
   config: {
-    baseModelPropName: 'value',
     // naive-ui组件的空值为null,不能是undefined，否则重置表单时不生效
     emptyStateValue: null,
+    baseModelPropName: 'value',
     modelPropNameMap: {
       Checkbox: 'checked',
       Radio: 'checked',
-      Switch: 'checked',
       Upload: 'fileList',
     },
   },

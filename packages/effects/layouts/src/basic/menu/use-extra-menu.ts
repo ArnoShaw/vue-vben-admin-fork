@@ -15,6 +15,9 @@ function useExtraMenu() {
 
   const menus = computed(() => accessStore.accessMenus);
 
+  /** 记录当前顶级菜单下哪个子菜单最后激活 */
+  const defaultSubMap = new Map<string, string>();
+
   const route = useRoute();
   const extraMenus = ref<MenuRecordRaw[]>([]);
   const sidebarExtraVisible = ref<boolean>(false);
@@ -32,6 +35,10 @@ function useExtraMenu() {
     sidebarExtraVisible.value = hasChildren;
     if (!hasChildren) {
       await navigation(menu.path);
+    } else if (preferences.sidebar.autoActivateChild) {
+      await navigation(
+        defaultSubMap.has(menu.path) ? (defaultSubMap.get(menu.path) as string) : menu.path,
+      );
     }
   };
 
@@ -40,10 +47,7 @@ function useExtraMenu() {
    * @param menu
    * @param rootMenu
    */
-  const handleDefaultSelect = (
-    menu: MenuRecordRaw,
-    rootMenu?: MenuRecordRaw,
-  ) => {
+  const handleDefaultSelect = (menu: MenuRecordRaw, rootMenu?: MenuRecordRaw) => {
     extraMenus.value = rootMenu?.children ?? [];
     extraActiveMenu.value = menu.parents?.[0] ?? menu.path;
 
@@ -61,10 +65,7 @@ function useExtraMenu() {
     }
     sidebarExtraVisible.value = false;
 
-    const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(
-      menus.value,
-      route.path,
-    );
+    const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(menus.value, route.path);
     extraActiveMenu.value = rootMenuPath ?? findMenu?.path ?? '';
     extraMenus.value = rootMenu?.children ?? [];
   };
@@ -85,10 +86,8 @@ function useExtraMenu() {
       // if (preferences.sidebar.expandOnHover) {
       //   return;
       // }
-      const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(
-        menus.value,
-        currentPath,
-      );
+      const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(menus.value, currentPath);
+      if (rootMenuPath) defaultSubMap.set(rootMenuPath, currentPath);
       extraActiveMenu.value = rootMenuPath ?? findMenu?.path ?? '';
       extraMenus.value = rootMenu?.children ?? [];
     },

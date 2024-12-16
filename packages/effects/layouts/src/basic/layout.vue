@@ -91,8 +91,15 @@ const {
   sidebarExtraVisible,
 } = useExtraMenu();
 
-const { handleMenuSelect, headerActive, headerMenus, sidebarActive, sidebarMenus, sidebarVisible } =
-  useMixedMenu();
+const {
+  handleMenuSelect,
+  handleMenuOpen,
+  headerActive,
+  headerMenus,
+  sidebarActive,
+  sidebarMenus,
+  sidebarVisible,
+} = useMixedMenu();
 
 /**
  * 包装菜单，翻译菜单名称
@@ -234,6 +241,7 @@ const headerSlots = computed(() => {
         :rounded="isMenuRounded"
         :theme="sidebarTheme"
         mode="vertical"
+        @open="handleMenuOpen"
         @select="handleMenuSelect"
       />
     </template>

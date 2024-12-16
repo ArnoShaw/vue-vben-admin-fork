@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
   contentClass: 'vben-tabs-content',
   draggable: true,
   styleType: 'chrome',
+  wheelable: true,
 });
 
 const emit = defineEmits<TabsEmits>();
@@ -27,12 +28,21 @@ const forward = useForwardPropsEmits(props, emit);
 
 const {
   handleScrollAt,
+  handleWheel,
   scrollbarRef,
   scrollDirection,
   scrollIsAtLeft,
   scrollIsAtRight,
   showScrollButton,
 } = useTabsViewScroll(props);
+
+function onWheel(e: WheelEvent) {
+  if (props.wheelable) {
+    handleWheel(e);
+    e.stopPropagation();
+    e.preventDefault();
+  }
+}
 
 useTabsDrag(props, emit);
 </script>
@@ -69,11 +79,9 @@ useTabsDrag(props, emit);
         shadow-left
         shadow-right
         @scroll-at="handleScrollAt"
+        @wheel="onWheel"
       >
-        <TabsChrome
-          v-if="styleType === 'chrome'"
-          v-bind="{ ...forward, ...$attrs, ...$props }"
-        />
+        <TabsChrome v-if="styleType === 'chrome'" v-bind="{ ...forward, ...$attrs, ...$props }" />
 
         <Tabs v-else v-bind="{ ...forward, ...$attrs, ...$props }" />
       </VbenScrollbar>

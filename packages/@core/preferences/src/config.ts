@@ -64,6 +64,7 @@ const defaultPreferences: Preferences = {
     globalSearch: true,
   },
   sidebar: {
+    autoActivateChild: false,
     collapsed: false,
     collapsedShowTitle: false,
     enable: true,
@@ -82,6 +83,7 @@ const defaultPreferences: Preferences = {
     showMaximize: true,
     showMore: true,
     styleType: 'chrome',
+    wheelable: true,
   },
   theme: {
     builtinType: 'default',

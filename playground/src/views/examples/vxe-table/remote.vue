@@ -25,10 +25,10 @@ const gridOptions: VxeGridProps<RowType> = {
   columns: [
     { title: '序号', type: 'seq', width: 50 },
     { align: 'left', title: 'Name', type: 'checkbox', width: 100 },
-    { field: 'category', title: 'Category' },
-    { field: 'color', title: 'Color' },
-    { field: 'productName', title: 'Product Name' },
-    { field: 'price', title: 'Price' },
+    { field: 'category', sortable: true, title: 'Category' },
+    { field: 'color', sortable: true, title: 'Color' },
+    { field: 'productName', sortable: true, title: 'Product Name' },
+    { field: 'price', sortable: true, title: 'Price' },
     { field: 'releaseDate', formatter: 'formatDateTime', title: 'DateTime' },
   ],
   exportConfig: {},
@@ -36,19 +36,26 @@ const gridOptions: VxeGridProps<RowType> = {
   keepSource: true,
   proxyConfig: {
     ajax: {
-      query: async ({ page }) => {
+      query: async ({ page, sort }) => {
         return await getExampleTableApi({
           page: page.currentPage,
           pageSize: page.pageSize,
+          sortBy: sort.field,
+          sortOrder: sort.order,
         });
       },
     },
+    sort: true,
+  },
+  sortConfig: {
+    defaultSort: { field: 'category', order: 'desc' },
+    remote: true,
   },
   toolbarConfig: {
     custom: true,
     export: true,
     // import: true,
-    refresh: true,
+    refresh: { code: 'query' },
     zoom: true,
   },
 };
@@ -62,12 +69,8 @@ const [Grid, gridApi] = useVbenVxeGrid({
   <Page auto-content-height>
     <Grid table-title="数据列表" table-title-help="提示">
       <template #toolbar-tools>
-        <Button class="mr-2" type="primary" @click="() => gridApi.query()">
-          刷新当前页面
-        </Button>
-        <Button type="primary" @click="() => gridApi.reload()">
-          刷新并返回第一页
-        </Button>
+        <Button class="mr-2" type="primary" @click="() => gridApi.query()"> 刷新当前页面 </Button>
+        <Button type="primary" @click="() => gridApi.reload()"> 刷新并返回第一页 </Button>
       </template>
     </Grid>
   </Page>
