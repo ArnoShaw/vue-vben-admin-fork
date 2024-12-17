@@ -78,6 +78,7 @@ const computedSchema = computed(
     formFieldProps: Record<string, any>;
   } & Omit<FormSchema, 'formFieldProps'>)[] => {
     const {
+      colon = false,
       componentProps = {},
       controlClass = '',
       disabled,
@@ -100,6 +101,7 @@ const computedSchema = computed(
         props.showCollapseButton && !!formCollapsed.value && keepIndex ? keepIndex <= index : false;
 
       return {
+        colon,
         disabled,
         disabledOnChangeListener,
         disabledOnInputListener,
